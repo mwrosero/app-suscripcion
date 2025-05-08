@@ -22,6 +22,18 @@
     --vers-gallery-100: #f8f8f8;
     --vers-gallery-100: #eaeaea;
     --vers-gallery-200: #dcdcdc;
+    --vers-silver-chalice-300: #c8c8c8;
+    --vers-silver-chalice-400: #b4b4b4;
+    --vers-silver-chalice-500: #999999;
+    --vers-athens-gray-50: #eff3f8;
+    --vers-athens-gray-100: #e6ecf3;
+    --vers-athens-gray-200: #d2ddeb;
+    --vers-zumthor-50: #eaf0fd;
+    --vers-zumthor-100: #e3eafc;
+    --vers-zumthor-200: #ccd9f9;
+    --vers-perano-200: #c9dbfc;
+    --vers-perano-300: #a9c4f9;
+    --vers-perano-400: #85a1f4;
     --vers-blue-ribbon-500: #3885f9;
     --vers-blue-ribbon-600: #296bef;
     --vers-blue-ribbon-700: #1a50db;
@@ -34,7 +46,7 @@
     --vers-blue-zodiac-950: #13243f;
     --vers-mirage-800: #1c4270;
     --vers-mirage-900: #1c395e;
-    --vers-mirage-950: #0F1D32;
+    --vers-mirage-950: #0f1d32;
     --vers-mariner-500: #0c8deb;
     --vers-mariner-600: #0071ce;
     --vers-mariner-700: #0157a3;
@@ -68,15 +80,138 @@ h1,
     box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, 0.48);
     color: var(--vers-blue-zodiac-950) !important;
 }
-.bg-gallery-100{
+.bg-athens-gray {
+    background-color: var(--vers-athens-gray-50) !important;
+}
+.bg-gallery-100 {
     background-color: var(--vers-gallery-100) !important;
+}
+.bg-blue-ribbon-600 {
+    background-color: var(--vers-blue-ribbon-600);
+}
+.bg-zumthor-50 {
+    background-color: var(--vers-zumthor-50);
 }
 .border-start-blue {
     border-left: 3px solid var(--vers-blue-ribbon-600) !important;
 }
+.border-silver-chalice-400 {
+    border: 1px solid var(--vers-silver-chalice-400) !important;
+}
+.border-perano-300 {
+    border: 1px solid var(--vers-perano-300) !important;
+}
+.btn-blue-veris {
+    background-color: var(--vers-blue-ribbon-600) !important;
+    color: var(--vers-white-50) !important;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-blue-veris:hover {
+    background-color: var(--vers-blue-ribbon-600);
+    color: var(--vers-white-50);
+}
+.btn-blue-veris:active {
+    background-color: #1a50db !important;
+    color: var(--vers-white-50) !important;
+    transform: scale(0.98);
+}
+.btn-blue-veris:disabled {
+    background-color: #daebff;
+    color: #5da8fd;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.btn-zest-veris {
+    color: #ffffff !important;
+    background-color: #e8850f !important;
+    border: 1px solid #e8850f;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-zest-veris:hover {
+    background-color: #e8850f;
+    color: #ffffff;
+    border-color: #e8850f;
+    text-decoration: none;
+}
+
+.btn-zest-veris:active {
+    background-color: #c86f0c !important;
+    border-color: #c86f0c !important;
+    color: #fff !important;
+    box-shadow: none;
+    transform: scale(0.95);
+}
+
+.btn-zest-veris:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-zest-veris:disabled,
+.btn-zest-veris.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    background-color: #e8850f;
+    color: #ffffff;
+    border-color: #e8850f;
+}
+
+.btn-outline-zest-veris {
+    color: #e8850f;
+    background-color: #ffffff;
+    border: 1px solid #e8850f;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-outline-zest-veris:hover {
+    background-color: #e8850f;
+    color: #ffffff;
+    border-color: #e8850f;
+    text-decoration: none;
+}
+
+.btn-outline-zest-veris:active {
+    background-color: #c86f0c !important;
+    border-color: #c86f0c !important;
+    color: #fff !important;
+    box-shadow: none;
+    transform: scale(0.95);
+}
+
+.btn-outline-zest-veris:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-outline-zest-veris:disabled,
+.btn-outline-zest-veris.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    background-color: #ffffff;
+    color: #e8850f;
+    border-color: #e8850f;
+}
 .dropdown-user-empresa {
     border-radius: 25px 10px 10px 25px;
     background-color: var(--vers-wild-sand-50);
+}
+.fs-10p {
+    font-size: 10px;
 }
 .fw-medium {
     font-weight: 500 !important;
@@ -123,14 +258,17 @@ h1,
 .text-primary-veris {
     color: var(--vers-blue-ribbon-600);
 }
-.text-mirage-950{
+.text-mirage-950 {
     color: var(--vers-mirage-950);
 }
-.rounded-4{
+.rounded-4 {
     border-radius: 1rem !important;
 }
-.rounded-5{
+.rounded-5 {
     border-radius: 2rem !important;
+}
+.rounded-10p {
+    border-radius: 10px !important;
 }
 @font-face {
     font-family: "Gotham Rounded";
