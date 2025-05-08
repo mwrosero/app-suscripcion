@@ -34,55 +34,64 @@ Registro
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-anual-veris" role="tabpanel" aria-labelledby="pills-anual-veris-tab" tabindex="0">
                     <div class="row justify-content-center">
-                        <div class="col-md-4">
-                            <!-- Opciones -->
-                            <div class="list-group list-group-radio d-grid gap-4 border-0">
-                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
-                                    <div class="d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="radio" name="plan" checked data-bs-toggle="collapse" data-bs-target="#detalleOpcion1">
-                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 1</span>
-                                    </div>
-                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
-                                </label>
-                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
-                                    <div class="d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
-                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 2</span>
-                                    </div>
-                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
-                                </label>
-                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
-                                    <div class="d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
-                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 3</span>
-                                    </div>    
-                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
-                                </label>
-                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
-                                    <div class="d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
-                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 4</span>
-                                    </div>
-                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <!-- Detalles Opción 1 -->
-                            <div class="card shadow-sm collapse show detalle-plan" id="detalleOpcion1">
+                        <div class="col-12 col-lg-8">
+                            <div class="card border rounded-5 shadow-none">
                                 <div class="card-body">
-                                    <h5 class="card-title">Opción 1</h5>
-                                    <span class="badge bg-primary mb-2">AHORRA 30%</span>
-                                    <h2 class="fw-bold">$8,25 <small class="text-muted">/mes</small></h2>
-                                    <p class="text-decoration-line-through text-muted">PVP: $11,90</p>
-                                    <hr>
-                                    <h6>Beneficios</h6>
-                                    <ul class="list-unstyled">
-                                        <li>✔ 4 consultas al año (1 por trimestre)</li>
-                                        <li>✔ 1 Profilaxis</li>
-                                        <li>✔ Consulta Optométrica y Odontológica</li>
-                                    </ul>
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-5">
+                                            <!-- Opciones -->
+                                            <div class="list-group list-group-radio d-grid gap-4 border-0">
+                                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-2" type="radio" name="plan" checked data-bs-toggle="collapse" data-bs-target="#detalleOpcion1">
+                                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 1</span>
+                                                    </div>
+                                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
+                                                </label>
+                                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
+                                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 2</span>
+                                                    </div>
+                                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
+                                                </label>
+                                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
+                                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 3</span>
+                                                    </div>    
+                                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
+                                                </label>
+                                                <label class="list-group-item bg-gallery-100 border-0 d-flex justify-content-between align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input me-2" type="radio" name="plan" data-bs-toggle="collapse" data-bs-target=".detalle-plan">
+                                                        <span class="text-mirage-950 fw-medium h5 mb-0">Opción 4</span>
+                                                    </div>
+                                                    <span class="fw-semibold">$8,25 <small class="text-muted">/mes</small></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <!-- Detalles Opción 1 -->
+                                            <div class="card bg-gallery-100 border-0 rounded-4 collapse show detalle-plan" id="detalleOpcion1">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Opción 1</h5>
+                                                    <div class="card-body shadow-none rounded-3 bg-white">
+                                                        <span class="badge bg-primary mb-2">AHORRA 30%</span>
+                                                        <h2 class="fw-bold">$8,25 <small class="text-muted">/mes</small></h2>
+                                                        <p class="text-decoration-line-through text-muted">PVP: $11,90</p>
+                                                        <hr>
+                                                        <h6>Beneficios</h6>
+                                                        <ul class="list-unstyled">
+                                                            <li>✔ 4 consultas al año (1 por trimestre)</li>
+                                                            <li>✔ 1 Profilaxis</li>
+                                                            <li>✔ Consulta Optométrica y Odontológica</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -126,6 +126,12 @@ h1,
 .text-mirage-950{
     color: var(--vers-mirage-950);
 }
+.rounded-4{
+    border-radius: 1rem !important;
+}
+.rounded-5{
+    border-radius: 2rem !important;
+}
 @font-face {
     font-family: "Gotham Rounded";
     src: url("../fonts/gotham-rounded/GothamRnd-BoldItalic.eot");
