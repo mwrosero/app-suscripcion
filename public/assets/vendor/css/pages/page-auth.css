@@ -49,15 +49,15 @@
   max-width: 400px;
   position: relative;
 }
-.authentication-wrapper.authentication-basic .authentication-inner:before {
+/* .authentication-wrapper.authentication-basic .authentication-inner:before {
   width: 238px;
   height: 233px;
   content: " ";
   position: absolute;
   top: -55px;
   left: -40px;
-  }
-.authentication-wrapper.authentication-basic .authentication-inner:after {
+  } */
+/* .authentication-wrapper.authentication-basic .authentication-inner:after {
   width: 180px;
   height: 180px;
   content: " ";
@@ -65,7 +65,7 @@
   z-index: -1;
   bottom: -30px;
   right: -56px;
- }
+ } */
 .authentication-wrapper .auth-input-wrapper .auth-input {
   max-width: 50px;
   padding-left: 0.4rem;

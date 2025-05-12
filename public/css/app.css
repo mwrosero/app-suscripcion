@@ -13,47 +13,59 @@
 
 /* Custom Properties */
 :root {
-    --vers-white-50: #ffffff;
-    --vers-white-100: #efefef;
-    --vers-white-200: #dcdcdc;
-    --vers-wild-sand-50: #f3f4f5;
-    --vers-wild-sand-100: #eeeff0;
-    --vers-wild-sand-200: #d8dbdf;
-    --vers-gallery-100: #f8f8f8;
-    --vers-gallery-100: #eaeaea;
-    --vers-gallery-200: #dcdcdc;
-    --vers-silver-chalice-300: #c8c8c8;
-    --vers-silver-chalice-400: #b4b4b4;
-    --vers-silver-chalice-500: #999999;
-    --vers-athens-gray-50: #eff3f8;
-    --vers-athens-gray-100: #e6ecf3;
-    --vers-athens-gray-200: #d2ddeb;
-    --vers-zumthor-50: #eaf0fd;
-    --vers-zumthor-100: #e3eafc;
-    --vers-zumthor-200: #ccd9f9;
-    --vers-perano-200: #c9dbfc;
-    --vers-perano-300: #a9c4f9;
-    --vers-perano-400: #85a1f4;
-    --vers-blue-ribbon-500: #3885f9;
-    --vers-blue-ribbon-600: #296bef;
-    --vers-blue-ribbon-700: #1a50db;
-    --vers-bay-many-800: #1459e1;
-    --vers-bay-many-800: #1747b6;
-    --vers-bay-many-900: #19408f;
-    --vers-bay-many-950: #142857;
-    --vers-blue-zodiac-800: #2257ab;
-    --vers-blue-zodiac-900: #214c87;
-    --vers-blue-zodiac-950: #13243f;
-    --vers-mirage-800: #1c4270;
-    --vers-mirage-900: #1c395e;
-    --vers-mirage-950: #0f1d32;
-    --vers-mariner-500: #0c8deb;
-    --vers-mariner-600: #0071ce;
-    --vers-mariner-700: #0157a3;
+    --vris-white-50: #ffffff;
+    --vris-white-100: #efefef;
+    --vris-white-200: #dcdcdc;
+    --vris-wild-sand-50: #f3f4f5;
+    --vris-wild-sand-100: #eeeff0;
+    --vris-wild-sand-200: #d8dbdf;
+    --vris-gallery-100: #f8f8f8;
+    --vris-gallery-100: #eaeaea;
+    --vris-gallery-200: #dcdcdc;
+    --vris-silver-chalice-300: #c8c8c8;
+    --vris-silver-chalice-400: #b4b4b4;
+    --vris-silver-chalice-500: #999999;
+    --vris-athens-gray-50: #eff3f8;
+    --vris-athens-gray-100: #e6ecf3;
+    --vris-athens-gray-200: #d2ddeb;
+    --vris-zumthor-50: #eaf0fd;
+    --vris-zumthor-100: #e3eafc;
+    --vris-zumthor-200: #ccd9f9;
+    --vris-fiord-600: #4f607a;
+    --vris-fiord-700: #425065;
+    --vris-fiord-800: #384354;
+    --vris-perano-200: #c9dbfc;
+    --vris-perano-300: #a9c4f9;
+    --vris-perano-400: #85a1f4;
+    --vris-cornflower-blue-300: #98baf8;
+    --vris-cornflower-blue-400: #5489f2;
+    --vris-cornflower-blue-500: #4371ee;
+    --vris-pattens-blue-50: #f0f9ff;
+    --vris-pattens-blue-100: #d7edfd;
+    --vris-pattens-blue-200: #bbe5fc;
+    --vris-cerulean-blue-700: #1d61d8;
+    --vris-cerulean-blue-800: #2156bf;
+    --vris-cerulean-blue-900: #1e458a;
+    --vris-blue-ribbon-500: #3885f9;
+    --vris-blue-ribbon-600: #296bef;
+    --vris-blue-ribbon-700: #1a50db;
+    --vris-bay-many-800: #1459e1;
+    --vris-bay-many-800: #1747b6;
+    --vris-bay-many-900: #19408f;
+    --vris-bay-many-950: #142857;
+    --vris-blue-zodiac-800: #2257ab;
+    --vris-blue-zodiac-900: #214c87;
+    --vris-blue-zodiac-950: #13243f;
+    --vris-mirage-800: #1c4270;
+    --vris-mirage-900: #1c395e;
+    --vris-mirage-950: #0f1d32;
+    --vris-mariner-500: #0c8deb;
+    --vris-mariner-600: #0071ce;
+    --vris-mariner-700: #0157a3;
 }
 body {
     font-family: "Gotham Rounded", "Gotham Rounded SSm", sans-serif !important;
-    color: var(--vers-blue-zodiac-950) !important;
+    color: var(--vris-blue-zodiac-950) !important;
 }
 h6,
 .h6,
@@ -67,54 +79,63 @@ h2,
 .h2,
 h1,
 .h1 {
-    color: var(--vers-blue-zodiac-950) !important;
+    color: var(--vris-blue-zodiac-950) !important;
 }
 .bg-menu-theme-veris-life {
-    background-color: var(--vers-bay-many-900);
-    color: var(--vers-white-50) !important;
+    background-color: var(--vris-bay-many-900);
+    color: var(--vris-white-50) !important;
 }
 .bg-menu-theme-veris-life.menu-vertical
     .menu-item.active
     > .menu-link:not(.menu-toggle) {
-    background: var(--vers-white-50);
+    background: var(--vris-white-50);
     box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, 0.48);
-    color: var(--vers-blue-zodiac-950) !important;
+    color: var(--vris-blue-zodiac-950) !important;
 }
 .bg-athens-gray {
-    background-color: var(--vers-athens-gray-50) !important;
+    background-color: var(--vris-athens-gray-50) !important;
+}
+.bg-athens-gray-100 {
+    background-color: var(--vris-athens-gray-100) !important;
 }
 .bg-gallery-100 {
-    background-color: var(--vers-gallery-100) !important;
+    background-color: var(--vris-gallery-100) !important;
 }
 .bg-blue-ribbon-600 {
-    background-color: var(--vers-blue-ribbon-600);
+    background-color: var(--vris-blue-ribbon-600);
 }
 .bg-zumthor-50 {
-    background-color: var(--vers-zumthor-50);
+    background-color: var(--vris-zumthor-50);
+}
+.bg-cornflower-blue-400 {
+    background-color: var(--vris-cornflower-blue-400);
+}
+.bg-pattens-blue-100 {
+    background-color: var(--vris-pattens-blue-100);
 }
 .border-start-blue {
-    border-left: 3px solid var(--vers-blue-ribbon-600) !important;
+    border-left: 3px solid var(--vris-blue-ribbon-600) !important;
 }
 .border-silver-chalice-400 {
-    border: 1px solid var(--vers-silver-chalice-400) !important;
+    border: 1px solid var(--vris-silver-chalice-400) !important;
 }
 .border-perano-300 {
-    border: 1px solid var(--vers-perano-300) !important;
+    border: 1px solid var(--vris-perano-300) !important;
 }
 .btn-blue-veris {
-    background-color: var(--vers-blue-ribbon-600) !important;
-    color: var(--vers-white-50) !important;
+    background-color: var(--vris-blue-ribbon-600) !important;
+    color: var(--vris-white-50) !important;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .btn-blue-veris:hover {
-    background-color: var(--vers-blue-ribbon-600);
-    color: var(--vers-white-50);
+    background-color: var(--vris-blue-ribbon-600);
+    color: var(--vris-white-50);
 }
 .btn-blue-veris:active {
     background-color: #1a50db !important;
-    color: var(--vers-white-50) !important;
+    color: var(--vris-white-50) !important;
     transform: scale(0.98);
 }
 .btn-blue-veris:disabled {
@@ -123,6 +144,30 @@ h1,
     cursor: not-allowed;
     opacity: 0.7;
 }
+
+.btn-cerulean-blue-800 {
+    background-color: var(--vris-cerulean-blue-800) !important;
+    color: var(--vris-white-50) !important;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-blue-veris:hover {
+    background-color: var(--vris--cerulean-blue-800);
+    color: var(--vris-white-50);
+}
+.btn-blue-veris:active {
+    background-color: var(--vris--cerulean-blue-700) !important;
+    color: var(--vris-white-50) !important;
+    transform: scale(0.98);
+}
+.btn-blue-veris:disabled {
+    background-color: #daebff;
+    color: #5da8fd;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 .btn-zest-veris {
     color: #ffffff !important;
     background-color: #e8850f !important;
@@ -135,14 +180,12 @@ h1,
     transition: all 0.3s ease;
     display: inline-block;
 }
-
 .btn-zest-veris:hover {
     background-color: #e8850f;
     color: #ffffff;
     border-color: #e8850f;
     text-decoration: none;
 }
-
 .btn-zest-veris:active {
     background-color: #c86f0c !important;
     border-color: #c86f0c !important;
@@ -150,7 +193,6 @@ h1,
     box-shadow: none;
     transform: scale(0.95);
 }
-
 .btn-zest-veris:focus {
     outline: none;
     box-shadow: none;
@@ -208,10 +250,16 @@ h1,
 }
 .dropdown-user-empresa {
     border-radius: 25px 10px 10px 25px;
-    background-color: var(--vers-wild-sand-50);
+    background-color: var(--vris-wild-sand-50);
 }
 .fs-10p {
-    font-size: 10px;
+    font-size: 10px !important;
+}
+.fs-12p {
+    font-size: 12px !important;
+}
+.fs-14p {
+    font-size: 14px !important;
 }
 .fw-medium {
     font-weight: 500 !important;
@@ -229,8 +277,8 @@ h1,
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
-    background-color: var(--vers-blue-ribbon-600) !important;
-    color: var(--vers-white-50) !important;
+    background-color: var(--vris-blue-ribbon-600) !important;
+    color: var(--vris-white-50) !important;
     font-weight: 500;
     transform: scale(1.05);
 }
@@ -238,7 +286,7 @@ h1,
 .nav-tabs .nav-link:not(.active):focus,
 .nav-pills .nav-link:not(.active):hover,
 .nav-pills .nav-link:not(.active):focus {
-    color: var(--vers-blue-ribbon-600) !important;
+    color: var(--vris-blue-ribbon-600) !important;
 }
 .nav-pills .nav-link.active {
     box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
@@ -256,10 +304,13 @@ h1,
     transform: translateY(0);
 }
 .text-primary-veris {
-    color: var(--vers-blue-ribbon-600);
+    color: var(--vris-blue-ribbon-600) !important;
 }
 .text-mirage-950 {
-    color: var(--vers-mirage-950);
+    color: var(--vris-mirage-950);
+}
+.text-fiord-700{
+    color: var(--vris-fiord-700);
 }
 .rounded-4 {
     border-radius: 1rem !important;

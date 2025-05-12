@@ -74,9 +74,12 @@ Route::group(['middleware' => ['loggedUser']], function () {
     
 });
 
-Route::get('/inicio', function () {
+Route::get('verislife/login', function () {
+    return view('login.verislife.login');
+});
+Route::get('verislife/home', function () {
     return view('verislife.inicio');
 });
-Route::get('/planes-informacion', function () {
+Route::get('verislife/planes-informacion', function () {
     return view('verislife.informacion');
 });
