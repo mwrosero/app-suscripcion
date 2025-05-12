@@ -75,7 +75,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
 });
 
 Route::get('verislife/login', function () {
-    return view('login.verislife.login');
+    return view('verislife.login');
 });
 Route::get('verislife/home', function () {
     return view('verislife.inicio');
