@@ -73,3 +73,13 @@ Route::group(['middleware' => ['loggedUser']], function () {
     Route::get('/refreshToken', [SeguridadesController::class, 'refreshToken'])->name('refreshToken')->withoutMiddleware(['guest']);
     
 });
+
+Route::get('verislife/login', function () {
+    return view('login.verislife.login');
+});
+Route::get('verislife/home', function () {
+    return view('verislife.inicio');
+});
+Route::get('verislife/verificacion-plan', function () {
+    return view('verislife.verificacionPlan');
+});
