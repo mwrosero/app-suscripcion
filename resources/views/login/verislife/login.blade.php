@@ -1,4 +1,4 @@
-@extends('template.verislife.login')
+@extends('template.verisLife.login')
 @section('title')
 VerisLife - Login
 @endsection
