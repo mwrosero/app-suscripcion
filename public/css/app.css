@@ -113,6 +113,12 @@ h1,
 .bg-pattens-blue-100 {
     background-color: var(--vris-pattens-blue-100);
 }
+.bg-perano-300{
+    background-color: var(--vris-perano-300) !important;
+}
+.bg-blue-zodiac-950{
+    background-color: var(--vris-blue-zodiac-950) !important;
+}
 .border-start-blue {
     border-left: 3px solid var(--vris-blue-ribbon-600) !important;
 }
@@ -152,20 +158,27 @@ h1,
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.btn-blue-veris:hover {
-    background-color: var(--vris--cerulean-blue-800);
+.btn-cerulean-blue-800:hover {
+    background-color: var(--vris-cerulean-blue-800);
     color: var(--vris-white-50);
 }
-.btn-blue-veris:active {
-    background-color: var(--vris--cerulean-blue-700) !important;
+.btn-cerulean-blue-800:active {
+    background-color: var(--vris-cerulean-blue-700) !important;
     color: var(--vris-white-50) !important;
     transform: scale(0.98);
 }
-.btn-blue-veris:disabled {
+.btn-cerulean-blue-800:disabled {
     background-color: #daebff;
     color: #5da8fd;
     cursor: not-allowed;
     opacity: 0.7;
+}
+.btn-outline-cerulean-blue-800{
+    background-color: var(--vris-white-50) !important;
+    color: var(--vris-cerulean-blue-800) !important;
+    border: 1px solid var(--vris-cerulean-blue-800) !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-zest-veris {
@@ -292,6 +305,10 @@ h1,
     box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
     transform: scale(1.05);
 }
+.layout-navbar-fixed .layout-page::before {
+    backdrop-filter: none !important;
+    background: none !important;
+}
 .tab-pane {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -311,6 +328,12 @@ h1,
 }
 .text-fiord-700{
     color: var(--vris-fiord-700);
+}
+.text-mariner-600{
+    color: var( --vris-mariner-600) !important;
+}
+.text-blue-zodiac-950{
+    color: var(--vris-blue-zodiac-950) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;

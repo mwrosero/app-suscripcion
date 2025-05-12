@@ -80,6 +80,6 @@ Route::get('verislife/login', function () {
 Route::get('verislife/home', function () {
     return view('verislife.inicio');
 });
-Route::get('verislife/planes-informacion', function () {
-    return view('verislife.informacion');
+Route::get('verislife/verificacion-plan', function () {
+    return view('verislife.verificacionPlan');
 });
