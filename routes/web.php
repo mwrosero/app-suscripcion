@@ -83,3 +83,6 @@ Route::get('verislife/home', function () {
 Route::get('verislife/verificacion-plan', function () {
     return view('verislife.verificacionPlan');
 });
+Route::get('verislife/registro', function () {
+    return view('verislife.registro');
+});

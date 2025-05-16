@@ -16,24 +16,40 @@ VerisLife - Login
         </div>
         <!-- /Logo -->
         <div class="row justify-content-center pb-5">
-            <ul class="nav nav-pills justify-content-center bg-athens-gray-100 w-auto px-2 py-1 rounded-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link px-4 bg-white active" id="pills-empresa-veris-tab" data-bs-toggle="pill" data-bs-target="#pills-empresa-veris" type="button" role="tab" aria-controls="pills-empresa-veris" aria-selected="true">Empresa</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link px-4 bg-white" id="pills-colaborador-veris-tab" data-bs-toggle="pill" data-bs-target="#pills-colaborador-veris" type="button" role="tab" aria-controls="pills-colaborador-veris" aria-selected="false">Colaborador</button>
-                </li>
-            </ul>
-            <div class="tab-content px-0" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-empresa-veris" role="tabpanel" aria-labelledby="pills-empresa-veris-tab" tabindex="0">
-                    <x-forms.form-login type="empresa" action="#!" />
+            <form class="mb-3 needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-medium">Correo o Número de Identificación *</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="email"
+                        name="email-username"
+                        placeholder="Enter your email or username"
+                        autofocus required/>
                 </div>
-                <div class="tab-pane fade" id="pills-colaborador-veris" role="tabpanel" aria-labelledby="pills-colaborador-veris-tab" tabindex="0">
-                    <x-forms.form-login type="colaborador" action="#!" />
+                <div class="mb-2 form-password-toggle">
+                    <div class="d-flex justify-content-between">
+                        <label class="form-label fw-medium" for="password">Contraseña *</label>
+                    </div>
+                    <div class="input-group input-group-merge">
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            name="password"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password" required/>
+                        <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
                 </div>
-            </div>
+                <div class="mb-5">
+                    <a href="#!" class="fs-12p"><small>Olvidé mi contraseña</small></a>
+                </div>
+                <div class="mb-3">
+                    <a href="/verislife/home" class="btn btn-lg btn-blue-veris d-grid w-100">Iniciar sesión</a>
+                </div>
+            </form>
         </div>
-
     </div>
 </div>
 @endsection

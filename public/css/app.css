@@ -34,6 +34,9 @@
     --vris-fiord-600: #4f607a;
     --vris-fiord-700: #425065;
     --vris-fiord-800: #384354;
+    --vris-raven-600: #8793a4;
+    --vris-raven-700: #717c8c;
+    --vris-raven-800: #5f6874;
     --vris-perano-200: #c9dbfc;
     --vris-perano-300: #a9c4f9;
     --vris-perano-400: #85a1f4;
@@ -62,6 +65,15 @@
     --vris-mariner-500: #0c8deb;
     --vris-mariner-600: #0071ce;
     --vris-mariner-700: #0157a3;
+    --vris-lochmara-400: #53a3dd;
+    --vris-lochmara-500: #2c84c6;
+    --vris-lochmara-600: #1e6aab;
+    --vris-aquamarine-200: #b9f9d9;
+    --vris-aquamarine-300: #69f0ae;
+    --vris-aquamarine-400: #45e397;
+    --vris-rose-bud-200: #ffd5c8;
+    --vris-rose-bud-300: #ffab91;
+    --vris-rose-bud-400: #fd8e6c;
 }
 body {
     font-family: "Gotham Rounded", "Gotham Rounded SSm", sans-serif !important;
@@ -118,6 +130,12 @@ h1,
 }
 .bg-blue-zodiac-950{
     background-color: var(--vris-blue-zodiac-950) !important;
+}
+.bg-athens-gray-50{
+    background-color: var(--vris-athens-gray-50) !important;
+}
+.bg-wild-sand-50{
+    background-color: var(--vris-wild-sand-50) !important;
 }
 .border-start-blue {
     border-left: 3px solid var(--vris-blue-ribbon-600) !important;
@@ -261,6 +279,10 @@ h1,
     color: #e8850f;
     border-color: #e8850f;
 }
+.step.crossed .step-trigger .bg-blue-zodiac-950{
+    background-color: var(--vris-blue-zodiac-950) !important;
+    color: var(--vris-white-50) !important;
+}
 .dropdown-user-empresa {
     border-radius: 25px 10px 10px 25px;
     background-color: var(--vris-wild-sand-50);
@@ -276,6 +298,9 @@ h1,
 }
 .fw-medium {
     font-weight: 500 !important;
+}
+.input-group:focus-within{
+    box-shadow: none !important;
 }
 .list-group-radio .list-group-item {
     cursor: pointer;
@@ -334,6 +359,18 @@ h1,
 }
 .text-blue-zodiac-950{
     color: var(--vris-blue-zodiac-950) !important;
+}
+.text-raven-700{
+    color: var(--vris-raven-700) !important;
+}
+.text-lochmara-500{
+    color: var(--vris-lochmara-500) !important;
+}
+.text-aquamarine-300{
+    color: var(--vris-aquamarine-300) !important;
+}
+.text-rose-bud-300{
+    color: var(--vris-rose-bud-300) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;

@@ -37,7 +37,7 @@ Registro
                         <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 36%</span>
                         <h4 class="fw-semibold text-primary-veris mb-0">$90,00 <small class="fs-6">/anual</small></h4>
                         <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $140</p>
-                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar suscripción</a>
+                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ Registro
                         <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
                         <h4 class="fw-semibold text-primary-veris mb-0">$129,00 <small class="fs-6">/anual</small></h4>
                         <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $210</p>
-                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar suscripción</a>
+                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@ Registro
                         <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
                         <h4 class="fw-semibold text-primary-veris mb-0">$172,00 <small class="fs-6">/anual</small></h4>
                         <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $280</p>
-                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar suscripción</a>
+                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ Registro
                         <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
                         <h4 class="fw-semibold text-primary-veris mb-0">$129,00 <small class="fs-6">/anual</small></h4>
                         <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $210</p>
-                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar suscripción</a>
+                        <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
                     </div>
                 </div>
             </div>

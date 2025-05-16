@@ -113,7 +113,7 @@
         <li class="menu-item">
             <a href="#!" class="menu-link fw-medium text-white">
                 <i class="menu-icon tf-icons ti ti-messages d-none"></i>
-                <div data-i18n="Suscripción">Suscripción</div>
+                <div data-i18n="Registro">Registro</div>
             </a>
         </li>
         <li class="menu-item">
