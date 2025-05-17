@@ -74,6 +74,7 @@
     --vris-rose-bud-200: #ffd5c8;
     --vris-rose-bud-300: #ffab91;
     --vris-rose-bud-400: #fd8e6c;
+    --vris-readonly-100: #e7e9ec;
 }
 body {
     font-family: "Gotham Rounded", "Gotham Rounded SSm", sans-serif !important;
@@ -125,16 +126,16 @@ h1,
 .bg-pattens-blue-100 {
     background-color: var(--vris-pattens-blue-100);
 }
-.bg-perano-300{
+.bg-perano-300 {
     background-color: var(--vris-perano-300) !important;
 }
-.bg-blue-zodiac-950{
+.bg-blue-zodiac-950 {
     background-color: var(--vris-blue-zodiac-950) !important;
 }
-.bg-athens-gray-50{
+.bg-athens-gray-50 {
     background-color: var(--vris-athens-gray-50) !important;
 }
-.bg-wild-sand-50{
+.bg-wild-sand-50 {
     background-color: var(--vris-wild-sand-50) !important;
 }
 .border-start-blue {
@@ -191,7 +192,7 @@ h1,
     cursor: not-allowed;
     opacity: 0.7;
 }
-.btn-outline-cerulean-blue-800{
+.btn-outline-cerulean-blue-800 {
     background-color: var(--vris-white-50) !important;
     color: var(--vris-cerulean-blue-800) !important;
     border: 1px solid var(--vris-cerulean-blue-800) !important;
@@ -279,7 +280,7 @@ h1,
     color: #e8850f;
     border-color: #e8850f;
 }
-.step.crossed .step-trigger .bg-blue-zodiac-950{
+.step.crossed .step-trigger .bg-blue-zodiac-950 {
     background-color: var(--vris-blue-zodiac-950) !important;
     color: var(--vris-white-50) !important;
 }
@@ -299,7 +300,7 @@ h1,
 .fw-medium {
     font-weight: 500 !important;
 }
-.input-group:focus-within{
+.input-group:focus-within {
     box-shadow: none !important;
 }
 .list-group-radio .list-group-item {
@@ -351,25 +352,25 @@ h1,
 .text-mirage-950 {
     color: var(--vris-mirage-950);
 }
-.text-fiord-700{
+.text-fiord-700 {
     color: var(--vris-fiord-700);
 }
-.text-mariner-600{
-    color: var( --vris-mariner-600) !important;
+.text-mariner-600 {
+    color: var(--vris-mariner-600) !important;
 }
-.text-blue-zodiac-950{
+.text-blue-zodiac-950 {
     color: var(--vris-blue-zodiac-950) !important;
 }
-.text-raven-700{
+.text-raven-700 {
     color: var(--vris-raven-700) !important;
 }
-.text-lochmara-500{
+.text-lochmara-500 {
     color: var(--vris-lochmara-500) !important;
 }
-.text-aquamarine-300{
+.text-aquamarine-300 {
     color: var(--vris-aquamarine-300) !important;
 }
-.text-rose-bud-300{
+.text-rose-bud-300 {
     color: var(--vris-rose-bud-300) !important;
 }
 .rounded-4 {
@@ -381,6 +382,27 @@ h1,
 .rounded-10p {
     border-radius: 10px !important;
 }
+
+.discount-badge {
+    background-color: #0d6efd;
+    color: white;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+input .fs-placeholder-14p::placeholder {
+    color: #a1a7b2;
+    font-size: 14px;
+}
+input[readonly],
+select[readonly] {
+    background-color: var(--vris-readonly-100) !important;
+    /* cursor: not-allowed; */
+}
+
 @font-face {
     font-family: "Gotham Rounded";
     src: url("../fonts/gotham-rounded/GothamRnd-BoldItalic.eot");

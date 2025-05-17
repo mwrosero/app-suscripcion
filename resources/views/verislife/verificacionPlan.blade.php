@@ -173,7 +173,7 @@ Registro
                             </div>
                             <div class="col-md-12">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                     <label class="form-check-label fs-10p" for="terms">
                                         Acepto <a href="#!" class="text-mariner-600 text-decoration-underline">Términos y Condiciones</a> <span class="text-danger">*</span>
                                     </label>
@@ -181,7 +181,7 @@ Registro
                             </div>
                             <div class="col-md-12">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="privacy">
+                                    <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
                                     <label class="form-check-label fs-10p" for="privacy">
                                         He leído y comprendo la autorización para el <a href="#!" class="text-mariner-600 text-decoration-underline">Tratamiento de mis datos personales</a>
                                     </label>

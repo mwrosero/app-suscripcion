@@ -8,6 +8,131 @@ Registro
 
 @section('content')
 <div class="flex-grow-1 container-p-y">
+    <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
+            <div class="modal-content p-3 py-md-4 px-md-5">
+                <div class="modal-body p-0">
+                    <form id="addBeneficiaryForm" class="pt-3">
+                        <h5 class="fw-semibold">Datos</h5>
+                        <hr>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="documentId" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="documentId" name="documentId" placeholder="Número de identificación" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="firstName" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="firstName" name="firstName" placeholder="Primer nombre" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="middleName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="middleName" name="middleName" placeholder="Segundo nombre">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="lastName" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="lastName" name="lastName" placeholder="Primer apellido" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="secondLastName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="secondLastName" name="secondLastName" placeholder="Segundo apellido">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg fs-14p" id="gender" name="gender" required>
+                                    <option value="" selected disabled>Selecciona un género</option>
+                                    <option value="female">Femenino</option>
+                                    <option value="male">Masculino</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="birthDate" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control form-control-lg fs-14p" id="birthDate" name="birthDate" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="maritalStatus" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg fs-14p" id="maritalStatus" name="maritalStatus" required>
+                                    <option value="" selected disabled>Selecciona estado civil</option>
+                                    <option value="single">Soltero/a</option>
+                                    <option value="married">Casado/a</option>
+                                    <option value="divorced">Divorciado/a</option>
+                                    <option value="widowed">Viudo/a</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="address" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="address" name="address" placeholder="Ingresa la dirección">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="sector" name="sector" placeholder="Ingresa el sector">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="contractNumber" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
+                                <input type="text" class="form-control form-control-lg fs-14p" id="contractNumber" name="contractNumber" placeholder="Número de contrato">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="relationship" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-lg fs-14p" id="relationship" name="relationship" required>
+                                    <option value="" selected disabled>Selecciona una opción</option>
+                                    <option value="spouse">Cónyuge</option>
+                                    <option value="child">Hijo/a</option>
+                                    <option value="parent">Padre/Madre</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="fw-semibold">Contacto</h5>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="phoneLandline" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                    <input type="tel" class="form-control form-control-lg fs-14p" id="phoneLandline" name="phoneLandline" placeholder="Ingresa el número de teléfono">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="phoneMobile" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
+                                    <input type="tel" class="form-control form-control-lg fs-14p" id="phoneMobile" name="phoneMobile" placeholder="Ingresa el número de teléfono">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                    <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                                        <label class="form-check-label fs-10p ms-2" for="acceptTerms">
+                                            Acepto <a href="#" target="_blank">Términos y Condiciones</a> <span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
+                                        <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
+                                            He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-footer border-0 p-0">
+                            <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-cerulean-blue-800">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="mb-4 p-3">
         <div class="row justify-content-center">
             <div class="col-12 mb-4">
@@ -53,32 +178,31 @@ Registro
                             </button>
                         </div>
                     </div>
-                    <div class="bs-stepper-content shadow-none p-0">
-                        <div id="registo-usuarios-validation" class="content border rounded">
+                    <div class="bs-stepper-content shadow-none bg-transparent p-0">
+                        <div id="registo-usuarios-validation" class="content">
                             <div class="card shadow-none">
                                 <div class="card-header">
                                     <div class="row align-items-center">
-                                        <!-- Título y buscador -->
                                         <div class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-4 mb-2 mb-md-0">
                                             <h5 class="text-raven-700 fw-medium mb-0">Beneficiarios</h5>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-wild-sand-50 border-end-0 border-0"><i class="ti ti-search"></i></span>
-                                                <input type="text" class="form-control bg-wild-sand-50 border-start-0 border-0 py-3" placeholder="Buscar" aria-label="Buscar">
+                                                <input type="text" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" placeholder="Buscar" aria-label="Buscar">
                                             </div>
                                         </div>
-
-                                        <!-- Botones -->
                                         <div class="col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row gap-3 pe-3">
-                                            <button type="button" class="btn btn-sm text-primary-veris fw-medium fs-14p shadow-none">+ Usuario</button>
-                                            <button type="button" class="btn btn-sm text-primary-veris fw-medium fs-14p shadow-none">+ Carga Masiva</button>
+                                            <button type="button" class="btn btn-sm text-primary-veris fw-medium fs-14p shadow-none" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">+ Usuario</button>
+                                            <label for="excelFile" class="btn btn-sm text-primary-veris fw-medium fs-14p shadow-none" style="cursor: pointer;">
+                                                + Carga Masiva
+                                                <input type="file" id="excelFile" name="excel_file" accept=".xls, .xlsx" hidden />
+                                            </label>
                                             <a href="/ruta-a-tu-template/colaboradores.csv" class="btn btn-sm fw-medium shadow-none flex-column align-items-start">
-                                                <small class="text-primary-veris fs-14p">Descarga template</small> 
+                                                <small class="text-primary-veris fs-14p">Descarga template</small>
                                                 <small class="text-lochmara-500 fs-10p"><i class="fa-solid fa-download me-2"></i> colaboradores.csv</small>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -95,14 +219,31 @@ Registro
                                         <tbody class="table-border-bottom-0">
                                             <tr>
                                                 <td></td>
-                                                <td><p class="me-1">0999999999</p></td>
-                                                <td><p class="me-1">Juan Perez</p></td>
-                                                <td><p class="me-1">0777777777</p></td>
-                                                <td><p class="me-1">usuariovbe@mail.com</p></td>
-                                                <td><p class="me-1">15/12/1992</p></td>
+                                                <td>
+                                                    <p class="me-1">0999999999</p>
+                                                </td>
+                                                <td>
+                                                    <p class="me-1">Juan Perez</p>
+                                                </td>
+                                                <td>
+                                                    <p class="me-1">0777777777</p>
+                                                </td>
+                                                <td>
+                                                    <p class="me-1">usuariovbe@mail.com</p>
+                                                </td>
+                                                <td>
+                                                    <p class="me-1">15/12/1992</p>
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none"><i class="fa-solid fa-pen"></i></button>
                                                     <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none"><i class="fa-solid fa-trash-can"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="7">
+                                                    <div class="text-center">
+                                                        <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/connecting-teams-amico.svg" alt="sin registro">
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -110,17 +251,250 @@ Registro
                                 </div>
                             </div>
                         </div>
-                        <div id="dato-facturacion-validation" class="content border rounded d-none">
-                            <h4>Paso 2: Datos de facturación</h4>
-                            <p>Contenido del paso 2</p>
+                        <div id="dato-facturacion-validation" class="content d-none">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body px-lg-5">
+                                            <h5 class="fw-semibold">Datos de facturación</h5>
+                                            <hr>
+                                            <form id="facturacionForm">
+                                                <div class="row g-3 justify-content-center">
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="docType" class="form-label fs-14p fw-medium">Elige tu documento <span class="text-danger">*</span></label>
+                                                        <select class="form-select form-select-lg fs-14p" id="docType" name="docType" required readonly disabled>
+                                                            <option value="ruc" selected>RUC</option>
+                                                            <option value="ci">Cédula</option>
+                                                            <option value="pasaporte">Pasaporte</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="docNumber" class="form-label fs-14p fw-medium">Número de documento <span class="text-danger">*</span></label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control form-control-lg fs-14p"
+                                                            id="docNumber"
+                                                            name="docNumber"
+                                                            placeholder="9999999999999"
+                                                            required
+                                                            readonly>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="fullName" class="form-label fs-14p fw-medium">Nombres y Apellidos <span class="text-danger">*</span></label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control form-control-lg fs-14p"
+                                                            id="fullName"
+                                                            name="fullName"
+                                                            placeholder="Empresa 1"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="phone" class="form-label fs-14p fw-medium">Teléfono <span class="text-danger">*</span></label>
+                                                        <input
+                                                            type="tel"
+                                                            class="form-control form-control-lg fs-14p"
+                                                            id="phone"
+                                                            name="phone"
+                                                            placeholder="+593 097 989 3554"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="email" class="form-label fs-14p fw-medium">Email <span class="text-danger">*</span></label>
+                                                        <input
+                                                            type="email"
+                                                            class="form-control form-control-lg fs-14p"
+                                                            id="email"
+                                                            name="email"
+                                                            placeholder="micorreo@empresa1.com"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-12 col-xl-8">
+                                                        <label for="address" class="form-label fs-14p fw-medium">Dirección <span class="text-danger">*</span></label>
+                                                        <input
+                                                            type="text"
+                                                            class="form-control form-control-lg fs-14p"
+                                                            id="address"
+                                                            name="address"
+                                                            placeholder="Colinas de los ceibos, 318"
+                                                            required
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="forma-pago-validation" class="content border rounded d-none">
-                            <h4>Paso 3: Forma de pago</h4>
-                            <p>Contenido del paso 3</p>
+                        <div id="forma-pago-validation" class="content d-none">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <h5 class="mb-3">Forma de pago</h5>
+                                                <hr>
+                                                <div class="row justify-content-center mt-4">
+                                                    <div class="col-md-4">
+                                                        <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
+                                                            <div class="card-body p-2">
+                                                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
+                                                                <h6 class="mb-2">Opción 1</h6>
+                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-6">/anual</small></h4>
+                                                                <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $140</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5 class="mb-3">Método de pago</h5>
+                                            <hr>
+                                            <div class="row justify-content-center pb-5">
+                                                <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto p-1 rounded-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-bank-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-bank-transfer" type="button" role="tab" aria-controls="pills-bank-transfer" aria-selected="false">Transferencia bancaria</button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content bg-transparent" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
+                                                        <div class="row g-3 justify-content-center">
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="cardNumber" class="form-label fs-14p fw-medium">Número de tarjeta</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="cardNumber" placeholder="Ingresa el número de la tarjeta" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa un número de tarjeta válido.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="cardHolder" class="form-label fs-14p fw-medium">Nombre del titular</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="cardHolder" placeholder="Ingresa nombre del titular" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa el nombre del titular.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="expiryDate" class="form-label fs-14p fw-medium">Fecha de expiración</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="expiryDate" placeholder="dd/mm/yy" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa una fecha válida.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <label for="cvv" class="form-label fs-14p fw-medium">CVV</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="cvv" placeholder="CVV" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa el código de seguridad.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="paymentType" class="form-label fs-14p fw-medium">Tipo de pago</label>
+                                                                <select class="form-select form-select-lg fs-14p" id="paymentType" required>
+                                                                    <option value="" selected disabled>Selecciona</option>
+                                                                    <option value="1">Pago único</option>
+                                                                    <option value="2">Pago en cuotas</option>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor selecciona un tipo de pago.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="pills-bank-transfer" role="tabpanel" aria-labelledby="pills-bank-transfer-tab" tabindex="0">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="confirmacion-validation" class="content border rounded d-none">
-                            <h4>Confirmación</h4>
-                            <p>Contenido de confirmación</p>
+                        <div id="confirmacion-validation" class="content d-none">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body p-4 text-center">
+                                            <div class="text-center mb-4">
+                                                <i class="fa-solid fa-circle-check text-primary-veris fs-1"></i>
+                                            </div>
+                                            <h4 class="text-primary-veris fw-semibold mb-4">Suscripción exitosa</h4>
+                                            <div class="row justify-content-center">
+                                                <div class="col-12 col-lg-8">
+                                                    <div class="card card-body shadow-none">
+                                                        <!-- Opción seleccionada -->
+                                                        <div class="d-flex justify-content-between border-perano-300 rounded-4 p-2 mb-4">
+                                                            <div class="option-info">
+                                                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
+                                                                <h4 class="option-title mb-0">Opción 1</h4>
+                                                            </div>
+                                                            <div class="price-block text-start">
+                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-6">/anual</small></h4>
+                                                                <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $140</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Beneficios -->
+                                                        <div class="text-start mb-4">
+                                                            <ul class="list-unstyled mb-0">
+                                                                <li class="d-flex align-items-start lh-sm mb-3">
+                                                                    <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
+                                                                    <span>8 consultas al año<br><small class="text-fiord-700">Uso inmediato</small></span>
+                                                                </li>
+                                                                <li class="d-flex align-items-start lh-sm mb-3">
+                                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                                                                    <span>3 Profilaxis</span>
+                                                                </li>
+                                                                <li class="d-flex align-items-start lh-sm mb-3">
+                                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                                                                    <span>Consulta Optométrica y Odontológica</span>
+                                                                </li>
+                                                                <li class="d-flex align-items-start lh-sm mb-3">
+                                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                                                                    <span>Descuentos en servicios<br>"Veris" y "Para mí"</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <!-- Detalles de la compra -->
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Colaboradores registrados:</div>
+                                                    <div class="detail-value">####</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Nombre de la empresa:</div>
+                                                    <div class="detail-value">Nombre de la empresa</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Método de pago:</div>
+                                                    <div class="detail-value">Credito/debito/Transferencia</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Monto:</div>
+                                                    <div class="detail-value">xxxxxx$</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Fecha de pago:</div>
+                                                    <div class="detail-value">dd/mm/yy</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,9 +568,8 @@ Registro
           `;
             } else if (idx === total - 1) {
                 actions.innerHTML = `
-            <a href="/home" class="btn btn-success">
-              <i class="bi bi-house"></i>
-              <span class="d-none d-sm-inline">Home</span>
+            <a href="/verislife/home" class="btn btn-cerulean-blue-800">
+              <span class="d-none d-sm-inline">Volver al inicio</span>
             </a>
           `;
             } else {
