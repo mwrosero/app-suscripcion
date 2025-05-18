@@ -1032,7 +1032,7 @@ li.ui-timepicker-selected,
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .swiper-pagination.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background: #7367f0 !important;
+  background: #7367f0;
 }
 
 .sk-primary.sk-plane,

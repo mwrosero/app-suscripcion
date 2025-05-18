@@ -115,10 +115,10 @@ h1,
     background-color: var(--vris-gallery-100) !important;
 }
 .bg-blue-ribbon-600 {
-    background-color: var(--vris-blue-ribbon-600);
+    background-color: var(--vris-blue-ribbon-600) !important;
 }
 .bg-zumthor-50 {
-    background-color: var(--vris-zumthor-50);
+    background-color: var(--vris-zumthor-50) !important;
 }
 .bg-cornflower-blue-400 {
     background-color: var(--vris-cornflower-blue-400);
@@ -373,14 +373,56 @@ h1,
 .text-rose-bud-300 {
     color: var(--vris-rose-bud-300) !important;
 }
+.text-bay-many-900{
+    color: var(--vris-bay-many-900) !important;
+}
 .rounded-4 {
     border-radius: 1rem !important;
 }
 .rounded-5 {
     border-radius: 2rem !important;
 }
+.rounded-bottom-4{
+    border-bottom-right-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important
+}
 .rounded-10p {
     border-radius: 10px !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--vris-blue-ribbon-600);
+  background: rgba(255, 255, 255, 1);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+  font-weight: 900;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.2rem !important;
+}
+
+.swiper-pagination-bullet {
+  background: var(--vris-athens-gray-100);
+  opacity: 0.9;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--vris-blue-ribbon-600) !important;
+  opacity: 1;
+}
+
+.slider-insurers .swiper-pagination-bullet-active {
+  background: var(--vris-blue-ribbon-500) !important;
+  opacity: 1;
 }
 
 .discount-badge {
