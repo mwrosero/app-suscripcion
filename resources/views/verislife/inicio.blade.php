@@ -117,7 +117,7 @@ Registro
                         <div class="swiper-slide">
                             <div class="card border-perano-300 rounded-4 shadow-none h-100">
                                 <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between mx-3">
+                                    <div class="d-flex justify-content-between mx-3 mb-3">
                                         <div class="option-info">
                                             <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
                                             <h5 class="option-title fw-medium mb-0">Opción 1</h5>
@@ -136,7 +136,7 @@ Registro
                         <div class="swiper-slide">
                             <div class="card border-perano-300 rounded-4 shadow-none h-100">
                                 <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between mx-3">
+                                    <div class="d-flex justify-content-between mx-3 mb-3">
                                         <div class="option-info">
                                             <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
                                             <h5 class="option-title fw-medium mb-0">Opción 2</h5>

@@ -207,7 +207,7 @@ Registro
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th class="white-space-nowrap fs-9 align-middle ps-0" style="max-width:20px; width:18px;"></th>
                                                 <th>Identificación</th>
                                                 <th>Nombre y Apellido</th>
                                                 <th>Teléfono móvil</th>
@@ -218,22 +218,16 @@ Registro
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <tr>
-                                                <td></td>
-                                                <td>
-                                                    <p class="me-1">0999999999</p>
+                                                <td class="fs-9 align-middle">
+                                                    <div class="form-check mb-0 fs-8">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                    </div>
                                                 </td>
-                                                <td>
-                                                    <p class="me-1">Juan Perez</p>
-                                                </td>
-                                                <td>
-                                                    <p class="me-1">0777777777</p>
-                                                </td>
-                                                <td>
-                                                    <p class="me-1">usuariovbe@mail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="me-1">15/12/1992</p>
-                                                </td>
+                                                <td>0999999999</td>
+                                                <td>Juan Perez</td>
+                                                <td>0777777777</td>
+                                                <td>usuariovbe@mail.com</td>
+                                                <td>15/12/1992</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none"><i class="fa-solid fa-pen"></i></button>
                                                     <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none"><i class="fa-solid fa-trash-can"></i></button>
@@ -248,6 +242,30 @@ Registro
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9">
+                                    <div class="col-12 col-md-6 text-md-start text-center mb-2 mb-md-0">
+                                        <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
+                                    </div>
+                                    <div class="col-auto d-flex">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination pagination-sm justify-content-center mb-0">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
