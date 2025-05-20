@@ -1032,7 +1032,7 @@ li.ui-timepicker-selected,
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .swiper-pagination.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background: #7367f0 !important;
+  background: #7367f0;
 }
 
 .sk-primary.sk-plane,
@@ -1220,8 +1220,8 @@ li.ui-timepicker-selected,
   color: #7367f0 !important;
 }
 .bs-stepper .step.crossed .step-trigger .bs-stepper-circle {
-  background-color: #f4f3fe !important;
-  color: #aba4f6 !important;
+  background-color: #f4f3fe ;
+  color: #aba4f6 ;
 }
 .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
   fill: #7367f0 !important;

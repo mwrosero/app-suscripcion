@@ -105,15 +105,15 @@
             <span class="menu-header-text">Apps &amp; Pages</span>
         </li> -->
         <li class="menu-item active">
-            <a href="#!" class="menu-link fw-medium text-white">
+            <a href="/verislife/home" class="menu-link fw-medium text-white">
                 <i class="menu-icon tf-icons ti ti-mail d-none"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="#!" class="menu-link fw-medium text-white">
+            <a href="/verislife/registro" class="menu-link fw-medium text-white">
                 <i class="menu-icon tf-icons ti ti-messages d-none"></i>
-                <div data-i18n="Suscripción">Suscripción</div>
+                <div data-i18n="Registro">Registro</div>
             </a>
         </li>
         <li class="menu-item">

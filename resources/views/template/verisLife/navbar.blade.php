@@ -9,7 +9,7 @@
         <div>
             <h5 class="mb-0">Bienvenido 👋🏻 </h5>
         </div>
-        <a href="#!" class="navbar-brand mx-auto">
+        <a href="#!" class="navbar-brand mx-auto d-none">
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-azul.svg" alt="veris" width="40">
         </a>
 
