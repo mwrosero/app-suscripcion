@@ -218,7 +218,7 @@ Registro
             <div class="col-12 col-lg-4">
                 <div class="card h-100">
                     <div class="card-header bg-cerulean-blue-800 py-3">
-                        <h5 class="fw-medium border-start-white text-white ps-3 fs-18 mb-0">Dependientes registrados</h5>
+                        <h6 class="fw-medium border-start-white text-white ps-3 mb-0">Dependientes registrados</h6>
                     </div>
                     <div class="card-body">
                         <div class="row g-0 justify-content-around align-items-center my-4">
@@ -244,7 +244,7 @@ Registro
             <div class="col-12 col-lg-4">
                 <div class="card h-100">
                     <div class="card-header bg-cerulean-blue-800 py-3">
-                        <h5 class="fw-medium border-start-white text-white ps-3 fs-18 mb-0">Consultas realizadas</h5>
+                        <h6 class="fw-medium border-start-white text-white ps-3 mb-0">Consultas realizadas</h6>
                     </div>
                     <div class="card-body">
                         <div class="row g-0 justify-content-center align-items-center my-4">
@@ -272,7 +272,7 @@ Registro
             <div class="col-12 col-lg-4">
                 <div class="card h-100">
                     <div class="card-header bg-cerulean-blue-800 py-3">
-                        <h5 class="fw-medium border-start-white text-white ps-3 fs-18 mb-0">Gratuidades</h5>
+                        <h6 class="fw-medium border-start-white text-white ps-3 mb-0">Gratuidades</h6>
                     </div>
                     <div class="card-body">
                         <div class="row g-0 justify-content-center align-items-center my-4">
