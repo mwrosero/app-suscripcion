@@ -74,6 +74,9 @@
     --vris-aquamarine-200: #b9f9d9;
     --vris-aquamarine-300: #69f0ae;
     --vris-aquamarine-400: #45e397;
+    --vris-chateau-green-500: #22c565;
+    --vris-chateau-green-600: #18B057;
+    --vris-chateau-green-700: #158042;
     --vris-rose-bud-200: #ffd5c8;
     --vris-rose-bud-300: #ffab91;
     --vris-rose-bud-400: #fd8e6c;
@@ -143,6 +146,14 @@ h1,
 }
 .bg-cerulean-blue-800{
     background-color: var(--vris-cerulean-blue-800) !important;
+}
+.bg-sail-gradient{
+    background: #AFDBFC;
+    background: linear-gradient(0deg, rgba(175, 219, 252, 1) 10%, rgba(235, 246, 254, 1) 85%);
+}
+.bg-madang-gradient{
+    background: #B9F6CA;
+    background: linear-gradient(0deg, rgba(185, 246, 202, 1) 10%, rgba(235, 246, 254, 1) 85%);
 }
 .border-start-blue {
     border-left: 3px solid var(--vris-blue-ribbon-600) !important;
@@ -395,6 +406,9 @@ h1,
 }
 .text-havelock-blue-500{
     color: var(--vris-havelock-blue-500) !important;
+}
+.text-chateau-green-600{
+    color: var(--vris-chateau-green-600) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;
