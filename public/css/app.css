@@ -46,7 +46,10 @@
     --vris-pattens-blue-50: #f0f9ff;
     --vris-pattens-blue-100: #d7edfd;
     --vris-pattens-blue-200: #bbe5fc;
-    --vris-cerulean-blue-700: #1d61d8;
+    --vris-havelock-blue-400: #4e9fe2;
+    --vris-havelock-blue-500: #338DD8;
+    --vris-havelock-blue-600: #1967b0;
+    --vris-cerulean-blue-700: #1967b0;
     --vris-cerulean-blue-800: #2156bf;
     --vris-cerulean-blue-900: #1e458a;
     --vris-blue-ribbon-500: #3885f9;
@@ -71,6 +74,9 @@
     --vris-aquamarine-200: #b9f9d9;
     --vris-aquamarine-300: #69f0ae;
     --vris-aquamarine-400: #45e397;
+    --vris-chateau-green-500: #22c565;
+    --vris-chateau-green-600: #18B057;
+    --vris-chateau-green-700: #158042;
     --vris-rose-bud-200: #ffd5c8;
     --vris-rose-bud-300: #ffab91;
     --vris-rose-bud-400: #fd8e6c;
@@ -140,6 +146,14 @@ h1,
 }
 .bg-cerulean-blue-800{
     background-color: var(--vris-cerulean-blue-800) !important;
+}
+.bg-sail-gradient{
+    background: #AFDBFC;
+    background: linear-gradient(0deg, rgba(175, 219, 252, 1) 10%, rgba(235, 246, 254, 1) 85%);
+}
+.bg-madang-gradient{
+    background: #B9F6CA;
+    background: linear-gradient(0deg, rgba(185, 246, 202, 1) 10%, rgba(235, 246, 254, 1) 85%);
 }
 .border-start-blue {
     border-left: 3px solid var(--vris-blue-ribbon-600) !important;
@@ -293,6 +307,9 @@ h1,
     border-radius: 25px 10px 10px 25px;
     background-color: var(--vris-wild-sand-50);
 }
+.form-select.bg-gray{
+    background-color: var(--vris-readonly-100) !important;
+}
 .fs-10p {
     font-size: 10px !important;
 }
@@ -351,6 +368,9 @@ h1,
     opacity: 1;
     transform: translateY(0);
 }
+.shadow-1{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px !important;
+}
 .text-primary-veris {
     color: var(--vris-blue-ribbon-600) !important;
 }
@@ -358,7 +378,7 @@ h1,
     color: var(--vris-mirage-950);
 }
 .text-fiord-700 {
-    color: var(--vris-fiord-700);
+    color: var(--vris-fiord-700) !important;
 }
 .text-mariner-600 {
     color: var(--vris-mariner-600) !important;
@@ -380,6 +400,15 @@ h1,
 }
 .text-bay-many-900 {
     color: var(--vris-bay-many-900) !important;
+}
+.text-cerulean-blue-800{
+    color: var(--vris-cerulean-blue-800) !important;
+}
+.text-havelock-blue-500{
+    color: var(--vris-havelock-blue-500) !important;
+}
+.text-chateau-green-600{
+    color: var(--vris-chateau-green-600) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;

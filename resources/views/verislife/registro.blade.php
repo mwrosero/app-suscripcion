@@ -276,6 +276,25 @@ Registro
                                         <div class="card-body px-lg-5">
                                             <h5 class="fw-semibold">Datos de facturación</h5>
                                             <hr>
+                                            <div class="row justify-content-center my-4">
+                                                <div class="col-md-12 col-xl-8">
+                                                    <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6">
+                                                                    <h3 class="mb-2">Total a pagar</h3>
+                                                                    <h2 class="fw-semibold text-cerulean-blue-800 mb-0">$9000 <small class="fw-normal fs-12p">/100 PLANES</small></h2>
+                                                                </div>
+                                                                <div class="col-12 col-md-6">
+                                                                    <div class="text-start text-md-end">
+                                                                        <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <form id="facturacionForm">
                                                 <div class="row g-3 justify-content-center">
                                                     <div class="col-md-12 col-xl-8">
@@ -351,16 +370,23 @@ Registro
                                     <div class="card shadow-sm">
                                         <div class="card-body">
                                             <div class="mb-4">
-                                                <h5 class="mb-3">Forma de pago</h5>
+                                                <h5 class="mb-3">Valor a pagar</h5>
                                                 <hr>
                                                 <div class="row justify-content-center mt-4">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
-                                                            <div class="card-body p-2">
-                                                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
-                                                                <h6 class="mb-2">Opción 1</h6>
-                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-6">/anual</small></h4>
-                                                                <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $140</p>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-6">
+                                                                        <h3 class="mb-2">Total a pagar</h3>
+                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0">$9000 <small class="fw-normal fs-12p">/100 PLANES</small></h2>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <div class="text-start text-md-end">
+                                                                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -425,10 +451,93 @@ Registro
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
-
+                                                        <div class="text-center mb-4">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" />
+                                                                <label class="form-check-label fw-medium" for="tipoCuentaAhorro">Cuenta de ahorros</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaCorriente" />
+                                                                <label class="form-check-label fw-medium" for="tipoCuentaCorriente">Cuenta corriente</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row g-3 justify-content-center mb-4">
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="cardNumber" class="form-label fs-14p fw-medium text-blue-zodiac-950">Número de cuenta</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="cardNumber" placeholder="Ingresa el número de cuenta" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa un número de cuenta válido.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="cardHolder" class="form-label fs-14p fw-medium text-blue-zodiac-950">Nombre del titular</label>
+                                                                <input type="text" class="form-control form-control-lg fs-14p" id="cardHolder" placeholder="Ingresa el nombre del titular" required>
+                                                                <div class="invalid-feedback">
+                                                                    Por favor ingresa el nombre del titular.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row g-3 justify-content-center text-center mb-4">
+                                                            <div class="col-12 col-lg-8">
+                                                                <a href="#!" class="text-mariner-600 text-decoration-underline fs-14p">Descargar autorización de débito</a>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <a href="#!" class="text-mariner-600 text-decoration-underline fs-14p">Descargar autorización acuerdo de responsabilidad</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row g-4 justify-content-center text-center mb-4">
+                                                            <div class="col-12 col-lg-8">
+                                                                <h6 class="fs-14p mb-1">Autorización de débito</h6>
+                                                                <a href="#!" class="btn btn-cerulean-blue-800 fs-14p">Cargar</a>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <h6 class="fs-14p mb-1">Acuerdo de responsabilidad</h6>
+                                                                <a href="#!" class="btn btn-cerulean-blue-800 fs-14p">Cargar</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="pills-bank-transfer" role="tabpanel" aria-labelledby="pills-bank-transfer-tab" tabindex="0">
-
+                                                        <div class="row g-3 flex-column justify-content-center align-items-center">
+                                                            <div class="col-12 col-lg-8">
+                                                                <div class="card bg-zumthor-50">
+                                                                    <div class="card-body">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <i class="fa-solid fa-circle-info text-havelock-blue-500 fs-1 me-3"></i>
+                                                                            <div>
+                                                                                <p class="text-blue-zodiac-950 fw-medium mb-0">Concepto de transferencia:</p>
+                                                                                <p class="fw-normal mb-0">Compra - Opción 1</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <select class="form-select form-select-lg bg-gray border-0 mb-3">
+                                                                    <option value="1">Banco Internacional</option>
+                                                                    <option value="2">Banco otro 1</option>
+                                                                    <option value="3">Banco otro 2</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <div class="card shadow-1 rounded-4">
+                                                                    <div class="card-body">
+                                                                        <div class="text-start mb-3">
+                                                                            <h6 class="text-primary-veris mb-0">Veris S.A.</h6>
+                                                                            <h6 class="text-primary-veris mb-0" id="numeroCuenta">1792040531001</h6>
+                                                                        </div>
+                                                                        <h5 class="text-blue-zodiac-950 mb-0" id="tipoBanco">Banco Internacional</h5>
+                                                                        <p class="fs-14p text-fiord-700 fw-medium mb-3">Cuenta corriente</p>
+                                                                        <h1 class="text-blue-zodiac-950 fw-bold">1000644814</h1>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <div class="text-center">
+                                                                    <h6 class="fs-14p mb-1">Comprobante de pago</h6>
+                                                                    <button type="button" class="btn btn-cerulean-blue-800 fs-14p">Cargar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -446,8 +555,21 @@ Registro
                                             <div class="text-center mb-4">
                                                 <i class="fa-solid fa-circle-check text-primary-veris fs-1"></i>
                                             </div>
-                                            <h4 class="text-primary-veris fw-semibold mb-4">Suscripción exitosa</h4>
+                                            <h4 class="text-primary-veris fw-semibold mb-4">Registro exitoso</h4>
                                             <div class="row justify-content-center">
+                                                <div class="col-12 col-lg-10">
+                                                    <div class="card bg-zumthor-50">
+                                                        <div class="card-body">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="fa-solid fa-circle-info text-havelock-blue-500 fs-1 me-3"></i>
+                                                                <div>
+                                                                    <p class="text-blue-zodiac-950 text-start mb-0">El <b>cobro</b> correspondiente a la opción contratada se realizará dentro de <b>30 días</b></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-12 col-lg-8">
                                                     <div class="card card-body shadow-none">
                                                         <!-- Opción seleccionada -->
@@ -457,7 +579,7 @@ Registro
                                                                 <h4 class="option-title mb-0">Opción 1</h4>
                                                             </div>
                                                             <div class="price-block text-start">
-                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-6">/anual</small></h4>
+                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-14p">/100 planes</small></h4>
                                                                 <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $140</p>
                                                             </div>
                                                         </div>
@@ -501,11 +623,19 @@ Registro
                                                     <div class="detail-value">Credito/debito/Transferencia</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Monto:</div>
+                                                    <div>Frecuencia de pago: </div>
+                                                    <div class="detail-value">Anual</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Monto total:</div>
                                                     <div class="detail-value">xxxxxx$</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Fecha de pago:</div>
+                                                    <div>Fecha de fin de contrato:</div>
+                                                    <div class="detail-value">dd/mm/yy</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Fecha de fin de contrato:</div>
                                                     <div class="detail-value">dd/mm/yy</div>
                                                 </li>
                                             </ul>
