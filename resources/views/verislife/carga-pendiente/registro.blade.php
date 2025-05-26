@@ -1,0 +1,260 @@
+@extends('template.verisLife.app-template')
+@section('title')
+Veris
+@endsection
+@section('title-section')
+Registro
+@endsection
+
+@section('content')
+<div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <div class="text-center mb-3">
+                    <div class="loader mx-auto"></div>
+                </div>
+                <h5 class="text-blue-zodiac-950 fw-bold">Se están cargando tus datos</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <i class="fa-solid fa-circle-check text-primary-veris fs-1 mb-3"></i>
+                <h5 class="text-blue-zodiac-950 fw-bold">Beneficiario agregado con éxito.</h5>
+                <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-cerulean-blue-800 col">Añadir nuevo</button>
+                    <button type="button" class="btn btn-outline-cerulean-blue-800 col" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
+        <div class="modal-content p-3 py-md-4 px-md-5">
+            <div class="modal-body p-0">
+                <form id="addBeneficiaryForm" class="pt-3">
+                    <h5 class="fw-semibold">Datos</h5>
+                    <hr>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="documentId" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="documentId" name="documentId" placeholder="Número de identificación" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="firstName" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="firstName" name="firstName" placeholder="Primer nombre" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="middleName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="middleName" name="middleName" placeholder="Segundo nombre">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="lastName" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="lastName" name="lastName" placeholder="Primer apellido" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="secondLastName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="secondLastName" name="secondLastName" placeholder="Segundo apellido">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="gender" name="gender" required>
+                                <option value="" selected disabled>Selecciona un género</option>
+                                <option value="female">Femenino</option>
+                                <option value="male">Masculino</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="birthDate" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-lg fs-14p" id="birthDate" name="birthDate" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="maritalStatus" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="maritalStatus" name="maritalStatus" required>
+                                <option value="" selected disabled>Selecciona estado civil</option>
+                                <option value="single">Soltero/a</option>
+                                <option value="married">Casado/a</option>
+                                <option value="divorced">Divorciado/a</option>
+                                <option value="widowed">Viudo/a</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="address" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="address" name="address" placeholder="Ingresa la dirección">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="sector" name="sector" placeholder="Ingresa el sector">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="contractNumber" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="contractNumber" name="contractNumber" placeholder="Número de contrato">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="relationship" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="relationship" name="relationship" required>
+                                <option value="" selected disabled>Selecciona una opción</option>
+                                <option value="spouse">Cónyuge</option>
+                                <option value="child">Hijo/a</option>
+                                <option value="parent">Padre/Madre</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5 class="fw-semibold">Contacto</h5>
+                        <hr>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="phoneLandline" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneLandline" name="phoneLandline" placeholder="Ingresa el número de teléfono">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phoneMobile" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneMobile" name="phoneMobile" placeholder="Ingresa el número de teléfono">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                                    <label class="form-check-label fs-10p ms-2" for="acceptTerms">
+                                        Acepto <a href="#" target="_blank">Términos y Condiciones</a> <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
+                                    <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
+                                        He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="modal-footer border-0 p-0">
+                        <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-cerulean-blue-800">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex-grow-1 container-p-y">
+
+    <section class="mb-4 p-3">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-4">
+                <div class="card shadow-none">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-4 mb-2 mb-md-0">
+                                <h5 class="text-raven-700 fw-medium mb-0">Beneficiarios</h5>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-wild-sand-50 border-end-0 border-0"><i class="ti ti-search"></i></span>
+                                    <input type="text" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" placeholder="Buscar" aria-label="Buscar">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row gap-3 pe-3">
+                                <button type="button" class="btn btn-blue-veris fw-medium fs-14p shadow-none" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal"><i class="fa-solid fa-plus me-2"></i> Añadir beneficiario</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="white-space-nowrap fs-9 align-middle ps-0" style="max-width:20px; width:18px;"></th>
+                                    <th>Identificación</th>
+                                    <th>Nombre y Apellido</th>
+                                    <th>Teléfono móvil</th>
+                                    <th>Correo</th>
+                                    <th>Fecha de nacimiento</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                <tr>
+                                    <td class="fs-9 align-middle">
+                                        <div class="form-check mb-0 fs-8">
+                                            <input class="form-check-input" type="checkbox" />
+                                        </div>
+                                    </td>
+                                    <td>0999999999</td>
+                                    <td>Juan Perez</td>
+                                    <td>0777777777</td>
+                                    <td>usuariovbe@mail.com</td>
+                                    <td>15/12/1992</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none"><i class="fa-solid fa-pen"></i></button>
+                                        <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center">
+                                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/connecting-teams-amico.svg" alt="sin registro">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9">
+                        <div class="col-12 col-md-6 text-md-start text-center mb-2 mb-md-0">
+                            <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
+                        </div>
+                        <div class="col-auto d-flex">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination pagination-sm justify-content-center mb-0">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="text-center">
+                    <a href="/verislife/carga-dependiente" class="btn btn-blue-veris fw-medium fs-14p shadow-none">Ir al home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+@endsection

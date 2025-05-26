@@ -427,18 +427,18 @@ Registro
                                             <hr>
                                             <div class="row justify-content-center pb-5">
                                                 <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto p-1 rounded-3" id="pills-tab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
+                                                    <li class="nav-item d-none" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
                                                     </li>
                                                     <li class="nav-item" role="presentation">
-                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
+                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
                                                     </li>
                                                     <li class="nav-item" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-bank-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-bank-transfer" type="button" role="tab" aria-controls="pills-bank-transfer" aria-selected="false">Transferencia bancaria</button>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content bg-transparent" id="pills-tabContent">
-                                                    <div class="tab-pane fade show active" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
+                                                    <div class="tab-pane fade d-none" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
                                                         <div class="row g-3 justify-content-center">
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="cardNumber" class="form-label fs-14p fw-medium">Número de tarjeta</label>
@@ -481,7 +481,7 @@ Registro
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tab-pane fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
+                                                    <div class="tab-pane fade show active" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
                                                         <div class="text-center mb-4">
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" />
