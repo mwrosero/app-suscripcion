@@ -7,132 +7,163 @@ Registro
 @endsection
 
 @section('content')
-<div class="flex-grow-1 container-p-y">
-    <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
-            <div class="modal-content p-3 py-md-4 px-md-5">
-                <div class="modal-body p-0">
-                    <form id="addBeneficiaryForm" class="pt-3">
-                        <h5 class="fw-semibold">Datos</h5>
-                        <hr>
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="documentId" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="documentId" name="documentId" placeholder="Número de identificación" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="firstName" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="firstName" name="firstName" placeholder="Primer nombre" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="middleName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="middleName" name="middleName" placeholder="Segundo nombre">
-                            </div>
 
-                            <div class="col-md-4">
-                                <label for="lastName" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="lastName" name="lastName" placeholder="Primer apellido" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="secondLastName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="secondLastName" name="secondLastName" placeholder="Segundo apellido">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="gender" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
-                                <select class="form-select form-select-lg fs-14p" id="gender" name="gender" required>
-                                    <option value="" selected disabled>Selecciona un género</option>
-                                    <option value="female">Femenino</option>
-                                    <option value="male">Masculino</option>
-                                    <option value="other">Otro</option>
-                                </select>
-                            </div>
+<div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <div class="text-center mb-3">
+                    <div class="loader mx-auto"></div>
+                </div>
+                <h5 class="text-blue-zodiac-950 fw-bold">Se están cargando tus datos</h5>
+            </div>
+        </div>
+    </div>
+</div>
 
-                            <div class="col-md-4">
-                                <label for="birthDate" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control form-control-lg fs-14p" id="birthDate" name="birthDate" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="maritalStatus" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
-                                <select class="form-select form-select-lg fs-14p" id="maritalStatus" name="maritalStatus" required>
-                                    <option value="" selected disabled>Selecciona estado civil</option>
-                                    <option value="single">Soltero/a</option>
-                                    <option value="married">Casado/a</option>
-                                    <option value="divorced">Divorciado/a</option>
-                                    <option value="widowed">Viudo/a</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="address" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="address" name="address" placeholder="Ingresa la dirección">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="sector" name="sector" placeholder="Ingresa el sector">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="contractNumber" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
-                                <input type="text" class="form-control form-control-lg fs-14p" id="contractNumber" name="contractNumber" placeholder="Número de contrato">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="relationship" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
-                                <select class="form-select form-select-lg fs-14p" id="relationship" name="relationship" required>
-                                    <option value="" selected disabled>Selecciona una opción</option>
-                                    <option value="spouse">Cónyuge</option>
-                                    <option value="child">Hijo/a</option>
-                                    <option value="parent">Padre/Madre</option>
-                                    <option value="other">Otro</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <h5 class="fw-semibold">Contacto</h5>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="phoneLandline" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
-                                    <input type="tel" class="form-control form-control-lg fs-14p" id="phoneLandline" name="phoneLandline" placeholder="Ingresa el número de teléfono">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="phoneMobile" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
-                                    <input type="tel" class="form-control form-control-lg fs-14p" id="phoneMobile" name="phoneMobile" placeholder="Ingresa el número de teléfono">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
-                                    <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="row g-3">
-                                <div class="col-md-12">
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
-                                        <label class="form-check-label fs-10p ms-2" for="acceptTerms">
-                                            Acepto <a href="#" target="_blank">Términos y Condiciones</a> <span class="text-danger">*</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
-                                        <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
-                                            He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="modal-footer border-0 p-0">
-                            <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-cerulean-blue-800">Agregar</button>
-                        </div>
-                    </form>
+<div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <i class="fa-solid fa-circle-check text-primary-veris fs-1 mb-3"></i>
+                <h5 class="text-blue-zodiac-950 fw-bold">Beneficiario agregado con éxito.</h5>
+                <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-cerulean-blue-800 col">Añadir nuevo</button>
+                    <button type="button" class="btn btn-outline-cerulean-blue-800 col" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
+        <div class="modal-content p-3 py-md-4 px-md-5">
+            <div class="modal-body p-0">
+                <form id="addBeneficiaryForm" class="pt-3">
+                    <h5 class="fw-semibold">Datos</h5>
+                    <hr>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="documentId" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="documentId" name="documentId" placeholder="Número de identificación" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="firstName" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="firstName" name="firstName" placeholder="Primer nombre" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="middleName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="middleName" name="middleName" placeholder="Segundo nombre">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="lastName" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="lastName" name="lastName" placeholder="Primer apellido" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="secondLastName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="secondLastName" name="secondLastName" placeholder="Segundo apellido">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="gender" name="gender" required>
+                                <option value="" selected disabled>Selecciona un género</option>
+                                <option value="female">Femenino</option>
+                                <option value="male">Masculino</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="birthDate" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-lg fs-14p" id="birthDate" name="birthDate" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="maritalStatus" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="maritalStatus" name="maritalStatus" required>
+                                <option value="" selected disabled>Selecciona estado civil</option>
+                                <option value="single">Soltero/a</option>
+                                <option value="married">Casado/a</option>
+                                <option value="divorced">Divorciado/a</option>
+                                <option value="widowed">Viudo/a</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="address" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="address" name="address" placeholder="Ingresa la dirección">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="sector" name="sector" placeholder="Ingresa el sector">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="contractNumber" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="contractNumber" name="contractNumber" placeholder="Número de contrato">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="relationship" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="relationship" name="relationship" required>
+                                <option value="" selected disabled>Selecciona una opción</option>
+                                <option value="spouse">Cónyuge</option>
+                                <option value="child">Hijo/a</option>
+                                <option value="parent">Padre/Madre</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5 class="fw-semibold">Contacto</h5>
+                        <hr>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="phoneLandline" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneLandline" name="phoneLandline" placeholder="Ingresa el número de teléfono">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phoneMobile" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneMobile" name="phoneMobile" placeholder="Ingresa el número de teléfono">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                                    <label class="form-check-label fs-10p ms-2" for="acceptTerms">
+                                        Acepto <a href="#" target="_blank">Términos y Condiciones</a> <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
+                                    <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
+                                        He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="modal-footer border-0 p-0">
+                        <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-cerulean-blue-800">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex-grow-1 container-p-y">
     <section class="mb-4 p-3">
         <div class="row justify-content-center">
             <div class="col-12 mb-4">
@@ -396,18 +427,18 @@ Registro
                                             <hr>
                                             <div class="row justify-content-center pb-5">
                                                 <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto p-1 rounded-3" id="pills-tab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
+                                                    <li class="nav-item d-none" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
                                                     </li>
                                                     <li class="nav-item" role="presentation">
-                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
+                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
                                                     </li>
                                                     <li class="nav-item" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-bank-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-bank-transfer" type="button" role="tab" aria-controls="pills-bank-transfer" aria-selected="false">Transferencia bancaria</button>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content bg-transparent" id="pills-tabContent">
-                                                    <div class="tab-pane fade show active" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
+                                                    <div class="tab-pane fade d-none" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
                                                         <div class="row g-3 justify-content-center">
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="cardNumber" class="form-label fs-14p fw-medium">Número de tarjeta</label>
@@ -450,7 +481,7 @@ Registro
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tab-pane fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
+                                                    <div class="tab-pane fade show active" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
                                                         <div class="text-center mb-4">
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" />

@@ -86,3 +86,11 @@ Route::get('verislife/verificacion-plan', function () {
 Route::get('verislife/registro', function () {
     return view('verislife.registro');
 });
+
+Route::get('verislife/carga-dependiente', function () {
+    return view('verislife.carga-pendiente.carga-dependiente');
+});
+
+Route::get('verislife/carga-dependiente/registro', function () {
+    return view('verislife.carga-pendiente.registro');
+});
