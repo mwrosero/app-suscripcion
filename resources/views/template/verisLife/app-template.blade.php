@@ -66,6 +66,13 @@
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/js/config.js"></script>
+    <script>
+        let _token = "{{ session('accessToken') }}";
+        const _application = "{{ \App\Models\Ism::APPLICATION }}";
+        const _idOrganizacion = "{{ \App\Models\Ism::IDORGANIZACION }}";
+        const api_url = "{{ \App\Models\Ism::BASE_URL }}";
+        const url_site = "{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}";
+    </script>
 </head>
 
 <body>
@@ -115,6 +122,7 @@
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/node-waves/node-waves.js"></script>
 
+    <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/block-ui/block-ui.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/hammer/hammer.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
@@ -145,6 +153,7 @@
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/js/dashboards-analytics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/js/scripts/utils.js"></script>
+    <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/js/ism-helper.js"></script>
 </body>
 
 </html>

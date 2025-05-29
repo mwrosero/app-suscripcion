@@ -41,7 +41,7 @@ Registro
             </div>
         </div>
     </section>
-    <section class="bg-pattens-blue-100 mb-4 px-3 py-4">
+    <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
             <a href="#!" class="fw-medium me-1">Ver todos</a>
@@ -159,7 +159,7 @@ Registro
                 <div class="swiper-pagination position-absolute bottom-0"></div>
             </div>
 
-            <div class="content-message text-center">
+            <div class="content-message text-center d-none" id="empty-space-no-contratado">
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/carrito.svg" />
                 <h4 class="text-primary-veris">No tienes opciones contratados</h4>
             </div>

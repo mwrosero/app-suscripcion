@@ -227,7 +227,7 @@ Registro
                                                 + Carga Masiva
                                                 <input type="file" id="excelFile" name="excel_file" accept=".xls, .xlsx" hidden />
                                             </label>
-                                            <a href="/ruta-a-tu-template/colaboradores.csv" class="btn btn-sm fw-medium shadow-none flex-column align-items-start">
+                                            <a href="/ruta-a-tu-template/colaboradores.csv" download="Plantilla" class="btn btn-sm fw-medium shadow-none flex-column align-items-start">
                                                 <small class="text-primary-veris fs-14p">Descarga template</small>
                                                 <small class="text-lochmara-500 fs-10p"><i class="fa-solid fa-download me-2"></i> colaboradores.csv</small>
                                             </a>
@@ -248,7 +248,7 @@ Registro
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
-                                            <tr>
+                                            {{-- <tr>
                                                 <td class="fs-9 align-middle">
                                                     <div class="form-check mb-0 fs-8">
                                                         <input class="form-check-input" type="checkbox" />
@@ -263,7 +263,7 @@ Registro
                                                     <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none"><i class="fa-solid fa-pen"></i></button>
                                                     <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none"><i class="fa-solid fa-trash-can"></i></button>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
                                                 <td colspan="7">
                                                     <div class="text-center">
