@@ -75,23 +75,24 @@ Route::group(['middleware' => ['loggedUser']], function () {
 });
 
 Route::get('verislife/login', function () {
-    return view('login.verislife.login');
+    return view('login.login');
 });
-Route::get('verislife/home', function () {
+Route::get('portal-fidelizacion/dashboard', function () {
     // dd(Session::get('menu'));
     return view('verislife.inicio');
 });
-Route::get('verislife/verificacion-plan', function () {
-    return view('verislife.verificacionPlan');
-});
-Route::get('verislife/registro', function () {
+Route::get('portal-fidelizacion/registro-plan', function () {
     return view('verislife.registro');
 });
-
 Route::get('verislife/carga-dependiente', function () {
     return view('verislife.carga-pendiente.carga-dependiente');
 });
-
 Route::get('verislife/carga-dependiente/registro', function () {
     return view('verislife.carga-pendiente.registro');
+});
+
+
+
+Route::get('verislife/verificacion-plan', function () {
+    return view('verislife.verificacionPlan');
 });
