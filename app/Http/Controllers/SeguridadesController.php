@@ -79,7 +79,8 @@ class SeguridadesController extends Controller
                         // dd(0);
 
                         Session::put('menu', $response->data);
-                        return redirect('/verislife/home');
+                        // return redirect('/verislife/home');
+                        return redirect('portal-fidelizacion/dashboard');
                     break;
                     case 'FORCE_CHANGE_PASSWORD':
                         $message = "Usuario nuevo que ingresa una clave temporal";

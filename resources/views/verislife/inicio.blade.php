@@ -41,6 +41,7 @@ Registro
             </div>
         </div>
     </section>
+
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
@@ -50,6 +51,7 @@ Registro
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="suscripcionPendientes">
+
                         <div class="swiper-slide">
                             <div class="card shadow-sm border-0 rounded-3">
                                 <div class="card-body p-3">
@@ -62,50 +64,21 @@ Registro
                             </div>
                         </div>
 
-                        <div class="swiper-slide">
-                            <div class="card shadow-sm border-0 rounded-3">
-                                <div class="card-body p-3">
-                                    <h5 class="card-title">Opción 2</h5>
-                                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
-                                    <h4 class="fw-semibold text-primary-veris mb-0">$129,00 <small class="fs-6">/anual</small></h4>
-                                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $210</p>
-                                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="card shadow-sm border-0 rounded-3">
-                                <div class="card-body p-3">
-                                    <h5 class="card-title">Opción 3</h5>
-                                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
-                                    <h4 class="fw-semibold text-primary-veris mb-0">$172,00 <small class="fs-6">/anual</small></h4>
-                                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $280</p>
-                                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="card shadow-sm border-0 rounded-3">
-                                <div class="card-body p-3">
-                                    <h5 class="card-title">Opción 4</h5>
-                                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
-                                    <h4 class="fw-semibold text-primary-veris mb-0">$129,00 <small class="fs-6">/anual</small></h4>
-                                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $210</p>
-                                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
                 <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                 <div class="swiper-pagination position-absolute bottom-0"></div>
             </div>
+
+            <div class="content-message text-center d-none" id="empty-space-pendientes-registro">
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/carrito.svg" />
+                <h4 class="text-primary-veris">No tienes pendientes de registro</h4>
+            </div>
+
         </div>
     </section>
-    <section class="bg-pattens-blue-100 mb-4 px-3 py-4">
+    <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-contratadas">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones contratadas</h5>
             <a href="#!" class="fw-medium me-1">Ver todos</a>
@@ -114,6 +87,7 @@ Registro
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                     <div class="swiper-wrapper" id="suscripcionContratadas">
+
                         <div class="swiper-slide">
                             <div class="card border-perano-300 rounded-4 shadow-none h-100">
                                 <div class="card-body p-0 pt-3">
@@ -133,25 +107,7 @@ Registro
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="card border-perano-300 rounded-4 shadow-none h-100">
-                                <div class="card-body p-0 pt-3">
-                                    <div class="d-flex justify-content-between mx-3 mb-3">
-                                        <div class="option-info">
-                                            <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
-                                            <h5 class="option-title fw-medium mb-0">Opción 2</h5>
-                                        </div>
-                                        <div class="price-block text-start">
-                                            <h5 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-6">/anual</small></h5>
-                                            <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $140</p>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn text-primary-veris fs-12p border-top rounded-0 w-100">
-                                        Ver detalle
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
@@ -166,7 +122,6 @@ Registro
         </div>
     </section>
 
-    
 
     <!-- COLABORADOR 2 B2B2C-->
     <section class="bg-sail-gradient mb-4 px-3 py-4">
@@ -857,7 +812,6 @@ Registro
             </div>
         </div>
     </section>
-
     <section class="bg-wild-sand-50 mb-4 px-3 py-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Historial de uso</h5>
@@ -867,3 +821,88 @@ Registro
 
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    async function obtenerPlanesSuscripcionDetalleEmpresa(contratado) {
+        if (!api_url || !_application || !_idOrganizacion || !_token) {
+            console.error('Faltan variables globales: api_url, _application, _idOrganizacion o _token.');
+            return null;
+        }
+
+        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`;
+        const queryParams = new URLSearchParams({
+            estado: 'ACTIVO',
+            frecuencia: 'ANUAL',
+            contratado: contratado, // dinámico
+            lineaNegocio: 'CMV',
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        return response?.data || [];
+    }
+
+    function renderizarPlanes(planes, containerId, emptyMessageId, esContratado = false) {
+        const container = document.getElementById(containerId);
+        const emptyMessage = document.getElementById(emptyMessageId);
+
+        container.innerHTML = '';
+
+        if (planes.length === 0) {
+            emptyMessage.classList.remove('d-none');
+            return;
+        }
+
+        emptyMessage.classList.add('d-none');
+
+        planes.forEach(plan => {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = esContratado ?
+                `
+            <div class="card border-perano-300 rounded-4 shadow-none h-100">
+                <div class="card-body p-0 pt-3">
+                    <div class="d-flex justify-content-between mx-3 mb-3">
+                        <div class="option-info">
+                            <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${plan.porcentajeDescuento}%</span>
+                            <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
+                        </div>
+                        <div class="price-block text-start">
+                            <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/anual</small></h5>
+                            <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</a>
+                </div>
+            </div>` :
+                `
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-3">
+                    <h5 class="card-title">${plan.nombre}</h5>
+                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
+                    <h4 class="fw-semibold text-primary-veris mb-0">$${plan.valorFinal.toFixed(2)} <small class="fs-6">/anual</small></h4>
+                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $${plan.precio.toFixed(2)}</p>
+                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
+                </div>
+            </div>`;
+            container.appendChild(slide);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const planesContratados = await obtenerPlanesSuscripcionDetalleEmpresa(true);
+        renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
+
+        const planesPendientes = await obtenerPlanesSuscripcionDetalleEmpresa(false);
+        renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+    });
+
+</script>
+
+@endpush

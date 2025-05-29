@@ -192,8 +192,8 @@ Registro
                     </div>
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
-                    <a href="/verislife/home" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
-                    <a href="/verislife/registro" form="verificacionPlanForm" class="btn btn-cerulean-blue-800">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></a>
+                    <a href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
+                    <a href="/portal-fidelizacion/registro-plan" form="verificacionPlanForm" class="btn btn-cerulean-blue-800">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></a>
                 </div>
             </div>
         </div>
