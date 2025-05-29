@@ -16,14 +16,26 @@ VerisLife - Login
         </div>
         <!-- /Logo -->
         <div class="row justify-content-center pb-5">
-            <form class="mb-3 needs-validation" novalidate>
+            {{-- <form class="mb-3 needs-validation" > --}}
+            <form id="loginForm" class="mb-3 needs-validation" action="/autenticar" method="POST" novalidate>
+                @csrf
+                @if (session()->has('mensaje'))
+                    <div class="alert alert-warning">
+                        {{ session('mensaje') }}
+                    </div>
+                @endif
+                @if($errors->has('csrf_token'))
+                <div class="alert alert-warning">
+                    {{ $errors->first('csrf_token') }}
+                </div>
+                @endif
                 <div class="mb-3">
-                    <label for="email" class="form-label fw-medium">Correo o Número de Identificación *</label>
+                    <label for="user" class="form-label fw-medium">Número de Identificación *</label>
                     <input
                         type="text"
                         class="form-control"
-                        id="email"
-                        name="email-username"
+                        id="user"
+                        name="user"
                         placeholder="Enter your email or username"
                         autofocus required/>
                 </div>
@@ -46,7 +58,8 @@ VerisLife - Login
                     <a href="#!" class="fs-12p"><small>Olvidé mi contraseña</small></a>
                 </div>
                 <div class="mb-3">
-                    <a href="/verislife/home" class="btn btn-lg btn-blue-veris d-grid w-100">Iniciar sesión</a>
+                    {{-- <a href="/verislife/home" class="btn btn-lg btn-blue-veris d-grid w-100">Iniciar sesión</a> --}}
+                    <button type="submit" class="btn btn-lg btn-blue-veris d-grid w-100">Iniciar sesión</button>
                 </div>
             </form>
         </div>

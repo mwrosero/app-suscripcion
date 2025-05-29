@@ -18,7 +18,8 @@ class SeguridadesController extends Controller
     }
 
     public function autenticar(Request $request){
-        return view('verislife.suscripcion');
+        // dd(0);
+        //return view('verislife.suscripcion');
         $data = $request->all();
         $user = $data['user'];
         $password = $data['password'];
@@ -51,7 +52,7 @@ class SeguridadesController extends Controller
                     ])->post(Ism::BASE_URL.$method);
             $response = json_decode($res->body());
 
-            //dd($response);
+            // dd($response);
             /*$method = '/seguridad/v1/usuarios/'.$response->data->secuenciaUsuario;
             $response = Ism::call([
                 'endpoint' => Ism::BASE_URL.$method.$param,
@@ -78,7 +79,7 @@ class SeguridadesController extends Controller
                         // dd(0);
 
                         Session::put('menu', $response->data);
-                        return redirect('/cotizador/consulta-cotizaciones');
+                        return redirect('/verislife/home');
                     break;
                     case 'FORCE_CHANGE_PASSWORD':
                         $message = "Usuario nuevo que ingresa una clave temporal";

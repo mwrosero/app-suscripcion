@@ -78,6 +78,7 @@ Route::get('verislife/login', function () {
     return view('login.verislife.login');
 });
 Route::get('verislife/home', function () {
+    // dd(Session::get('menu'));
     return view('verislife.inicio');
 });
 Route::get('verislife/verificacion-plan', function () {
