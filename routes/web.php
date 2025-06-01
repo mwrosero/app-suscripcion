@@ -81,8 +81,9 @@ Route::get('portal-fidelizacion/dashboard', function () {
     // dd(Session::get('menu'));
     return view('verislife.inicio');
 });
-Route::get('portal-fidelizacion/registro-plan', function () {
-    return view('verislife.registro');
+Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
+    // dd(Session::get('userData'));
+    return view('verislife.registro')->with('params', $params);
 });
 Route::get('verislife/carga-dependiente', function () {
     return view('verislife.carga-pendiente.carga-dependiente');

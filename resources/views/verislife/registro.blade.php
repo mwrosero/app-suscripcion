@@ -694,6 +694,7 @@ Registro
 @endsection
 
 <script>
+    let detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', function() {
         const stepperEl = document.querySelector('#wizard-validation');
         const stepper = new Stepper(stepperEl, {

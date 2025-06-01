@@ -7,6 +7,9 @@ Registro
 @endsection
 
 @section('content')
+@php
+    $processId = base64_encode(uniqid());
+@endphp
 <div class="flex-grow-1 container-p-y">
     <div class="bg-white p-3 mb-4 d-none">
         <h5 class="mb-0 mt-2">Home</h5>
@@ -824,6 +827,7 @@ Registro
 
 @push('scripts')
 <script>
+    let codigoCliente = 13315;
     async function obtenerPlanesSuscripcionDetalleEmpresa(contratado) {
         if (!api_url || !_application || !_idOrganizacion || !_token) {
             console.error('Faltan variables globales: api_url, _application, _idOrganizacion o _token.');
@@ -836,6 +840,7 @@ Registro
             frecuencia: 'ANUAL',
             contratado: contratado, // dinámico
             lineaNegocio: 'CMV',
+            codigoCliente: codigoCliente
         });
 
         const response = await call({
@@ -878,7 +883,7 @@ Registro
                             <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
                         </div>
                     </div>
-                    <a href="#" class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</a>
+                    <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</button>
                 </div>
             </div>` :
                 `
@@ -888,7 +893,7 @@ Registro
                     <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
                     <h4 class="fw-semibold text-primary-veris mb-0">$${plan.valorFinal.toFixed(2)} <small class="fs-6">/anual</small></h4>
                     <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $${plan.precio.toFixed(2)}</p>
-                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
+                    <button type="button" data-rel='${JSON.stringify(plan)}' class="btn btn-cerulean-blue-800 px-0 w-100 btn-continuar-registro">Continuar registro</button>
                 </div>
             </div>`;
             container.appendChild(slide);
@@ -901,6 +906,14 @@ Registro
 
         const planesPendientes = await obtenerPlanesSuscripcionDetalleEmpresa(false);
         renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+
+        $('body').on('click', '.btn-continuar-registro', function(){
+            let data = JSON.parse($(this).attr('data-rel'));
+            let suscripcion = {};
+            suscripcion.detallePlan = data;
+            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
+            location.href = '/portal-fidelizacion/registro-plan/{{ $processId }}';
+        })
     });
 
 </script>
