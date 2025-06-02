@@ -81,10 +81,24 @@ Route::get('portal-fidelizacion/dashboard', function () {
     // dd(Session::get('menu'));
     return view('verislife.inicio');
 });
-Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
+Route::get('portal-fidelizacion/verificacion-plan/{params}', function ($params) {
+    return view('verislife.verificacionPlan')->with('params', $params);
+});
+
+Route::get('portal-fidelizacion/registro-plan', function () {
+    // dd(Session::get('userData'));
+    return view('verislife.registro');
+});
+
+Route::get('portal-fidelizacion/facturacion', function () {
+    // dd(Session::get('userData'));
+    return view('verislife.datosFacturacion');
+});
+
+/* Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
     // dd(Session::get('userData'));
     return view('verislife.registro')->with('params', $params);
-});
+}); */
 Route::get('verislife/carga-dependiente', function () {
     return view('verislife.carga-pendiente.carga-dependiente');
 });
@@ -94,6 +108,3 @@ Route::get('verislife/carga-dependiente/registro', function () {
 
 
 
-Route::get('verislife/verificacion-plan', function () {
-    return view('verislife.verificacionPlan');
-});

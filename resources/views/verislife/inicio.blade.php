@@ -8,13 +8,14 @@ Registro
 
 @section('content')
 @php
-    $processId = base64_encode(uniqid());
+$processId = base64_encode(uniqid());
 @endphp
 <div class="flex-grow-1 container-p-y">
     <div class="bg-white p-3 mb-4 d-none">
         <h5 class="mb-0 mt-2">Home</h5>
     </div>
-    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4">
+
+    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4 d-none">
         <div class="d-none justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue text-white ps-3 fs-18 mb-0">Planes contratados</h5>
             <a href="#!" class="fw-medium text-white me-1">Ver todos</a>
@@ -44,7 +45,6 @@ Registro
             </div>
         </div>
     </section>
-
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
@@ -55,17 +55,43 @@ Registro
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="suscripcionPendientes">
 
-                        <div class="swiper-slide">
-                            <div class="card shadow-sm border-0 rounded-3">
-                                <div class="card-body p-3">
-                                    <h5 class="card-title">Opción 1</h5>
-                                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 36%</span>
-                                    <h4 class="fw-semibold text-primary-veris mb-0">$90,00 <small class="fs-6">/anual</small></h4>
-                                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $140</p>
-                                    <a href="/verislife/verificacion-plan" class="btn btn-cerulean-blue-800 px-0 w-100">Continuar registro</a>
+                        <!-- <div class="swiper-slide">
+                            <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
+                                <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
+                                    Opción 1
+                                </h5>
+                                <div class="px-3 py-2">
+                                    <div class="mt-1">
+                                        <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 36%</span>
+                                    </div>
+                                    <div class="my-1">
+                                        <h1 class="fw-bold text-blue-zodiac-950 m-0">$90 <small class="fw-medium fs-5">/anual</small></h1>
+                                        <small class="text-muted text-decoration-line-through text-xs">PVP: $140</small>
+                                    </div>
+                                </div>
+                                <hr class="my-1">
+                                <div class="p-3">
+                                    <h6 class="fw-bold">Beneficios</h6>
+                                    <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
+                                        <li class="mb-2 d-flex align-items-start lh-sm">
+                                            <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
+                                            <span>4 consultas al año<br><small>Uso inmediato</small></span>
+                                        </li>
+                                        <li class="mb-2 d-flex align-items-start lh-sm">
+                                            <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                                            1 Profilaxis
+                                        </li>
+                                        <li class="d-flex align-items-start lh-sm">
+                                            <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                                            Consulta Optométrica<br>y Odontológica
+                                        </li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Comprar</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -73,12 +99,10 @@ Registro
                 <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                 <div class="swiper-pagination position-absolute bottom-0"></div>
             </div>
-
             <div class="content-message text-center d-none" id="empty-space-pendientes-registro">
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/carrito.svg" />
                 <h4 class="text-primary-veris">No tienes pendientes de registro</h4>
             </div>
-
         </div>
     </section>
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-contratadas">
@@ -91,7 +115,7 @@ Registro
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                     <div class="swiper-wrapper" id="suscripcionContratadas">
 
-                        <div class="swiper-slide">
+                        <!-- <div class="swiper-slide">
                             <div class="card border-perano-300 rounded-4 shadow-none h-100">
                                 <div class="card-body p-0 pt-3">
                                     <div class="d-flex justify-content-between mx-3 mb-3">
@@ -109,7 +133,7 @@ Registro
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -127,7 +151,7 @@ Registro
 
 
     <!-- COLABORADOR 2 B2B2C-->
-    <section class="bg-sail-gradient mb-4 px-3 py-4">
+    <section class="bg-sail-gradient mb-4 px-3 py-4 d-none">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Elije la opción <b class="text-primary-veris">Veris</b> de tu preferencia</h5>
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-veris.svg" class="me-5" alt="veris">
@@ -471,7 +495,7 @@ Registro
             </div>
         </div>
     </section>
-    <section class="bg-madang-gradient mb-4 px-3 py-4">
+    <section class="bg-madang-gradient mb-4 px-3 py-4 d-none">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Elije la opción <b class="text-chateau-green-600">Club Para mí</b> de tu preferencia</h5>
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami.png" class="me-5" alt="parami">
@@ -815,7 +839,7 @@ Registro
             </div>
         </div>
     </section>
-    <section class="bg-wild-sand-50 mb-4 px-3 py-4">
+    <section class="bg-wild-sand-50 mb-4 px-3 py-4 d-none">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Historial de uso</h5>
             <a href="#!" class="fw-medium me-1">Ver todos</a>
@@ -828,17 +852,33 @@ Registro
 @push('scripts')
 <script>
     let codigoCliente = 13315;
-    async function obtenerPlanesSuscripcionDetalleEmpresa(contratado) {
+    document.addEventListener('DOMContentLoaded', async () => {
+        const planes = await obtenerPlanesSuscripcionDetalleEmpresa();
+        const planesContratados = planes.filter(plan => plan.contratado);
+        const planesPendientes = planes.filter(plan => !plan.contratado);
+
+        renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
+        renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+
+        $('body').on('click', '.btn-continuar-registro', function() {
+            let data = JSON.parse($(this).attr('data-rel'));
+            let suscripcion = {};
+            suscripcion.detallePlan = data;
+            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
+            location.href = '/portal-fidelizacion/verificacion-plan/{{ $processId }}';
+        });
+    });
+
+    async function obtenerPlanesSuscripcionDetalleEmpresa() {
         if (!api_url || !_application || !_idOrganizacion || !_token) {
             console.error('Faltan variables globales: api_url, _application, _idOrganizacion o _token.');
             return null;
         }
 
-        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`;
+        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`; 
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             frecuencia: 'ANUAL',
-            contratado: contratado, // dinámico
             lineaNegocio: 'CMV',
             codigoCliente: codigoCliente
         });
@@ -867,55 +907,66 @@ Registro
         emptyMessage.classList.add('d-none');
 
         planes.forEach(plan => {
+
+            const beneficios = plan.beneficios || [];
+            const beneficiosHTML = beneficios.map((beneficio, index) => {
+                const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
+                const claseTexto = index === 0 ? 'text-primary-veris' : '';
+                return `
+                    <li class="mb-2 d-flex align-items-start lh-sm">
+                        <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
+                        ${beneficio.descripcion}${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
+                    </li>`;
+            }).join('');
+
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.innerHTML = esContratado ?
                 `
-            <div class="card border-perano-300 rounded-4 shadow-none h-100">
-                <div class="card-body p-0 pt-3">
-                    <div class="d-flex justify-content-between mx-3 mb-3">
-                        <div class="option-info">
-                            <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${plan.porcentajeDescuento}%</span>
-                            <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
+                <div class="card border-perano-300 rounded-4 shadow-none h-100">
+                    <div class="card-body p-0 pt-3">
+                        <div class="d-flex justify-content-between mx-3 mb-3">
+                            <div class="option-info">
+                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${plan.porcentajeDescuento}%</span>
+                                <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
+                            </div>
+                            <div class="price-block text-start">
+                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/anual</small></h5>
+                                <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
+                            </div>
                         </div>
-                        <div class="price-block text-start">
-                            <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/anual</small></h5>
-                            <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
+                        <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</button>
+                    </div>
+                </div>` :
+                `
+                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
+                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
+                        ${plan.nombre}
+                    </h5>
+                    <div class="px-3 py-2">
+                        <div class="mt-1">
+                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${plan.porcentajeDescuento}%</span>
+                        </div>
+                        <div class="my-1">
+                            <h1 class="fw-bold text-blue-zodiac-950 m-0">$${plan.valorFinal.toFixed(2)} <small class="fw-medium fs-5">/anual</small></h1>
+                            <small class="text-muted text-decoration-line-through text-xs">PVP: $${plan.precio.toFixed(2)}</small>
                         </div>
                     </div>
-                    <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</button>
+                    <hr class="my-1">
+                    <div class="p-3">
+                        <h6 class="fw-bold">Beneficios</h6>
+                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
+                            ${beneficiosHTML}
+                        </ul>
+                        <div class="text-center">
+                            <button type="button" data-rel='${JSON.stringify(plan)}' class="btn btn-lg btn-blue-veris w-100 btn-continuar-registro">Continuar registro</button>
+                        </div>
+                    </div>
                 </div>
-            </div>` :
-                `
-            <div class="card shadow-sm border-0 rounded-3">
-                <div class="card-body p-3">
-                    <h5 class="card-title">${plan.nombre}</h5>
-                    <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
-                    <h4 class="fw-semibold text-primary-veris mb-0">$${plan.valorFinal.toFixed(2)} <small class="fs-6">/anual</small></h4>
-                    <p class="text-fiord-700 text-decoration-line-through small mb-2">PVP $${plan.precio.toFixed(2)}</p>
-                    <button type="button" data-rel='${JSON.stringify(plan)}' class="btn btn-cerulean-blue-800 px-0 w-100 btn-continuar-registro">Continuar registro</button>
-                </div>
-            </div>`;
+                `;
             container.appendChild(slide);
         });
     }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-        const planesContratados = await obtenerPlanesSuscripcionDetalleEmpresa(true);
-        renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
-
-        const planesPendientes = await obtenerPlanesSuscripcionDetalleEmpresa(false);
-        renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
-
-        $('body').on('click', '.btn-continuar-registro', function(){
-            let data = JSON.parse($(this).attr('data-rel'));
-            let suscripcion = {};
-            suscripcion.detallePlan = data;
-            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
-            location.href = '/portal-fidelizacion/registro-plan/{{ $processId }}';
-        })
-    });
-
+    
 </script>
-
 @endpush

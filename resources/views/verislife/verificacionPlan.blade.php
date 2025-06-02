@@ -113,7 +113,7 @@ Registro
                 <div class="card shadow-none border-0 mx-auto mb-4">
                     <div class="card-body p-4">
                         <div class="row g-3 justify-content-center mb-3">
-                            <div class="col-12 col-lg-8">
+                            <div class="col-12 col-lg-8" id="detalleSuscripcion">
                                 <div class="row border-perano-300 rounded p-3">
                                     <div class="col-md-6">
                                         <h6 class="bg-zumthor-50 text-blue-zodiac-950 fw-semibold text-start px-3 py-2 rounded w-auto">Opción 1</h6>
@@ -121,7 +121,7 @@ Registro
                                         <h2 class="fw-semibold text-blue-zodiac-950 mb-0">$90 <small class="fs-6">/anual</small></h2>
                                         <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $280</p>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 border-start">
                                         <h6 class="fw-semibold">Beneficios</h6>
                                         <ul class="list-unstyled mb-0">
                                             <li class="d-flex align-items-start lh-sm mb-3">
@@ -141,13 +141,11 @@ Registro
                                 </div>
                             </div>
                         </div>
-
                         <div class="text-center mb-3">
                             <button type="button" class="btn text-mariner-600 text-decoration-underline fw-normal" data-bs-toggle="modal" data-bs-target="#detallePlanModal">
                                 Ver detalles
                             </button>
                         </div>
-
                         <h6 class="fw-semibold mb-3">Datos de la empresa</h6>
                         <form id="verificacionPlanForm" class="row g-3 needs-validation" novalidate action="#!" method="POST">
                             @csrf
@@ -188,7 +186,6 @@ Registro
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
@@ -200,3 +197,67 @@ Registro
     </section>
 </div>
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+        const contenedor = document.getElementById('detalleSuscripcion');
+        contenedor.innerHTML = '';
+
+        if (!detalleSuscripcion || !detalleSuscripcion.detallePlan) {
+            contenedor.innerHTML = '<p>No hay información de suscripción disponible.</p>';
+            return;
+        }
+
+        const plan = detalleSuscripcion.detallePlan;
+        const beneficios = await obtenerBeneficiosPorFrecuencia(plan.secuenciaFrecuencia);
+
+        const beneficiosHTML = beneficios.map((beneficio, index) => {
+            const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
+            return `
+                <li class="mb-2 d-flex align-items-start lh-sm">
+                    <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
+                    ${beneficio.descripcion}${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
+                </li>`;
+        }).join('');
+
+        const html = `
+        <div class="row border-perano-300 rounded p-3">
+            <div class="col-md-6">
+                <h6 class="bg-zumthor-50 text-blue-zodiac-950 fw-semibold text-start px-3 py-2 rounded w-auto">${plan.nombre}</h6>
+                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
+                <h2 class="fw-semibold text-blue-zodiac-950 mb-0">$${plan.valorFinal} <small class="fs-6">/anual</small></h2>
+                <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $${plan.precio}</p>
+            </div>
+            <div class="col-md-6 border-start">
+                <h6 class="fw-semibold">Beneficios</h6>
+                <ul class="list-unstyled mb-0">
+                    ${beneficiosHTML}
+                </ul>
+            </div>
+        </div>`;
+
+        contenedor.innerHTML = html;
+    });
+
+    // Planes detalle_especifico
+    async function obtenerBeneficiosPorFrecuencia(secuenciaFrecuencia) {
+        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_especifico`;
+        const queryParams = new URLSearchParams({
+            estado: 'ACTIVO',
+            tipoBeneficio: 'G',
+            secuenciaFrecuencia: secuenciaFrecuencia,
+            lineaNegocio: 'CMV'
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        return response?.data || [];
+    }
+</script>
+@endpush
