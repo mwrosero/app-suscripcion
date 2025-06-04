@@ -270,14 +270,12 @@ h1,
     transition: all 0.3s ease;
     display: inline-block;
 }
-
 .btn-outline-zest-veris:hover {
     background-color: #e8850f;
     color: #ffffff;
     border-color: #e8850f;
     text-decoration: none;
 }
-
 .btn-outline-zest-veris:active {
     background-color: #c86f0c !important;
     border-color: #c86f0c !important;
@@ -285,12 +283,10 @@ h1,
     box-shadow: none;
     transform: scale(0.95);
 }
-
 .btn-outline-zest-veris:focus {
     outline: none;
     box-shadow: none;
 }
-
 .btn-outline-zest-veris:disabled,
 .btn-outline-zest-veris.disabled {
     opacity: 0.65;
@@ -299,6 +295,46 @@ h1,
     color: #e8850f;
     border-color: #e8850f;
 }
+
+.btn-outline-blue-veris {
+    color: #296BEF !important;
+    background-color: #ffffff;
+    border: 1px solid #296BEF !important;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.btn-outline-blue-veris:hover {
+    background-color: #296BEF;
+    color: #296BEF;
+    border-color: #296BEF;
+    text-decoration: none;
+}
+.btn-outline-blue-veris:active {
+    background-color: #1a50db !important;
+    border-color: #1a50db !important;
+    color: #fff !important;
+    box-shadow: none;
+    transform: scale(0.95);
+}
+.btn-outline-blue-veris:focus {
+    outline: none;
+    box-shadow: none;
+}
+.btn-outline-blue-veris:disabled,
+.btn-outline-blue-veris.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    background-color: #ffffff;
+    color: #296BEF;
+    border-color: #296BEF;
+}
+
+
 .step.crossed .step-trigger .bg-blue-zodiac-950 {
     background-color: var(--vris-blue-zodiac-950) !important;
     color: var(--vris-white-50) !important;
