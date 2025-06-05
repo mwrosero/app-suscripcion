@@ -58,12 +58,15 @@ async function call(args){
     let myHeaders = new Headers();
     if(args.bodyType == "json"){
         myHeaders.append("Content-Type", "application/json");
-        requestOptions.headers = myHeaders;
+    }else if (args.bodyType !== "formdata") {
+        // Solo agregas Content-Type si NO es FormData
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     }
         
     myHeaders.append("Application", _application);
     myHeaders.append("IdOrganizacion", _idOrganizacion);
     myHeaders.append("Authorization","Bearer "+ _token);
+    requestOptions.headers = myHeaders;
 
     if(args.method == "POST" || args.method == "PUT" || args.method == "DELETE"){
         if(args.data){
@@ -86,6 +89,59 @@ async function call(args){
             toastr.error("Ha ocurrido un problema con la comunicación al servicio requerido, inténtelo en unos momentos.","ERROR");
             //console.log(error);
         });
+}
+
+async function callDocumento(args) {
+    if (args.showLoader) {
+        showLoader();
+    }
+
+    let requestOptions = {
+        method: args.method,
+        redirect: 'follow'
+    };
+    let myHeaders = new Headers();
+    if (args.bodyType === "json") {
+        myHeaders.append("Content-Type", "application/json");
+        requestOptions.headers = myHeaders;
+    }
+    if (["POST", "PUT", "DELETE"].includes(args.method) && args.data) {
+        requestOptions.body = args.data;
+    }
+
+    myHeaders.append("Application", _application);
+    myHeaders.append("IdOrganizacion", _idOrganizacion);
+    myHeaders.append("Authorization","Bearer "+ _token);
+    requestOptions.headers = myHeaders;
+
+    try {
+        const response = await fetch(args.endpoint, requestOptions);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const blob = await response.blob();
+        if (args.showLoader) {
+            hideLoader();
+        }
+
+        return blob;
+    } catch (error) {
+        if (args.showLoader) {
+            hideLoader();
+        }
+
+        // Construye un objeto de error para devolver información relevante
+        let errorInfo = {
+            status: error.message.includes('HTTP error') ? parseInt(error.message.replace(/\D/g, '')) : 500, // Extrae el código de estado del mensaje de error, o asume 500 si no es específico
+            message: 'Ha ocurrido un problema con la comunicación al servicio requerido, inténtelo en unos momentos.'
+        };
+
+        
+
+        return errorInfo;
+    }
 }
 
 function removeLeadingZero(input, maxLength) {
@@ -177,4 +233,14 @@ function getInput(idElem, type = 'input'){
         break;
     }
     return valor;
+}
+
+async function cargarDocumento(nemonico){
+    let args = [];
+    args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${nemonico}&codigoEmpresa=1`
+    args["method"] = "GET";
+    args["showLoader"] = true;
+    args["token"] = _token;
+    const data = await call(args);
+    console.log(data);
 }
