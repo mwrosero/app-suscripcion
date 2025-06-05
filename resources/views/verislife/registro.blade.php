@@ -135,18 +135,18 @@ Registro
                     <div class="mt-4">
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <div class="form-check d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" id="acceptTerms" name="acceptTerms" required>
-                                    <label class="form-check-label fs-10p ms-2" for="acceptTerms">
-                                        Acepto <a href="#" target="_blank">Términos y Condiciones</a> <span class="text-danger">*</span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                    <label class="form-check-label fs-10p" for="terms">
+                                        Acepto <a href="#!" class="text-mariner-600 text-decoration-underline link-documento" nemonico-rel="TERMINOS_CONDICIONES">Términos y Condiciones</a> <span class="text-danger">*</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-check d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
-                                    <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
-                                        He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
+                                    <label class="form-check-label fs-10p" for="privacy">
+                                        He leído y comprendo la autorización para el <a href="#!" class="text-mariner-600 text-decoration-underline link-documento" nemonico-rel="TRATAMIENTO_DATOS">Tratamiento de mis datos personales</a>
                                     </label>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@ Registro
                     <hr>
                     <div class="modal-footer border-0 p-0">
                         <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-cerulean-blue-800">Agregar</button>
+                        <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add" disabled>Agregar</button>
                     </div>
                 </form>
             </div>
@@ -174,12 +174,12 @@ Registro
                 <label for="excelFile" class="btn btn-outline-blue-veris fw-medium fs-14p shadow-none" style="cursor: pointer;">
                     <i class="fa-solid fa-users me-2"></i> 
                     <small>Carga masiva de usuarios</small>
-                    <input type="file" id="excelFile" name="excel_file" accept=".xls, .xlsx" hidden />
+                    <input type="file" id="excelFile" name="excelFile" accept=".xls, .xlsx" hidden />
                 </label>
-                <a href="/ruta-a-tu-template/colaboradores.csv" download="Plantilla" class="btn text-primary-veris fw-medium shadow-none">
+                <button download="Plantilla" class="btn text-primary-veris fw-medium shadow-none btn-plantilla">
                     <i class="fa-solid fa-download me-2"></i> 
                     Descargar formato
-                </a>
+                </button>
             </div>
             <div class="col-12 mb-4">
                 <div class="card shadow-none mb-4">
@@ -200,7 +200,7 @@ Registro
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="white-space-nowrap fs-9 align-middle ps-0" style="max-width:20px; width:18px;"></th>
+                                    {{-- <th class="white-space-nowrap fs-9 align-middle ps-0" style="max-width:20px; width:18px;"></th> --}}
                                     <th>Identificación</th>
                                     <th>Nombre y Apellido</th>
                                     <th>Teléfono móvil</th>
@@ -209,7 +209,7 @@ Registro
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody class="table-border-bottom-0">
+                            <tbody class="table-border-bottom-0" id="contenido-pacientes">
                                 <!-- <tr>
                                     <td class="fs-9 align-middle">
                                         <div class="form-check mb-0 fs-8">
@@ -226,7 +226,7 @@ Registro
                                         <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none"><i class="fa-solid fa-trash-can"></i></button>
                                     </td>
                                 </tr> -->
-                                <tr>
+                                <tr id="empty-space">
                                     <td colspan="7">
                                         <div class="text-center">
                                             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/connecting-teams-amico.svg" alt="sin registro">
@@ -236,7 +236,7 @@ Registro
                             </tbody>
                         </table>
                     </div>
-                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9">
+                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9 box-pagination d-none">
                         <div class="col-12 col-md-6 text-md-start text-center mb-2 mb-md-0">
                             <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
                         </div>
@@ -263,7 +263,7 @@ Registro
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
                     <a href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
-                    <a href="/portal-fidelizacion/facturacion" form="verificacionPlanForm" class="btn btn-cerulean-blue-800">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></a>
+                    <button type="button" class="btn btn-cerulean-blue-800" disabled id="btn-continuar">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></button>
                 </div>
             </div>
         </div>
@@ -273,6 +273,135 @@ Registro
 @endsection
 @push('scripts')
 <script>
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+    let finalFile = null;
+    let pacientes = [];
+    document.addEventListener('DOMContentLoaded', async () => {
+        $('body').on('click', '.btn-plantilla', async function(){
+            await descargarPlantilla();
+        })
+
+        $('body').on('click', '.link-documento', async function(){
+            let nemonico = $(this).attr('nemonico-rel');
+            await cargarDocumento(nemonico);
+        })
+
+        $('body').on('click', '#btn-continuar', async function(){
+            detalleSuscripcion.pacientes = pacientes;
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+            location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+        })
+
+        $('body').on('change', '#terms, #privacy', function(){
+            if($('#terms').is(':checked') && $('#privacy').is(':checked')) {
+                $('#btn-add').attr('disabled', false);
+            } else {
+                $('#btn-add').attr('disabled', true);
+            }
+        });
+
+        $('#excelFile').on('change', async function (e) {
+            finalFile = e.target.files[0];
+            if (!finalFile) return;
+
+            // Opcional: validar tipo y tamaño
+            if (!finalFile.name.match(/\.(xls|xlsx)$/)) {
+                alert("Por favor selecciona un archivo Excel válido.");
+                return;
+            }
+
+            // Aquí llamas a la función que sube el archivo
+            await subirPlantilla();
+        });
+    })
+
+    async function subirPlantilla(){
+        const formData = new FormData();
+        formData.append("file", finalFile);
+
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_archivo_afiliados?codigoPais=1&codigoProvincia=1&codigoCiudad=1&tipoCredito=CREDITO_SERVICIOS&codigoConvenio=${detalleSuscripcion.detallePlan.codigoConvenio}`;
+        args["method"] = "POST";
+        args["token"] = _token;
+        args["showLoader"] = true;
+        args["data"] = formData;
+        args["bodyType"] = "formdata";
+
+        try {
+            const data = await call(args);
+            console.log(data);
+            if (data.code == 200) {
+                if(data.data.cargaErronea){
+                    const base64 = data.data.binarioCargaErronea;
+                    const nombreArchivo = 'errores_carga.xlsx';
+                    const byteCharacters = atob(base64);
+                    const byteNumbers = new Array(byteCharacters.length);
+                    for (let i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+                    const byteArray = new Uint8Array(byteNumbers);
+                    const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+                    // Crear link de descarga
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = nombreArchivo;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                }else{
+                    //procesar y dibujar en la tabla
+                    let elem = ``;
+                    $('#empty-space').remove();
+                    $('#btn-continuar').attr('disabled', false);
+                    $('.box-pagination').removeClass('d-none');
+                    $.each(data.data.rows, function(key, value){
+                        pacientes.push(value);
+                        elem += `<tr id="paciente-${key}">
+                            <td>${value.numeroIdentificacionPcte}</td>
+                            <td>${value.primerApellido} ${value.segundoApellido} ${value.primerNombre} ${value.segundoNombre}</td>
+                            <td>${value.telefonoMovil}</td>
+                            <td>${value.mail}</td>
+                            <td>${value.fechaNacimiento}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none btn-editar-paciente" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none btn-eliminar-paciente" paciente-rel="${key}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </td>
+                        </tr>`
+                    })
+                    $('#contenido-pacientes').html(elem)
+                }
+                return data;
+            } else {
+                console.log("Error en respuesta:", data);
+            }
+        } catch (error) {
+            console.error("Error en uploadFile:", error);
+        }
+    }
+
+    async function descargarPlantilla(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        try {
+            const blob = await callDocumento(args);
+            const pdfUrl = URL.createObjectURL(blob);
+            window.open(pdfUrl, '_blank');
+            setTimeout(() => {
+                URL.revokeObjectURL(pdfUrl);
+            }, 100);
+        } catch (error) {
+            console.error('Error al obtener el PDF:', error);
+        }
+    }
 
 </script>
 @endpush

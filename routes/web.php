@@ -17,6 +17,10 @@ use App\Http\Controllers\CotizadorController;
 */
 
 Route::middleware('guest')->group(function () {
+    Route::get('verislife/login', function () {
+        return view('login.login');
+    });
+
     Route::get('/login', [SeguridadesController::class, 'login'])->name('login')->withoutMiddleware(['loggedUser']);
     Route::post('/autenticar', [SeguridadesController::class, 'autenticar'])->name('autenticar')->withoutMiddleware(['loggedUser']);
     
@@ -40,7 +44,7 @@ Route::middleware('guest')->group(function () {
 
 //Route::middleware('auth')->group(function () {
 Route::group(['middleware' => ['loggedUser']], function () {
-    Route::get('/', [DashboardController::class, 'home'])->name('home')->withoutMiddleware(['guest']);
+    // Route::get('/', [DashboardController::class, 'home'])->name('home')->withoutMiddleware(['guest']);
 
     Route::get('/logout', [SeguridadesController::class, 'logout'])->name('logout')->withoutMiddleware(['guest']);
     
@@ -71,40 +75,38 @@ Route::group(['middleware' => ['loggedUser']], function () {
     });
 
     Route::get('/refreshToken', [SeguridadesController::class, 'refreshToken'])->name('refreshToken')->withoutMiddleware(['guest']);
+
+    Route::get('/', function(){
+        return view('verislife.inicio');
+    })->withoutMiddleware(['guest']);
     
-});
+    Route::get('portal-fidelizacion/dashboard', function () {
+        // dd(Session::get('menu'));
+        return view('verislife.inicio');
+    })->withoutMiddleware(['guest']);
+    Route::get('portal-fidelizacion/verificacion-plan/{params}', function ($params) {
+        // dd(Session::get('userData'));
+        return view('verislife.verificacionPlan')->with('params', $params);
+    })->withoutMiddleware(['guest']);
 
-Route::get('verislife/login', function () {
-    return view('login.login');
-});
-Route::get('portal-fidelizacion/dashboard', function () {
-    // dd(Session::get('menu'));
-    return view('verislife.inicio');
-});
-Route::get('portal-fidelizacion/verificacion-plan/{params}', function ($params) {
-    return view('verislife.verificacionPlan')->with('params', $params);
-});
+    Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
+        // dd(Session::get('userData'));
+        return view('verislife.registro')->with('params', $params);
+    })->withoutMiddleware(['guest']);
 
-Route::get('portal-fidelizacion/registro-plan', function () {
-    // dd(Session::get('userData'));
-    return view('verislife.registro');
+    Route::get('portal-fidelizacion/facturacion/{params}', function ($params) {
+        // dd(Session::get('userData'));
+        return view('verislife.datosFacturacion')->with('params', $params);
+    })->withoutMiddleware(['guest']);
+
+    /* Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
+        // dd(Session::get('userData'));
+        return view('verislife.registro')->with('params', $params);
+    })->withoutMiddleware(['guest']); */
+    Route::get('verislife/carga-dependiente', function () {
+        return view('verislife.carga-pendiente.carga-dependiente');
+    })->withoutMiddleware(['guest']);
+    Route::get('verislife/carga-dependiente/registro', function () {
+        return view('verislife.carga-pendiente.registro');
+    })->withoutMiddleware(['guest']); 
 });
-
-Route::get('portal-fidelizacion/facturacion', function () {
-    // dd(Session::get('userData'));
-    return view('verislife.datosFacturacion');
-});
-
-/* Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
-    // dd(Session::get('userData'));
-    return view('verislife.registro')->with('params', $params);
-}); */
-Route::get('verislife/carga-dependiente', function () {
-    return view('verislife.carga-pendiente.carga-dependiente');
-});
-Route::get('verislife/carga-dependiente/registro', function () {
-    return view('verislife.carga-pendiente.registro');
-});
-
-
-

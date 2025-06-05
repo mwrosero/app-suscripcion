@@ -224,7 +224,7 @@ Registro
                                                             <div class="row">
                                                                 <div class="col-12 col-md-6">
                                                                     <h3 class="mb-2">Total a pagar</h3>
-                                                                    <h2 class="fw-semibold text-cerulean-blue-800 mb-0">$9000 <small class="fw-normal fs-12p">/100 PLANES</small></h2>
+                                                                    <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
                                                                 </div>
                                                                 <div class="col-12 col-md-6">
                                                                     <div class="text-start text-md-end">
@@ -238,61 +238,59 @@ Registro
                                             </div>
                                             <div class="row g-3 justify-content-center">
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Elige tu documento <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-select-lg fs-14p" id="tipoIdentificacion" name="tipoIdentificacion" required readonly disabled>
+                                                    <label for="tipoIdentificacionFactura" class="form-label fs-14p fw-medium">Elige tu documento <span class="text-danger">*</span></label>
+                                                    <select class="form-select form-select-lg fs-14p" id="tipoIdentificacionFactura" name="tipoIdentificacionFactura" required>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="docNumber" class="form-label fs-14p fw-medium">Número de documento <span class="text-danger">*</span></label>
+                                                    <label for="numeroIdentificacionFactura" class="form-label fs-14p fw-medium">Número de documento <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="docNumber"
-                                                        name="docNumber"
+                                                        id="numeroIdentificacionFactura"
+                                                        name="numeroIdentificacionFactura"
                                                         placeholder="9999999999999"
-                                                        required
-                                                        readonly>
+                                                        required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="fullName" class="form-label fs-14p fw-medium">Nombres y Apellidos <span class="text-danger">*</span></label>
+                                                    <label for="nombresFactura" class="form-label fs-14p fw-medium">Nombres y Apellidos <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="fullName"
-                                                        name="fullName"
+                                                        id="nombresFactura"
+                                                        name="nombresFactura"
                                                         placeholder="Empresa 1"
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="phone" class="form-label fs-14p fw-medium">Teléfono <span class="text-danger">*</span></label>
+                                                    <label for="telefonoFactura" class="form-label fs-14p fw-medium">Teléfono <span class="text-danger">*</span></label>
                                                     <input
                                                         type="tel"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="phone"
-                                                        name="phone"
+                                                        id="telefonoFactura"
+                                                        name="telefonoFactura"
                                                         placeholder="+593 097 989 3554"
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="email" class="form-label fs-14p fw-medium">Email <span class="text-danger">*</span></label>
+                                                    <label for="emailFactura" class="form-label fs-14p fw-medium">Email <span class="text-danger">*</span></label>
                                                     <input
-                                                        type="email"
+                                                        type="emailFactura"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="email"
-                                                        name="email"
+                                                        id="emailFactura"
+                                                        name="emailFactura"
                                                         placeholder="micorreo@empresa1.com"
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="address" class="form-label fs-14p fw-medium">Dirección <span class="text-danger">*</span></label>
+                                                    <label for="direccionFactura" class="form-label fs-14p fw-medium">Dirección <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="address"
-                                                        name="address"
+                                                        id="direccionFactura"
+                                                        name="direccionFactura"
                                                         placeholder="Colinas de los ceibos, 318"
-                                                        required
-                                                        readonly>
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -315,7 +313,7 @@ Registro
                                                                 <div class="row">
                                                                     <div class="col-12 col-md-6">
                                                                         <h3 class="mb-2">Total a pagar</h3>
-                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0">$9000 <small class="fw-normal fs-12p">/100 PLANES</small></h2>
+                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar">small></h2>
                                                                     </div>
                                                                     <div class="col-12 col-md-6">
                                                                         <div class="text-start text-md-end">
@@ -719,32 +717,31 @@ Registro
     function renderButtons(idx) {
         if (idx === 0) {
             actions.innerHTML = `
-        <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
-          <i class="fa-solid fa-chevron-left me-2"></i>
-          <span class="d-none d-sm-inline">Regresar</span>
-        </a>
-        <button id="btn-next" class="btn btn-cerulean-blue-800">
-          <span class="d-none d-sm-inline">Continuar</span>
-          <i class="fa-solid fa-chevron-right ms-2"></i>
-        </button>
-      `;
-        } else if (idx === total - 1) {
-            actions.innerHTML = `
-        <a href="/portal-fidelizacion/dashboard" class="btn btn-cerulean-blue-800">
-          <span class="d-none d-sm-inline">Volver al inicio</span>
-        </a>
-      `;
-        } else {
-            actions.innerHTML = `
-        <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
-          <i class="fa-solid fa-chevron-left me-2"></i>
-          <span class="d-none d-sm-inline">Regresar</span>
-        </button>
-        <button id="btn-next" class="btn btn-cerulean-blue-800">
-          <span class="d-none d-sm-inline">Continuar</span>
-          <i class="fa-solid fa-chevron-right ms-2"></i>
-        </button>
-      `;
+                <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
+                  <i class="fa-solid fa-chevron-left me-2"></i>
+                  <span class="d-none d-sm-inline">Regresar</span>
+                </a>
+                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="1">
+                  <span class="d-none d-sm-inline">Continuar</span>
+                  <i class="fa-solid fa-chevron-right ms-2"></i>
+                </button>
+              `;
+                } else if (idx === total - 1) {
+                    actions.innerHTML = `
+                <a href="/portal-fidelizacion/dashboard" class="btn btn-cerulean-blue-800">
+                  <span class="d-none d-sm-inline">Volver al inicio</span>
+                </a>
+              `;
+                } else {
+                    actions.innerHTML = `
+                <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
+                  <i class="fa-solid fa-chevron-left me-2"></i>
+                  <span class="d-none d-sm-inline">Regresar</span>
+                </button>
+                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="2">
+                  <span class="d-none d-sm-inline">Continuar</span>
+                  <i class="fa-solid fa-chevron-right ms-2"></i>
+                </button>`;
         }
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
@@ -769,16 +766,22 @@ Registro
     showContent(steps[0].getAttribute('data-target').slice(1));
     renderButtons(0);
 
+    let numeroIdentificacionFacturaValido = false;
+    let emailFacturaValido = false;
+ 
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
 
-        const tipoIdentificacionSelect = document.getElementById('tipoIdentificacion');
+        $('.valor-pagar').html(`$${ (detalleSuscripcion.detallePlan.precio * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-12p">/${detalleSuscripcion.pacientes.length} PLAN${ (detalleSuscripcion.pacientes.length == 1) ? `` : `ES` }</small>`)
+
+        const tipoIdentificacionSelect = document.getElementById('tipoIdentificacionFactura');
         tipoIdentificacionSelect.innerHTML = '<option value="" selected>Seleccionar tipo de identificación</option>';
 
         const tiposIdentificacion = await obtenerTiposIdentificacion();
 
         tiposIdentificacion.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.nemonico?.toLowerCase();
+            option.value = item.codigoTipoIdentificacion;
             option.textContent = item.nombreTipoIdentificacion;
             tipoIdentificacionSelect.appendChild(option);
         });
@@ -799,13 +802,86 @@ Registro
         nombreBancoSelect.disabled = false;
 
 
+        $('body').on('change', '#numeroIdentificacionFactura', async function(){
+            await validarIdentificacionFactura();
+        })
+
+        $('body').on('change', '#emailFactura', async function(){
+            let email = $(this).val();
+            await validarCorreoElectronico(email);
+        })
+
+        $('body').on('change', 'input, select', async function(){
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let nombresFactura = $('#nombresFactura').val();
+            let telefonoFactura = $('#telefonoFactura').val();
+            let direccionFactura = $('#direccionFactura').val();
+            if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 10 && numeroIdentificacionFacturaValido && emailFacturaValido){
+                $('#btn-next').attr('disabled', false);
+            }else{
+                $('#btn-next').attr('disabled', true);
+            }
+        })
+
+        $('body').on('click', '#btn-next', async function(){
+            let step = $(this).attr('step-rel');
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let nombresFactura = $('#nombresFactura').val();
+            let telefonoFactura = $('#telefonoFactura').val();
+            let direccionFactura = $('#direccionFactura').val();
+            
+            if(step == 1){
+                detalleSuscripcion.datosFactura = {
+                    "tipoIdentificacion": tipoIdentificacionFactura,
+                    "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
+                    "nombres": nombresFactura,
+                    "telefono": telefonoFactura,
+                    "correo": $('#emailFactura').val(),
+                    "direccion": direccionFactura
+                }
+            }
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+        })
+
     });
+
+    async function validarIdentificacionFactura(){
+        let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
+        let numeroIdentificacion = $('#numeroIdentificacionFactura').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        if(data.code == 200){
+            numeroIdentificacionFacturaValido = data.data.esIdentificacionValida
+        }
+    }
+
+    async function validarCorreoElectronico(email){
+        let args = [];
+        args["endpoint"] = `${api_url}/general/v1/util/validacion_correo_electronico?canalOrigenInvocaion=COMERCIAL`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "idPaciente": 0,
+            "correoElectronico": email
+        });
+        const data = await call(args);
+        console.log(data);
+        if(data.code == 200){
+            emailFacturaValido = data.data.correoValido
+        }
+    }
 
     async function obtenerTiposIdentificacion() {
         const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: '1',
-            usoTipoIdentificacion: 'TODOS'
+            usoTipoIdentificacion: 'GESTION_FACTURACION'
         });
 
         const response = await call({

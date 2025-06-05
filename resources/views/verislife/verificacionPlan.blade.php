@@ -114,7 +114,7 @@ Registro
                     <div class="card-body p-4">
                         <div class="row g-3 justify-content-center mb-3">
                             <div class="col-12 col-lg-8" id="detalleSuscripcion">
-                                <div class="row border-perano-300 rounded p-3">
+                                {{-- <div class="row border-perano-300 rounded p-3">
                                     <div class="col-md-6">
                                         <h6 class="bg-zumthor-50 text-blue-zodiac-950 fw-semibold text-start px-3 py-2 rounded w-auto">Opción 1</h6>
                                         <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA 39%</span>
@@ -138,7 +138,7 @@ Registro
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="text-center mb-3">
@@ -173,7 +173,7 @@ Registro
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                     <label class="form-check-label fs-10p" for="terms">
-                                        Acepto <a href="#!" class="text-mariner-600 text-decoration-underline">Términos y Condiciones</a> <span class="text-danger">*</span>
+                                        Acepto <a href="#!" class="text-mariner-600 text-decoration-underline link-documento" nemonico-rel="TERMINOS_CONDICIONES">Términos y Condiciones</a> <span class="text-danger">*</span>
                                     </label>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@ Registro
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
                                     <label class="form-check-label fs-10p" for="privacy">
-                                        He leído y comprendo la autorización para el <a href="#!" class="text-mariner-600 text-decoration-underline">Tratamiento de mis datos personales</a>
+                                        He leído y comprendo la autorización para el <a href="#!" class="text-mariner-600 text-decoration-underline link-documento" nemonico-rel="TRATAMIENTO_DATOS">Tratamiento de mis datos personales</a>
                                     </label>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@ Registro
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
                     <a href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
-                    <a href="/portal-fidelizacion/registro-plan" form="verificacionPlanForm" class="btn btn-cerulean-blue-800">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></a>
+                    <button type="button" disabled id="btn-continuar" class="btn btn-cerulean-blue-800">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></button>
                 </div>
             </div>
         </div>
@@ -199,8 +199,8 @@ Registro
 @endsection
 @push('scripts')
 <script>
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
-        const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
         const contenedor = document.getElementById('detalleSuscripcion');
         contenedor.innerHTML = '';
 
@@ -210,7 +210,8 @@ Registro
         }
 
         const plan = detalleSuscripcion.detallePlan;
-        const beneficios = await obtenerBeneficiosPorFrecuencia(plan.secuenciaFrecuencia);
+        //const beneficios = await obtenerBeneficiosPorFrecuencia(plan.secuenciaFrecuencia);
+        const beneficios = detalleSuscripcion.detallePlan.beneficios;
 
         const beneficiosHTML = beneficios.map((beneficio, index) => {
             const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
@@ -238,7 +239,38 @@ Registro
         </div>`;
 
         contenedor.innerHTML = html;
+
+        await infoInicial();
+
+        $('body').on('click', '.link-documento', async function(){
+            let nemonico = $(this).attr('nemonico-rel');
+            await cargarDocumento(nemonico);
+        })
+
+        $('body').on('change', '#terms, #privacy', function(){
+            if($('#terms').is(':checked') && $('#privacy').is(':checked')) {
+                $('#btn-continuar').attr('disabled', false);
+            } else {
+                $('#btn-continuar').attr('disabled', true);
+            }
+        });
+
+        $('body').on('click', '#btn-continuar', async function(){
+            location.href = `/portal-fidelizacion/registro-plan/{{ $params }}`;
+            await cargarDocumento(nemonico);
+        })
+
     });
+
+    async function infoInicial(){
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/{{ Session::get('userData')->secuenciaUsuario }}/informacion_inicial`
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data);
+    }
 
     // Planes detalle_especifico
     async function obtenerBeneficiosPorFrecuencia(secuenciaFrecuencia) {
