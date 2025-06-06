@@ -61,12 +61,13 @@ class SeguridadesController extends Controller
             ]);
             dd($response);*/
             if($response->code == 200){
+                $secuenciaUsuario = $response->data->secuenciaUsuario;
                 switch($response->data->estadoUsuario) {
                     case 'CONFIRMED':
                         Session::put('userData', $response->data);
                         Session::put('accessToken', $response->data->idToken);
                         
-                        $method = '/seguridad/v1/usuarios/'.$response->data->secuenciaUsuario.'/modulos_opciones_acceso';
+                        $method = '/seguridad/v1/usuarios/'.$secuenciaUsuario.'/modulos_opciones_acceso';
                         $param = '?codigoSucursal='.Ism::CODIGOSUCURSAL;
 
                         $response = Ism::call([
@@ -80,6 +81,16 @@ class SeguridadesController extends Controller
 
                         Session::put('menu', $response->data);
                         // return redirect('/verislife/home');
+                        $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
+                        $response = Ism::call([
+                            'endpoint' => Ism::BASE_URL.$method,
+                            'token'    => Session::get('accessToken'),
+                            'method'   => 'GET'
+                        ]);
+
+                        Session::put('infoCliente', $response->data);
+                        //dd($response);
+
                         return redirect('portal-fidelizacion/dashboard');
                     break;
                     case 'FORCE_CHANGE_PASSWORD':

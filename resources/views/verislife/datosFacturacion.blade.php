@@ -7,7 +7,13 @@ Registro
 @endsection
 
 @section('content')
+@php
+    use Carbon\Carbon;
 
+    // Establecer zona horaria
+    $now = Carbon::now('America/Bogota'); // UTC-5 (también puedes usar 'America/Guayaquil')
+    $nextYear = $now->copy()->addYear();
+@endphp
 <div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
@@ -330,18 +336,18 @@ Registro
                                             <hr>
                                             <div class="row justify-content-center pb-5">
                                                 <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto p-1 rounded-3" id="pills-tab" role="tablist">
-                                                    <!-- <li class="nav-item" role="presentation">
+                                                    <li class="nav-item nav-metodo-pago d-none pasarela_pagos" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
-                                                    </li> -->
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link px-lg-4 fs-14p active" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
                                                     </li>
-                                                    <li class="nav-item" role="presentation">
+                                                    <li class="nav-item nav-metodo-pago d-none debito_cuenta" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
+                                                    </li>
+                                                    <li class="nav-item nav-metodo-pago d-none transferencia" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-bank-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-bank-transfer" type="button" role="tab" aria-controls="pills-bank-transfer" aria-selected="false">Transferencia bancaria</button>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content bg-transparent" id="pills-tabContent">
-                                                    <!-- <div class="tab-pane fade" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
+                                                    <div class="tab-pane tab-pasarela_pagos d-none fade" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
                                                         <div class="row g-3 justify-content-center">
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="cardNumber" class="form-label fs-14p fw-medium">Número de tarjeta</label>
@@ -383,27 +389,27 @@ Registro
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> -->
-                                                    <div class="tab-pane fade show active" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
-                                                        <div class="text-center mb-4">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" />
+                                                    </div>
+                                                    <div class="tab-pane tab-debito_cuenta d-none fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
+                                                        <div class="text-center mb-4" id="listTiposCuenta">
+                                                            {{-- <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" value="A" />
                                                                 <label class="form-check-label fw-medium" for="tipoCuentaAhorro">Cuenta de ahorros</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaCorriente" />
+                                                                <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaCorriente" value="C" />
                                                                 <label class="form-check-label fw-medium" for="tipoCuentaCorriente">Cuenta corriente</label>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                         <div class="row g-3 justify-content-center mb-4">
                                                             <div class="col-md-12 col-xl-8">
                                                                 <label for="nombreBanco" class="form-label fs-14p fw-medium text-blue-zodiac-950">Nombre del banco </label>
-                                                                <select class="form-select form-select-lg fs-14p" id="nombreBanco" name="nombreBanco" required readonly disabled>
+                                                                <select class="form-select form-select-lg fs-14p select2" id="nombreBanco" name="nombreBanco" required readonly disabled>
                                                                 </select>
                                                             </div>
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="frecuenciaPago" class="form-label fs-14p fw-medium text-blue-zodiac-950">Frecuencia de pago</label>
-                                                                <input type="text" class="form-control form-control-lg fs-14p" name="frecuenciaPago" id="frecuenciaPago" placeholder="Anual">
+                                                                <input type="text" class="form-control form-control-lg fs-14p text-capitalize" name="frecuenciaPago" id="frecuenciaPago" disabled>
                                                             </div>
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="numeroCuenta" class="form-label fs-14p fw-medium text-blue-zodiac-950">Número de cuenta <span class="text-danger">*</span></label>
@@ -424,7 +430,7 @@ Registro
                                                         </div>
 
                                                     </div>
-                                                    <div class="tab-pane fade" id="pills-bank-transfer" role="tabpanel" aria-labelledby="pills-bank-transfer-tab" tabindex="0">
+                                                    <div class="tab-pane tab-transferencia d-none fade" id="pills-bank-transfer" role="tabpanel" aria-labelledby="pills-bank-transfer-tab" tabindex="0">
                                                         <div class="row g-3 flex-column justify-content-center align-items-center">
                                                             <div class="col-12 col-lg-8">
                                                                 <div class="card bg-zumthor-50">
@@ -520,25 +526,26 @@ Registro
                                                         id="ruc"
                                                         name="ruc"
                                                         placeholder="0999999999"
-                                                        required>
+                                                        required
+                                                        readonly>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="titulo" class="form-label fs-14p fw-medium">Nombres del titular</label>
+                                                    <label for="titular" class="form-label fs-14p fw-medium">Nombres del titular</label>
                                                     <input
                                                         type="tel"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="titulo"
-                                                        name="titulo"
+                                                        id="titular"
+                                                        name="titular"
                                                         placeholder="María Yanina Donoso Samaniego"
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="email" class="form-label fs-14p fw-medium">Email <span class="text-danger">*</span></label>
+                                                    <label for="emailContacto" class="form-label fs-14p fw-medium">Email <span class="text-danger">*</span></label>
                                                     <input
                                                         type="email"
                                                         class="form-control form-control-lg fs-14p"
-                                                        id="email"
-                                                        name="email"
+                                                        id="emailContacto"
+                                                        name="emailContacto"
                                                         placeholder="micorreo@empresa1.com"
                                                         required>
                                                 </div>
@@ -550,8 +557,10 @@ Registro
                                                         id="telefono"
                                                         name="telefono"
                                                         placeholder="+593 097 989 3554"
-                                                        required
-                                                        readonly>
+                                                        required>
+                                                </div>
+                                                <div class="col-md-12 col-xl-8 text-center">
+                                                    El contrato será enviado por email, no olvides revisar la bandeja de spam.
                                                 </div>
                                             </div>
                                         </div>
@@ -585,20 +594,13 @@ Registro
                                                 <div class="col-12 col-lg-8">
                                                     <div class="card card-body shadow-none">
                                                         <!-- Opción seleccionada -->
-                                                        <div class="d-flex justify-content-between border-perano-300 rounded-4 p-2 mb-4">
-                                                            <div class="option-info">
-                                                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
-                                                                <h4 class="option-title mb-0">Opción 1</h4>
-                                                            </div>
-                                                            <div class="price-block text-start">
-                                                                <h4 class="fw-semibold mb-0">$90,00 <small class="fw-normal fs-14p">/100 planes</small></h4>
-                                                                <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $140</p>
-                                                            </div>
+                                                        <div class="d-flex justify-content-between border-perano-300 rounded-4 p-2 mb-4 info-plan">
+                                                            
                                                         </div>
                                                         <!-- Beneficios -->
                                                         <div class="text-start mb-4">
-                                                            <ul class="list-unstyled mb-0">
-                                                                <li class="d-flex align-items-start lh-sm mb-3">
+                                                            <ul class="list-unstyled mb-0 lista-beneficios">
+                                                                {{-- <li class="d-flex align-items-start lh-sm mb-3">
                                                                     <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
                                                                     <span>8 consultas al año<br><small class="text-fiord-700">Uso inmediato</small></span>
                                                                 </li>
@@ -613,7 +615,7 @@ Registro
                                                                 <li class="d-flex align-items-start lh-sm mb-3">
                                                                     <i class="bi bi-patch-check-fill text-dark me-2"></i>
                                                                     <span>Descuentos en servicios<br>"Veris" y "Para mí"</span>
-                                                                </li>
+                                                                </li> --}}
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -624,31 +626,31 @@ Registro
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Colaboradores registrados:</div>
-                                                    <div class="detail-value">####</div>
+                                                    <div class="detail-value colaboradores-registrados"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Nombre de la empresa:</div>
-                                                    <div class="detail-value">Nombre de la empresa</div>
+                                                    <div class="text-start">Nombre de la empresa:</div>
+                                                    <div class="detail-value text-end">{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Método de pago:</div>
-                                                    <div class="detail-value">Credito/debito/Transferencia</div>
+                                                    <div class="detail-value metodo-pago text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Frecuencia de pago: </div>
-                                                    <div class="detail-value">Anual</div>
+                                                    <div class="detail-value frecuencia-pago text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Monto total:</div>
-                                                    <div class="detail-value">xxxxxx$</div>
+                                                    <div class="detail-value valor-total"></div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Fecha de inicio de contrato:</div>
+                                                    <div class="detail-value">{{ $now->format('d/m/Y') }}</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Fecha de fin de contrato:</div>
-                                                    <div class="detail-value">dd/mm/yy</div>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Fecha de fin de contrato:</div>
-                                                    <div class="detail-value">dd/mm/yy</div>
+                                                    <div class="detail-value">{{ $nextYear->format('d/m/Y') }}</div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -715,6 +717,8 @@ Registro
     }
 
     function renderButtons(idx) {
+        console.log({total})
+        console.log({idx})
         if (idx === 0) {
             actions.innerHTML = `
                 <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
@@ -726,19 +730,19 @@ Registro
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>
               `;
-                } else if (idx === total - 1) {
-                    actions.innerHTML = `
+        } else if (idx === total - 1) {
+            actions.innerHTML = `
                 <a href="/portal-fidelizacion/dashboard" class="btn btn-cerulean-blue-800">
                   <span class="d-none d-sm-inline">Volver al inicio</span>
                 </a>
               `;
-                } else {
-                    actions.innerHTML = `
+        } else {
+            actions.innerHTML = `
                 <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
-                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="2">
+                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="${idx+1}">
                   <span class="d-none d-sm-inline">Continuar</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
@@ -746,7 +750,37 @@ Registro
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev && idx > 0 && idx < total - 1) btnPrev.addEventListener('click', () => stepper.previous());
-        if (btnNext && idx < total - 1) btnNext.addEventListener('click', () => stepper.next());
+        if (btnNext && idx < total - 1) btnNext.addEventListener('click', async () => {
+            stepper.next();
+            console.log('Siguiente paso activado');
+            let step = $('#btn-next').attr('step-rel');
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let nombresFactura = $('#nombresFactura').val();
+            let telefonoFactura = $('#telefonoFactura').val();
+            let direccionFactura = $('#direccionFactura').val();
+
+            console.log(step);
+            
+            if(step == 2){
+                detalleSuscripcion.datosFactura = {
+                    "tipoIdentificacion": tipoIdentificacionFactura,
+                    "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
+                    "nombres": nombresFactura,
+                    "telefono": telefonoFactura,
+                    "correo": $('#emailFactura').val(),
+                    "direccion": direccionFactura
+                }
+            }
+
+            if(step === undefined){
+                $('.colaboradores-registrados').html(detalleSuscripcion.pacientes.length);
+                $('.metodo-pago').html($('.nav-metodo-pago button.active').attr('descripcion-rel').toLowerCase());
+                $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
+                $('.valor-total').html((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2));
+                await crearSuscripcion();
+            }
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+        });
     }
 
     stepperEl.addEventListener('show.bs-stepper', function(event) {
@@ -772,7 +806,32 @@ Registro
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
 
-        $('.valor-pagar').html(`$${ (detalleSuscripcion.detallePlan.precio * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-12p">/${detalleSuscripcion.pacientes.length} PLAN${ (detalleSuscripcion.pacientes.length == 1) ? `` : `ES` }</small>`)
+        const beneficios = detalleSuscripcion.detallePlan.beneficios;
+        const beneficiosHTML = beneficios.map((beneficio, index) => {
+        const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
+        return `
+            <li class="mb-2 d-flex align-items-start lh-sm">
+                <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
+                ${beneficio.descripcion}${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
+            </li>`;
+        }).join('');
+        $('.lista-beneficios').html(beneficiosHTML);
+
+        $('.info-plan').html(`<div class="option-info">
+                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${detalleSuscripcion.detallePlan.porcentajeDescuento}%</span>
+                <h4 class="option-title mb-0 nombrePlan">${detalleSuscripcion.detallePlan.nombre}</h4>
+            </div>
+            <div class="price-block text-start">
+                <h4 class="fw-semibold mb-0">$${ (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-14p">/${detalleSuscripcion.pacientes.length} plan${ (detalleSuscripcion.pacientes.length == 1) ? `` : `es` }</small></h4>
+                <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $${ (detalleSuscripcion.detallePlan.precio * detalleSuscripcion.pacientes.length ).toFixed(2) } </p>
+            </div>`)
+
+        $('#frecuenciaPago').val(detalleSuscripcion.detallePlan.tipo.toLowerCase())
+
+        $('#nombreEmpresa').val("{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}")
+        $('#ruc').val("{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}")
+
+        $('.valor-pagar').html(`$${ (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-12p">/${detalleSuscripcion.pacientes.length} PLAN${ (detalleSuscripcion.pacientes.length == 1) ? `` : `ES` }</small>`)
 
         const tipoIdentificacionSelect = document.getElementById('tipoIdentificacionFactura');
         tipoIdentificacionSelect.innerHTML = '<option value="" selected>Seleccionar tipo de identificación</option>';
@@ -800,6 +859,7 @@ Registro
         });
 
         nombreBancoSelect.disabled = false;
+        $('#nombreBanco').select2()
 
 
         $('body').on('change', '#numeroIdentificacionFactura', async function(){
@@ -811,19 +871,12 @@ Registro
             await validarCorreoElectronico(email);
         })
 
-        $('body').on('change', 'input, select', async function(){
-            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-            let nombresFactura = $('#nombresFactura').val();
-            let telefonoFactura = $('#telefonoFactura').val();
-            let direccionFactura = $('#direccionFactura').val();
-            if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 10 && numeroIdentificacionFacturaValido && emailFacturaValido){
-                $('#btn-next').attr('disabled', false);
-            }else{
-                $('#btn-next').attr('disabled', true);
-            }
+        $('body').on('input', 'input, select', async function(){
+            validateFields();
         })
 
-        $('body').on('click', '#btn-next', async function(){
+        {{-- $('body').on('click', '#btn-next', async function(){
+            console.log("-----------------------------")
             let step = $(this).attr('step-rel');
             let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
             let nombresFactura = $('#nombresFactura').val();
@@ -840,10 +893,106 @@ Registro
                     "direccion": direccionFactura
                 }
             }
+            if(step == 3){
+                await crearSuscripcion();
+            }
             localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-        })
+        }) --}}
 
+        await cargarMediosPago();
+        await cargarTiposCuenta();
     });
+
+    function validateFields(){
+        let step = $('#btn-next').attr('step-rel');
+        if(step == 1){
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let nombresFactura = $('#nombresFactura').val();
+            let telefonoFactura = $('#telefonoFactura').val();
+            let direccionFactura = $('#direccionFactura').val();
+            if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 5 && numeroIdentificacionFacturaValido && emailFacturaValido){
+                $('#btn-next').attr('disabled', false);
+            }else{
+                $('#btn-next').attr('disabled', true);
+            }
+        }
+
+        if(step == 2){
+            let frecuenciaPago = $('#frecuenciaPago').val();
+            let nombreBanco = $('#nombreBanco').val();
+            let numeroCuenta = $('#numeroCuenta').val();
+            let nombreTitular = $('#nombreTitular').val();
+            let autorizacionCobro = $('#autorizacionCobro').is(':checked')
+            if(nombreBanco !== '' && frecuenciaPago.length > 4 && numeroCuenta.length > 6 && nombreTitular && autorizacionCobro){
+                $('#btn-next').attr('disabled', false);
+            }else{
+                $('#btn-next').attr('disabled', true);
+            }
+        }
+
+        if(step == 3){
+            let titular = $('#titular').val();
+            let emailContacto = $('#emailContacto').val();
+            
+            if(titular.length > 4 && emailContacto.length > 4){
+                $('#btn-next').attr('disabled', false);
+            }else{
+                $('#btn-next').attr('disabled', true);
+            }
+        }
+    }
+
+    async function cargarTiposCuenta(){
+        let args = [];
+        args["endpoint"] = api_url + `/facturacion/v1/util/tipos_cuenta_bancaria`;
+        args["method"] = "GET";
+        args["showLoader"] = false;
+        args["token"] = _token;
+
+        const data = await call(args);
+        if(data.code == 200){
+            let elem = ``;
+            $.each(data.data, function(key, value){
+                elem += `<div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuenta${value.nombreTipoCuenta.toLowerCase()}" value="${value.codigoTipoCuenta}" />
+                        <label class="form-check-label fw-medium" for="tipoCuenta${value.nombreTipoCuenta.toLowerCase()}">Cuenta ${value.nombreTipoCuenta.toLowerCase()}</label>
+                    </div>`;
+            })
+            $('#listTiposCuenta').html(elem);
+            // $('input[name="tipoCuenta"]:checked').val();
+        }
+    }
+
+    async function cargarMediosPago(){
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=EMPRESA
+    `;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data);
+        let isSettedActive = false;
+        
+        $.each(data.data, function(key, value){
+            let classTab = ``
+            let classTabContent = ``
+            if(value.activo == true){
+                if(!isSettedActive){
+                    isSettedActive = true;
+                    classTab = `active`;
+                    classTabContent = `show active`;
+                }
+                console.log(value.nemonico)
+                console.log(classTab,classTabContent)
+                $(`.${value.nemonico.toLowerCase()}`).removeClass('d-none');
+                $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
+                console.log(`.${value.nemonico.toLowerCase()} button`);
+                $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
+            }
+
+        })
+    }
 
     async function validarIdentificacionFactura(){
         let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
@@ -908,6 +1057,90 @@ Registro
         });
 
         return response?.data || [];
+    }
+
+    async function crearSuscripcion(){
+        let codigoInstitucion = $('#nombreBanco option:selected').val();
+        let numeroCuenta = $('#numeroCuenta').val();
+        let nombreTitular = $('#nombreTitular').val();
+        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
+        let tipoFlujo = "E";
+
+
+        let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+        let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
+        let nombresFactura = $('#nombresFactura').val();
+        let telefonoFactura = $('#telefonoFactura').val();
+        let emailFactura = $('#emailFactura').val();
+        let direccionFactura = $('#direccionFactura').val();
+
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoCliente": {{ Session::get('infoCliente')->informacionCliente->codigoCliente }},
+            "secuenciaAfiliado": "",
+            "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+            "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
+            "tipoFlujo": tipoFlujo,
+            "pago": {
+                "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
+                "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2),
+                "detalle": {
+                    // "numeroTarjeta": "",
+                    // "mesExpiracion": 0,
+                    // "anioExpiracion": 0,
+                    // "codigoSeguridad": 0,
+                    // "tipoCobro": "CORRIENTE",
+                    "numeroCuenta": numeroCuenta,
+                    "nombreTitular": nombreTitular,
+                    "tipoCuenta": tipoCuenta,
+                    "codigoInstitucion": codigoInstitucion,
+                    "autorizaDebitoCargado": true,
+                    "autorizaAcuerdoCargado": true,
+                    "comprobantePagoCargado": true
+                }
+            },
+
+            "datosFacturacion": {
+                "codigoTipoIdentificacion": tipoIdentificacionFactura,
+                "numeroIdentificacion": numeroIdentificacionFactura,
+                "nombres": nombresFactura,
+                "telefono": telefonoFactura,
+                "email": emailFactura,
+                "direccion": direccionFactura
+            },
+            "terminosCondiciones": {
+                "aceptaPolitica": true,
+                "aceptaTratamientoDatos": true,
+                "aceptaConsentimientoDependiente": true
+            }
+        });
+        const data = await call(args);
+        console.log(data);
+        detalleSuscripcion.suscripcion = data.data;
+        if(data.code == 200){
+            await cargaAfiliadosSuscripcion();
+        }
+    }
+
+    async function cargaAfiliadosSuscripcion(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+            "secuenciaSuscripcion": detalleSuscripcion.suscripcion.secuenciaSuscripcion,
+            "afiliados": detalleSuscripcion.pacientes
+        });
+        const data = await call(args);
+        console.log(data);
     }
 </script>
 @endpush

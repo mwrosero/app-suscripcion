@@ -151,15 +151,15 @@ Registro
                             @csrf
                             <div class="col-md-4">
                                 <label class="form-label text-blue-zodiac-950 fw-semibold">RUC</label>
-                                <input type="text" class="form-control form-control-lg" value="9999999999999" required readonly />
+                                <input type="text" class="form-control form-control-lg" value="{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}" required readonly />
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label text-blue-zodiac-950 fw-semibold">Razón Social</label>
-                                <input type="text" class="form-control form-control-lg" value="Empresa 1" required readonly />
+                                <input type="text" class="form-control form-control-lg" value="{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}" required readonly />
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label text-blue-zodiac-950 fw-semibold">Código empresa</label>
-                                <input type="text" class="form-control form-control-lg" value="ASCO099" required readonly />
+                                <input type="text" class="form-control form-control-lg" value="{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}" required readonly />
                             </div>
                             <div class="col-md-6 d-none">
                                 <label class="form-label text-blue-zodiac-950 fw-semibold">Crédito empresa</label>
