@@ -46,43 +46,48 @@ Registro
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label for="documentId" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="documentId" name="documentId" placeholder="Número de identificación" required>
+                            <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de identificación <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" required>
+                                <option value="" selected disabled>Selecciona el tipo de identificación</option>
+                            </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="firstName" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="firstName" name="firstName" placeholder="Primer nombre" required>
+                            <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">CI/RUC/Pasaporte <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="middleName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="middleName" name="middleName" placeholder="Segundo nombre">
+                            <label for="primerNombre" class="form-label fs-14p fw-medium">Primer nombre <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="primerNombre" name="primerNombre" placeholder="Primer nombre" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="segundoNombre" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="segundoNombre" name="segundoNombre" placeholder="Segundo nombre">
                         </div>
 
                         <div class="col-md-4">
-                            <label for="lastName" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="lastName" name="lastName" placeholder="Primer apellido" required>
+                            <label for="primerApellido" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="primerApellido" name="primerApellido" placeholder="Primer apellido" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="secondLastName" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="secondLastName" name="secondLastName" placeholder="Segundo apellido">
+                            <label for="segundoApellido" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
                         </div>
                         <div class="col-md-4">
-                            <label for="gender" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
-                            <select class="form-select form-select-lg fs-14p" id="gender" name="gender" required>
+                            <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p" id="genero" name="genero" required>
                                 <option value="" selected disabled>Selecciona un género</option>
-                                <option value="female">Femenino</option>
-                                <option value="male">Masculino</option>
-                                <option value="other">Otro</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
                             </select>
                         </div>
 
                         <div class="col-md-4">
-                            <label for="birthDate" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control form-control-lg fs-14p" id="birthDate" name="birthDate" required>
+                            <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="maritalStatus" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
-                            <select class="form-select form-select-lg fs-14p" id="maritalStatus" name="maritalStatus" required>
+                            <label for="estadoCivil" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p text-capitalize" id="estadoCivil" name="estadoCivil" required>
                                 <option value="" selected disabled>Selecciona estado civil</option>
                                 <option value="single">Soltero/a</option>
                                 <option value="married">Casado/a</option>
@@ -90,27 +95,24 @@ Registro
                                 <option value="widowed">Viudo/a</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label for="address" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="address" name="address" placeholder="Ingresa la dirección">
+                        <div class="col-md-12">
+                            <label for="direccion" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="direccion" name="direccion" placeholder="Ingresa la dirección">
                         </div>
 
                         <div class="col-md-4">
                             <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="sector" name="sector" placeholder="Ingresa el sector">
+                            <select class="form-select form-select-lg fs-14p text-capitalize" id="sector" name="sector" required>
+                            </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="contractNumber" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="contractNumber" name="contractNumber" placeholder="Número de contrato">
+                            <label for="numeroContratoAfiliado" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroContratoAfiliado" name="numeroContratoAfiliado" placeholder="Número de contrato">
                         </div>
                         <div class="col-md-4">
-                            <label for="relationship" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
-                            <select class="form-select form-select-lg fs-14p" id="relationship" name="relationship" required>
+                            <label for="parentesco" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p text-capitalize" id="parentesco" name="parentesco" required>
                                 <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="spouse">Cónyuge</option>
-                                <option value="child">Hijo/a</option>
-                                <option value="parent">Padre/Madre</option>
-                                <option value="other">Otro</option>
                             </select>
                         </div>
                     </div>
@@ -119,12 +121,12 @@ Registro
                         <hr>
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <label for="phoneLandline" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneLandline" name="phoneLandline" placeholder="Ingresa el número de teléfono">
+                                <label for="telefonoFijo" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono fijo <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoFijo" name="telefonoFijo" placeholder="Ingresa el número de teléfono">
                             </div>
                             <div class="col-md-4">
-                                <label for="phoneMobile" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
-                                <input type="tel" class="form-control form-control-lg fs-14p" id="phoneMobile" name="phoneMobile" placeholder="Ingresa el número de teléfono">
+                                <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
+                                <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número de teléfono">
                             </div>
                             <div class="col-md-4">
                                 <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
@@ -277,6 +279,7 @@ Registro
     let finalFile = null;
     let pacientes = [];
     document.addEventListener('DOMContentLoaded', async () => {
+
         $('body').on('click', '.btn-plantilla', async function(){
             await descargarPlantilla();
         })
@@ -313,7 +316,93 @@ Registro
             // Aquí llamas a la función que sube el archivo
             await subirPlantilla();
         });
+
+        await cargarTiposIdentificacion();
+        await cargarEstadoCivil();
+        await cargarTiposParentesco();
+        await cargarSectores();
     })
+
+    async function cargarTiposIdentificacion() {
+        const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
+        const queryParams = new URLSearchParams({
+            codigoEmpresa: '1',
+            usoTipoIdentificacion: 'GESTION_FACTURACION'
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: false,
+        });
+
+        let elem = `<option value="" selected disabled>Selecciona el tipo de identificación</option>`;
+        response.data.forEach(item => {
+            elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
+        });
+        $('#tipoIdentificacion').html(elem);
+    }
+
+    async function cargarEstadoCivil() {
+        const baseUrl = `${api_url}/general/v1/estado_civil`;
+        const queryParams = new URLSearchParams({
+            codigoEmpresa: '1'
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: false,
+        });
+
+        let elem = `<option value="" selected disabled>Selecciona un género</option>`;
+        response.data.forEach(item => {
+            elem += `<option class="text-capitalize" value="${item.codigoEstadoCivil}">${item.nombreEstadoCivil.toLowerCase()}</option>`
+        });
+        $('#estadoCivil').html(elem);
+    }
+
+    async function cargarTiposParentesco() {
+        const baseUrl = `${api_url}/general/v1/tipos_parentesco`;
+        const queryParams = new URLSearchParams({
+            usoTipoParentesco: 'TODOS'
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: false,
+        });
+
+        let elem = `<option value="" selected disabled>Selecciona un género</option>`;
+        response.data.forEach(item => {
+            elem += `<option class="text-capitalize" value="${item.codigoTipoParentesco}">${item.nombreTipoParentesco.toLowerCase()}</option>`
+        });
+        $('#parentesco').html(elem);
+    }
+
+    async function cargarSectores() {
+        const baseUrl = `${api_url}/general/v1/sectores_cardinales`;
+        const queryParams = new URLSearchParams({
+            usoTipoParentesco: 'TODOS'
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: false,
+        });
+
+        let elem = `<option value="" selected disabled>Selecciona un sector</option>`;
+        response.data.forEach(item => {
+            elem += `<option class="text-capitalize" value="${item.codigoSector}">${item.nombreSector.toLowerCase()}</option>`
+        });
+        $('#sector').html(elem);
+    }
 
     async function subirPlantilla(){
         const formData = new FormData();

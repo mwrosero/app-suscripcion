@@ -5,10 +5,10 @@
         </a>
     </div>
 
-    <div class="navbar-nav-right d-flex justify-content-between align-items-center" id="navbar-collapse">
-        <div>
+    <div class="navbar-nav-right d-flex justify-content-end justify-content-md-between align-items-center" id="navbar-collapse">
+        <div class="d-none d-md-block ">
             {{-- <h5 class="mb-0">Bienvenido 👋🏻 </h5> --}}
-            <h5 class="mb-0">Bienvenido, Empresa 1</h5>
+            <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->informacionCliente->nombreCliente) }}</span></h5>
         </div>
         <a href="#!" class="navbar-brand mx-auto d-none">
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-azul.svg" alt="veris" width="40">
@@ -367,11 +367,11 @@
                     <div class="avatar avatar-online">
                         <img src="../../images/avatars/user_profile.png" alt class="h-auto rounded-circle" />
                     </div>
-                    <span class="fw-bold text-dark">Nombre Empresa</span>
+                    <span class="fw-bold text-dark">{{ strtolower(Session::get('userData')->codigoUsuario) }}</span>
                     <i class="fa-solid fa-chevron-down fs-6 text-dark"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item" href="pages-account-settings-account.html">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
                     <!-- <li>
                         <div class="dropdown-divider"></div>
                     </li>
@@ -435,7 +435,7 @@
                         <div class="dropdown-divider"></div>
                     </li> -->
                     <li>
-                        <a class="dropdown-item" href="#!" target="_blank">
+                        <a class="dropdown-item" href="/logout" target="_blank">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Cerrar sesión</span>
                         </a>

@@ -851,7 +851,8 @@ $processId = base64_encode(uniqid());
 
 @push('scripts')
 <script>
-    let codigoCliente = 13315;
+    let codigoCliente = {{ Session::get('infoCliente')->informacionCliente->codigoCliente }};
+    {{-- let codigoCliente = 13315; --}}
     document.addEventListener('DOMContentLoaded', async () => {
         const planes = await obtenerPlanesSuscripcionDetalleEmpresa();
         const planesContratados = planes.filter(plan => plan.contratado);
