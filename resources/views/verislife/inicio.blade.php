@@ -879,7 +879,7 @@ $processId = base64_encode(uniqid());
         const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`; 
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
-            frecuencia: 'TODOS',
+            frecuencia: 'ANUAL',
             lineaNegocio: 'CMV',
             codigoCliente: codigoCliente
         });
