@@ -264,7 +264,7 @@ Registro
                     </div>
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
-                    <a href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
+                    <a href="/portal-fidelizacion/verificacion-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
                     <button type="button" class="btn btn-cerulean-blue-800" disabled id="btn-continuar">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></button>
                 </div>
             </div>
@@ -280,6 +280,11 @@ Registro
     let pacientes = [];
     document.addEventListener('DOMContentLoaded', async () => {
 
+        if(detalleSuscripcion.hasOwnProperty('pacientes')){
+            pacientes = detalleSuscripcion.pacientes;
+            fillRegistros();
+        }
+
         $('body').on('click', '.btn-plantilla', async function(){
             await descargarPlantilla();
         })
@@ -287,6 +292,17 @@ Registro
         $('body').on('click', '.link-documento', async function(){
             let nemonico = $(this).attr('nemonico-rel');
             await cargarDocumento(nemonico);
+        })
+
+        $('body').on('click', '.btn-editar-paciente', async function(){
+            let paciente = JSON.parse($(this).attr('data-rel'));
+            await fillPaciente(paciente);
+        })
+
+        $('body').on('click', '.btn-eliminar-paciente', async function(){
+            let keyAEliminar = parseInt($(this).attr('paciente-rel'));
+            delete pacientes[keyAEliminar];
+            fillRegistros();
         })
 
         $('body').on('click', '#btn-continuar', async function(){
@@ -322,6 +338,55 @@ Registro
         await cargarTiposParentesco();
         await cargarSectores();
     })
+
+    function fillPaciente(paciente){
+        $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
+        $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
+        $('#primerNombre').val(paciente.primerNombre)
+        $('#segundoNombre').val(paciente.segundoNombre)
+        $('#primerApellido').val(paciente.primerApellido)
+        $('#segundoApellido').val(paciente.segundoApellido)
+        $('#genero').val(paciente.genero)
+
+        var partes = paciente.fechaNacimiento.split("/"); // ["09", "06", "2025"]
+        var fechaFormateada = partes[2] + "-" + partes[1] + "-" + partes[0]; // "2025-06-09"
+
+        $('#fechaNacimiento').val(fechaFormateada)
+        $('#estadoCivil').val(paciente.codigoEstadoCivil)
+        $('#direccion').val(paciente.direccion)
+        $('#sector').val(paciente.codigoSector)
+        $('#numeroContratoAfiliado').val(paciente.numeroContrato)
+        $('#parentesco').val(paciente.codigoTipoParentesco)
+        $('#telefonoFijo').val(paciente.telefonoFijo)
+        $('#telefonoMovil').val(paciente.telefonoMovil)
+        $('#email').val(paciente.mail)
+    }
+
+    function fillRegistros(){
+        //Validar si esta vacio
+        let elem = ``;
+        $('#empty-space').remove();
+        $('#btn-continuar').attr('disabled', false);
+        $('.box-pagination').removeClass('d-none');
+        $.each(pacientes, function(key, value){
+            elem += `<tr id="paciente-${key}">
+                <td>${value.numeroIdentificacionPcte}</td>
+                <td>${value.primerApellido} ${value.segundoApellido} ${value.primerNombre} ${value.segundoNombre}</td>
+                <td>${value.telefonoMovil}</td>
+                <td>${value.mail}</td>
+                <td>${value.fechaNacimiento}</td>
+                <td>
+                    <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none btn-editar-paciente" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none btn-eliminar-paciente" paciente-rel="${key}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+            </tr>`
+        })
+        $('#contenido-pacientes').html(elem)
+    }
 
     async function cargarTiposIdentificacion() {
         const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
@@ -441,7 +506,12 @@ Registro
 
                 }else{
                     //procesar y dibujar en la tabla
-                    let elem = ``;
+                    $.each(data.data.rows, function(key, value){
+                        pacientes.push(value);
+                    });
+                    fillRegistros()
+
+                    /*let elem = ``;
                     $('#empty-space').remove();
                     $('#btn-continuar').attr('disabled', false);
                     $('.box-pagination').removeClass('d-none');
@@ -463,7 +533,7 @@ Registro
                             </td>
                         </tr>`
                     })
-                    $('#contenido-pacientes').html(elem)
+                    $('#contenido-pacientes').html(elem)*/
                 }
                 return data;
             } else {

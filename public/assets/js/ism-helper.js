@@ -241,6 +241,14 @@ async function cargarDocumento(nemonico){
     args["method"] = "GET";
     args["showLoader"] = true;
     args["token"] = _token;
-    const data = await call(args);
-    console.log(data);
+    try {
+        const blob = await callDocumento(args);
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, '_blank');
+        setTimeout(() => {
+            URL.revokeObjectURL(pdfUrl);
+        }, 100);
+    } catch (error) {
+        console.error('Error al obtener el PDF:', error);
+    }
 }
