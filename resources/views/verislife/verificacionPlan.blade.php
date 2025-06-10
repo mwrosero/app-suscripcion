@@ -272,6 +272,7 @@ Registro
         console.log(data);
     }
 
+
     // Planes detalle_especifico
     async function obtenerBeneficiosPorFrecuencia(secuenciaFrecuencia) {
         const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_especifico`;

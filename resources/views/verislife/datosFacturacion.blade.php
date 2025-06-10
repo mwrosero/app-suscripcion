@@ -428,7 +428,6 @@ Registro
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     <div class="tab-pane tab-transferencia d-none fade" id="pills-bank-transfer" role="tabpanel" aria-labelledby="pills-bank-transfer-tab" tabindex="0">
                                                         <div class="row g-3 flex-column justify-content-center align-items-center">
@@ -661,7 +660,7 @@ Registro
                     </div>
                 </div>
                 <div class="d-flex gap-3 justify-content-center" id="wizard-actions">
-                    <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
+                    <a id="btn-prev" href="/portal-fidelizacion/registro-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800">
                         <i class="fa-solid fa-chevron-left me-2"></i>
                         <span class="d-none d-sm-inline">Regresar</span>
                     </a>
@@ -721,7 +720,7 @@ Registro
         console.log({idx})
         if (idx === 0) {
             actions.innerHTML = `
-                <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
+                <a id="btn-prev" href="/portal-fidelizacion/registro-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </a>
@@ -746,6 +745,9 @@ Registro
                   <span class="d-none d-sm-inline">Continuar</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
+        }
+        if(total == 4){
+            validateFields();
         }
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
@@ -776,7 +778,7 @@ Registro
                 $('.colaboradores-registrados').html(detalleSuscripcion.pacientes.length);
                 $('.metodo-pago').html($('.nav-metodo-pago button.active').attr('descripcion-rel').toLowerCase());
                 $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
-                $('.valor-total').html((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2));
+                $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
                 await crearSuscripcion();
             }
             localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
@@ -871,7 +873,7 @@ Registro
             await validarCorreoElectronico(email);
         })
 
-        $('body').on('input', 'input, select', async function(){
+        $('body').on('input change', 'input, select', async function(){
             validateFields();
         })
 
@@ -1004,7 +1006,8 @@ Registro
         args["token"] = _token;
         const data = await call(args);
         if(data.code == 200){
-            numeroIdentificacionFacturaValido = data.data.esIdentificacionValida
+            numeroIdentificacionFacturaValido = data.data.esIdentificacionValida;
+            validateFields();
         }
     }
 
@@ -1023,6 +1026,7 @@ Registro
         console.log(data);
         if(data.code == 200){
             emailFacturaValido = data.data.correoValido
+            validateFields();
         }
     }
 
@@ -1104,7 +1108,15 @@ Registro
                     "comprobantePagoCargado": true
                 }
             },
-
+            "datosFirmaDocumentos": {
+                "nombreEmpresa": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
+                "codigoTipoIdentificacion": 3,//cambiar
+                "numeroIdentificacion": $('#ruc').val(),
+                "representanteLegal": $('#titular').val(),
+                "telefono": $('#telefono').val(),
+                "email": $('#emailContacto').val(),
+                "direccion": "Mi casa"
+            },
             "datosFacturacion": {
                 "codigoTipoIdentificacion": tipoIdentificacionFactura,
                 "numeroIdentificacion": numeroIdentificacionFactura,

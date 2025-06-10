@@ -932,7 +932,7 @@ $processId = base64_encode(uniqid());
                                 <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
                             </div>
                             <div class="price-block text-start">
-                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/anual</small></h5>
+                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/${plan.tipo}</small></h5>
                                 <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
                             </div>
                         </div>
@@ -949,7 +949,7 @@ $processId = base64_encode(uniqid());
                             <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${plan.porcentajeDescuento}%</span>
                         </div>
                         <div class="my-1">
-                            <h1 class="fw-bold text-blue-zodiac-950 m-0">$${plan.valorFinal.toFixed(2)} <small class="fw-medium fs-5">/anual</small></h1>
+                            <h1 class="fw-bold text-blue-zodiac-950 m-0">$${plan.valorFinal.toFixed(2)} <small class="fw-medium fs-5">/${plan.tipo}</small></h1>
                             <small class="text-muted text-decoration-line-through text-xs">PVP: $${plan.precio.toFixed(2)}</small>
                         </div>
                     </div>
