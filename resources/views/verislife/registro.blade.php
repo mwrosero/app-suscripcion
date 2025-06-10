@@ -7,7 +7,13 @@ Registro
 @endsection
 
 @section('content')
+@php
+    use Carbon\Carbon;
 
+    // Establecer zona horaria
+    $now = Carbon::now('America/Bogota'); // UTC-5 (también puedes usar 'America/Guayaquil')
+    $nextYear = $now->copy()->addYear();
+@endphp
 <div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
@@ -41,7 +47,7 @@ Registro
     <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
         <div class="modal-content p-3 py-md-4 px-md-5">
             <div class="modal-body p-0">
-                <form id="addBeneficiaryForm" class="pt-3">
+                <div id="addBeneficiaryForm" class="pt-3">
                     <h5 class="fw-semibold">Datos</h5>
                     <hr>
                     <div class="row g-3">
@@ -159,7 +165,7 @@ Registro
                         <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add" disabled>Agregar</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -319,6 +325,79 @@ Registro
             }
         });
 
+        $('body').on('click', '#btn-add', async function(){
+            let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
+            let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
+            let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
+            let primerNombre = $('#primerNombre').val().toUpperCase();
+            let segundoNombre = $('#segundoNombre').val().toUpperCase();
+            let primerApellido = $('#primerApellido').val().toUpperCase();
+            let segundoApellido = $('#segundoApellido').val().toUpperCase();
+            let genero = $('#genero option:selected').val();
+            
+            let fechaNacimiento = $('#fechaNacimiento').val();
+            let dateObj = new Date(fechaNacimiento);
+            // Obtener día, mes y año
+            let dia = String(dateObj.getDate()).padStart(2, '0'); // Asegura 2 dígitos
+            let mes = String(dateObj.getMonth() + 1).padStart(2, '0'); // +1 porque los meses van de 0 a 11
+            let anio = dateObj.getFullYear();
+            // Formatear a dd/mm/yyyy
+            let fechaFormateada = `${dia}/${mes}/${anio}`;
+
+            let codigoEstadoCivil = $('#estadoCivil option:selected').val();
+            let estadoCivil = $('#estadoCivil option:selected').val().toUpperCase();
+            let direccion = $('#direccion').val().toUpperCase();
+            let codigoSector = $('#sector option:selected').val();
+            let sector = $('#sector option:selected').html().toUpperCase();
+            let numeroContratoAfiliado = $('#numeroContratoAfiliado').val();
+            let codigoTipoParentesco = $('#parentesco option:selected').val();
+            let nombreTipoParentesco = $('#parentesco option:selected').html();
+            let telefonoFijo = $('#telefonoFijo').val();
+            let telefonoMovil = $('#telefonoMovil').val();
+            let email = $('#email').val();
+            let terms = $('#terms').val();
+            let privacy = $('#privacy').val();
+
+            pacientes.push({
+                "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
+                "numeroIdentificacionPcte": numeroIdentificacionPcte,
+                "primerApellido": primerApellido,
+                "segundoApellido": segundoApellido,
+                "primerNombre": primerNombre,
+                "segundoNombre": segundoNombre,
+                "genero": genero,
+                "codigoEstadoCivil": codigoEstadoCivil,
+                "fechaNacimiento": fechaFormateada,
+                "direccion": direccion,
+                "mail": email,
+                "codigoSector": codigoSector,
+                "telefonoFijo": telefonoFijo,
+                "telefonoMovil": telefonoMovil,
+                "codigoRegion": 1,
+                "codigoCiudad": 1,
+                "codigoPais": 1,
+                "codigoProvincia": 1,
+                "numeroContrato": numeroContratoAfiliado,
+                "titularDependiente": "T",
+                "codigoTipoParentesco": codigoTipoParentesco,
+                "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+                "titularOtroContrato": null,
+                "yaEsTitularContrato": null,
+                "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
+                "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
+                "tipoIdentificacionPcte": tipoIdentificacionPcte,
+                "nombreTipoParentesco": nombreTipoParentesco,
+                "estadoCivil": estadoCivil,
+                "abreviaturaEstadoCivil": estadoCivil.charAt(0),
+                "sector": sector,
+                "region": "COSTA",
+                "observacionesError": null
+            })
+
+            fillRegistros();
+            $('#addBeneficiaryModal').modal('hide')
+        })
+
         $('#excelFile').on('change', async function (e) {
             finalFile = e.target.files[0];
             if (!finalFile) return;
@@ -371,7 +450,7 @@ Registro
         $.each(pacientes, function(key, value){
             elem += `<tr id="paciente-${key}">
                 <td>${value.numeroIdentificacionPcte}</td>
-                <td>${value.primerApellido} ${value.segundoApellido} ${value.primerNombre} ${value.segundoNombre}</td>
+                <td>${ value.primerApellido ?? '' } ${ value.segundoApellido ?? '' } ${ value.primerNombre ?? '' } ${ value.segundoNombre ?? '' }</td>
                 <td>${value.telefonoMovil}</td>
                 <td>${value.mail}</td>
                 <td>${value.fechaNacimiento}</td>
@@ -402,7 +481,7 @@ Registro
             showLoader: false,
         });
 
-        let elem = `<option value="" selected disabled>Selecciona el tipo de identificación</option>`;
+        let elem = `<option value="" selected disabled>Seleccionar</option>`;
         response.data.forEach(item => {
             elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
         });

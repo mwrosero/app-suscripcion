@@ -720,7 +720,7 @@ Registro
         console.log({idx})
         if (idx === 0) {
             actions.innerHTML = `
-                <a id="btn-prev" href="/portal-fidelizacion/dashboard" class="btn btn-outline-cerulean-blue-800">
+                <a id="btn-prev" href="/portal-fidelizacion/registro-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </a>
@@ -745,6 +745,9 @@ Registro
                   <span class="d-none d-sm-inline">Continuar</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
+        }
+        if(total == 4){
+            validateFields();
         }
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
@@ -870,7 +873,7 @@ Registro
             await validarCorreoElectronico(email);
         })
 
-        $('body').on('input', 'input, select', async function(){
+        $('body').on('input change', 'input, select', async function(){
             validateFields();
         })
 
@@ -1003,7 +1006,8 @@ Registro
         args["token"] = _token;
         const data = await call(args);
         if(data.code == 200){
-            numeroIdentificacionFacturaValido = data.data.esIdentificacionValida
+            numeroIdentificacionFacturaValido = data.data.esIdentificacionValida;
+            validateFields();
         }
     }
 
@@ -1022,6 +1026,7 @@ Registro
         console.log(data);
         if(data.code == 200){
             emailFacturaValido = data.data.correoValido
+            validateFields();
         }
     }
 
