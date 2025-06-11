@@ -28,7 +28,7 @@ class SeguridadesController extends Controller
         $param = '?usuario='.strtoupper($user);
 
         $response = Ism::call([
-            'endpoint' => ISM::getBaseUrl().$method.$param,
+            'endpoint' => Ism::BASE_URL.$method.$param,
             //'token'    => Ism::getToken(),
             //'data'     => ['' => $var],
             'method'   => 'GET'
@@ -39,7 +39,7 @@ class SeguridadesController extends Controller
             $method = '/seguridad/v1/autenticacion/login';
 
             /*$response = Ism::call([
-                'endpoint'  => ISM::getBaseUrl().$method,
+                'endpoint'  => Ism::BASE_URL.$method,
                 'basic'     => base64_encode(strtoupper($user) .":". $password),
                 'method'    => 'POST'
             ]);*/
@@ -49,13 +49,13 @@ class SeguridadesController extends Controller
                     ])->withHeaders([
                         'Application' => Ism::APPLICATION,
                         'Authorization' => 'Basic '.base64_encode(strtoupper($user) .":". $password),
-                    ])->post(ISM::getBaseUrl().$method);
+                    ])->post(Ism::BASE_URL.$method);
             $response = json_decode($res->body());
 
             // dd($response);
             /*$method = '/seguridad/v1/usuarios/'.$response->data->secuenciaUsuario;
             $response = Ism::call([
-                'endpoint' => ISM::getBaseUrl().$method.$param,
+                'endpoint' => Ism::BASE_URL.$method.$param,
                 'token'    => $response->data->idToken,
                 'method'   => 'GET'
             ]);
@@ -71,11 +71,11 @@ class SeguridadesController extends Controller
                         $param = '?codigoSucursal='.Ism::CODIGOSUCURSAL;
 
                         $response = Ism::call([
-                            'endpoint' => ISM::getBaseUrl().$method.$param,
+                            'endpoint' => Ism::BASE_URL.$method.$param,
                             'token'    => $response->data->idToken,
                             'method'   => 'GET'
                         ]);
-                        // echo ISM::getBaseUrl().$method.$param;
+                        // echo Ism::BASE_URL.$method.$param;
                         // dump($response);
                         // dd(0);
 
@@ -83,7 +83,7 @@ class SeguridadesController extends Controller
                         // return redirect('/verislife/home');
                         $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
                         $response = Ism::call([
-                            'endpoint' => ISM::getBaseUrl().$method,
+                            'endpoint' => Ism::BASE_URL.$method,
                             'token'    => Session::get('accessToken'),
                             'method'   => 'GET'
                         ]);
@@ -129,7 +129,7 @@ class SeguridadesController extends Controller
         $method = '/seguridad/v1/usuarios/solicitud_recuperacion_clave';
 
         $response = Ism::call([
-            'endpoint' => ISM::getBaseUrl().$method,
+            'endpoint' => Ism::BASE_URL.$method,
             //'token'    => Ism::getToken(),
             'data'     => ['usuario' => strtoupper($user)],
             'method'   => 'POST'
@@ -154,7 +154,7 @@ class SeguridadesController extends Controller
         $data = $request->all();
         $method = '/seguridad/v1/usuarios/recuperacion_clave';
         $response = Ism::call([
-            'endpoint' => ISM::getBaseUrl().$method,
+            'endpoint' => Ism::BASE_URL.$method,
             //'token'    => Ism::getToken(),
             'data'     => ['usuario' => $data['usuario'], 'codigoRecuperacion' => $data['codigo'], 'claveNueva' => $data['nuevaClave']],
             'method'   => 'POST'
@@ -174,7 +174,7 @@ class SeguridadesController extends Controller
         $info = Session::get('userData');
         $method = '/seguridad/v1/autenticacion/refresh_token';
         $response = Ism::call([
-            'endpoint'  => ISM::getBaseUrl().$method,
+            'endpoint'  => Ism::BASE_URL.$method,
             'data'      => ["refreshToken" => $info->refreshToken],
             'method'    => 'POST'
         ]);
