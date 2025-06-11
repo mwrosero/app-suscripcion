@@ -3,6 +3,7 @@
     Veris - Actualizar Contraseña
 @endsection
 @section('content')
+
 <!-- Content Actualizar Clave -->
 <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Recuperando Contraseña</p>
 <p class="fs-10 mb-3 text-center bg-colortext">Para actualizar la contraseña debes ingresar el código de validación enviado a tu correo electrónico registrado</p>
@@ -16,7 +17,7 @@
         </div>
     @endif
     <div class="mb-2">
-        <label for="codigo" class="form-label bg-colortext fw-bold mt-2">Código de validación</label>
+        <label for="codigo" class="form-label fw-medium">Código de validación</label>
         <input type="text"
             class="form-control"
             id="codigo"
@@ -26,7 +27,7 @@
             value="{{ $codigo }}" />
     </div>
     <div class="mb-2">
-        <label for="nuevaClave" class="form-label bg-colortext fw-bold mt-2">Nueva contraseña</label>
+        <label for="nuevaClave" class="form-label fw-medium">Nueva contraseña</label>
         <div class="input-group input-group-merge">
             <input type="password"
                 class="form-control"
@@ -38,7 +39,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <label for="confirmarClave" class="form-label bg-colortext fw-bold mt-2">Confirmar nueva contraseña</label>
+        <label for="confirmarClave" class="form-label fw-medium">Confirmar nueva contraseña</label>
         <div class="input-group input-group-merge">
             <input type="password"
                 class="form-control"
@@ -50,7 +51,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary d-grid w-100 bg-colorboton" type="submit" id="recuperarContrasena">Actualizar Contraseña</button>
+        <button class="btn btn-lg btn-blue-veris d-grid w-100" type="submit" id="recuperarContrasena">Actualizar Contraseña</button>
     </div>
 </form>
 <!-- /Content Actualizar Clave -->

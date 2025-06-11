@@ -14,7 +14,7 @@
         {{ session('mensaje') }}
         </div>
     @endif
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <label for="user" class="form-label bg-colortext fw-bold mt-2">Usuario o Correo Electrónico</label>
         <input type="text"
             class="form-control"
@@ -22,13 +22,23 @@
             name="user"
             autofocus
             required />
+    </div> --}}
+    <div class="mb-3">
+        <label for="user" class="form-label fw-medium">Usuario o Correo Electrónico *</label>
+        <input
+            type="text"
+            class="form-control"
+            id="user"
+            name="user"
+            autofocus 
+            required/>
     </div>
 
     <div class="mb-3">
-        <button class="btn btn-primary d-grid w-100 bg-colorboton" type="submit" id="recuperarContrasena">Recuperar Contraseña</button>
+        <button class="btn btn-lg btn-blue-veris d-grid w-100" type="submit" id="recuperarContrasena">Recuperar Contraseña</button>
     </div>
     <div class="mb-3 text-center">
-        <a href="login" class="form-cha bg-colortext" for="noCerrarSeesion"> Regresar al Login</a>
+        <a href="login" class="fs-12p" for="noCerrarSeesion"> Regresar al Login</a>
     </div>
 </form>
 <!-- /Content Olvide Clave -->
