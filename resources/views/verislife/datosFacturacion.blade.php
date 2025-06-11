@@ -577,7 +577,7 @@ Registro
                                             </div>
                                             <h4 class="text-primary-veris fw-semibold mb-4">Registro exitoso</h4>
                                             <div class="row justify-content-center">
-                                                <div class="col-12 col-lg-10">
+                                                <div class="col-12 col-lg-10 box-tiene-credito d-none">
                                                     <div class="card bg-zumthor-50">
                                                         <div class="card-body">
                                                             <div class="d-flex align-items-center">
@@ -807,6 +807,10 @@ Registro
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
+
+        @if(!Session::get('infoCliente')->informacionCliente->aplicaCredito)
+            $('.box-tiene-credito').remove('d-none');
+        @endif
 
         const beneficios = detalleSuscripcion.detallePlan.beneficios;
         const beneficiosHTML = beneficios.map((beneficio, index) => {

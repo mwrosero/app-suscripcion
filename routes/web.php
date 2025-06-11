@@ -95,7 +95,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
     })->withoutMiddleware(['guest']);
 
     Route::get('portal-fidelizacion/facturacion/{params}', function ($params) {
-        // dd(Session::get('userData'));
+        // dd(Session::get('infoCliente'));
         return view('verislife.datosFacturacion')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
