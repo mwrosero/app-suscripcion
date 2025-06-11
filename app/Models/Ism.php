@@ -20,7 +20,7 @@ class Ism extends Model
     // TEST
     public const BASE_URL = 'https://api-phantomx.veris.com.ec';  
     public const IDORGANIZACION = 'adf4e264-cd20-4653-9a44-025b13050992';
-    public const APPLICATION = 'UEhBTlRPTVhfRU1QUkVTQVJJQUw=';
+    public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     public const WAR_SEGURIDAD = 'seguridadtest';
     
     public const CODIGOSUCURSAL = 12;
