@@ -55,7 +55,7 @@ VerisLife - Login
                     </div>
                 </div>
                 <div class="mb-5">
-                    <a href="#!" class="fs-12p"><small>Olvidé mi contraseña</small></a>
+                    <a href="/olvide-clave" class="fs-12p"><small>Olvidé mi contraseña</small></a>
                 </div>
                 <div class="mb-3">
                     {{-- <a href="/verislife/home" class="btn btn-lg btn-blue-veris d-grid w-100">Iniciar sesión</a> --}}
