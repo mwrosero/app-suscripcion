@@ -34,8 +34,8 @@ class SeguridadesController extends Controller
             'method'   => 'GET'
         ]);
 
-        echo Ism::BASE_URL.$method.$param;
-        dd($response);
+        // echo Ism::BASE_URL.$method.$param;
+        // dd($response);
         
 
         if($response->code == 200){
