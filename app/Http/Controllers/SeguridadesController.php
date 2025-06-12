@@ -98,6 +98,10 @@ class SeguridadesController extends Controller
                     break;
                     case 'FORCE_CHANGE_PASSWORD':
                         $message = "Usuario nuevo que ingresa una clave temporal";
+                        
+                        Session::put('userTmp', $user);
+                        Session::put('passwordTmp', $password);
+                        return redirect('actualizar-clave-inicial');
                     break;
                     case 'CHANGE_PASSWORD':
                         $message = "Usuario debe cambiar su clave porque ha pasado 'x' tiempo desde el último cambio";
@@ -122,6 +126,29 @@ class SeguridadesController extends Controller
     /*Formulario de Olvide clave*/
     public function olvideClave(){
         return view('login.olvide_clave');
+    }
+
+    public function actualizarClaveTemporal(){
+        return view('login.actualizar_clave_temporal');
+    }
+
+    public function actualizarClaveTemporalAction(Request $request){
+        $data = $request->all();
+        $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/activacion_cuenta';
+        $response = Ism::call([
+            'endpoint' => Ism::BASE_URL.$method,
+            //'token'    => Ism::getToken(),
+            'data'     => ['usuario' => Session::get('userTmp'), 'claveTemporal' => Session::get('passwordTmp'), 'claveNueva' => $data['nuevaClave'], 'codigoGrupoUsuario' => 3],
+            'method'   => 'POST'
+        ]);
+
+        if($response->code != 200){
+            session()->flash('mensaje', $response->message);
+            return Redirect::route('actualizarClaveTemporal');
+        }
+
+        session()->flash('mensaje', "Contraseña actualizada exitosamente.");
+        return redirect()->route('login');
     }
 
     /*Envio de petición para reestablecer clave*/
