@@ -435,7 +435,7 @@
                         <div class="dropdown-divider"></div>
                     </li> -->
                     <li>
-                        <a class="dropdown-item" href="/logout" target="_blank">
+                        <a class="dropdown-item" href="/logout">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Cerrar sesión</span>
                         </a>

@@ -26,11 +26,15 @@ Route::middleware('guest')->group(function () {
     
     Route::get('/olvide-clave', [SeguridadesController::class, 'olvideClave'])->name('olvide_clave')->withoutMiddleware(['loggedUser']);
 
+    Route::get('/actualizar-clave-inicial', [SeguridadesController::class, 'actualizarClaveTemporal'])->name('actualizarClaveTemporal')->withoutMiddleware(['loggedUser']);
+
     Route::post('/recuperar-clave', [SeguridadesController::class, 'recuperarClave'])->name('recuperar_clave')->withoutMiddleware(['loggedUser']);
 
     Route::get('/reestablecer-clave', [SeguridadesController::class, 'reestablecerClave'])->name('reestablecer_clave')->withoutMiddleware(['loggedUser']);
     
     Route::post('/actualizar-clave', [SeguridadesController::class, 'actualizarClave'])->name('actualizar_clave.update')->withoutMiddleware(['loggedUser']);
+
+    Route::post('/actualizar-clave-temporal', [SeguridadesController::class, 'actualizarClaveTemporalAction'])->name('actualizarClaveTemporalAction')->withoutMiddleware(['loggedUser']);
 
     Route::get('/actualizar-clave/{codigo}/{usuario}', [SeguridadesController::class, 'formularioActualizarClave'])->name('actualizar_clave.form')->withoutMiddleware(['loggedUser']);
 
@@ -95,7 +99,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
     })->withoutMiddleware(['guest']);
 
     Route::get('portal-fidelizacion/facturacion/{params}', function ($params) {
-        // dd(Session::get('userData'));
+        // dd(Session::get('infoCliente'));
         return view('verislife.datosFacturacion')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
