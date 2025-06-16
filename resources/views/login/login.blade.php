@@ -30,13 +30,13 @@ VerisLife - Login
                 </div>
                 @endif
                 <div class="mb-3">
-                    <label for="user" class="form-label fw-medium">Número de Identificación *</label>
+                    <label for="user" class="form-label fw-medium">Usuario o Correo electrónico *</label>
                     <input
                         type="text"
                         class="form-control"
                         id="user"
                         name="user"
-                        placeholder="Enter your email or username"
+                        placeholder="Ingresa tu usuario o correo"
                         autofocus required/>
                 </div>
                 <div class="mb-2 form-password-toggle">
@@ -49,7 +49,7 @@ VerisLife - Login
                             id="password"
                             class="form-control"
                             name="password"
-                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            placeholder="Ingresa tu contraseña"
                             aria-describedby="password" required/>
                         <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                     </div>

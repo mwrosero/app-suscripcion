@@ -77,9 +77,15 @@
     --vris-chateau-green-500: #22c565;
     --vris-chateau-green-600: #18B057;
     --vris-chateau-green-700: #158042;
+    --vris-malachite-500: #049140;
+    --vris-malachite-600: #00C853;
+    --vris-malachite-700: #049140;
     --vris-rose-bud-200: #ffd5c8;
     --vris-rose-bud-300: #ffab91;
     --vris-rose-bud-400: #fd8e6c;
+    --vris-grenadier-500: #ef5f20;
+    --vris-grenadier-600: #D84315;
+    --vris-grenadier-700: #ba3214;
     --vris-readonly-100: #e7e9ec;
 }
 body {
@@ -370,6 +376,7 @@ h1,
 }
 .nav-pills .nav-link {
     transition: all 0.3s ease-in-out;
+    background-color: var(--vris-white-50) !important;
 }
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover,
@@ -445,6 +452,12 @@ h1,
 }
 .text-chateau-green-600{
     color: var(--vris-chateau-green-600) !important;
+}
+.text-malachite-600{
+    color: var(--vris-malachite-600) !important;
+}
+.text-grenadier-600{
+    color: var(--vris-grenadier-600) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;
@@ -743,6 +756,10 @@ h1,
 
 .progress-circle {
     margin-bottom: 1em;
+}
+.swiper {
+    width: 100%;
+    height: 100%;
 }
 .swiper-button-next,
 .swiper-button-prev {
