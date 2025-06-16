@@ -591,7 +591,7 @@ Registro
 </div>
 @endsection
 @push('scripts')
-<!-- <script>
+<script>
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     let finalFile = null;
     let pacientes = [];
@@ -958,5 +958,5 @@ Registro
         }
     }
 
-</script> -->
+</script>
 @endpush
