@@ -45,58 +45,58 @@ Registro
 
 <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-simple modal-dialog-centered">
-        <div class="modal-content p-3 py-md-4 px-md-2">
+        <div class="modal-content p-3 py-md-4 px-md-4">
             <div class="modal-body p-0">
                 <div id="addBeneficiaryForm" class="pt-3">
                     <h5 class="fw-semibold">Registrar colaborador</h5>
                     <hr>
-                    <div class="row g-3 px-3">
-                        <div class="col-12 col-md-8 offset-md-2">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-12 col-md-10">
                             <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de identificación <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" required>
                                 <option value="" selected disabled>Selecciona el tipo de identificación</option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" required>
                         </div>
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="primerNombre" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="primerNombre" name="primerNombre" placeholder="Primer nombre" required>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="primerNombre" name="primerNombre" placeholder="Ingresa tu nombre" required />
                         </div>
-                        <!-- <div class="col-12 col-md-8 offset-md-2">">
+                        <!-- <div class="col-12 col-md-10">">
                             <label for="segundoNombre" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="segundoNombre" name="segundoNombre" placeholder="Segundo nombre">
                         </div> -->
 
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="primerApellido" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="primerApellido" name="primerApellido" placeholder="Primer apellido" required>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="primerApellido" name="primerApellido" placeholder="Ingresa tu primer apellido" required />
                         </div>
-                        <!-- <div class="col-12 col-md-8 offset-md-2">">
+                        <!-- <div class="col-12 col-md-10">">
                             <label for="segundoApellido" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
                         </div> -->
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
                             <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required>
                         </div>
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p" id="genero" name="genero" required>
-                                <option value="" selected disabled>Selecciona un género</option>
+                                <option value="" selected disabled>Elige el genero del paciente</option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
                             </select>
                         </div>
-                        <!-- <div class="col-12 col-md-8 offset-md-2">">
+                        <!-- <div class="col-12 col-md-10">">
                             <label for="parentesco" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="parentesco" name="parentesco" required>
                                 <option value="" selected disabled>Selecciona una opción</option>
                             </select>
                         </div> -->
-                        <!-- <div class="col-12 col-md-8 offset-md-2">">
+                        <!-- <div class="col-12 col-md-10">">
                             <label for="estadoCivil" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="estadoCivil" name="estadoCivil" required>
                                 <option value="" selected disabled>Selecciona estado civil</option>
@@ -107,22 +107,22 @@ Registro
                             <input type="text" class="form-control form-control-lg fs-14p" id="direccion" name="direccion" placeholder="Ingresa la dirección">
                         </div>
 
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="sector" name="sector" required>
                             </select>
                         </div>
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="numeroContratoAfiliado" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroContratoAfiliado" name="numeroContratoAfiliado" placeholder="Número de contrato">
                         </div> -->
-                        <div class="col-12 col-md-8 offset-md-2">
-                            <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Teléfono móvil <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número de teléfono">
-                        </div>
-                        <div class="col-12 col-md-8 offset-md-2">
+                        <div class="col-12 col-md-10">
                             <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo">
+                            <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico">
+                        </div>
+                        <div class="col-12 col-md-10">
+                            <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular">
                         </div>
                         
                     </div>
@@ -145,8 +145,8 @@ Registro
                         </div>
                     </div> -->
                     <div class="mt-4">
-                        <div class="row g-3 px-3">
-                            <div class="col-12 col-md-8 offset-md-2">
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-12 col-md-10">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                     <label class="form-check-label fs-10p" for="terms">
@@ -154,7 +154,7 @@ Registro
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-8 offset-md-2">
+                            <div class="col-12 col-md-10">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
                                     <label class="form-check-label fs-10p" for="privacy">
@@ -165,7 +165,7 @@ Registro
                         </div>
                     </div>
                     <hr>
-                    <div class="modal-footer border-0 p-0">
+                    <div class="modal-footer justify-content-center border-0 p-0">
                         <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add" disabled>Agregar</button>
                     </div>
@@ -555,7 +555,7 @@ Registro
                             </tbody>
                         </table>
                     </div>
-                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9 box-pagination d-none">
+                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9 box-pagination">
                         <div class="col-12 col-md-6 text-md-start text-center mb-2 mb-md-0">
                             <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
                         </div>
@@ -603,6 +603,8 @@ Registro
         }
 
         $('body').on('click', '.btn-plantilla', async function(){
+            console.log('test-clic');
+            
             await descargarPlantilla();
         })
 
@@ -941,6 +943,8 @@ Registro
     }
 
     async function descargarPlantilla(){
+        console.log('test');
+        
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
         args["method"] = "GET";

@@ -15,34 +15,58 @@ $processId = base64_encode(uniqid());
         <h5 class="mb-0 mt-2">Home</h5>
     </div>
 
-    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4 d-none">
+    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4">
         <div class="d-none justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue text-white ps-3 fs-18 mb-0">Planes contratados</h5>
             <a href="#!" class="fw-medium text-white me-1">Ver todos</a>
         </div>
         <div class="row g-3">
-            <div class="col-12 col-lg-3">
-                <div class="card rounded-4 shadow-sm h-100">
-                    <div class="card-body px-0 pt-3 pb-0">
-                        <div class="text-center d-flex justify-content-between align-items-end border-start-blue mx-3 mb-3">
-                            <div class="text-start ms-3">
-                                <h6 class="text-bay-many-900 small mb-0">Opción 1</h6>
-                                <h2 class="fw-bold text-blue-zodiac-950 mb-0">100</h2>
-                            </div>
-                            <div class="text-end ">
-                                <i class="fa-solid fa-users fs-1 text-primary-veris"></i>
+
+            <div class="slider-planes-contratados position-relative">
+                <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
+                    <div class="swiper-wrapper" id="planesContratados">
+                        <div class="swiper-slide">
+                            <div class="card rounded-4 shadow-sm h-100">
+                                <div class="card-body px-3 py-3">
+                                    <div class="text-center border-start-blue-8 mb-3">
+                                        <div class="ms-3">
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <h6 class="text-bay-many-900 mb-0">Esencial</h6>
+                                                <button type="button" class="btn text-grenadier-600 fw-normal p-0 me-2"><i class="fa-regular fa-trash-can fs-4"></i></button>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="text-start">
+                                                    <h2 class="fw-bold text-blue-zodiac-950 mb-0">100</h2>
+                                                </div>
+                                                <div class="text-end">
+                                                    <i class="fa-solid fa-users fs-1 text-primary-veris"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex flex-column gap-3 px-3 pt-0">
+                                    <a href="#" class="btn btn-blue-veris fs-14p w-100">
+                                        Mejora tus beneficios
+                                    </a>
+                                    <a href="#" class="btn btn-outline-blue-veris fs-14p w-100">
+                                        Ver colaboradores
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="btn text-primary-veris bg-zumthor-50 fs-12p rounded-bottom-4 w-100">
-                            Ver colaboradores
-                        </a>
                     </div>
                 </div>
+                <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
+                <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
+                <div class="swiper-pagination position-absolute bottom-0"></div>
             </div>
-            <div class="content-message text-center">
+
+            <div class="content-message text-center d-none" id="empty-space-planes-contratados">
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/login-amico1.svg" />
                 <h4 class="text-white">Pronto podrás visualizar tu información aquí</h4>
             </div>
+
         </div>
     </section>
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
@@ -54,7 +78,6 @@ $processId = base64_encode(uniqid());
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="suscripcionPendientes">
-
                         <!-- <div class="swiper-slide">
                             <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
                                 <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
@@ -92,7 +115,6 @@ $processId = base64_encode(uniqid());
                                 </div>
                             </div>
                         </div> -->
-
                     </div>
                 </div>
                 <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>

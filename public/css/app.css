@@ -164,6 +164,9 @@ h1,
 .border-start-blue {
     border-left: 3px solid var(--vris-blue-ribbon-600) !important;
 }
+.border-start-blue-8 {
+    border-left: 8px solid var(--vris-blue-ribbon-600) !important;
+}
 .border-start-white {
     border-left: 3px solid var(--vris-white-50) !important;
 }
@@ -378,7 +381,7 @@ h1,
     transition: all 0.3s ease-in-out;
     background-color: var(--vris-white-50) !important;
 }
-.nav-pills .nav-link.active,
+.nav-pills .nav-link.active,        
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
     background-color: var(--vris-blue-ribbon-600) !important;
