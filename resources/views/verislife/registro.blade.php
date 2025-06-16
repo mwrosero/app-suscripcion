@@ -247,7 +247,6 @@ Registro
     </div>
 </div>
 
-
 <div class="modal fade" id="improveBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="improveBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
         <div class="modal-content p-3 py-md-4 px-md-2">
@@ -601,7 +600,7 @@ Registro
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0" id="contenido-pacientes">
-                                <tr>
+                                <!-- <tr>
                                     <td class="text-nowrap align-middle text-center">
                                         <div class="form-check d-flex justify-content-center align-items-center me-1">
                                             <input class="form-check-input mx-auto" type="checkbox" />
@@ -617,7 +616,7 @@ Registro
                                         <button type="button" class="btn btn-sm text-malachite-600 shadow-none px-2"><i class="fa-solid fa-pen"></i></button>
                                         <button type="button" class="btn btn-sm text-grenadier-600 shadow-none px-2" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal"><i class="fa-solid fa-trash"></i></button>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr id="empty-space">
                                     <td colspan="8">
                                         <div class="text-center">
