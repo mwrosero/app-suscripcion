@@ -10,6 +10,21 @@ Registro
 @php
 $processId = base64_encode(uniqid());
 @endphp
+
+<div class="modal fade" id="deleteSubscriptionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h5 class="text-blue-zodiac-950 text-center fw-bold">Para eliminar tu suscripción, comunícate con tu asesor de cuenta asignado</h5>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/consent.svg" class="mb-3" />
+                <div class="text-center">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="flex-grow-1 container-p-y">
     <div class="bg-white p-3 mb-4 d-none">
         <h5 class="mb-0 mt-2">Home</h5>
@@ -32,7 +47,7 @@ $processId = base64_encode(uniqid());
                                         <div class="ms-3">
                                             <div class="d-flex justify-content-between mb-3">
                                                 <h6 class="text-bay-many-900 mb-0">Esencial</h6>
-                                                <button type="button" class="btn text-grenadier-600 fw-normal p-0 me-2"><i class="fa-regular fa-trash-can fs-4"></i></button>
+                                                <button type="button" class="btn text-grenadier-600 fw-normal p-0 me-2" data-bs-toggle="modal" data-bs-target="#deleteSubscriptionModal"><i class="fa-regular fa-trash-can fs-4"></i></button>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="text-start">

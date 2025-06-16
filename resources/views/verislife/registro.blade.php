@@ -14,34 +14,6 @@ Registro
     $now = Carbon::now('America/Bogota'); // UTC-5 (también puedes usar 'America/Guayaquil')
     $nextYear = $now->copy()->addYear();
 @endphp
-<div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
-        <div class="modal-content">
-            <div class="modal-body text-center p-3">
-                <div class="text-center mb-3">
-                    <div class="loader mx-auto"></div>
-                </div>
-                <h5 class="text-blue-zodiac-950 fw-bold">Se están cargando tus datos</h5>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
-        <div class="modal-content">
-            <div class="modal-body text-center p-3">
-                <i class="fa-solid fa-circle-check text-primary-veris fs-1 mb-3"></i>
-                <h5 class="text-blue-zodiac-950 fw-bold">Beneficiario agregado con éxito.</h5>
-                <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
-                <div class="d-flex gap-3">
-                    <button type="submit" class="btn btn-cerulean-blue-800 col">Añadir nuevo</button>
-                    <button type="button" class="btn btn-outline-cerulean-blue-800 col" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-simple modal-dialog-centered">
@@ -174,6 +146,107 @@ Registro
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="uploadedModal" tabindex="-1" aria-labelledby="uploadedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <div class="text-center mb-3">
+                    <div class="loader mx-auto"></div>
+                </div>
+                <h5 class="text-blue-zodiac-950 fw-bold">Se están cargando tus datos</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successfullyAddedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successfullyAddedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <h4 class="text-blue-zodiac-950 fw-bold">Beneficiario agregado con éxito.</h4>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" />
+                <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col">Añadir nuevo</button>
+                    <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successfullyUpdatedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successfullyUpdatedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h3 class="text-primary-veris fw-medium">Actualización exitosa</h3>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" />
+                <h5 class="text-blue-zodiac-950 fw-bold">Has cambiado a <b class="number-collaborator">3</b> colaboradores a la opción Bienestar</h5>
+                <div class="text-center">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteCollaboratorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteCollaboratorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Estás seguro de que deseas borrar este colaborador?</h6>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/man-thinking.svg" />
+                <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Cúal es el motivo principal para eliminar a este colaborador?</h6>
+                <div class="text-start d-flex flex-column gap-2 mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo1"/>
+                        <label class="form-check-label fs-14p fw-semibold" for="motivo1">
+                            Ya no trabaja en la empresa.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo2"/>
+                        <label class="form-check-label fs-14p fw-semibold" for="motivo2">
+                            Reducción de costos.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo3"/>
+                        <label class="form-check-label fs-14p fw-semibold" for="motivo3">
+                            No me gustó el servicio.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="motivo4"/>
+                        <label class="form-check-label fs-14p fw-semibold" for="motivo4">
+                            Otro.
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col">Borrar colaborador</button>
+                    <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="collaboratorSuccessRemovedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="collaboratorSuccessRemovedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center px-5 py-4">
+                <h6 class="text-blue-zodiac-950 text-center fw-bold">El colaborador ha sido borrado con éxito</h6>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/advantages.svg" class="mb-3"/>
+                <div class="text-center">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="improveBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="improveBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
@@ -472,17 +545,17 @@ Registro
 
 <div class="flex-grow-1 container-p-y">
     <section class="mb-4 p-3">
-        <div class="row justify-content-center">
+        <div class="row g-3 justify-content-center">
             <div class="col-12 mb-4 text-end">
-                <button type="button" class="btn btn-blue-veris fw-medium fs-14p shadow-none" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
+                <button type="button" class="btn btn-blue-veris fw-medium fs-14p shadow-none mb-3" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                     <i class="fa-solid fa-plus me-2"></i> Añadir usuario
                 </button>
-                <label for="excelFile" class="btn btn-outline-blue-veris fw-medium fs-14p shadow-none" style="cursor: pointer;">
+                <label for="excelFile" class="btn btn-outline-blue-veris fw-medium fs-14p shadow-none mb-3" style="cursor: pointer;">
                     <i class="fa-solid fa-users me-2"></i> 
                     <small>Carga masiva de usuarios</small>
                     <input type="file" id="excelFile" name="excelFile" accept=".xls, .xlsx" hidden />
                 </label>
-                <button download="Plantilla" class="btn text-primary-veris fw-medium shadow-none btn-plantilla">
+                <button download="Plantilla" class="btn text-primary-veris fw-medium shadow-none btn-plantilla mb-3">
                     <i class="fa-solid fa-download me-2"></i> 
                     Descargar formato
                 </button>
@@ -490,7 +563,7 @@ Registro
             <div class="col-12 mb-4">
                 <div class="card shadow-none mb-4">
                     <div class="card-header">
-                        <div class="row align-items-center justify-content-between">
+                        <div class="row g-3 align-items-center justify-content-between">
                             <div class="col-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start gap-4 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <span class="input-group-text bg-wild-sand-50 border-end-0 border-0"><i class="ti ti-search"></i></span>
@@ -498,7 +571,7 @@ Registro
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 justify-content-end">
-                                <div class="row justify-content-end">
+                                <div class="row g-3 justify-content-end">
                                     <div class="col-12 col-lg-6">
                                         <select class="form-select form-select-lg fs-14p" id="grupo" name="grupo" required>
                                             <option value="" selected disabled>Todas las opciones</option>
@@ -528,7 +601,7 @@ Registro
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0" id="contenido-pacientes">
-                                <!-- <tr>
+                                <tr>
                                     <td class="text-nowrap align-middle text-center">
                                         <div class="form-check d-flex justify-content-center align-items-center me-1">
                                             <input class="form-check-input mx-auto" type="checkbox" />
@@ -542,9 +615,9 @@ Registro
                                     <td class="text-center">Veris Care</td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-sm text-malachite-600 shadow-none px-2"><i class="fa-solid fa-pen"></i></button>
-                                        <button type="button" class="btn btn-sm text-grenadier-600 shadow-none px-2"><i class="fa-solid fa-trash"></i></button>
+                                        <button type="button" class="btn btn-sm text-grenadier-600 shadow-none px-2" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal"><i class="fa-solid fa-trash"></i></button>
                                     </td>
-                                </tr> -->
+                                </tr>
                                 <tr id="empty-space">
                                     <td colspan="8">
                                         <div class="text-center">
@@ -555,24 +628,37 @@ Registro
                             </tbody>
                         </table>
                     </div>
-                    <div class="row align-items-center justify-content-center justify-content-lg-between py-3 px-5 fs-9 box-pagination">
-                        <div class="col-12 col-md-6 text-md-start text-center mb-2 mb-md-0">
+                    <div class="row align-items-center py-3 px-3 px-lg-5 fs-9 box-pagination">
+                        <!-- Columna izquierda: info -->
+                        <div class="col-6 col-md-5 text-start mb-2 mb-md-0">
                             <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
                         </div>
-                        <div class="col-auto d-flex">
+
+                        <!-- Columna derecha: paginación centrada -->
+                        <div class="col-6 col-md-7 d-flex justify-content-start">
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination pagination-sm justify-content-center mb-0">
+                                <ul class="pagination pagination-sm ms-lg-5 mb-0">
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
+                                        <a class="page-link bg-transparent" href="#" aria-label="first">
+                                            <i class="bi bi-chevron-double-left"></i>
                                         </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
+                                        <a class="page-link bg-transparent" href="#" aria-label="Previous">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link bg-transparent" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link bg-transparent" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link bg-transparent" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link bg-transparent" href="#" aria-label="Next">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link bg-transparent" href="#" aria-label="last">
+                                            <i class="bi bi-chevron-double-right"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -603,8 +689,6 @@ Registro
         }
 
         $('body').on('click', '.btn-plantilla', async function(){
-            console.log('test-clic');
-            
             await descargarPlantilla();
         })
 
@@ -777,7 +861,7 @@ Registro
                     <button type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" paciente-rel="${key}">
+                    <button type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
@@ -943,8 +1027,6 @@ Registro
     }
 
     async function descargarPlantilla(){
-        console.log('test');
-        
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
         args["method"] = "GET";
