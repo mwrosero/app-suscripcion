@@ -20,41 +20,40 @@ Registro
         <div class="modal-content p-3 py-md-4 px-md-4">
             <div class="modal-body p-0">
                 <div id="addBeneficiaryForm" class="pt-3">
-                    <h5 class="fw-semibold">Registrar colaborador</h5>
+                    <h5 class="fw-semibold">Registrar dependiente</h5>
                     <hr>
                     <div class="row g-3 justify-content-center">
                         <div class="col-12 col-md-10">
-                            <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de identificación <span class="text-danger">*</span></label>
-                            <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" required>
+                            <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de documento <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" autocomplete="off" required>
                                 <option value="" selected disabled>Selecciona el tipo de identificación</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" required>
+                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                         </div>
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="nombre-col">
                             <label for="primerNombre" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="primerNombre" name="primerNombre" placeholder="Ingresa tu nombre" required />
                         </div>
-                        <!-- <div class="col-12 col-md-10">">
+                        <!-- <div class="col-12 col-md-10">
                             <label for="segundoNombre" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo nombre <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="segundoNombre" name="segundoNombre" placeholder="Segundo nombre">
                         </div> -->
-
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="apellido-col">
                             <label for="primerApellido" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="primerApellido" name="primerApellido" placeholder="Ingresa tu primer apellido" required />
                         </div>
-                        <!-- <div class="col-12 col-md-10">">
+                        <!-- <div class="col-12 col-md-10">
                             <label for="segundoApellido" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
                         </div> -->
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="fecha-col">
                             <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
                             <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required>
                         </div>
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="genero-col">
                             <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p" id="genero" name="genero" required>
                                 <option value="" selected disabled>Elige el genero del paciente</option>
@@ -62,13 +61,13 @@ Registro
                                 <option value="F">Femenino</option>
                             </select>
                         </div>
-                        <!-- <div class="col-12 col-md-10">">
+                        <!-- <div class="col-12 col-md-10">
                             <label for="parentesco" class="form-label fs-14p fw-medium">Parentesco <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="parentesco" name="parentesco" required>
                                 <option value="" selected disabled>Selecciona una opción</option>
                             </select>
                         </div> -->
-                        <!-- <div class="col-12 col-md-10">">
+                        <!-- <div class="col-12 col-md-10">
                             <label for="estadoCivil" class="form-label fs-14p fw-medium">Estado Civil <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="estadoCivil" name="estadoCivil" required>
                                 <option value="" selected disabled>Selecciona estado civil</option>
@@ -88,11 +87,11 @@ Registro
                             <label for="numeroContratoAfiliado" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroContratoAfiliado" name="numeroContratoAfiliado" placeholder="Número de contrato">
                         </div> -->
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="email-col">
                             <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico">
                         </div>
-                        <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="telefono-col">
                             <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular">
                         </div>
@@ -118,7 +117,7 @@ Registro
                     </div> -->
                     <div class="mt-4">
                         <div class="row g-3 justify-content-center">
-                            <div class="col-12 col-md-10">
+                            <div class="col-12 col-md-10 d-none" id="terms-col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                     <label class="form-check-label fs-10p" for="terms">
@@ -126,7 +125,7 @@ Registro
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-10">
+                            <div class="col-12 col-md-10 d-none" id="privacy-col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
                                     <label class="form-check-label fs-10p" for="privacy">
@@ -139,7 +138,7 @@ Registro
                     <hr>
                     <div class="modal-footer justify-content-center border-0 p-0">
                         <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add" disabled>Agregar</button>
+                        <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add">Validar</button>
                     </div>
                 </div>
             </div>
@@ -168,7 +167,7 @@ Registro
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" />
                 <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
                 <div class="d-flex gap-3">
-                    <button type="submit" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col">Añadir nuevo</button>
+                    <button type="submit" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">Añadir nuevo</button>
                     <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -672,14 +671,15 @@ Registro
             </div>
         </div>
     </section>
-
 </div>
 @endsection
 @push('scripts')
 <script>
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     let finalFile = null;
+    let validado = false;
     let pacientes = [];
+    
     document.addEventListener('DOMContentLoaded', async () => {
 
         if(detalleSuscripcion.hasOwnProperty('pacientes')){
@@ -721,7 +721,17 @@ Registro
             }
         });
 
-        $('body').on('click', '#btn-add', async function(){
+        $('body').on('click', '#btn-add', async function () {
+            if (!validado) {
+                const fueValidado = await validarIdentidad();
+                if (!fueValidado) return;
+                mostrarCamposAdicionales();
+            } else {
+                agregarPaciente();
+            }
+        });
+
+        /* $('body').on('click', '#btn-add', async function(){
             let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
             let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
             let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
@@ -792,7 +802,7 @@ Registro
 
             fillRegistros();
             $('#addBeneficiaryModal').modal('hide')
-        })
+        }) */
 
         $('#excelFile').on('change', async function (e) {
             finalFile = e.target.files[0];
@@ -808,6 +818,26 @@ Registro
             await subirPlantilla();
         });
 
+        $('#addBeneficiaryModal').on('show.bs.modal', function () {
+            validado = false;
+
+            $('#tipoIdentificacion').prop('disabled', false);
+            $('#numeroIdentificacion').prop('readonly', false);
+            $('#numeroIdentificacion').val('');
+            $('#tipoIdentificacion').val('');
+
+            $('#nombre-col, #apellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
+                .addClass('d-none');
+
+            $('#btn-add').text('Validar').attr('disabled', false);
+
+            $('#primerNombre, #primerApellido, #fechaNacimiento, #telefonoMovil, #email').val('');
+            $('#genero').val('');
+
+            $('#privacy').prop('checked', false);
+            $('#terms').prop('checked', false);
+        });
+
         await cargarTiposIdentificacion();
         await cargarEstadoCivil();
         await cargarTiposParentesco();
@@ -815,6 +845,7 @@ Registro
     })
 
     function fillPaciente(paciente){
+        $('#uploadedModal').modal('hide');
         $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
         $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
         $('#primerNombre').val(paciente.primerNombre)
@@ -851,7 +882,7 @@ Registro
                     </div>
                 </td>
                 <td class="text-center">${value.numeroIdentificacionPcte}</td>
-                <td class="text-center">${ value.primerApellido ?? '' } ${ value.segundoApellido ?? '' } ${ value.primerNombre ?? '' } ${ value.segundoNombre ?? '' }</td>
+                <td class="text-center">${value.primerApellido ?? '' } ${ value.segundoApellido ?? '' } ${ value.primerNombre ?? '' } ${ value.segundoNombre ?? '' }</td>
                 <td class="text-center">${value.telefonoMovil}</td>
                 <td class="text-center">${value.mail}</td>
                 <td class="text-center">${value.fechaNacimiento}</td>
@@ -888,6 +919,98 @@ Registro
             elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
         });
         $('#tipoIdentificacion').html(elem);
+    }
+
+    async function validarIdentidad() {
+        const tipo = $('#tipoIdentificacion').val();
+        const numero = $('#numeroIdentificacion').val();
+
+        if (!tipo || !numero) {
+            alert('Debes seleccionar tipo y número de identificación');
+            return false;
+        }
+
+        try {
+            const baseUrl = `${api_url}/general/v1/util/validar_identificacion`;
+            const queryParams = new URLSearchParams({
+                codigoTipoIdentificacion: tipo,
+                codigoEmpresa: '1',
+                numeroIdentificacion: numero,
+            });
+
+            const response = await call({
+                method: 'GET',
+                endpoint: `${baseUrl}?${queryParams.toString()}`,
+                bodyType: 'json',
+                showLoader: false,
+            });
+
+            if (response.data?.esIdentificacionValida === true) {
+                validado = true;
+                return true;
+            } else {
+                alert('Identificación no válida');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error al validar', error);
+            alert('Error al validar identificación');
+            return false;
+        }
+    }
+
+    function mostrarCamposAdicionales() {
+        $('#nombre-col, #apellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
+            .removeClass('d-none');
+
+        $('#tipoIdentificacion').prop('disabled', true);
+        $('#numeroIdentificacion').prop('readonly', true);
+
+        $('#btn-add').text('Agregar').attr('disabled', true);
+    }
+
+    function agregarPaciente() {
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
+        let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
+        let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
+        let primerNombre = $('#primerNombre').val().toUpperCase();
+        let primerApellido = $('#primerApellido').val().toUpperCase();
+        let genero = $('#genero option:selected').val();
+        let fechaNacimiento = $('#fechaNacimiento').val();
+        let telefonoMovil = $('#telefonoMovil').val();
+        let email = $('#email').val();
+
+        let dateObj = new Date(fechaNacimiento);
+        let dia = String(dateObj.getDate()).padStart(2, '0');
+        let mes = String(dateObj.getMonth() + 1).padStart(2, '0');
+        let anio = dateObj.getFullYear();
+        let fechaFormateada = `${dia}/${mes}/${anio}`;
+
+        pacientes.push({
+            "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
+            "numeroIdentificacionPcte": numeroIdentificacionPcte,
+            "primerApellido": primerApellido,
+            "primerNombre": primerNombre,
+            "genero": genero,
+            "fechaNacimiento": fechaFormateada,
+            "mail": email,
+            "telefonoMovil": telefonoMovil,
+            "codigoRegion": 1,
+            "codigoCiudad": 1,
+            "codigoPais": 1,
+            "codigoProvincia": 1,
+            "titularDependiente": "T",
+            "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+            "titularOtroContrato": null,
+            "yaEsTitularContrato": null,
+            "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
+            "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
+            "tipoIdentificacionPcte": tipoIdentificacionPcte,
+            "observacionesError": null
+        });
+
+        fillRegistros();
+        $('#addBeneficiaryModal').modal('hide');
     }
 
     async function cargarEstadoCivil() {
