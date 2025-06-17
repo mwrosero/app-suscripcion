@@ -902,6 +902,7 @@ $processId = base64_encode(uniqid());
             let data = JSON.parse($(this).attr('data-rel'));
             let suscripcion = {};
             suscripcion.detallePlan = data;
+            suscripcion.origen = "suscripcion";
             localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
             location.href = '/portal-fidelizacion/verificacion-plan/{{ $processId }}';
         });
@@ -916,7 +917,7 @@ $processId = base64_encode(uniqid());
         const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`; 
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
-            frecuencia: 'ANUAL',
+            frecuencia: 'TODOS',
             lineaNegocio: 'CMV',
             codigoCliente: codigoCliente
         });
