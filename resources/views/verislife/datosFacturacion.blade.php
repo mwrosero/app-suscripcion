@@ -959,8 +959,9 @@ Registro
         if(data.code == 200){
             let elem = ``;
             $.each(data.data, function(key, value){
+                let activeAttribute = (value.codigoTipoCuenta == 1) ? `checked` : ``;
                 elem += `<div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuenta${value.nombreTipoCuenta.toLowerCase()}" value="${value.codigoTipoCuenta}" />
+                        <input ${activeAttribute} class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuenta${value.nombreTipoCuenta.toLowerCase()}" value="${value.codigoTipoCuenta}" />
                         <label class="form-check-label fw-medium" for="tipoCuenta${value.nombreTipoCuenta.toLowerCase()}">Cuenta ${value.nombreTipoCuenta.toLowerCase()}</label>
                     </div>`;
             })

@@ -30,17 +30,16 @@ $processId = base64_encode(uniqid());
         <h5 class="mb-0 mt-2">Home</h5>
     </div>
 
-    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4">
+    <section class="bg-cornflower-blue-400 mb-4 px-3 py-4 section-admin-planes d-none">
         <div class="d-none justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue text-white ps-3 fs-18 mb-0">Planes contratados</h5>
             <a href="#!" class="fw-medium text-white me-1">Ver todos</a>
         </div>
         <div class="row g-3">
-
             <div class="slider-planes-contratados position-relative">
-                <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
-                    <div class="swiper-wrapper" id="planesContratados">
-                        <div class="swiper-slide">
+                <div class="swiper my-swiper pt-3 pb-3" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
+                    <div class="swiper-wrapper" id="planesContratadosAdmin">
+                        {{-- <div class="swiper-slide">
                             <div class="card rounded-4 shadow-sm h-100">
                                 <div class="card-body px-3 py-3">
                                     <div class="text-center border-start-blue-8 mb-3">
@@ -69,7 +68,7 @@ $processId = base64_encode(uniqid());
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
@@ -897,6 +896,7 @@ $processId = base64_encode(uniqid());
 
         renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
         renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+        drawAdminPlanes(planesContratados);
 
         $('body').on('click', '.btn-continuar-registro', function() {
             let data = JSON.parse($(this).attr('data-rel'));
@@ -906,7 +906,59 @@ $processId = base64_encode(uniqid());
             localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
             location.href = '/portal-fidelizacion/verificacion-plan/{{ $processId }}';
         });
+
+        $('body').on('click', '.btn-edit-plan', function() {
+            let data = JSON.parse($(this).attr('data-rel'));
+            let suscripcion = {};
+            suscripcion.detallePlan = data;
+            suscripcion.origen = "edicion";
+            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
+            location.href = '/portal-fidelizacion/registro-plan/{{ $processId }}';
+        });
+
     });
+
+    async function drawAdminPlanes(planes){
+        if(planes.length == 0){
+            return;
+        }
+        $('.section-admin-planes').removeClass('d-none');
+        //section-admin-planes
+        let elem = ``;
+        $.each(planes, function(key, value){
+            elem += `<div class="swiper-slide">
+                        <div class="card rounded-4 shadow-sm h-100">
+                            <div class="card-body px-3 py-3">
+                                <div class="text-center border-start-blue-8 mb-3">
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6 class="text-bay-many-900 mb-0">${value.nombre}</h6>
+                                            <button type="button" class="btn text-grenadier-600 fw-normal p-0 me-2" data-bs-toggle="modal" data-bs-target="#deleteSubscriptionModal"><i class="fa-regular fa-trash-can fs-4"></i></button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="text-start">
+                                                <h2 class="fw-bold text-blue-zodiac-950 mb-0">100</h2>
+                                            </div>
+                                            <div class="text-end">
+                                                <i class="fa-solid fa-users fs-1 text-primary-veris"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex flex-column gap-3 px-3 pt-0">
+                                <a href="#" class="btn btn-blue-veris fs-14p w-100 btn-edit-plan" data-rel='${ JSON.stringify(value) }'>
+                                    Mejora tus beneficios
+                                </a>
+                                <a href="#" class="btn btn-outline-blue-veris fs-14p w-100 btn-edit-plan" data-rel='${ JSON.stringify(value) }'>
+                                    Ver colaboradores
+                                </a>
+                            </div>
+                        </div>
+                    </div>`;
+        })
+        $('#planesContratadosAdmin').html(elem);
+    }
 
     async function obtenerPlanesSuscripcionDetalleEmpresa() {
         if (!api_url || !_application || !_idOrganizacion || !_token) {

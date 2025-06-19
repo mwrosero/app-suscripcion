@@ -565,16 +565,16 @@ Registro
                             <div class="col-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start gap-4 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <span class="input-group-text bg-wild-sand-50 border-end-0 border-0"><i class="ti ti-search"></i></span>
-                                    <input type="text" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" placeholder="Apellidos/identificación" aria-label="Buscar">
+                                    <input type="text" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" id="valorFiltro" placeholder="Apellidos/identificación" aria-label="Buscar">
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 justify-content-end">
+                            <div class="col-12 col-md-6 justify-content-end d-none box-options">
                                 <div class="row g-3 justify-content-end">
                                     <div class="col-12 col-lg-6">
-                                        <select class="form-select form-select-lg fs-14p" id="grupo" name="grupo" required>
+                                        <select class="form-select form-select-lg fs-14p" id="tipoFiltro" name="tipoFiltro" required>
                                             <option value="" selected disabled>Todas las opciones</option>
-                                            <option value="">Opcion 1</option>
-                                            <option value="">Opcion 2</option>
+                                            <option value="identificacion">Identificación</option>
+                                            <option value="nombreAfiliado">Nombre de Afiliado</option>
                                         </select>
                                     </div>
                                     <div class="col-12 col-lg-6">
@@ -588,7 +588,7 @@ Registro
                         <table class="table text-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="align-middle text-center" style="width: 50px;"></th>
+                                    <th class="align-middle text-center item-action" style="width: 50px;"></th>
                                     <th class="text-center">Identificación</th>
                                     <th class="text-center">Nombre y Apellido</th>
                                     <th class="text-center">Teléfono móvil</th>
@@ -681,6 +681,13 @@ Registro
     let pacientes = [];
     
     document.addEventListener('DOMContentLoaded', async () => {
+
+        if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
+            $('.item-action').addClass('d-none')
+        }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
+            $('.box-options').removeClass('d-none')
+            await cargarAfiliados();
+        }
 
         if(detalleSuscripcion.hasOwnProperty('pacientes')){
             pacientes = detalleSuscripcion.pacientes;
@@ -844,6 +851,38 @@ Registro
         await cargarSectores();
     })
 
+    
+    let page = 1;
+    let perPage = 10;
+
+    async function cargarAfiliados(){
+        const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
+
+        const queryParams = new URLSearchParams({
+            codigoEmpresa: 1,
+            codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
+            tipoCredito: 'CREDITO_FIDELIZACION',
+            tipoFiltro: $('#tipoFiltro option:selected').val(),
+            valorFiltro: $('#valorFiltro').val(),
+            page: page,
+            perPage: perPage
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: false,
+        });
+
+        if(response.code == 200){
+            pacientes = response.data.rows;
+            fillRegistros();
+        }
+
+        console.log(response)
+    }
+
     function fillPaciente(paciente){
         $('#uploadedModal').modal('hide');
         $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
@@ -875,18 +914,22 @@ Registro
         $('#btn-continuar').attr('disabled', false);
         $('.box-pagination').removeClass('d-none');
         $.each(pacientes, function(key, value){
-            elem += `<tr id="paciente-${key}">
-                <td class="text-nowrap align-middle text-center">
+            let actionTd = `<td class="text-nowrap align-middle text-center">
                     <div class="form-check d-flex justify-content-center align-items-center me-1">
                         <input class="form-check-input mx-auto" type="checkbox" />
                     </div>
-                </td>
+                </td>`;
+            if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
+                actionTd = ``;
+            }
+            elem += `<tr id="paciente-${key}">
+                ${actionTd}
                 <td class="text-center">${value.numeroIdentificacionPcte}</td>
                 <td class="text-center">${value.primerApellido ?? '' } ${ value.segundoApellido ?? '' } ${ value.primerNombre ?? '' } ${ value.segundoNombre ?? '' }</td>
                 <td class="text-center">${value.telefonoMovil}</td>
-                <td class="text-center">${value.mail}</td>
+                <td class="text-center">${(value.mail) ?? value.correo}</td>
                 <td class="text-center">${value.fechaNacimiento}</td>
-                <td class="text-center"></td>
+                <td class="text-center">${detalleSuscripcion.detallePlan.nombre}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
@@ -942,7 +985,7 @@ Registro
                 method: 'GET',
                 endpoint: `${baseUrl}?${queryParams.toString()}`,
                 bodyType: 'json',
-                showLoader: false,
+                showLoader: true,
             });
 
             if (response.data?.esIdentificacionValida === true) {
