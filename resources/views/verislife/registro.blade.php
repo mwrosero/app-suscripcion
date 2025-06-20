@@ -51,7 +51,7 @@ Registro
                         </div> -->
                         <div class="col-12 col-md-10 d-none" id="fecha-col">
                             <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required>
+                            <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required />
                         </div>
                         <div class="col-12 col-md-10 d-none" id="genero-col">
                             <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
@@ -89,11 +89,11 @@ Registro
                         </div> -->
                         <div class="col-12 col-md-10 d-none" id="email-col">
                             <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico">
+                            <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico"/>
                         </div>
                         <div class="col-12 col-md-10 d-none" id="telefono-col">
                             <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
-                            <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular">
+                            <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular"/>
                         </div>
                         
                     </div>
@@ -578,7 +578,7 @@ Registro
                                         </select>
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        <button type="button" class="btn btn-lg btn-blue-veris fw-medium fs-14p shadow-none w-100" data-bs-toggle="modal" data-bs-target="#improveBeneficiaryModal"><i class="fa-solid fa-rocket me-2"></i> Mejora tus beneficios</button>
+                                        <button type="button" class="btn btn-lg btn-blue-veris fw-medium fs-14p shadow-none w-100 filter-grayscale" disabled data-bs-toggle="modal" data-bs-target="#improveBeneficiaryModal"><i class="fa-solid fa-rocket me-2"></i> Mejora tus beneficios</button>
                                     </div>
                                 </div>
                             </div>
@@ -627,12 +627,10 @@ Registro
                         </table>
                     </div>
                     <div class="row align-items-center py-3 px-3 px-lg-5 fs-9 box-pagination">
-                        <!-- Columna izquierda: info -->
                         <div class="col-6 col-md-5 text-start mb-2 mb-md-0">
                             <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
                         </div>
 
-                        <!-- Columna derecha: paginación centrada -->
                         <div class="col-6 col-md-7 d-flex justify-content-start">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination pagination-sm ms-lg-5 mb-0">
@@ -647,7 +645,7 @@ Registro
                                         </a>
                                     </li>
                                     <li class="page-item"><a class="page-link bg-transparent" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link bg-transparent" href="#">2</a></li>
+                                    <li class="page-item"><span class="page-link border-0">de</span></li>
                                     <li class="page-item"><a class="page-link bg-transparent" href="#">3</a></li>
                                     <li class="page-item">
                                         <a class="page-link bg-transparent" href="#" aria-label="Next">
@@ -694,6 +692,15 @@ Registro
             fillRegistros();
         }
 
+        $('body').on('click', '.btn-pagination-page', function (e) {
+            e.preventDefault();
+            const newPage = parseInt($(this).data('page'));
+            if (!isNaN(newPage) && newPage !== page) {
+                page = newPage;
+                cargarAfiliados();
+            }
+        });
+
         $('body').on('click', '.btn-plantilla', async function(){
             await descargarPlantilla();
         })
@@ -702,6 +709,10 @@ Registro
             let nemonico = $(this).attr('nemonico-rel');
             await cargarDocumento(nemonico);
         })
+
+        $('body').on('change', '#contenido-pacientes .form-check-input', function () {
+            actualizarEstadoBotonesAccion();
+        });
 
         $('body').on('click', '.btn-editar-paciente', async function(){
             let paciente = JSON.parse($(this).attr('data-rel'));
@@ -853,7 +864,7 @@ Registro
 
     
     let page = 1;
-    let perPage = 10;
+    let perPage = 12;
 
     async function cargarAfiliados(){
         const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
@@ -878,6 +889,7 @@ Registro
         if(response.code == 200){
             pacientes = response.data.rows;
             fillRegistros();
+            await drawPaginationAfiliados(response.data, page);
         }
 
         console.log(response)
@@ -943,6 +955,59 @@ Registro
         $('#contenido-pacientes').html(elem)
     }
 
+    async function drawPaginationAfiliados(data, currentPage = 1) {
+        const totalItems = data.totalRows;
+        const totalPages = Math.ceil(totalItems / perPage);
+        const page = Math.max(1, Math.min(currentPage, totalPages));
+        const startItem = ((page - 1) * perPage) + 1;
+        const endItem = Math.min(page * perPage, totalItems);
+
+        $('[data-list-info]').text(`${startItem}-${endItem} de ${totalItems}`);
+
+        let paginationHtml = `
+            <li class="page-item ${page === 1 ? 'disabled' : ''}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="first" data-page="1">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item ${page === 1 ? 'disabled' : ''}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="Previous" data-page="${page - 1}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link bg-transparent disabled" href="#">${page}</a></li>
+            <li class="page-item"><span class="page-link border-0">de</span></li>
+            <li class="page-item"><a class="page-link bg-transparent disabled" href="#">${totalPages}</a></li>
+            <li class="page-item ${page === totalPages ? 'disabled' : ''}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="Next" data-page="${page + 1}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item ${page === totalPages ? 'disabled' : ''}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="last" data-page="${totalPages}">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+        `;
+
+        $('.pagination').html(paginationHtml);
+    }
+
+    function actualizarEstadoBotonesAccion() {
+        const totalSeleccionados = $('#contenido-pacientes .form-check-input:checked').length;
+
+        const btnMejorar = $('[data-bs-target="#improveBeneficiaryModal"]');
+        const botonesAccion = $('#contenido-pacientes .btn-editar-paciente, #contenido-pacientes .btn-eliminar-paciente');
+
+        if (totalSeleccionados > 0) {
+            btnMejorar.removeClass('filter-grayscale').prop('disabled', false);
+            botonesAccion.addClass('filter-grayscale').prop('disabled', true);
+        } else {
+            btnMejorar.addClass('filter-grayscale').prop('disabled', true);
+            botonesAccion.removeClass('filter-grayscale').prop('disabled', false);
+        }
+    }
+
     async function cargarTiposIdentificacion() {
         const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
         const queryParams = new URLSearchParams({
@@ -990,6 +1055,13 @@ Registro
 
             if (response.data?.esIdentificacionValida === true) {
                 validado = true;
+
+                const paciente = await consultarPaciente();
+                mostrarCamposAdicionales();
+                if (paciente) {
+                    llenarCamposPaciente(paciente);
+                }
+
                 return true;
             } else {
                 alert('Identificación no válida');
@@ -1000,6 +1072,58 @@ Registro
             alert('Error al validar identificación');
             return false;
         }
+    }
+
+    async function consultarPaciente() {
+        const tipoIdentificacion = $('#tipoIdentificacion').val();
+        const numeroIdentificacion = $('#numeroIdentificacion').val();
+
+        if (!tipoIdentificacion || !numeroIdentificacion) {
+            alert('Debes seleccionar tipo identificacion y número de identificación');
+            return false;
+        }
+
+        try {
+            const baseUrl = `${api_url}/general/v1/pacientes/consulta_basica`;
+            const queryParams = new URLSearchParams({
+                tipoFiltro: 'numeroIdentificacion',
+                codigoTipoIdentificacion: tipoIdentificacion,
+                valorFiltro: numeroIdentificacion,
+                page: page,
+                perPage: 1,
+            });
+
+            const response = await call({
+                method: 'GET',
+                endpoint: `${baseUrl}?${queryParams.toString()}`,
+                bodyType: 'json',
+                showLoader: true,
+            });
+
+            const paciente = response.data?.rows?.[0];
+            return paciente || null;
+
+        } catch (error) {
+            console.error('Error al consultar datos del paciente', error);
+            alert('Error al obtener datos del paciente');
+            return false;
+        }
+    }
+
+    function llenarCamposPaciente(paciente) {
+        $('#primerNombre').val(paciente.primerNombre || '');
+        $('#primerApellido').val(paciente.primerApellido || '');
+        $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
+        $('#genero').val(paciente.genero || '');
+        $('#email').val(paciente.correoElectronico || '');
+        $('#telefonoMovil').val(paciente.telefonoCelular || '');
+    }
+
+    function formatearFechaInput(fecha) {
+        const partes = fecha.split('/');
+        if (partes.length !== 3) return '';
+        const [dia, mes, anio] = partes;
+        return `${anio}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
     }
 
     function mostrarCamposAdicionales() {

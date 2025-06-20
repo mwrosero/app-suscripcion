@@ -819,6 +819,21 @@ select[readonly] {
     background-color: var(--vris-readonly-100) !important;
     /* cursor: not-allowed; */
 }
+
+.filter-grayscale{
+    filter: grayscale(1);
+    cursor: default;
+}
+.btn.btn-editar-paciente:disabled, 
+.btn.btn-editar-paciente.disabled, 
+fieldset:disabled .btn.btn-editar-paciente,
+.btn.btn-eliminar-paciente:disabled, 
+.btn.btn-eliminar-paciente.disabled, 
+fieldset:disabled .btn.btn-eliminar-paciente{
+    border-color: none;
+    border: none;
+}
+
 .loader {
   width: 50px;
   --b: 8px; 
