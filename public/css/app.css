@@ -366,13 +366,12 @@ h1,
     transition: all 0.3s ease-in-out;
     overflow: hidden;
     position: relative;
-    border: 1px solid transparent;
-    min-height: 350px;
+    min-height: 396px;
 }
 
 .card-hover:hover {
-    border: 2px solid #007bff;
-    cursor: pointer;
+    border: 2px solid #296BEF;
+    /* cursor: pointer; */
 }
 
 .card-body {
@@ -386,45 +385,60 @@ h1,
     padding: 2rem;
 }
 
-.card-hover img.logo-veris {
-    width: 80px;
+.card-hover img {
+    width: 96px;
     transition: transform 0.3s ease-in-out;
     z-index: 2;
 }
 
-.card-hover:hover img.logo-veris {
-    transform: translateY(-100px); /* Subir el logo */
+.card-hover:hover img {
+    transform: translateY(-100px);
 }
 
 .card-info {
     position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    bottom: 0%;
+    left: 0%;
+    transform: translate(0%, 100%);
     opacity: 0;
     transition: all 0.3s ease-in-out;
     text-align: center;
     width: 100%;
+    background-color: var(--vris-cerulean-blue-800);
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
 }
 
 .card-hover:hover .card-info {
     opacity: 1;
-    transform: translate(-50%, 0%);
+    transform: translate(0%, 0%);
 }
 
 .badge-descuento {
-    background-color: #dbe5f7;
-    color: #2c4a9a;
+    background-color: #D4E1FC;
+    color: var(--vris-fiord-700);
     padding: 5px 12px;
     border-radius: 20px;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
 }
+
+/* .card-hover:hover .badge-descuento {
+    opacity: 1;
+    transform: translate(-50%, -320%);
+} */
 
 .info-icon {
     font-size: 1.5rem;
     margin-bottom: 0.3rem;
+    color: var(--vris-white-50);
 }
 
 .info-text {
