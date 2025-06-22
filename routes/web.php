@@ -117,6 +117,10 @@ Route::group(['middleware' => ['loggedUser']], function () {
 
 });
 
+Route::get('/login-veris-care', function () {
+    return view('verislife.b2b2c.login');
+});
+
 Route::get('/selecciona-empresa', function () {
     return view('verislife.b2b2c.selectorEmpresa');
 });

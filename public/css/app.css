@@ -101,6 +101,21 @@ body {
     font-family: "Gotham Rounded", "Gotham Rounded SSm", sans-serif !important;
     color: var(--vris-blue-zodiac-950) !important;
 }
+
+body.login-page {
+    background: 
+        linear-gradient(45deg,
+            rgba(251, 251, 251, 0.99) 0%,
+            rgba(248, 251, 255, 0.35) 45.5%,
+            rgba(255, 255, 255, 0) 100% 
+        ),
+        url('/assets/img/veris/fondo-veris-care.png') no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
 h6,
 .h6,
 h5,
@@ -221,7 +236,7 @@ h1,
 .border-blue-ribbon-600 {
     border: 1px solid var(--vris-blue-ribbon-600) !important;
 }
-.border-aquamarine-blue-300{
+.border-aquamarine-blue-300 {
     border: 1px solid var(--vris-aquamarine-blue-300) !important;
 }
 .btn-blue-veris {
@@ -247,7 +262,7 @@ h1,
     opacity: 0.7;
 }
 
-.btn-robin-egg-blue-400{
+.btn-robin-egg-blue-400 {
     background-color: var(--vris-robin-egg-blue-400) !important;
     color: var(--vris-blue-zodiac-950) !important;
     border: none;
@@ -573,7 +588,6 @@ h1,
     transform: scale(1.05);
 }
 
-
 /* .nav-pills .nav-link {
     transition: all 0.3s ease-in-out;
     background-color: var(--vris-white-50) !important;
@@ -597,7 +611,6 @@ h1,
     box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
     transform: scale(1.05);
 }
-
 
 .layout-navbar-fixed .layout-page::before {
     backdrop-filter: none !important;
@@ -663,7 +676,7 @@ h1,
 .text-grenadier-600 {
     color: var(--vris-grenadier-600) !important;
 }
-.text-robin-egg-blue-400{
+.text-robin-egg-blue-400 {
     color: var(--vris-robin-egg-blue-400) !important;
 }
 .rounded-4 {
