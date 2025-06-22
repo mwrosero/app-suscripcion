@@ -1,4 +1,4 @@
-@extends('template.verisLife.app-template')
+@extends('template.app-template')
 @section('title')
 Veris
 @endsection

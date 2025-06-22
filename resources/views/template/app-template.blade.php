@@ -80,13 +80,13 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-            @include('template.verisLife.sidebar')
+            @include('template.sidebar')
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                @include('template.verisLife.navbar')
+                @include('template.navbar')
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
@@ -96,7 +96,7 @@
                     <!-- / Content -->
 
                     <!-- Footer -->
-                    {{-- @include('template.verisLife.footer') --}}
+                    {{-- @include('template.footer') --}}
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>

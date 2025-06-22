@@ -112,5 +112,14 @@ Route::group(['middleware' => ['loggedUser']], function () {
     })->withoutMiddleware(['guest']);
     Route::get('verislife/carga-dependiente/registro', function () {
         return view('verislife.carga-pendiente.registro');
-    })->withoutMiddleware(['guest']); 
+    })->withoutMiddleware(['guest']);
+
+});
+
+Route::get('/selecciona-empresa', function () {
+    return view('verislife.b2b2c.selectorEmpresa');
+});
+
+Route::get('/centro-medico', function () {
+    return view('verislife.b2b2c.centroMedico');
 });
