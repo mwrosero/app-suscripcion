@@ -30,61 +30,65 @@ VerisLife - Selecciona la empresa
 
                 <div class="row gap-4 justify-content-center">
                     <div class="col-12 col-md-4">
-                        <div class="card shadow-1 rounded-4 card-hover text-center">
-                            <div class="card-body position-relative">
-                                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-lg.svg" class="my-auto" alt="Veris"/>
-                                <div class="card-info pt-5 p-4">
-                                    <div class="badge-descuento">-15% en:</div>
-                                    <div class="row g-0 justify-content-center">
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
+                        <a href="#!" class="text-decoration-none">
+                            <div class="card shadow-1 rounded-4 card-hover text-center">
+                                <div class="card-body position-relative">
+                                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-lg.svg" class="my-auto" alt="Veris"/>
+                                    <div class="card-info pt-5 p-4">
+                                        <div class="badge-descuento">-15% en:</div>
+                                        <div class="row g-0 justify-content-center">
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <div class="card shadow-1 rounded-4 card-hover text-center">
-                            <div class="card-body position-relative">
-                                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-vertical.png" class="my-auto" alt="ParaMí" />
-                                <div class="card-info pt-5 p-4">
-                                    <div class="badge-descuento">-15% en:</div>
-                                    <div class="row g-0 justify-content-center">
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
-                                        </div>
-                                        <div class="col-6 col-md-6">
-                                            <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
-                                            <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
+                        <a href="#" class="text-decoration-none">
+                            <div class="card shadow-1 rounded-4 card-hover text-center">
+                                <div class="card-body position-relative">
+                                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-vertical.png" class="my-auto" alt="ParaMí" />
+                                    <div class="card-info pt-5 p-4">
+                                        <div class="badge-descuento">-15% en:</div>
+                                        <div class="row g-0 justify-content-center">
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
+                                            </div>
+                                            <div class="col-6 col-md-6">
+                                                <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
+                                                <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

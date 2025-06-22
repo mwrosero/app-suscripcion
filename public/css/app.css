@@ -371,7 +371,7 @@ h1,
 
 .card-hover:hover {
     border: 2px solid #296BEF;
-    /* cursor: pointer; */
+    cursor: pointer;
 }
 
 .card-body {
