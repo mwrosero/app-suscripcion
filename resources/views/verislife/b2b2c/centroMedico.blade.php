@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 @section('title')
-VerisLife - Selecciona la empresa
+VerisLife - Centro médico
 @endsection
 
 @section('body-class', 'bg-pattens-blue-100-gradient')
@@ -31,7 +31,7 @@ VerisLife - Selecciona la empresa
                 <div class="row gap-4 justify-content-center">
                     <div class="col-12 col-md-4">
                         <a href="#!" class="text-decoration-none">
-                            <div class="card shadow-1 rounded-4 card-hover text-center">
+                            <div class="card card-medical-center-brand shadow-1 rounded-4 card-hover text-center">
                                 <div class="card-body position-relative">
                                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-lg.svg" class="my-auto" alt="Veris"/>
                                     <div class="card-info pt-5 p-4">
@@ -62,7 +62,7 @@ VerisLife - Selecciona la empresa
 
                     <div class="col-12 col-md-4">
                         <a href="#" class="text-decoration-none">
-                            <div class="card shadow-1 rounded-4 card-hover text-center">
+                            <div class="card card-medical-center-brand shadow-1 rounded-4 card-hover text-center">
                                 <div class="card-body position-relative">
                                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-vertical.png" class="my-auto" alt="ParaMí" />
                                     <div class="card-info pt-5 p-4">

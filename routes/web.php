@@ -107,6 +107,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
         // dd(Session::get('userData'));
         return view('verislife.registro')->with('params', $params);
     })->withoutMiddleware(['guest']); */
+
     Route::get('verislife/carga-dependiente', function () {
         return view('verislife.carga-pendiente.carga-dependiente');
     })->withoutMiddleware(['guest']);
@@ -122,4 +123,12 @@ Route::get('/selecciona-empresa', function () {
 
 Route::get('/centro-medico', function () {
     return view('verislife.b2b2c.centroMedico');
+});
+
+Route::get('/plan-medico-veris', function () {
+   return view('verislife.b2b2c.planes.veris'); 
+});
+
+Route::get('/plan-medico-parami', function () {
+   return view('verislife.b2b2c.planes.parami'); 
 });

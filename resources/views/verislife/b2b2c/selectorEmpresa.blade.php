@@ -9,7 +9,7 @@ VerisLife - Selecciona la empresa
 <div class="container">
     <div class="row justify-content-center align-items-center h-100">
         <div class="col-12 col-lg-6">
-            <div class="row gap-5 justify-content-center align-items-center mb-5">
+            <div class="row g-0 gap-4 justify-content-center align-items-center mb-5">
                 <div class="col-auto">
                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical.svg" width="138" alt="Veris Logo">
                 </div>
@@ -36,7 +36,7 @@ VerisLife - Selecciona la empresa
                         <option value="">Banco Pacífico</option>
                     </select>
                 </div>
-                <div class="col-12 col-xl-7">
+                <div class="col-12 col-xl-7 d-none">
                     <button type="submit" class="btn btn-lg btn-blue-veris w-100">Continuar</button>
                 </div>
             </div>

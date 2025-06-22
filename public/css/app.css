@@ -71,6 +71,15 @@
     --vris-lochmara-400: #53a3dd;
     --vris-lochmara-500: #2c84c6;
     --vris-lochmara-600: #1e6aab;
+    --vris-onahau-50: #eefbfd;
+    --vris-onahau-100: #c5eef6;
+    --vris-onahau-200: #afe6f2;
+    --vris-robin-egg-blue-300: #19b7c1;
+    --vris-robin-egg-blue-400: #25cad2;
+    --vris-robin-egg-blue-500: #19b7c1;
+    --vris-aquamarine-blue-200: #b3ecee;
+    --vris-aquamarine-blue-300: #66d8dd;
+    --vris-aquamarine-blue-400: #42c6ce;
     --vris-aquamarine-200: #b9f9d9;
     --vris-aquamarine-300: #69f0ae;
     --vris-aquamarine-400: #45e397;
@@ -135,6 +144,9 @@ h1,
 .bg-zumthor-50 {
     background-color: var(--vris-zumthor-50) !important;
 }
+.bg-vris-onahau-100 {
+    background-color: var(--vris-onahau-100) !important;
+}
 .bg-cornflower-blue-400 {
     background-color: var(--vris-cornflower-blue-400) !important;
 }
@@ -156,6 +168,9 @@ h1,
 .bg-cerulean-blue-800 {
     background-color: var(--vris-cerulean-blue-800) !important;
 }
+.bg-robin-egg-blue-400 {
+    background-color: var(--vris-robin-egg-blue-400) !important;
+}
 .bg-sail-gradient {
     background: #afdbfc;
     background: linear-gradient(
@@ -169,6 +184,14 @@ h1,
     background: linear-gradient(
         0deg,
         rgba(185, 246, 202, 1) 10%,
+        rgba(235, 246, 254, 1) 85%
+    );
+}
+.bg-onahau-gradient-100 {
+    background: var(--vris-onahau-100);
+    background: linear-gradient(
+        0deg,
+        rgba(197, 238, 246, 1) 10%,
         rgba(235, 246, 254, 1) 85%
     );
 }
@@ -195,6 +218,12 @@ h1,
 .border-perano-300 {
     border: 1px solid var(--vris-perano-300) !important;
 }
+.border-blue-ribbon-600 {
+    border: 1px solid var(--vris-blue-ribbon-600) !important;
+}
+.border-aquamarine-blue-300{
+    border: 1px solid var(--vris-aquamarine-blue-300) !important;
+}
 .btn-blue-veris {
     background-color: var(--vris-blue-ribbon-600) !important;
     color: var(--vris-white-50) !important;
@@ -217,6 +246,30 @@ h1,
     cursor: not-allowed;
     opacity: 0.7;
 }
+
+.btn-robin-egg-blue-400{
+    background-color: var(--vris-robin-egg-blue-400) !important;
+    color: var(--vris-blue-zodiac-950) !important;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-robin-egg-blue-400:hover {
+    background-color: var(--vris-robin-egg-blue-400);
+    color: var(--vris-blue-zodiac-950);
+}
+.btn-robin-egg-blue-400:active {
+    background-color: #1a50db !important;
+    color: var(--vris-blue-zodiac-950) !important;
+    transform: scale(0.98);
+}
+.btn-robin-egg-blue-400:disabled {
+    background-color: #daebff;
+    color: #5da8fd;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 .btn-cerulean-blue-800 {
     background-color: var(--vris-cerulean-blue-800) !important;
     color: var(--vris-white-50) !important;
@@ -370,11 +423,11 @@ h1,
 }
 
 .card-hover:hover {
-    border: 2px solid #296BEF;
+    border: 2px solid #296bef;
     cursor: pointer;
 }
 
-.card-body {
+.card-medical-center-brand .card-body {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -415,7 +468,7 @@ h1,
 }
 
 .badge-descuento {
-    background-color: #D4E1FC;
+    background-color: #d4e1fc;
     color: var(--vris-fiord-700);
     padding: 5px 12px;
     border-radius: 20px;
@@ -519,6 +572,33 @@ h1,
     box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
     transform: scale(1.05);
 }
+
+
+/* .nav-pills .nav-link {
+    transition: all 0.3s ease-in-out;
+    background-color: var(--vris-white-50) !important;
+} */
+
+.nav-pills.nav-pills-parmi .nav-link.active,
+.nav-pills.nav-pills-parmi .nav-link.active:hover,
+.nav-pills.nav-pills-parmi .nav-link.active:focus {
+    background-color: var(--vris-robin-egg-blue-400) !important;
+    color: var(--vris-white-50) !important;
+    font-weight: 500;
+    transform: scale(1.05);
+}
+.nav-tabs .nav-link:not(.active):hover,
+.nav-tabs .nav-link:not(.active):focus,
+.nav-pills.nav-pills-parmi .nav-link:not(.active):hover,
+.nav-pills.nav-pills-parmi .nav-link:not(.active):focus {
+    color: var(--vris-robin-egg-blue-400) !important;
+}
+.nav-pills.nav-pills-parmi .nav-link.active {
+    box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
+    transform: scale(1.05);
+}
+
+
 .layout-navbar-fixed .layout-page::before {
     backdrop-filter: none !important;
     background: none !important;
@@ -582,6 +662,9 @@ h1,
 }
 .text-grenadier-600 {
     color: var(--vris-grenadier-600) !important;
+}
+.text-robin-egg-blue-400{
+    color: var(--vris-robin-egg-blue-400) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;
