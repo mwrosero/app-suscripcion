@@ -438,17 +438,15 @@ Registro
                                                                             <i class="fa-solid fa-circle-info text-havelock-blue-500 fs-1 me-3"></i>
                                                                             <div>
                                                                                 <p class="text-blue-zodiac-950 fw-medium mb-0">Concepto de transferencia:</p>
-                                                                                <p class="fw-normal mb-0">Compra - Opción 1</p>
+                                                                                <p class="fw-normal mb-0 nombrePlanTransferencia"></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-lg-8">
+                                                            <div class="col-12 col-lg-8 d-none">
                                                                 <select class="form-select form-select-lg bg-gray border-0 mb-3">
-                                                                    <option value="1">Banco Internacional</option>
-                                                                    <option value="2">Banco otro 1</option>
-                                                                    <option value="3">Banco otro 2</option>
+                                                                    <option value="2005132890">Banco Produbanco</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-12 col-lg-8">
@@ -456,11 +454,11 @@ Registro
                                                                     <div class="card-body">
                                                                         <div class="text-start mb-3">
                                                                             <h6 class="text-primary-veris mb-0">Veris S.A.</h6>
-                                                                            <h6 class="text-primary-veris mb-0" id="numeroCuenta">1792040531001</h6>
+                                                                            <h6 class="text-primary-veris mb-0" id="numeroCuenta">2005132890</h6>
                                                                         </div>
-                                                                        <h5 class="text-blue-zodiac-950 mb-0" id="tipoBanco">Banco Internacional</h5>
+                                                                        <h5 class="text-blue-zodiac-950 mb-0" id="tipoBanco">Banco Produbanco</h5>
                                                                         <p class="fs-14p text-fiord-700 fw-medium mb-3">Cuenta corriente</p>
-                                                                        <h1 class="text-blue-zodiac-950 fw-bold">1000644814</h1>
+                                                                        <h1 class="text-blue-zodiac-950 fw-bold">2005132890</h1>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -487,7 +485,7 @@ Registro
                                         <div class="card-body px-lg-5">
                                             <h5 class="fw-semibold">Firmar documentos</h5>
                                             <hr>
-                                            <div class="row justify-content-center my-4">
+                                            <div class="row justify-content-center my-4 d-none">
                                                 <div class="col-md-12 col-xl-8">
                                                     <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
                                                         <div class="card-body">
@@ -506,6 +504,20 @@ Registro
                                                 </div>
                                             </div>
                                             <div class="row g-3 justify-content-center">
+                                                <div class="col-md-12 col-xl-8 d-flex justify-content-between align-items-center">
+                                                    Documento 1
+                                                    <button class="bg-transparent"><i class="fa-solid fa-eye me-1"></i>Previsualizar</button>
+                                                </div>
+                                                <div class="col0qw">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="aceptaContrato" name="aceptaContrato" required>
+                                                        <label class="form-check-label fs-10p" for="aceptaContrato">
+                                                            He leido y estoy de acuerdo con los documentos de contratación <span class="text-danger">*</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row g-3 justify-content-center d-none">
                                                 <div class="col-md-12 col-xl-8">
                                                     <label for="nombreEmpresa" class="form-label fs-14p fw-medium">Nombre de la empresa</label>
                                                     <input
@@ -742,7 +754,7 @@ Registro
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
                 <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="${idx+1}">
-                  <span class="d-none d-sm-inline">Continuar</span>
+                  <span class="d-none d-sm-inline">Continuar..</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
         }
@@ -811,6 +823,8 @@ Registro
         @if(!Session::get('infoCliente')->informacionCliente->aplicaCredito)
             $('.box-tiene-credito').remove('d-none');
         @endif
+
+        $('.nombrePlanTransferencia').html(`Compra - ${detalleSuscripcion.detallePlan.nombre}`)
 
         const beneficios = detalleSuscripcion.detallePlan.beneficios;
         const beneficiosHTML = beneficios.map((beneficio, index) => {

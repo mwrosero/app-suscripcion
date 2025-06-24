@@ -970,7 +970,7 @@ $processId = base64_encode(uniqid());
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             frecuencia: 'TODOS',
-            lineaNegocio: 'CMV',
+            //lineaNegocio: 'CMV',
             codigoCliente: codigoCliente
         });
 
