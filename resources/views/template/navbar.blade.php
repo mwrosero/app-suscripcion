@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class="navbar-nav-right d-flex justify-content-end justify-content-md-between align-items-center" id="navbar-collapse">
+    <div class="navbar-nav-right d-flex justify-content-end justify-content-md-between align-items-center ps-3" id="navbar-collapse">
         <div class="d-none d-md-block ">
             {{-- <h5 class="mb-0">Bienvenido 👋🏻 </h5> --}}
             <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->informacionCliente->nombreCliente) }}</span></h5>

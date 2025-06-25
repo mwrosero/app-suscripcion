@@ -21,14 +21,32 @@
         </div>
         @foreach (Session::get('menu') as $value)
             @foreach ($value->opciones as $v)
-                <li class="menu-item @if($loop->first) active @endif">
-                    <a href="/{{ $value->vista }}/{{ $v->vista }}" class="menu-link text-white">
-                        <div class="fs-14" data-i18n="{{ $v->descripcionOpcion }}">{{ $v->descripcionOpcion }}</div>
+                @php
+                    $currentRoute = request()->path();
+                    $expectedRoute = "{$value->vista}/{$v->vista}";
+                    $isActive = $currentRoute === $expectedRoute;
+
+                    $style = $isActive ? 'solid' : 'light';
+                    $iconBase = config('menu_icons.' . $v->vista);
+                    $iconPath = $iconBase ? "/assets/svg/icons/menu/{$iconBase}_{$style}_icon.svg" : null;
+                @endphp
+
+                <li class="menu-item @if($isActive) active @endif">
+                    <a href="/{{ $expectedRoute }}" class="menu-link text-white">
+                        @if ($iconPath)
+                            <div class="svg-container me-3">
+                                <img src="{{ $iconPath }}" width="32"/>
+                            </div>
+                        @endif
+                        <div class="text-one-line fs-14 lh-1 mt-1" data-i18n="{{ $v->descripcionOpcion }}">
+                            {{ $v->descripcionOpcion }}
+                        </div>
                     </a>
                 </li>
             @endforeach
-        </li>
         @endforeach
+
+
         {{-- <li class="menu-item active">
             <a href="/verislife/home" class="menu-link fw-medium text-white">
                 <i class="menu-icon tf-icons ti ti-mail d-none"></i>
