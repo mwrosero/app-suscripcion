@@ -402,7 +402,7 @@ Registro
                                                             </div> --}}
                                                         </div>
                                                         <div class="row g-3 justify-content-center mb-4">
-                                                            <div class="col-md-12 col-xl-8">
+                                                            <div class="col-12 col-lg-8">
                                                                 <label for="nombreBanco" class="form-label fs-14p fw-medium text-blue-zodiac-950">Nombre del banco </label>
                                                                 <select class="form-select form-select-lg fs-14p select2" id="nombreBanco" name="nombreBanco" required readonly disabled>
                                                                 </select>
@@ -454,11 +454,11 @@ Registro
                                                                     <div class="card-body">
                                                                         <div class="text-start mb-3">
                                                                             <h6 class="text-primary-veris mb-0">Veris S.A.</h6>
-                                                                            <h6 class="text-primary-veris mb-0" id="numeroCuenta">2005132890</h6>
+                                                                            <h6 class="text-primary-veris mb-0 d-none" id="numeroCuenta">2005132890</h6>
                                                                         </div>
                                                                         <h5 class="text-blue-zodiac-950 mb-0" id="tipoBanco">Banco Produbanco</h5>
                                                                         <p class="fs-14p text-fiord-700 fw-medium mb-3">Cuenta corriente</p>
-                                                                        <h1 class="text-blue-zodiac-950 fw-bold">2005132890</h1>
+                                                                        <h1 class="text-blue-zodiac-950 fw-bold text-center">2005132890</h1>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -504,9 +504,11 @@ Registro
                                                 </div>
                                             </div>
                                             <div class="row g-3 justify-content-center">
-                                                <div class="col-md-12 col-xl-8 d-flex justify-content-between align-items-center">
+                                                <div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
                                                     Documento 1
-                                                    <button class="bg-transparent"><i class="fa-solid fa-eye me-1"></i>Previsualizar</button>
+                                                    <button class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal">
+                                                        <i class="fa-solid fa-eye me-1"></i>Previsualizar
+                                                    </button>
                                                 </div>
                                                 <div class="col0qw">
                                                     <div class="form-check">
@@ -699,6 +701,7 @@ Registro
     const total = steps.length;
 
     function disableAllTriggers() {
+        console.log('disableAllTriggers')
         steps.forEach(step => {
             const btn = step.querySelector('.step-trigger');
             btn.setAttribute('disabled', '');
@@ -706,11 +709,13 @@ Registro
     }
 
     function enableTrigger(idx) {
+        console.log('enableTrigger')
         const btn = steps[idx].querySelector('.step-trigger');
         btn.removeAttribute('disabled');
     }
 
     function updateCircles(idx) {
+        console.log('updateCircles')
         steps.forEach((step, i) => {
             const circle = step.querySelector('.bs-stepper-circle');
             if (i < idx) {
@@ -722,6 +727,7 @@ Registro
     }
 
     function showContent(targetId) {
+        console.log('showContent')
         document.querySelectorAll('.bs-stepper-content .content')
             .forEach(el => el.classList.add('d-none'));
         document.getElementById(targetId).classList.remove('d-none');
@@ -747,6 +753,16 @@ Registro
                   <span class="d-none d-sm-inline">Volver al inicio</span>
                 </a>
               `;
+        } else if(idx === 1) {
+            actions.innerHTML = `
+                <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
+                  <i class="fa-solid fa-chevron-left me-2"></i>
+                  <span class="d-none d-sm-inline">Regresar</span>
+                </button>
+                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="${idx+1}">
+                  <span class="d-none d-sm-inline">Continuar</span>
+                  <i class="fa-solid fa-chevron-right ms-2"></i>
+                </button>`;
         } else {
             actions.innerHTML = `
                 <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
@@ -754,18 +770,19 @@ Registro
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
                 <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="${idx+1}">
-                  <span class="d-none d-sm-inline">Continuar..</span>
+                  <span class="d-none d-sm-inline">Firmar contratos</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
         }
         if(total == 4){
-            validateFields();
+            validateFields(); 
         }
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev && idx > 0 && idx < total - 1) btnPrev.addEventListener('click', () => stepper.previous());
         if (btnNext && idx < total - 1) btnNext.addEventListener('click', async () => {
-            stepper.next();
+            let couldNext = true;
+            //stepper.next();
             console.log('Siguiente paso activado');
             let step = $('#btn-next').attr('step-rel');
             let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
@@ -791,7 +808,14 @@ Registro
                 $('.metodo-pago').html($('.nav-metodo-pago button.active').attr('descripcion-rel').toLowerCase());
                 $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
                 $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
+                couldNext = true;//validar
                 await crearSuscripcion();
+            }
+
+            if(couldNext){
+                stepper.next();
+            }else{
+                alert("Error")
             }
             localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
         });
@@ -943,7 +967,7 @@ Registro
             let numeroCuenta = $('#numeroCuenta').val();
             let nombreTitular = $('#nombreTitular').val();
             let autorizacionCobro = $('#autorizacionCobro').is(':checked')
-            if(nombreBanco !== '' && frecuenciaPago.length > 4 && numeroCuenta.length > 6 && nombreTitular && autorizacionCobro){
+            if(nombreBanco !== '' && frecuenciaPago.length > 4 && numeroCuenta.length > 4 && nombreTitular && autorizacionCobro){
                 $('#btn-next').attr('disabled', false);
             }else{
                 $('#btn-next').attr('disabled', true);
@@ -951,10 +975,9 @@ Registro
         }
 
         if(step == 3){
-            let titular = $('#titular').val();
-            let emailContacto = $('#emailContacto').val();
+            let aceptaContrato = $('#aceptaContrato').is(':checked')
             
-            if(titular.length > 4 && emailContacto.length > 4){
+            if(aceptaContrato){
                 $('#btn-next').attr('disabled', false);
             }else{
                 $('#btn-next').attr('disabled', true);
