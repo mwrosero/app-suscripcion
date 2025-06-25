@@ -937,7 +937,7 @@ $processId = base64_encode(uniqid());
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <div class="text-start">
-                                                <h2 class="fw-bold text-blue-zodiac-950 mb-0">100</h2>
+                                                <h2 class="fw-bold text-blue-zodiac-950 mb-0">${value.cantidadAfiliados}</h2>
                                             </div>
                                             <div class="text-end">
                                                 <i class="fa-solid fa-users fs-1 text-primary-veris"></i>

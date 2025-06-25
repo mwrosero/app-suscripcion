@@ -910,9 +910,11 @@ Registro
         });
 
         if(response.code == 200){
-            pacientes = response.data.rows;
-            fillRegistros();
-            await drawPaginationAfiliados(response.data, page);
+            if(response.data !== null){
+                pacientes = response.data.rows;
+                fillRegistros();
+                await drawPaginationAfiliados(response.data, page);
+            }
         }
 
         console.log(response)
