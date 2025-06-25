@@ -802,8 +802,8 @@ Registro
                     "direccion": direccionFactura
                 }
             }
-
-            if(step === undefined){
+            console.log("STEEEEP: "+step)
+            if(step == 3){
                 $('.colaboradores-registrados').html(detalleSuscripcion.pacientes.length);
                 $('.metodo-pago').html($('.nav-metodo-pago button.active').attr('descripcion-rel').toLowerCase());
                 $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
