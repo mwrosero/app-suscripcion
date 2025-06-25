@@ -775,7 +775,7 @@ Registro
                 </button>`;
         }
         if(total == 4){
-            validateFields();
+            validateFields(); 
         }
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
