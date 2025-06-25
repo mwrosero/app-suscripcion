@@ -1153,10 +1153,10 @@ Registro
             "datosFirmaDocumentos": {
                 "nombreEmpresa": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
                 "codigoTipoIdentificacion": 3,//cambiar
-                "numeroIdentificacion": $('#ruc').val(),
-                "representanteLegal": $('#titular').val(),
-                "telefono": $('#telefono').val(),
-                "email": $('#emailContacto').val(),
+                "numeroIdentificacion": "0923796304",//$('#ruc').val(),
+                "representanteLegal": "Michael Rosero",//$('#titular').val(),
+                "telefono": "0988302580",//$('#telefono').val(),
+                "email": "mwrosero@gmail.com",//$('#emailContacto').val(),
                 "direccion": "Mi casa"
             },
             "datosFacturacion": {
