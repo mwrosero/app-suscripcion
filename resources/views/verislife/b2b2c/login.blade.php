@@ -14,7 +14,7 @@
         
         <div class="row g-3 g-xl-5 gap-4 flex-column justify-content-start">
             <div class="col-12">
-                 <img src="{{ asset('assets/img/veris/titular.png') }}" alt="Sé parte de Veris Care" class="img-fluid" />
+                 <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid" />
             </div>
             <div class="col-12">
                 <form action="#!" method="POST" class="row g-3 justify-content-start align-items-end">

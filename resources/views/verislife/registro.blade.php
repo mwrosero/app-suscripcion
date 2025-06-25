@@ -29,6 +29,7 @@ Registro
                                 <option value="" selected disabled>Selecciona el tipo de identificación</option>
                             </select>
                         </div>
+                        <input type="hidden" id="idPersonaRegistro">
                         <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
@@ -716,6 +717,8 @@ Registro
 
         $('body').on('click', '.btn-editar-paciente', async function(){
             let paciente = JSON.parse($(this).attr('data-rel'));
+            validado = true;
+            mostrarCamposAdicionales();
             await fillPaciente(paciente);
         })
 
@@ -745,7 +748,19 @@ Registro
                 if (!fueValidado) return;
                 mostrarCamposAdicionales();
             } else {
-                agregarPaciente();
+                let idPersonaRegistro = $('#idPersonaRegistro').val();
+                if(idPersonaRegistro === ""){
+                    agregarPaciente();
+                }else{
+                    /*
+                    Buscar el index de pacientes donde tipoIdentificacio y numeroIdentificacion
+                    pacientes[indexBusqueda].nombre = S('#primerNombre').val()
+                    */
+                    console.log("Actualizar")
+                    fillRegistros();
+                    $('#addBeneficiaryModal').modal('hide');
+                }
+                //agregarPaciente();
             }
         });
 
@@ -856,6 +871,10 @@ Registro
             $('#terms').prop('checked', false);
         });
 
+        $('#addBeneficiaryModal').on('hidden.bs.modal', function () {
+            $('#idPersonaRegistro').val('');
+        })
+
         await cargarTiposIdentificacion();
         await cargarEstadoCivil();
         await cargarTiposParentesco();
@@ -904,6 +923,8 @@ Registro
         $('#primerApellido').val(paciente.primerApellido)
         $('#segundoApellido').val(paciente.segundoApellido)
         $('#genero').val(paciente.genero)
+
+        $('#idPersonaRegistro').val(paciente.numeroIdentificacionPcte);
 
         var partes = paciente.fechaNacimiento.split("/"); // ["09", "06", "2025"]
         var fechaFormateada = partes[2] + "-" + partes[1] + "-" + partes[0]; // "2025-06-09"
