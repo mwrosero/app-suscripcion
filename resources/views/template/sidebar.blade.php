@@ -1,5 +1,5 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme-veris-life shadow-none">
-    <div class="app-brand demo">
+    {{-- <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo d-none">
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-white.svg" alt="">
@@ -10,13 +10,14 @@
             <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
             <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
         </a>
-    </div>
+    </div> --}}
 
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <div class="text-center mx-auto mb-4">
-            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-white.svg" alt="veris">
+        <div class="text-start mx-auto my-3 px-4 w-100">
+            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-white.svg" alt="veris" class="d-none">
+            <h2 class="fw-bold text-white text-start">Menú</h2>
         </div>
         @foreach (Session::get('menu') as $value)
             @foreach ($value->opciones as $v)
