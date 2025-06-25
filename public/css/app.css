@@ -134,16 +134,22 @@ h1,
     height: 65% !important;
 }
 .bg-menu-theme-veris-life {
-    background-color: var(--vris-bay-many-900);
+    background-color: var(--vris-blue-zodiac-950);
     color: var(--vris-white-50) !important;
 }
-.bg-menu-theme-veris-life.menu-vertical
+.bg-menu-theme-veris-life.menu-vertical .menu-item.active {
+  background: var(--vris-blue-ribbon-600);
+  color: var(--vris-white-50) !important;
+  font-weight: 500;
+}
+
+/* .bg-menu-theme-veris-life.menu-vertical
     .menu-item.active
     > .menu-link:not(.menu-toggle) {
     background: var(--vris-white-50);
     box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, 0.48);
     color: var(--vris-blue-zodiac-950) !important;
-}
+} */
 .bg-athens-gray {
     background-color: var(--vris-athens-gray-50) !important;
 }

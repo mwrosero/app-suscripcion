@@ -21,7 +21,7 @@
         @foreach (Session::get('menu') as $value)
             @foreach ($value->opciones as $v)
                 <li class="menu-item @if($loop->first) active @endif">
-                    <a href="/{{ $value->vista }}/{{ $v->vista }}" class="menu-link fw-medium text-white">
+                    <a href="/{{ $value->vista }}/{{ $v->vista }}" class="menu-link text-white">
                         <div class="fs-14" data-i18n="{{ $v->descripcionOpcion }}">{{ $v->descripcionOpcion }}</div>
                     </a>
                 </li>
