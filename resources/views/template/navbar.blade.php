@@ -169,7 +169,7 @@
                     data-bs-auto-close="outside"
                     aria-expanded="false">
                     <i class="fa-solid fa-bell ti-sm text-primary-veris"></i>
-                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+                    <span class="badge bg-danger rounded-pill badge-notifications d-none">5</span>
                 </a>
                 <!-- <ul class="dropdown-menu dropdown-menu-end py-0">
                     <li class="dropdown-menu-header border-bottom">
@@ -367,7 +367,7 @@
                     <div class="avatar avatar-online">
                         <img src="../../images/avatars/user_profile.png" alt class="h-auto rounded-circle" />
                     </div>
-                    <span class="fw-bold text-dark">{{ strtolower(Session::get('userData')->codigoUsuario) }}</span>
+                    <span class="fw-medium text-dark">{{ strtolower(Session::get('userData')->codigoUsuario) }}</span>
                     <i class="fa-solid fa-chevron-down fs-6 text-dark"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

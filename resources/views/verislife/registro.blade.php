@@ -139,7 +139,7 @@ Registro
                     <hr>
                     <div class="modal-footer justify-content-center border-0 p-0">
                         <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-cerulean-blue-800" id="btn-add">Validar</button>
+                        <button type="button" class="btn btn-cerulean-blue-800" id="btn-add">Validar</button>
                     </div>
                 </div>
             </div>
@@ -720,6 +720,7 @@ Registro
             validado = true;
             mostrarCamposAdicionales();
             await fillPaciente(paciente);
+            $('#btn-add').text('Actualizar').attr('disabled', false);
         })
 
         $('body').on('click', '.btn-eliminar-paciente', async function(){
@@ -747,20 +748,18 @@ Registro
                 const fueValidado = await validarIdentidad();
                 if (!fueValidado) return;
                 mostrarCamposAdicionales();
+                $('#btn-add').text('Agregar').attr('disabled', true);
             } else {
                 let idPersonaRegistro = $('#idPersonaRegistro').val();
                 if(idPersonaRegistro === ""){
                     agregarPaciente();
                 }else{
-                    /*
-                    Buscar el index de pacientes donde tipoIdentificacio y numeroIdentificacion
-                    pacientes[indexBusqueda].nombre = S('#primerNombre').val()
-                    */
-                    console.log("Actualizar")
+                    // console.log("Actualizar");
+                    // console.log(idPersonaRegistro);
+                    actualizarPaciente(idPersonaRegistro);
                     fillRegistros();
                     $('#addBeneficiaryModal').modal('hide');
                 }
-                //agregarPaciente();
             }
         });
 
@@ -872,7 +871,12 @@ Registro
         });
 
         $('#addBeneficiaryModal').on('hidden.bs.modal', function () {
+            $('#addBeneficiaryForm input, #addBeneficiaryForm select').val('');
+            $('#tipoIdentificacion').prop('disabled', false);
+            $('#numeroIdentificacion').prop('readonly', false);
             $('#idPersonaRegistro').val('');
+
+            validado = false;
         })
 
         await cargarTiposIdentificacion();
@@ -1153,8 +1157,6 @@ Registro
 
         $('#tipoIdentificacion').prop('disabled', true);
         $('#numeroIdentificacion').prop('readonly', true);
-
-        $('#btn-add').text('Agregar').attr('disabled', true);
     }
 
     function agregarPaciente() {
@@ -1173,6 +1175,16 @@ Registro
         let mes = String(dateObj.getMonth() + 1).padStart(2, '0');
         let anio = dateObj.getFullYear();
         let fechaFormateada = `${dia}/${mes}/${anio}`;
+
+        const pacienteRegistrado = pacientes.some(paciente => 
+            paciente.codigoTipoIdentificacionPcte === codigoTipoIdentificacionPcte && 
+            paciente.numeroIdentificacionPcte === numeroIdentificacionPcte
+        );
+
+        if (pacienteRegistrado) {
+            alert('Este paciente ya ha sido agregado.');
+            return;
+        }
 
         pacientes.push({
             "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
@@ -1200,6 +1212,51 @@ Registro
         fillRegistros();
         $('#addBeneficiaryModal').modal('hide');
     }
+
+    function actualizarPaciente(id) {
+        const index = pacientes.findIndex(p => p.numeroIdentificacionPcte === id);
+        if (index === -1) return;
+
+        let primerNombre = $('#primerNombre').val().toUpperCase();
+        // let segundoNombre = $('#segundoNombre').val().toUpperCase();
+        let primerApellido = $('#primerApellido').val().toUpperCase();
+        // let segundoApellido = $('#segundoApellido').val().toUpperCase();
+        let genero = $('#genero').val();
+        let fechaNacimiento = $('#fechaNacimiento').val();
+        // let estadoCivil = $('#estadoCivil').val();
+        // let direccion = $('#direccion').val();
+        // let sector = $('#sector').val();
+        // let numeroContrato = $('#numeroContratoAfiliado').val();
+        // let parentesco = $('#parentesco').val();
+        // let telefonoFijo = $('#telefonoFijo').val();
+        let telefonoMovil = $('#telefonoMovil').val();
+        let email = $('#email').val();
+
+        let dateObj = new Date(fechaNacimiento);
+        let dia = String(dateObj.getDate()).padStart(2, '0');
+        let mes = String(dateObj.getMonth() + 1).padStart(2, '0');
+        let anio = dateObj.getFullYear();
+        let fechaFormateada = `${dia}/${mes}/${anio}`;
+
+        pacientes[index] = {
+            ...pacientes[index], // mantiene campos como identificación, etc.
+            primerNombre,
+            // segundoNombre,
+            primerApellido,
+            // segundoApellido,
+            genero,
+            fechaNacimiento: fechaFormateada,
+            // codigoEstadoCivil: estadoCivil,
+            // direccion,
+            // codigoSector: sector,
+            // numeroContrato,
+            // codigoTipoParentesco: parentesco,
+            // telefonoFijo,
+            telefonoMovil,
+            mail: email
+        };
+    }
+
 
     async function cargarEstadoCivil() {
         const baseUrl = `${api_url}/general/v1/estado_civil`;
