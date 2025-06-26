@@ -1022,7 +1022,7 @@ $processId = base64_encode(uniqid());
                                 <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
                             </div>
                             <div class="price-block text-start">
-                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-6">/${plan.tipo}</small></h5>
+                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-14p">/${plan.tipo}</small></h5>
                                 <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
                             </div>
                         </div>

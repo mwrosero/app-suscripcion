@@ -1312,7 +1312,7 @@ Registro
                         </div>
                         <div class="my-1">
                             <h2 class="fw-bold text-blue-zodiac-950 m-0">
-                                $${parseFloat(value.valorFinal).toFixed(2)} <small class="fw-medium fs-5">/${value.tipo.toLowerCase()}</small>
+                                $${parseFloat(value.valorFinal).toFixed(2)} <small class="fw-medium fs-14p">/${value.tipo.toLowerCase()}</small>
                             </h2>
                             <small class="text-muted text-decoration-line-through text-xs">
                                 PVP: $${parseFloat(value.precio).toFixed(2)}
