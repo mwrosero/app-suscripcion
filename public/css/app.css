@@ -720,6 +720,11 @@ h1,
     box-shadow: none;
     position: relative;
 }
+.progress-circle.progress-circle-lg {
+    width: 98px;
+    height: 98px;
+}
+
 .progress-circle > span {
     width: 50%;
     height: 100%;

@@ -169,7 +169,105 @@ Registro
     </div>
 </div>
 
-<div class="flex-grow-1 container-p-y">
+<div class="modal fade" id="documentoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="documentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-simple modal-dialog-centered">
+        <div class="modal-content p-3 py-md-4 px-md-4">
+            <div class="modal-body p-0">
+                <div id="addBeneficiaryForm" class="pt-3">
+                    <h5 class="fw-semibold text-center">Documento 1</h5>
+                    <div class="text-center my-3" id="content-file">
+                        <iframe src="/assets/file/documento.pdf" width="100%" height="500px" style="border: none;"></iframe>
+                    </div>
+                    <div class="modal-footer justify-content-center border-0 p-0">
+                        <button type="button" class="btn btn-cerulean-blue-800" data-bs-dismiss="modal">Cerrar preview</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de Código de Verificación -->
+<div class="modal fade" id="verificationCodeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="verificationCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-body text-center p-4">
+
+                <h3 class="modal-title fw-semibold text-primary-veris mb-3" id="verificationCodeModalLabel">Código de verificación</h3>
+
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/enter-otp.svg" alt="Código de verificación" class="img-fluid mb-4" style="max-height: 256px;">
+
+                <p class="mb-2 fw-semibold fs-6">Ingresa el código de verificación que ha sido enviado por SMS al número:</p>
+                <p class="text-primary-veris fw-semibold fs-6">0999999999</p>
+
+                <div class="d-flex justify-content-center gap-2 mb-3">
+                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
+                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
+                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
+                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                </div>
+
+                <p class="fw-semibold fs-6 mb-3">
+                    ¿Recibiste el código?
+                    <a href="#" class="text-decoration-none text-primary-veris fw-semibold">Reenviar código</a>
+                </p>
+
+                <button type="button" class="btn btn-cerulean-blue-800 w-100 mb-2" disabled>Verificar código</button>
+                <button type="button" class="btn btn-outline-cerulean-blue-800 w-100" data-bs-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Firmado documento -->
+<div class="modal fade" id="signedDocumentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signedDocumentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-body text-center p-4">
+
+                <h3 class="modal-title fw-semibold text-primary-veris mb-3" id="signedDocumentModalLabel">Firmando documentos</h3>
+
+                <div class="progress-circle progress-circle-lg my-auto ms-auto" data-percentage="10">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">
+                        <div>
+                            <span><i class="bi bi-hourglass-split fw-medium text-success fs-4"></i></span>
+                            <p class="text-success fw-bold fs-2 mt-3 mb-0">30</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="fw-semibold fs-5 my-4">
+                    ¡Este proceso puede tardar hasta 30 segundos!
+                </p>
+
+                <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Firma exitisa -->
+<div class="modal fade" id="successSignatureModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successSignatureModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-3">
+                <h2 class="text-primary-veris fw-bold">Firma exitosa</h2>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" class="mb-3"/>
+                <h5 class="text-blue-zodiac-950 fw-bold">Tus documentos han sido firmados con éxito</h5>
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="button" class="btn btn-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex-grow-1 container-p-y"> 
     <section class="mb-4 p-3">
         <div class="row justify-content-center">
             <div class="col-12 mb-4">
@@ -506,7 +604,7 @@ Registro
                                             <div class="row g-3 justify-content-center">
                                                 <div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
                                                     Documento 1
-                                                    <button class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal">
+                                                    <button class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal" data-bs-toggle="modal" data-bs-target="#documentoModal">
                                                         <i class="fa-solid fa-eye me-1"></i>Previsualizar
                                                     </button>
                                                 </div>
@@ -769,7 +867,7 @@ Registro
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
-                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="${idx+1}">
+                <button id="btn-next" class="btn btn-cerulean-blue-800" data-bs-toggle="modal" data-bs-target="#verificationCodeModal" disabled step-rel="${idx+1}">
                   <span class="d-none d-sm-inline">Firmar contratos</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;

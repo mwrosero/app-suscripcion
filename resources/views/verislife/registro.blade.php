@@ -1299,7 +1299,7 @@ Registro
 
             slide.innerHTML = `
                 <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
-                    <img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${value.lineaNegocio}">
+                    <img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${value.lineaNegocio}" width="128">
                     <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
                         ${value.nombre}
                     </h5>
