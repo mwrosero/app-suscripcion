@@ -1,8 +1,8 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme-veris-life shadow-none">
-    {{-- <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
-            <span class="app-brand-logo demo d-none">
-                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-white.svg" alt="">
+    <div class="app-brand demo">
+        <a href="/" class="app-brand-link text-white">
+            <span class="app-brand-text demo menu-text fw-bold">
+                Menú
             </span>
         </a>
 
@@ -10,12 +10,12 @@
             <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
             <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
         </a>
-    </div> --}}
+    </div>
 
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <div class="text-start mx-auto my-3 px-4 w-100">
+        <div class="text-start mx-auto my-3 px-4 w-100 d-none">
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-white.svg" alt="veris" class="d-none">
             <h2 class="fw-bold text-white text-start">Menú</h2>
         </div>
@@ -38,7 +38,7 @@
                                 <img src="{{ $iconPath }}" width="32"/>
                             </div>
                         @endif
-                        <div class="text-one-line fs-14 lh-1 mt-1" data-i18n="{{ $v->descripcionOpcion }}">
+                        <div class="text-one-line fs-14p lh-1 mt-1" data-i18n="{{ $v->descripcionOpcion }}">
                             {{ $v->descripcionOpcion }}
                         </div>
                     </a>

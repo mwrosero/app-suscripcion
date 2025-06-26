@@ -493,7 +493,6 @@ Registro
                         <div class="col-6 col-md-5 text-start mb-2 mb-md-0">
                             <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
                         </div>
-
                         <div class="col-6 col-md-7 d-flex justify-content-start">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination pagination-sm ms-lg-5 mb-0">
@@ -543,7 +542,9 @@ Registro
     let finalFile = null;
     let validado = false;
     let pacientes = [];
-    
+    let page = 1;
+    let perPage = 12;
+
     document.addEventListener('DOMContentLoaded', async () => {
 
         if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
@@ -708,10 +709,6 @@ Registro
         await cargarSectores();
     })
 
-    
-    let page = 1;
-    let perPage = 12;
-
     async function cargarAfiliados(){
         const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
 
@@ -732,19 +729,21 @@ Registro
             showLoader: false,
         });
 
-        if(response.code == 200){
-            if(response.data !== null){
-                pacientes = response.data.rows;
-                fillRegistros();
-                await drawPaginationAfiliados(response.data, page);
-            }
+        if(response.code == 200 && response.data && Array.isArray(response.data.rows) && response.data.rows.length > 0){
+            pacientes = response.data.rows;
+            fillRegistros();
+            await drawPaginationAfiliados(response.data, page);
+        } else {
+            $('[data-list-info]').text(`0-0 de 011`);
+            $('.pagination').empty();
+            $('.box-pagination').addClass('d-none');  
         }
 
         console.log(response)
     }
 
     function fillPaciente(paciente){
-        $('#uploadedModal').modal('hide');
+        // $('#uploadedModal').modal('hide');
         $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
         $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
         $('#primerNombre').val(paciente.primerNombre)
@@ -767,11 +766,9 @@ Registro
         $('#telefonoFijo').val(paciente.telefonoFijo)
         $('#telefonoMovil').val(paciente.telefonoMovil)
         $('#email').val(paciente.mail)
-
     }
 
     function fillRegistros(){
-        //Validar si esta vacio
         let elem = ``;
         $('#empty-space').remove();
         $('#btn-continuar').attr('disabled', false);
