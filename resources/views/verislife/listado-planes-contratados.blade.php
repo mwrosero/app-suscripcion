@@ -83,7 +83,7 @@ $processId = base64_encode(uniqid());
 
         </div>
     </section>
-    <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
+    <section class="bg-pattens-blue-100 mb-4 px-3 py-4 d-none" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
             <a href="#!" class="fw-medium me-1">Ver todos</a>
@@ -895,7 +895,7 @@ $processId = base64_encode(uniqid());
         const planesPendientes = planes.filter(plan => !plan.contratado);
 
         renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
-        renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+        //renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
         drawAdminPlanes(planesContratados);
 
         $('body').on('click', '.btn-continuar-registro', function() {
@@ -1026,7 +1026,7 @@ $processId = base64_encode(uniqid());
                                 <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
                             </div>
                         </div>
-                        <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100 btn-edit-plan">Ver detalle</button>
+                        <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100">Ver detalle</button>
                     </div>
                 </div>` :
                 `
