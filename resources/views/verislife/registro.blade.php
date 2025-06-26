@@ -253,23 +253,27 @@ Registro
             <div class="modal-body p-0">
                 <h5 class="fw-semibold text-center">Opción en la que estás registrado</h5>
                 <div class="row justify-content-center mb-3">
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-perano-300 border-2 shadow-none">
                             <div class="card-body p-3">
-                                <h5>Esencial</h5>
+                                <h5 class="fw-semibodl" id="nombrePlanActual">Esencial</h5>
                                 <div class="mt-1">
-                                    <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 36%</span>
+                                    <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" id="descuentoPlanaAtual" style="font-size: 0.625rem;">AHORRA 36%</span>
                                 </div>
                                 <div class="my-1">
-                                    <h5 class="fw-semibold text-blue-zodiac-950 m-0">$90,00 <small class="fw-normal fs-12p">/anual</small></h5>
-                                    <small class="text-muted text-decoration-line-through text-xs">PVP: $140</small>
+                                    <h5 class="fw-semibold text-blue-zodiac-950 m-0" >
+                                        $<span id="precioFinalPlanActual">90,00</span>
+                                        <small class="fw-normal fs-12p">/anual</small>
+                                    </h5>
+                                    <small class="text-muted text-decoration-line-through text-xs">
+                                        PVP: $<span id="precioPlanActual">140</span>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <h5 class="fw-semibold text-center">Descubre más beneficios</h5>
-                
                 <div class="row justify-content-center">
                     <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto px-2 p-1 rounded-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -283,7 +287,7 @@ Registro
                         <div class="tab-pane fade show active" id="pills-anual-veris" role="tabpanel" aria-labelledby="pills-anual-veris-tab" tabindex="0">
                             <div class="row g-3">
                                 <div class="slider-anual position-relative">
-                                    <div class="swiper my-swiper" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
+                                    <div class="swiper my-swiper pb-4" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                                         <div class="swiper-wrapper" id="planesVerisAnual">
 
                                             <div class="swiper-slide">
@@ -404,12 +408,15 @@ Registro
                                     <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-pagination position-absolute bottom-0"></div>
                                 </div>
+                                <div class="content-message text-center d-none" id="empty-space-planes-anual">
+                                    <h4 class="text-primary-veris">No hay planes disponibles en esta categoría.</h4>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-mensual-veris" role="tabpanel" aria-labelledby="pills-mensual-veris-tab" tabindex="0">
                             <div class="row g-3">
                                 <div class="slider-mensual position-relative">
-                                    <div class="swiper my-swiper" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
+                                    <div class="swiper my-swiper pb-4" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                                         <div class="swiper-wrapper" id="planesVerisMensual">
 
                                             <div class="swiper-slide">
@@ -529,6 +536,9 @@ Registro
                                     <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-pagination position-absolute bottom-0"></div>
+                                </div>
+                                <div class="content-message text-center d-none" id="empty-space-planes-mensual">
+                                    <h4 class="text-primary-veris">No hay planes disponibles en esta categoría.</h4>
                                 </div>
                             </div>
                         </div>
@@ -878,6 +888,40 @@ Registro
 
             validado = false;
         })
+
+        improveBeneficiaryModal.addEventListener('show.bs.modal', async () => {
+            if (!detalleSuscripcion || !detalleSuscripcion.detallePlan) return;
+
+            const planActual = detalleSuscripcion.detallePlan;
+            const descuento = planActual.porcentajeDescuento ?? 0;
+            const tipo = planActual.tipo?.toLowerCase() === 'anual' ? '/anual' : `/${planActual.tipo?.toLowerCase()}`;
+            
+            document.getElementById('nombrePlanActual').textContent = planActual.nombre ?? '---';
+            document.getElementById('descuentoPlanaAtual').textContent = `AHORRA ${descuento}%`;
+            document.querySelector('#precioFinalPlanActual').textContent = parseFloat(planActual.valorFinal).toFixed(2);
+            document.querySelector('#precioPlanActual').textContent = parseFloat(planActual.precio).toFixed(2);
+            document.querySelector('#precioFinalPlanActual').closest('h5').querySelector('small').textContent = tipo;
+
+            const planes = await obtenerTodosLosPlanes(planActual);
+            if (!planes) return;
+
+            const planesAnuales = planes.filter(p =>
+                p.tipo === 'ANUAL' &&
+                p.codigoConvenio !== planActual.codigoConvenio &&
+                p.valorFinal > planActual.valorFinal
+            );
+
+            const planesMensuales = planes.filter(p =>
+                p.tipo === 'MENSUAL' &&
+                p.codigoConvenio !== planActual.codigoConvenio &&
+                p.valorFinal > planActual.valorFinal
+            );
+
+            renderPlanesEnSwiper(planesAnuales, 'planesVerisAnual');
+            renderPlanesEnSwiper(planesMensuales, 'planesVerisMensual');
+
+        });
+
 
         await cargarTiposIdentificacion();
         await cargarEstadoCivil();
@@ -1257,7 +1301,6 @@ Registro
         };
     }
 
-
     async function cargarEstadoCivil() {
         const baseUrl = `${api_url}/general/v1/estado_civil`;
         const queryParams = new URLSearchParams({
@@ -1410,6 +1453,97 @@ Registro
             console.error('Error al obtener el PDF:', error);
         }
     }
+
+    async function obtenerTodosLosPlanes(planActual) {
+        if (!api_url || !_application || !_idOrganizacion || !_token) {
+            console.error('Faltan variables globales.');
+            return [];
+        }
+
+        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`;
+
+        const queryParams = new URLSearchParams({
+            estado: 'ACTIVO',
+            frecuencia: 'TODOS',
+            lineaNegocio: planActual.lineaNegocio,
+            codigoCliente: planActual.codigoCliente
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        return response?.data || [];
+    }
+
+    function renderPlanesEnSwiper(planes, contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        const mensajeId = contenedorId === 'planesVerisAnual' 
+            ? 'empty-space-planes-anual' 
+            : 'empty-space-planes-mensual';
+
+        const mensajeVacio = document.getElementById(mensajeId);
+
+        contenedor.innerHTML = '';
+
+        if (!planes || planes.length === 0) {
+            mensajeVacio.classList.remove('d-none');
+            return;
+        }
+
+        mensajeVacio.classList.add('d-none');
+
+        planes.forEach(value => {
+            const beneficiosHtml = value.beneficios.map(beneficio => `
+                <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
+                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                    ${beneficio.descripcion}
+                </li>
+            `).join('');
+
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+
+            slide.innerHTML = `
+                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
+                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
+                        ${value.nombre}
+                    </h5>
+                    <div class="px-3 py-2">
+                        <div class="mt-1">
+                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">
+                                AHORRA ${value.porcentajeDescuento}%
+                            </span>
+                        </div>
+                        <div class="my-1">
+                            <h2 class="fw-bold text-blue-zodiac-950 m-0">
+                                $${parseFloat(value.valorFinal).toFixed(2)} <small class="fw-medium fs-5">/${value.tipo.toLowerCase()}</small>
+                            </h2>
+                            <small class="text-muted text-decoration-line-through text-xs">
+                                PVP: $${parseFloat(value.precio).toFixed(2)}
+                            </small>
+                        </div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="card-body p-3">
+                        <h6 class="fw-bold">Beneficios</h6>
+                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
+                            ${beneficiosHtml}
+                        </ul>
+                    </div>
+                    <div class="card-footer p-0 text-center">
+                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
+                    </div>
+                </div>
+            `;
+
+            contenedor.appendChild(slide);
+        });
+    }
+
 
 </script>
 @endpush
