@@ -98,6 +98,16 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.registro')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
+    Route::get('portal-fidelizacion/registro-plan', function () {
+        // dd(Session::get('userData'));
+        return view('verislife.listado-planes-contratados');
+    })->withoutMiddleware(['guest']);
+
+    Route::get('portal-fidelizacion/editar-colaboradores', function () {
+        // dd(Session::get('userData'));
+        return view('verislife.listado-planes-contratados');
+    })->withoutMiddleware(['guest']);
+
     Route::get('portal-fidelizacion/facturacion/{params}', function ($params) {
         // dd(Session::get('infoCliente'));
         return view('verislife.datosFacturacion')->with('params', $params);
