@@ -161,7 +161,7 @@
             <!-- Quick links -->
 
             <!-- Notification -->
-            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3">
                 <a
                     class="nav-link dropdown-toggle hide-arrow"
                     href="javascript:void(0);"
@@ -362,7 +362,7 @@
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle dropdown-user-empresa hide-arrow d-flex align-items-center gap-2 p-1 pe-3" 
+                <a class="nav-link dropdown-toggle dropdown-user-empresa hide-arrow d-flex align-items-center gap-3 p-1 pe-3" 
                     href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                         <img src="../../images/avatars/user_profile.png" alt class="h-auto rounded-circle" />

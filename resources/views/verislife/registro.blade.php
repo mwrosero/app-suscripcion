@@ -168,7 +168,7 @@ Registro
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" />
                 <h5 class="text-blue-zodiac-950 fw-bold">¿Deseas añadir un nuevo beneficiario?</h5>
                 <div class="d-flex gap-3">
-                    <button type="submit" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">Añadir nuevo</button>
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">Añadir nuevo</button>
                     <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -253,23 +253,27 @@ Registro
             <div class="modal-body p-0">
                 <h5 class="fw-semibold text-center">Opción en la que estás registrado</h5>
                 <div class="row justify-content-center mb-3">
-                    <div class="col-12 col-lg-3">
+                    <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-perano-300 border-2 shadow-none">
                             <div class="card-body p-3">
-                                <h5>Esencial</h5>
+                                <h5 class="fw-semibodl" id="nombrePlanActual">Esencial</h5>
                                 <div class="mt-1">
-                                    <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 36%</span>
+                                    <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" id="descuentoPlanaAtual" style="font-size: 0.625rem;">AHORRA 36%</span>
                                 </div>
                                 <div class="my-1">
-                                    <h5 class="fw-semibold text-blue-zodiac-950 m-0">$90,00 <small class="fw-normal fs-12p">/anual</small></h5>
-                                    <small class="text-muted text-decoration-line-through text-xs">PVP: $140</small>
+                                    <h5 class="fw-semibold text-blue-zodiac-950 m-0" >
+                                        $<span id="precioFinalPlanActual">90,00</span>
+                                        <small class="fw-normal fs-12p">/anual</small>
+                                    </h5>
+                                    <small class="text-muted text-decoration-line-through text-xs">
+                                        PVP: $<span id="precioPlanActual">140</span>
+                                    </small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <h5 class="fw-semibold text-center">Descubre más beneficios</h5>
-                
                 <div class="row justify-content-center">
                     <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto px-2 p-1 rounded-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -283,7 +287,7 @@ Registro
                         <div class="tab-pane fade show active" id="pills-anual-veris" role="tabpanel" aria-labelledby="pills-anual-veris-tab" tabindex="0">
                             <div class="row g-3">
                                 <div class="slider-anual position-relative">
-                                    <div class="swiper my-swiper" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
+                                    <div class="swiper my-swiper pb-4" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                                         <div class="swiper-wrapper" id="planesVerisAnual">
 
                                             <div class="swiper-slide">
@@ -323,80 +327,6 @@ Registro
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide">
-                                                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
-                                                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                                        Plenitud
-                                                    </h5>
-                                                    <div class="px-3 py-2">
-                                                        <div class="mt-1">
-                                                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 39%</span>
-                                                        </div>
-                                                        <div class="my-1">
-                                                            <h2 class="fw-bold text-blue-zodiac-950 m-0">$129 <small class="fw-medium fs-5">/anual</small></h2>
-                                                            <small class="text-muted text-decoration-line-through text-xs">PVP: $210</small>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-body p-3">
-                                                        <h6 class="fw-bold">Beneficios</h6>
-                                                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
-                                                                <span>6 consultas al año<br><small>Uso inmediato</small></span>
-                                                            </li>
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                2 Profilaxis
-                                                            </li>
-                                                            <li class="d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                Consulta Optométrica<br>y Odontológica
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="card-footer p-0 text-center">
-                                                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
-                                                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                                        Familiar
-                                                    </h5>
-                                                    <div class="px-3 py-2">
-                                                        <div class="mt-1">
-                                                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 39%</span>
-                                                        </div>
-                                                        <div class="my-1">
-                                                            <h2 class="fw-bold text-blue-zodiac-950 m-0">$172 <small class="fw-medium fs-5">/anual</small></h2>
-                                                            <small class="text-muted text-decoration-line-through text-xs">PVP: $180</small>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-body p-3">
-                                                        <h6 class="fw-bold">Beneficios</h6>
-                                                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
-                                                                <span>4 consultas al año<br><small>Uso inmediato</small></span>
-                                                            </li>
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                1 Profilaxis
-                                                            </li>
-                                                            <li class="d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                Consulta Optométrica<br>y Odontológica
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="card-footer p-0 text-center">
-                                                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -404,15 +334,18 @@ Registro
                                     <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-pagination position-absolute bottom-0"></div>
                                 </div>
+                                <div class="content-message text-center d-none" id="empty-space-planes-anual">
+                                    <h4 class="text-primary-veris">No hay planes disponibles en esta categoría.</h4>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-mensual-veris" role="tabpanel" aria-labelledby="pills-mensual-veris-tab" tabindex="0">
                             <div class="row g-3">
                                 <div class="slider-mensual position-relative">
-                                    <div class="swiper my-swiper" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
+                                    <div class="swiper my-swiper pb-4" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                                         <div class="swiper-wrapper" id="planesVerisMensual">
 
-                                            <div class="swiper-slide">
+                                            <!-- <div class="swiper-slide">
                                                 <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
                                                     <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
                                                         Bienestar
@@ -448,87 +381,16 @@ Registro
                                                         <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
-                                                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                                        Plenitud
-                                                    </h5>
-                                                    <div class="px-3 py-2">
-                                                        <div class="mt-1">
-                                                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 32%</span>
-                                                        </div>
-                                                        <div class="my-1">
-                                                            <h2 class="fw-bold text-blue-zodiac-950 m-0">$11,83 <small class="fw-medium fs-5">/mes</small></h2>
-                                                            <small class="text-muted text-decoration-line-through text-xs">PVP: $210</small>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-body p-3">
-                                                        <h6 class="fw-bold">Beneficios</h6>
-                                                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
-                                                                <span>6 consultas al año<br><small>2 consulta por bimestre</small></span>
-                                                            </li>
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                2 Profilaxis
-                                                            </li>
-                                                            <li class="d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                Consulta Optométrica<br>y Odontológica
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="card-footer p-0 text-center">
-                                                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
-                                                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                                        Familiar
-                                                    </h5>
-                                                    <div class="px-3 py-2">
-                                                        <div class="mt-1">
-                                                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 32%</span>
-                                                        </div>
-                                                        <div class="my-1">
-                                                            <h2 class="fw-bold text-blue-zodiac-950 m-0">$15,95 <small class="fw-medium fs-5">/mes</small></h2>
-                                                            <small class="text-muted text-decoration-line-through text-xs">PVP: $280</small>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-body p-3">
-                                                        <h6 class="fw-bold">Beneficios</h6>
-                                                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
-                                                                <span>8 consultas al año<br><small>2 consulta por trimestre</small></span>
-                                                            </li>
-                                                            <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                3 Profilaxis
-                                                            </li>
-                                                            <li class="d-flex align-items-start fs-14p lh-sm">
-                                                                <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                                Consulta Optométrica<br>y Odontológica
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="card-footer p-0 text-center">
-                                                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                     </div>
                                     <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-button-prev mt-n5 ms-n2 ms-lg-n3 box-shadow-2 d-none"></div>
                                     <div class="swiper-pagination position-absolute bottom-0"></div>
+                                </div>
+                                <div class="content-message text-center d-none" id="empty-space-planes-mensual">
+                                    <h4 class="text-primary-veris">No hay planes disponibles en esta categoría.</h4>
                                 </div>
                             </div>
                         </div>
@@ -674,7 +536,10 @@ Registro
 @endsection
 @push('scripts')
 <script>
+    const uploadedModal = new bootstrap.Modal(document.getElementById('uploadedModal'));
+    const successModal = new bootstrap.Modal(document.getElementById('successfullyAddedModal'));
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+
     let finalFile = null;
     let validado = false;
     let pacientes = [];
@@ -754,87 +619,12 @@ Registro
                 if(idPersonaRegistro === ""){
                     agregarPaciente();
                 }else{
-                    // console.log("Actualizar");
-                    // console.log(idPersonaRegistro);
                     actualizarPaciente(idPersonaRegistro);
                     fillRegistros();
                     $('#addBeneficiaryModal').modal('hide');
                 }
             }
         });
-
-        /* $('body').on('click', '#btn-add', async function(){
-            let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
-            let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
-            let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
-            let primerNombre = $('#primerNombre').val().toUpperCase();
-            // let segundoNombre = $('#segundoNombre').val().toUpperCase();
-            let primerApellido = $('#primerApellido').val().toUpperCase();
-            // let segundoApellido = $('#segundoApellido').val().toUpperCase();
-            let genero = $('#genero option:selected').val();
-            
-            let fechaNacimiento = $('#fechaNacimiento').val();
-            let dateObj = new Date(fechaNacimiento);
-            // Obtener día, mes y año
-            let dia = String(dateObj.getDate()).padStart(2, '0'); // Asegura 2 dígitos
-            let mes = String(dateObj.getMonth() + 1).padStart(2, '0'); // +1 porque los meses van de 0 a 11
-            let anio = dateObj.getFullYear();
-            // Formatear a dd/mm/yyyy
-            let fechaFormateada = `${dia}/${mes}/${anio}`;
-
-            // let codigoEstadoCivil = $('#estadoCivil option:selected').val();
-            // let estadoCivil = $('#estadoCivil option:selected').val().toUpperCase();
-            // let direccion = $('#direccion').val().toUpperCase();
-            // let codigoSector = $('#sector option:selected').val();
-            // let sector = $('#sector option:selected').html().toUpperCase();
-            // let numeroContratoAfiliado = $('#numeroContratoAfiliado').val();
-            // let codigoTipoParentesco = $('#parentesco option:selected').val();
-            // let nombreTipoParentesco = $('#parentesco option:selected').html();
-            // let telefonoFijo = $('#telefonoFijo').val();
-            let telefonoMovil = $('#telefonoMovil').val();
-            let email = $('#email').val();
-            let terms = $('#terms').val();
-            let privacy = $('#privacy').val();
-
-            pacientes.push({
-                "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
-                "numeroIdentificacionPcte": numeroIdentificacionPcte,
-                "primerApellido": primerApellido,
-                // "segundoApellido": segundoApellido,
-                "primerNombre": primerNombre,
-                // "segundoNombre": segundoNombre,
-                "genero": genero,
-                // "codigoEstadoCivil": codigoEstadoCivil,
-                "fechaNacimiento": fechaFormateada,
-                // "direccion": direccion,
-                "mail": email,
-                // "codigoSector": codigoSector,
-                // "telefonoFijo": telefonoFijo,
-                "telefonoMovil": telefonoMovil,
-                "codigoRegion": 1,
-                "codigoCiudad": 1,
-                "codigoPais": 1,
-                "codigoProvincia": 1,
-                // "numeroContrato": numeroContratoAfiliado,
-                "titularDependiente": "T",
-                // "codigoTipoParentesco": codigoTipoParentesco,
-                "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
-                "titularOtroContrato": null,
-                "yaEsTitularContrato": null,
-                "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
-                "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
-                "tipoIdentificacionPcte": tipoIdentificacionPcte,
-                // "nombreTipoParentesco": nombreTipoParentesco,
-                // "estadoCivil": estadoCivil,
-                // "abreviaturaEstadoCivil": estadoCivil.charAt(0),
-                // "sector": sector,
-                // "regio   n": "COSTA",
-                "observacionesError": null
-            })
-
-            fillRegistros();
-            $('#addBeneficiaryModal').modal('hide')
-        }) */
 
         $('#excelFile').on('change', async function (e) {
             finalFile = e.target.files[0];
@@ -878,6 +668,39 @@ Registro
 
             validado = false;
         })
+
+        improveBeneficiaryModal.addEventListener('show.bs.modal', async () => {
+            if (!detalleSuscripcion || !detalleSuscripcion.detallePlan) return;
+
+            const planActual = detalleSuscripcion.detallePlan;
+            const descuento = planActual.porcentajeDescuento ?? 0;
+            const tipo = planActual.tipo?.toLowerCase() === 'anual' ? '/anual' : `/${planActual.tipo?.toLowerCase()}`;
+            
+            document.getElementById('nombrePlanActual').textContent = planActual.nombre ?? '---';
+            document.getElementById('descuentoPlanaAtual').textContent = `AHORRA ${descuento}%`;
+            document.querySelector('#precioFinalPlanActual').textContent = parseFloat(planActual.valorFinal).toFixed(2);
+            document.querySelector('#precioPlanActual').textContent = parseFloat(planActual.precio).toFixed(2);
+            document.querySelector('#precioFinalPlanActual').closest('h5').querySelector('small').textContent = tipo;
+
+            const planes = await obtenerTodosLosPlanes(planActual);
+            if (!planes) return;
+
+            const planesAnuales = planes.filter(p =>
+                p.tipo === 'ANUAL' &&
+                p.codigoConvenio !== planActual.codigoConvenio &&
+                p.valorFinal > planActual.valorFinal
+            );
+
+            const planesMensuales = planes.filter(p =>
+                p.tipo === 'MENSUAL' &&
+                p.codigoConvenio !== planActual.codigoConvenio &&
+                p.valorFinal > planActual.valorFinal
+            );
+
+            renderPlanesEnSwiper(planesAnuales, 'planesVerisAnual');
+            renderPlanesEnSwiper(planesMensuales, 'planesVerisMensual');
+
+        });
 
         await cargarTiposIdentificacion();
         await cargarEstadoCivil();
@@ -944,6 +767,7 @@ Registro
         $('#telefonoFijo').val(paciente.telefonoFijo)
         $('#telefonoMovil').val(paciente.telefonoMovil)
         $('#email').val(paciente.mail)
+
     }
 
     function fillRegistros(){
@@ -1213,6 +1037,8 @@ Registro
 
         fillRegistros();
         $('#addBeneficiaryModal').modal('hide');
+        successModal.show();
+        
     }
 
     function actualizarPaciente(id) {
@@ -1258,7 +1084,6 @@ Registro
             mail: email
         };
     }
-
 
     async function cargarEstadoCivil() {
         const baseUrl = `${api_url}/general/v1/estado_civil`;
@@ -1332,10 +1157,12 @@ Registro
         args["data"] = formData;
         args["bodyType"] = "formdata";
 
+        uploadedModal.show();
         try {
             const data = await call(args);
             console.log(data);
             if (data.code == 200) {
+                uploadedModal.hide();
                 if(data.data.cargaErronea){
                     const base64 = data.data.binarioCargaErronea;
                     const nombreArchivo = 'errores_carga.xlsx';
@@ -1361,7 +1188,8 @@ Registro
                         pacientes.push(value);
                     });
                     fillRegistros()
-
+                    
+                    successModal.show();
                     /*let elem = ``;
                     $('#empty-space').remove();
                     $('#btn-continuar').attr('disabled', false);
@@ -1389,9 +1217,11 @@ Registro
                 return data;
             } else {
                 console.log("Error en respuesta:", data);
+                uploadedModal.hide();
             }
         } catch (error) {
             console.error("Error en uploadFile:", error);
+            uploadedModal.hide();
         }
     }
 
@@ -1412,6 +1242,102 @@ Registro
             console.error('Error al obtener el PDF:', error);
         }
     }
+
+    async function obtenerTodosLosPlanes(planActual) {
+        if (!api_url || !_application || !_idOrganizacion || !_token) {
+            console.error('Faltan variables globales.');
+            return [];
+        }
+
+        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`;
+
+        const queryParams = new URLSearchParams({
+            estado: 'ACTIVO',
+            frecuencia: 'TODOS',
+            lineaNegocio: planActual.lineaNegocio,
+            codigoCliente: planActual.codigoCliente
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        return response?.data || [];
+    }
+
+    function renderPlanesEnSwiper(planes, contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        const mensajeId = contenedorId === 'planesVerisAnual' 
+            ? 'empty-space-planes-anual' 
+            : 'empty-space-planes-mensual';
+
+        const mensajeVacio = document.getElementById(mensajeId);
+
+        contenedor.innerHTML = '';
+
+        if (!planes || planes.length === 0) {
+            mensajeVacio.classList.remove('d-none');
+            return;
+        }
+
+        mensajeVacio.classList.add('d-none');
+
+        planes.forEach(value => {
+            const beneficiosHtml = value.beneficios.map(beneficio => `
+                <li class="mb-2 d-flex align-items-start fs-14p lh-sm">
+                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
+                    ${beneficio.descripcion}
+                </li>
+            `).join('');
+
+            let logoNombre = 'logo-veris.svg';
+            if (value.lineaNegocio === 'PMF') logoNombre = 'parami.png';
+            const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
+
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+
+            slide.innerHTML = `
+                <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
+                    <img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${value.lineaNegocio}">
+                    <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
+                        ${value.nombre}
+                    </h5>
+                    <div class="px-3 py-2">
+                        <div class="mt-1">
+                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">
+                                AHORRA ${value.porcentajeDescuento}%
+                            </span>
+                        </div>
+                        <div class="my-1">
+                            <h2 class="fw-bold text-blue-zodiac-950 m-0">
+                                $${parseFloat(value.valorFinal).toFixed(2)} <small class="fw-medium fs-14p">/${value.tipo.toLowerCase()}</small>
+                            </h2>
+                            <small class="text-muted text-decoration-line-through text-xs">
+                                PVP: $${parseFloat(value.precio).toFixed(2)}
+                            </small>
+                        </div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="card-body p-3">
+                        <h6 class="fw-bold">Beneficios</h6>
+                        <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
+                            ${beneficiosHtml}
+                        </ul>
+                    </div>
+                    <div class="card-footer p-0 text-center">
+                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
+                    </div>
+                </div>
+            `;
+
+            contenedor.appendChild(slide);
+        });
+    }
+
 
 </script>
 @endpush
