@@ -997,9 +997,9 @@ $processId = base64_encode(uniqid());
 
         emptyMessage.classList.add('d-none');
 
-        planes.forEach(plan => {
+        planes.forEach(value => {
 
-            const beneficios = plan.beneficios || [];
+            const beneficios = value.beneficios || [];
             const beneficiosHTML = beneficios.map((beneficio, index) => {
                 const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
                 const claseTexto = index === 0 ? 'text-primary-veris' : '';
@@ -1010,6 +1010,10 @@ $processId = base64_encode(uniqid());
                     </li>`;
             }).join('');
 
+            let logoNombre = 'logo-veris.svg';
+            if (value.lineaNegocio === 'PMF') logoNombre = 'parami.png';
+            const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
+
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.innerHTML = esContratado ?
@@ -1018,29 +1022,30 @@ $processId = base64_encode(uniqid());
                     <div class="card-body p-0 pt-3">
                         <div class="d-flex justify-content-between mx-3 mb-3">
                             <div class="option-info">
-                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${plan.porcentajeDescuento}%</span>
-                                <h5 class="option-title fw-medium mb-0">${plan.nombre}</h5>
+                                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${value.porcentajeDescuento}%</span>
+                                <h5 class="option-title fw-medium mb-0">${value.nombre}</h5>
                             </div>
                             <div class="price-block text-start">
-                                <h5 class="fw-semibold mb-0">$${plan.valorFinal.toFixed(2)} <small class="fw-normal fs-14p">/${plan.tipo}</small></h5>
-                                <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${plan.precio.toFixed(2)}</p>
+                                <h5 class="fw-semibold mb-0">$${value.valorFinal.toFixed(2)} <small class="fw-normal fs-14p">/${value.tipo}</small></h5>
+                                <p class="text-fiord-700 text-decoration-line-through fs-12p mb-0">PVP $${value.precio.toFixed(2)}</p>
                             </div>
                         </div>
-                        <button type="button" data-rel='${JSON.stringify(plan)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100 btn-edit-plan">Ver detalle</button>
+                        <button type="button" data-rel='${JSON.stringify(value)}' class="btn text-primary-veris fs-12p border-top rounded-0 w-100 btn-edit-plan">Ver detalle</button>
                     </div>
                 </div>` :
                 `
                 <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
+                    <img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${value.lineaNegocio}" width="128">
                     <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                        ${plan.nombre}
+                        ${value.nombre}
                     </h5>
                     <div class="px-3 py-2">
                         <div class="mt-1">
-                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${plan.porcentajeDescuento}%</span>
+                            <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${value.porcentajeDescuento}%</span>
                         </div>
                         <div class="my-1">
-                            <h1 class="fw-bold text-blue-zodiac-950 m-0">$${plan.valorFinal.toFixed(2)} <small class="fw-medium fs-5">/${plan.tipo}</small></h1>
-                            <small class="text-muted text-decoration-line-through text-xs">PVP: $${plan.precio.toFixed(2)}</small>
+                            <h1 class="fw-bold text-blue-zodiac-950 m-0">$${value.valorFinal.toFixed(2)} <small class="fw-medium fs-5">/${value.tipo}</small></h1>
+                            <small class="text-muted text-decoration-line-through text-xs">PVP: $${value.precio.toFixed(2)}</small>
                         </div>
                     </div>
                     <hr class="my-1">
@@ -1050,7 +1055,7 @@ $processId = base64_encode(uniqid());
                             ${beneficiosHTML}
                         </ul>
                         <div class="text-center">
-                            <button type="button" data-rel='${JSON.stringify(plan)}' class="btn btn-lg btn-blue-veris w-100 btn-continuar-registro">Continuar registro</button>
+                            <button type="button" data-rel='${JSON.stringify(value)}' class="btn btn-lg btn-blue-veris w-100 btn-continuar-registro">Continuar registro</button>
                         </div>
                     </div>
                 </div>
