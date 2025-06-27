@@ -519,6 +519,7 @@ Registro
     let finalFile = null;
     let validado = false;
     let pacientes = [];
+    let pacientesAgregados = [];
     let page = 1;
     let perPage = 3;
 
@@ -577,9 +578,16 @@ Registro
         })
 
         $('body').on('click', '#btn-continuar', async function(){
-            detalleSuscripcion.pacientes = pacientes;
-            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-            location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+            if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
+                detalleSuscripcion.pacientes = pacientes;
+                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+                location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+            }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
+                await cargaAfiliadosSuscripcion();
+                detalleSuscripcion.pacientes = pacientesAgregados;
+                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+                location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
+            }
         })
 
         $('body').on('change', '#terms, #privacy', function(){
@@ -690,6 +698,22 @@ Registro
         await cargarSectores();
     });
 
+    async function cargaAfiliadosSuscripcion(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+            "secuenciaSuscripcion": detalleSuscripcion.detallePlan.secuenciaSuscripcion,
+            "afiliados": pacientesAgregados
+        });
+        const data = await call(args);
+        console.log(data);
+    }
+
     async function cargarAfiliados() {
         if (pacientes.length > 0) {
             $('.box-pagination').removeClass('d-none');
@@ -720,6 +744,7 @@ Registro
 
         if (response.code === 200) {
             pacientes = response.data.rows;
+            console.log(pacientes)
             page = 1;
             fillRegistros();
             drawPaginationAfiliados({ totalRows: pacientes.length }, page);
@@ -763,9 +788,13 @@ Registro
 
         let elem = '';
         $.each(registrosPaginados, function (key, value) {
+            let disabled = ``;
+            if(value.hasOwnProperty('permiteUpgrade') && !value.permiteUpgrade){
+                disabled = `disabled`;
+            }
             let actionTd = `<td class="text-nowrap align-middle text-center">
                 <div class="form-check d-flex justify-content-center align-items-center me-1">
-                    <input class="form-check-input mx-auto" type="checkbox" />
+                    <input ${disabled} class="form-check-input mx-auto" type="checkbox" />
                 </div>
             </td>`;
             if (detalleSuscripcion.origen === "suscripcion") {
@@ -868,6 +897,40 @@ Registro
         $('#tipoIdentificacion').html(elem);
     }
 
+    async function existeIdentificacion(codigo, numero) {
+        console.log(codigo, numero)
+        return pacientes.some(item => 
+            parseInt(item.codigoTipoIdentificacionPcte) === parseInt(codigo) &&
+            item.numeroIdentificacionPcte === numero
+        );
+    }
+
+    async function existeIdentificionSuscrita(numero){
+        const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
+        const queryParams = new URLSearchParams({
+            codigoEmpresa: 1,
+            codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
+            tipoCredito: 'CREDITO_FIDELIZACION',
+            tipoFiltro: 'identificacion',
+            valorFiltro: numero,
+            page: 1,
+            perPage: 9999 // obtener todos, si luego vamos a paginar localmente
+        });
+
+        const response = await call({
+            method: 'GET',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+        
+        if(response.data.totalRows == 0){
+            return false;
+        }
+
+        return true;
+    }
+
     async function validarIdentidad() {
         const tipo = $('#tipoIdentificacion').val();
         const numero = $('#numeroIdentificacion').val();
@@ -875,6 +938,20 @@ Registro
         if (!tipo || !numero) {
             alert('Debes seleccionar tipo y número de identificación');
             return false;
+        }
+
+        let existeMemoria = await existeIdentificacion(tipo, numero)
+        if(existeMemoria){
+            alert('Paciente con esa identificación ya se encuentra suscrita - memoria');
+            return false;
+        }
+
+        if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
+            let existeWS = await existeIdentificionSuscrita(numero);
+            if(existeWS){
+                alert('Paciente con esa identificación ya se encuentra suscrita - ws');
+                return false;
+            }
         }
 
         try {
@@ -955,7 +1032,7 @@ Registro
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
         $('#email').val(paciente.correoElectronico || '');
-        $('#telefonoMovil').val(paciente.telefonoCelular || '');
+        $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');
     }
 
     function formatearFechaInput(fecha) {
@@ -1000,15 +1077,17 @@ Registro
             return;
         }
 
-        pacientes.push({
+        let itemPaciente = {
+            "permiteUpgrade": false,
             "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
+            "codigoTipoIdentificacion": codigoTipoIdentificacionPcte,
             "numeroIdentificacionPcte": numeroIdentificacionPcte,
             "primerApellido": primerApellido,
             "primerNombre": primerNombre,
             "genero": genero,
             "fechaNacimiento": fechaFormateada,
             "mail": email,
-            "telefonoMovil": telefonoMovil,
+            "telefonoMovil": telefonoMovil.replace(/\D/g, ''),
             "codigoRegion": 1,
             "codigoCiudad": 1,
             "codigoPais": 1,
@@ -1021,7 +1100,11 @@ Registro
             "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
             "tipoIdentificacionPcte": tipoIdentificacionPcte,
             "observacionesError": null
-        });
+        };
+
+        pacientes.push(itemPaciente);
+
+        pacientesAgregados.push(itemPaciente);
 
         fillRegistros();
         $('#addBeneficiaryModal').modal('hide');
@@ -1183,11 +1266,16 @@ Registro
 
                         // Combinar sin duplicados
                         const nuevos = data.data.rows;
+                        nuevos.forEach(item => {
+                            item.permiteUpgrade = false;
+                            pacientesAgregados.push(item);
+                        });
                         const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
 
                         const noDuplicados = nuevos.filter(p => !existentes.has(p.numeroIdentificacionPcte));
 
                         pacientes = pacientes.concat(noDuplicados);
+
 
                         page = 1;
                         fillRegistros();
