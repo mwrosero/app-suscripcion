@@ -489,40 +489,17 @@ Registro
                             </tbody>
                         </table>
                     </div>
-                    <div class="row align-items-center py-3 px-3 px-lg-5 fs-9 box-pagination">
+                    <div class="row align-items-center py-3 px-3 px-lg-5 fs-9 box-pagination d-none">
                         <div class="col-6 col-md-5 text-start mb-2 mb-md-0">
-                            <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info">1-10 de 1000</p>
+                            <p class="mb-0 me-3 fs-10p text-body" data-list-info="data-list-info"></p>
                         </div>
                         <div class="col-6 col-md-7 d-flex justify-content-start">
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination pagination-sm ms-lg-5 mb-0">
-                                    <li class="page-item">
-                                        <a class="page-link bg-transparent" href="#" aria-label="first">
-                                            <i class="bi bi-chevron-double-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link bg-transparent" href="#" aria-label="Previous">
-                                            <i class="bi bi-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link bg-transparent" href="#">1</a></li>
-                                    <li class="page-item"><span class="page-link border-0">de</span></li>
-                                    <li class="page-item"><a class="page-link bg-transparent" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link bg-transparent" href="#" aria-label="Next">
-                                            <i class="bi bi-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link bg-transparent" href="#" aria-label="last">
-                                            <i class="bi bi-chevron-double-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <ul class="pagination pagination-sm ms-lg-5 mb-0"></ul>
                             </nav>
                         </div>
                     </div>
+
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
                     <a href="/portal-fidelizacion/verificacion-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
@@ -543,7 +520,7 @@ Registro
     let validado = false;
     let pacientes = [];
     let page = 1;
-    let perPage = 12;
+    let perPage = 3;
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -561,10 +538,14 @@ Registro
 
         $('body').on('click', '.btn-pagination-page', function (e) {
             e.preventDefault();
-            const newPage = parseInt($(this).data('page'));
-            if (!isNaN(newPage) && newPage !== page) {
-                page = newPage;
-                cargarAfiliados();
+
+            const targetPage = parseInt($(this).data('page'));
+            const totalPages = Math.ceil(pacientes.length / perPage);
+
+            if (!isNaN(targetPage) && targetPage >= 1 && targetPage <= totalPages && targetPage !== page) {
+                page = targetPage;
+                fillRegistros();
+                drawPaginationAfiliados({ totalRows: pacientes.length }, page);
             }
         });
 
@@ -707,19 +688,27 @@ Registro
         await cargarEstadoCivil();
         await cargarTiposParentesco();
         await cargarSectores();
-    })
+    });
 
-    async function cargarAfiliados(){
+    async function cargarAfiliados() {
+        if (pacientes.length > 0) {
+            $('.box-pagination').removeClass('d-none');
+            fillRegistros();
+            drawPaginationAfiliados({ totalRows: pacientes.length }, page);
+            return;
+        }
+
+        origenDatos = 'api';
+
         const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
-
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
             tipoCredito: 'CREDITO_FIDELIZACION',
             tipoFiltro: $('#tipoFiltro option:selected').val(),
             valorFiltro: $('#valorFiltro').val(),
-            page: page,
-            perPage: perPage
+            page: 1,
+            perPage: 9999 // obtener todos, si luego vamos a paginar localmente
         });
 
         const response = await call({
@@ -729,17 +718,12 @@ Registro
             showLoader: false,
         });
 
-        if(response.code == 200 && response.data && Array.isArray(response.data.rows) && response.data.rows.length > 0){
+        if (response.code === 200) {
             pacientes = response.data.rows;
+            page = 1;
             fillRegistros();
-            await drawPaginationAfiliados(response.data, page);
-        } else {
-            $('[data-list-info]').text(`0-0 de 011`);
-            $('.pagination').empty();
-            $('.box-pagination').addClass('d-none');  
+            drawPaginationAfiliados({ totalRows: pacientes.length }, page);
         }
-
-        console.log(response)
     }
 
     function fillPaciente(paciente){
@@ -768,26 +752,32 @@ Registro
         $('#email').val(paciente.mail)
     }
 
-    function fillRegistros(){
-        let elem = ``;
+    function fillRegistros() {
         $('#empty-space').remove();
         $('#btn-continuar').attr('disabled', false);
         $('.box-pagination').removeClass('d-none');
-        $.each(pacientes, function(key, value){
+
+        const start = (page - 1) * perPage;
+        const end = page * perPage;
+        const registrosPaginados = pacientes.slice(start, end);
+
+        let elem = '';
+        $.each(registrosPaginados, function (key, value) {
             let actionTd = `<td class="text-nowrap align-middle text-center">
-                    <div class="form-check d-flex justify-content-center align-items-center me-1">
-                        <input class="form-check-input mx-auto" type="checkbox" />
-                    </div>
-                </td>`;
-            if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
+                <div class="form-check d-flex justify-content-center align-items-center me-1">
+                    <input class="form-check-input mx-auto" type="checkbox" />
+                </div>
+            </td>`;
+            if (detalleSuscripcion.origen === "suscripcion") {
                 actionTd = ``;
             }
+
             elem += `<tr id="paciente-${key}">
                 ${actionTd}
                 <td class="text-center">${value.numeroIdentificacionPcte}</td>
-                <td class="text-center">${value.primerApellido ?? '' } ${ value.segundoApellido ?? '' } ${ value.primerNombre ?? '' } ${ value.segundoNombre ?? '' }</td>
+                <td class="text-center">${value.primerApellido ?? ''} ${value.segundoApellido ?? ''} ${value.primerNombre ?? ''} ${value.segundoNombre ?? ''}</td>
                 <td class="text-center">${value.telefonoMovil}</td>
-                <td class="text-center">${(value.mail) ?? value.correo}</td>
+                <td class="text-center">${value.mail ?? value.correo}</td>
                 <td class="text-center">${value.fechaNacimiento}</td>
                 <td class="text-center">${detalleSuscripcion.detallePlan.nombre}</td>
                 <td class="text-center">
@@ -798,9 +788,10 @@ Registro
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
-            </tr>`
-        })
-        $('#contenido-pacientes').html(elem)
+            </tr>`;
+        });
+
+        $('#contenido-pacientes').html(elem);
     }
 
     async function drawPaginationAfiliados(data, currentPage = 1) {
@@ -814,12 +805,12 @@ Registro
 
         let paginationHtml = `
             <li class="page-item ${page === 1 ? 'disabled' : ''}">
-                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="first" data-page="1">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" data-page="1">
                     <i class="bi bi-chevron-double-left"></i>
                 </a>
             </li>
             <li class="page-item ${page === 1 ? 'disabled' : ''}">
-                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="Previous" data-page="${page - 1}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" data-page="${page - 1}">
                     <i class="bi bi-chevron-left"></i>
                 </a>
             </li>
@@ -827,12 +818,12 @@ Registro
             <li class="page-item"><span class="page-link border-0">de</span></li>
             <li class="page-item"><a class="page-link bg-transparent disabled" href="#">${totalPages}</a></li>
             <li class="page-item ${page === totalPages ? 'disabled' : ''}">
-                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="Next" data-page="${page + 1}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" data-page="${page + 1}">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </li>
             <li class="page-item ${page === totalPages ? 'disabled' : ''}">
-                <a class="page-link bg-transparent btn-pagination-page" href="#" aria-label="last" data-page="${totalPages}">
+                <a class="page-link bg-transparent btn-pagination-page" href="#" data-page="${totalPages}">
                     <i class="bi bi-chevron-double-right"></i>
                 </a>
             </li>
@@ -1181,12 +1172,30 @@ Registro
 
                 }else{
                     //procesar y dibujar en la tabla
-                    $.each(data.data.rows, function(key, value){
+                    /* $.each(data.data.rows, function(key, value){
                         pacientes.push(value);
                     });
                     fillRegistros()
-                    
-                    successModal.show();
+                    successModal.show(); */
+
+                    if (data.code === 200 && !data.data.cargaErronea) {
+                        origenDatos = 'local'; // todos los pacientes están ahora en memoria
+
+                        // Combinar sin duplicados
+                        const nuevos = data.data.rows;
+                        const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
+
+                        const noDuplicados = nuevos.filter(p => !existentes.has(p.numeroIdentificacionPcte));
+
+                        pacientes = pacientes.concat(noDuplicados);
+
+                        page = 1;
+                        fillRegistros();
+                        drawPaginationAfiliados({ totalRows: pacientes.length }, page);
+
+                        successModal.show();
+                    }
+
                     /*let elem = ``;
                     $('#empty-space').remove();
                     $('#btn-continuar').attr('disabled', false);
@@ -1334,7 +1343,6 @@ Registro
             contenedor.appendChild(slide);
         });
     }
-
 
 </script>
 @endpush
