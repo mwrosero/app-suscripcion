@@ -88,6 +88,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
         // dd(Session::get('menu'));
         return view('verislife.inicio');
     })->withoutMiddleware(['guest']);
+    
     Route::get('portal-fidelizacion/verificacion-plan/{params}', function ($params) {
         // dd(Session::get('userData'));
         return view('verislife.verificacionPlan')->with('params', $params);
@@ -113,14 +114,15 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.datosFacturacion')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
-    /* Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
+    Route::get('/portal-fidelizacion/confirmacion/{params}', function ($params) {
         // dd(Session::get('userData'));
-        return view('verislife.registro')->with('params', $params);
-    })->withoutMiddleware(['guest']); */
+        return view('verislife.confirmacion')->with('params', $params);
+    })->withoutMiddleware(['guest']);
 
     Route::get('verislife/carga-dependiente', function () {
         return view('verislife.carga-pendiente.carga-dependiente');
     })->withoutMiddleware(['guest']);
+
     Route::get('verislife/carga-dependiente/registro', function () {
         return view('verislife.carga-pendiente.registro');
     })->withoutMiddleware(['guest']);

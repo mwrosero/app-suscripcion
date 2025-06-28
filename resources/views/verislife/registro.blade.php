@@ -1245,8 +1245,6 @@ Registro
         
     }
 
-    
-
     async function cargarEstadoCivil() {
         const baseUrl = `${api_url}/general/v1/estado_civil`;
         const queryParams = new URLSearchParams({
