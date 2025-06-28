@@ -23,13 +23,16 @@ Registro
                     <h5 class="fw-semibold">Registrar dependiente</h5>
                     <hr>
                     <div class="row g-3 justify-content-center">
+                        <input type="hidden" id="idPersonaRegistro" autocomplete="off"/>
+                        <input type="hidden" id="secuenciaAfiliado" autocomplete="off"/>
+                        <input type="hidden" id="codigoEstadoCivil" autocomplete="off"/>
+                        <input type="hidden" id="estadoCivil" autocomplete="off"/>
                         <div class="col-12 col-md-10">
                             <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de documento <span class="text-danger">*</span></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" autocomplete="off" required>
                                 <option value="" selected disabled>Selecciona el tipo de identificación</option>
                             </select>
                         </div>
-                        <input type="hidden" id="idPersonaRegistro">
                         <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
@@ -73,18 +76,17 @@ Registro
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="estadoCivil" name="estadoCivil" required>
                                 <option value="" selected disabled>Selecciona estado civil</option>
                             </select>
-                        </div>
-                        <div class="col-md-12">
+                        </div> -->
+                        <!-- <div class="col-md-12">
                             <label for="direccion" class="form-label fs-14p fw-medium d-flex justify-content-between">Dirección <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="direccion" name="direccion" placeholder="Ingresa la dirección">
-                        </div>
-
-                        <div class="col-12 col-md-10">
+                        </div> -->
+                        <!-- <div class="col-12 col-md-10">
                             <label for="sector" class="form-label fs-14p fw-medium d-flex justify-content-between">Sector <small class="text-muted fs-12p">(Opcional)</small></label>
                             <select class="form-select form-select-lg fs-14p text-capitalize" id="sector" name="sector" required>
                             </select>
-                        </div>
-                        <div class="col-12 col-md-10">
+                        </div> -->
+                        <!-- <div class="col-12 col-md-10">
                             <label for="numeroContratoAfiliado" class="form-label fs-14p fw-medium">Número de contrato afiliado</label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroContratoAfiliado" name="numeroContratoAfiliado" placeholder="Número de contrato">
                         </div> -->
@@ -195,37 +197,12 @@ Registro
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
             <div class="modal-body text-center p-4">
-                <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Estás seguro de que deseas borrar este colaborador?</h6>
+                <h5 class="text-blue-zodiac-950 text-center fw-bold">¿Estás seguro de que deseas borrar este colaborador?</h5>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/man-thinking.svg" />
                 <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Cúal es el motivo principal para eliminar a este colaborador?</h6>
-                <div class="text-start d-flex flex-column gap-2 mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="motivo" id="motivo1"/>
-                        <label class="form-check-label fs-14p fw-semibold" for="motivo1">
-                            Ya no trabaja en la empresa.
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="motivo" id="motivo2"/>
-                        <label class="form-check-label fs-14p fw-semibold" for="motivo2">
-                            Reducción de costos.
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="motivo" id="motivo3"/>
-                        <label class="form-check-label fs-14p fw-semibold" for="motivo3">
-                            No me gustó el servicio.
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="motivo" id="motivo4"/>
-                        <label class="form-check-label fs-14p fw-semibold" for="motivo4">
-                            Otro.
-                        </label>
-                    </div>
-                </div>
+                <div class="text-start d-flex flex-column gap-2 mb-4" id="contentMotivosInactivacion"></div>
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col">Borrar colaborador</button>
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" id="btnDeleteCollaborador">Borrar colaborador</button>
                     <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -514,14 +491,16 @@ Registro
 <script>
     const uploadedModal = new bootstrap.Modal(document.getElementById('uploadedModal'));
     const successModal = new bootstrap.Modal(document.getElementById('successfullyAddedModal'));
+    const collaboratorSuccessRemovedModal = new bootstrap.Modal(document.getElementById('collaboratorSuccessRemovedModal'));
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+    const btnDeleteCollaborador = document.getElementById('btnDeleteCollaborador');
 
     let finalFile = null;
     let validado = false;
     let pacientes = [];
     let pacientesAgregados = [];
     let page = 1;
-    let perPage = 3;
+    let perPage = 7;
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -541,23 +520,25 @@ Registro
             e.preventDefault();
 
             const targetPage = parseInt($(this).data('page'));
-            const totalPages = Math.ceil(pacientes.length / perPage);
+            const totalPages = Math.ceil(pacientes.filter(p => p.activo).length / perPage);
 
             if (!isNaN(targetPage) && targetPage >= 1 && targetPage <= totalPages && targetPage !== page) {
                 page = targetPage;
                 fillRegistros();
-                drawPaginationAfiliados({ totalRows: pacientes.length }, page);
+
+                const pacientesActivos = pacientes.filter(p => p.activo);
+                drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
             }
         });
 
         $('body').on('click', '.btn-plantilla', async function(){
             await descargarPlantilla();
-        })
+        });
 
         $('body').on('click', '.link-documento', async function(){
             let nemonico = $(this).attr('nemonico-rel');
             await cargarDocumento(nemonico);
-        })
+        });
 
         $('body').on('change', '#contenido-pacientes .form-check-input', function () {
             actualizarEstadoBotonesAccion();
@@ -569,13 +550,14 @@ Registro
             mostrarCamposAdicionales();
             await fillPaciente(paciente);
             $('#btn-add').text('Actualizar').attr('disabled', false);
-        })
+        });
 
         $('body').on('click', '.btn-eliminar-paciente', async function(){
             let keyAEliminar = parseInt($(this).attr('paciente-rel'));
+            // console.log(keyAEliminar);
             delete pacientes[keyAEliminar];
             fillRegistros();
-        })
+        });
 
         $('body').on('click', '#btn-continuar', async function(){
             if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
@@ -588,7 +570,7 @@ Registro
                 localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
                 location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
             }
-        })
+        });
 
         $('body').on('change', '#terms, #privacy', function(){
             if($('#terms').is(':checked') && $('#privacy').is(':checked')) {
@@ -606,9 +588,12 @@ Registro
                 $('#btn-add').text('Agregar').attr('disabled', true);
             } else {
                 let idPersonaRegistro = $('#idPersonaRegistro').val();
+                let secuenciaAfiliado = $('#secuenciaAfiliado').val();
+                console.log(idPersonaRegistro);
+                
                 if(idPersonaRegistro === ""){
                     agregarPaciente();
-                }else{
+                } else {
                     actualizarPaciente(idPersonaRegistro);
                     fillRegistros();
                     $('#addBeneficiaryModal').modal('hide');
@@ -655,9 +640,23 @@ Registro
             $('#tipoIdentificacion').prop('disabled', false);
             $('#numeroIdentificacion').prop('readonly', false);
             $('#idPersonaRegistro').val('');
+            $('#secuenciaAfiliado').val('');
 
             validado = false;
         })
+
+        btnDeleteCollaborador.addEventListener('click', async () => {
+            const secuenciaAfiliado = deleteCollaboratorModal.getAttribute('data-secuencia-afiliado');
+            const selectedRadio = document.querySelector('input[name="motivo"]:checked');
+            if (!selectedRadio) {
+                alert('Debes seleccionar un motivo para eliminar al colaborador.');
+                return;
+            }
+
+            const codigoMotivo = selectedRadio.value;
+
+            await deleteAfiliado(secuenciaAfiliado, codigoMotivo);
+        });
 
         improveBeneficiaryModal.addEventListener('show.bs.modal', async () => {
             if (!detalleSuscripcion || !detalleSuscripcion.detallePlan) return;
@@ -690,6 +689,13 @@ Registro
             renderPlanesEnSwiper(planesAnuales, 'planesVerisAnual');
             renderPlanesEnSwiper(planesMensuales, 'planesVerisMensual');
 
+        });
+
+        deleteCollaboratorModal.addEventListener('show.bs.modal', async () => {
+            const button = event.relatedTarget;
+            const secuenciaAfiliado = button.getAttribute('data-secuencia-afiliado');
+            deleteCollaboratorModal.setAttribute('data-secuencia-afiliado', secuenciaAfiliado);
+            cargarMotivosInactivacion();
         });
 
         await cargarTiposIdentificacion();
@@ -732,7 +738,7 @@ Registro
             tipoFiltro: $('#tipoFiltro option:selected').val(),
             valorFiltro: $('#valorFiltro').val(),
             page: 1,
-            perPage: 9999 // obtener todos, si luego vamos a paginar localmente
+            perPage: 9999
         });
 
         const response = await call({
@@ -746,13 +752,13 @@ Registro
             pacientes = response.data.rows;
             console.log(pacientes)
             page = 1;
+            const pacientesActivos = pacientes.filter(p => p.activo);
             fillRegistros();
-            drawPaginationAfiliados({ totalRows: pacientes.length }, page);
+            drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
         }
     }
 
     function fillPaciente(paciente){
-        // $('#uploadedModal').modal('hide');
         $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
         $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
         $('#primerNombre').val(paciente.primerNombre)
@@ -762,12 +768,14 @@ Registro
         $('#genero').val(paciente.genero)
 
         $('#idPersonaRegistro').val(paciente.numeroIdentificacionPcte);
+        $('#secuenciaAfiliado').val(paciente.secuenciaAfiliado);
 
         var partes = paciente.fechaNacimiento.split("/"); // ["09", "06", "2025"]
         var fechaFormateada = partes[2] + "-" + partes[1] + "-" + partes[0]; // "2025-06-09"
 
         $('#fechaNacimiento').val(fechaFormateada)
-        $('#estadoCivil').val(paciente.codigoEstadoCivil)
+        $('#codigoEstadoCivil').val(paciente.codigoEstadoCivil)
+        $('#estadoCivil').val(paciente.estadoCivil)
         $('#direccion').val(paciente.direccion)
         $('#sector').val(paciente.codigoSector)
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
@@ -781,10 +789,12 @@ Registro
         $('#empty-space').remove();
         $('#btn-continuar').attr('disabled', false);
         $('.box-pagination').removeClass('d-none');
+        
+        const pacientesActivos = pacientes.filter(p => p.activo);
 
         const start = (page - 1) * perPage;
         const end = page * perPage;
-        const registrosPaginados = pacientes.slice(start, end);
+        const registrosPaginados = pacientesActivos.slice(start, end);
 
         let elem = '';
         $.each(registrosPaginados, function (key, value) {
@@ -813,7 +823,7 @@ Registro
                     <button type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
+                    <button type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
@@ -859,6 +869,128 @@ Registro
         `;
 
         $('.pagination').html(paginationHtml);
+    }
+
+    async function actualizarPaciente(id) {
+        let secuenciaAfiliado = $('#secuenciaAfiliado').val();
+
+        if (secuenciaAfiliado && !isNaN(secuenciaAfiliado)) {
+            await actualizarAfiliados(Number(secuenciaAfiliado));
+        } else {
+            actualizarPacienteLocal(id);
+        }
+    }
+
+    async function actualizarAfiliados(secuenciaAfiliado) {
+        let primerNombre = $('#primerNombre').val().toUpperCase();
+        let segundoNombre = $('#segundoNombre').val()?.toUpperCase() || '';
+        let primerApellido = $('#primerApellido').val().toUpperCase();
+        let segundoApellido = $('#segundoApellido').val()?.toUpperCase() || '';
+        let codigoEstadoCivil = $('#codigoEstadoCivil').val();
+        let estadoCivil	 = $('#estadoCivil').val();
+
+        const body = [{
+            secuenciaAfiliado: secuenciaAfiliado,
+            activo: true,
+            primerApellido: primerApellido,
+            segundoApellido: segundoApellido,
+            primerNombre: primerNombre,
+            segundoNombre: segundoNombre,
+            codigoEstadoCivil: parseInt(codigoEstadoCivil),
+            estadoCivil: estadoCivil
+        }];
+
+        const baseUrl = `${api_url}/comercial/v1/afiliados/modificacion_afiliados_cargados`;
+        try {
+            const queryParams = new URLSearchParams({
+                codigoEmpresa: '1',
+            });
+    
+            const response = await call({
+                method: 'PUT',
+                endpoint: `${baseUrl}?${queryParams.toString()}`,
+                bodyType: 'json',
+                showLoader: false,
+                data: JSON.stringify(body),
+            });
+            
+            if (response.code === 200) {
+                alert('Actualización de datos con éxito');
+            } else {
+                alert('Error al actualizar en servidor');
+            }
+        } catch (error) {
+            console.error('Error al actualizar paciente', error);
+            alert('Error inesperado');
+        }
+
+    }
+
+    async function deleteAfiliado(secuenciaAfiliado, codigoMotivo) {
+        const baseUrl = `${api_url}/comercial/v1/afiliados/${secuenciaAfiliado}`;
+
+        const queryParams = new URLSearchParams({
+            codigoMotivoInactivacion: codigoMotivo,
+        });
+
+        const response = await call({
+            method: 'DELETE',
+            endpoint: `${baseUrl}?${queryParams.toString()}`,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        if (response.code === 200) {
+            bootstrap.Modal.getInstance(document.getElementById('deleteCollaboratorModal')).hide();
+            collaboratorSuccessRemovedModal.show();
+            // fillRegistros();
+        } else {
+            console.error('Error al eleminar el afiliado:', response);
+        }
+    }
+
+    function actualizarPacienteLocal(id) {
+        const index = pacientes.findIndex(p => p.numeroIdentificacionPcte === id);
+        if (index === -1) return;
+
+        let primerNombre = $('#primerNombre').val().toUpperCase();
+        // let segundoNombre = $('#segundoNombre').val().toUpperCase();
+        let primerApellido = $('#primerApellido').val().toUpperCase();
+        // let segundoApellido = $('#segundoApellido').val().toUpperCase();
+        let genero = $('#genero').val();
+        let fechaNacimiento = $('#fechaNacimiento').val();
+        // let estadoCivil = $('#estadoCivil').val();
+        // let direccion = $('#direccion').val();
+        // let sector = $('#sector').val();
+        // let numeroContrato = $('#numeroContratoAfiliado').val();
+        // let parentesco = $('#parentesco').val();
+        // let telefonoFijo = $('#telefonoFijo').val();
+        let telefonoMovil = $('#telefonoMovil').val();
+        let email = $('#email').val();
+
+        let dateObj = new Date(fechaNacimiento);
+        let dia = String(dateObj.getDate()).padStart(2, '0');
+        let mes = String(dateObj.getMonth() + 1).padStart(2, '0');
+        let anio = dateObj.getFullYear();
+        let fechaFormateada = `${dia}/${mes}/${anio}`;
+
+        pacientes[index] = {
+            ...pacientes[index], // mantiene campos como identificación, etc.
+            primerNombre,
+            // segundoNombre,
+            primerApellido,
+            // segundoApellido,
+            genero,
+            fechaNacimiento: fechaFormateada,
+            // codigoEstadoCivil: estadoCivil,
+            // direccion,
+            // codigoSector: sector,
+            // numeroContrato,
+            // codigoTipoParentesco: parentesco,
+            // telefonoFijo,
+            telefonoMovil,
+            mail: email
+        };
     }
 
     function actualizarEstadoBotonesAccion() {
@@ -1078,6 +1210,7 @@ Registro
         }
 
         let itemPaciente = {
+            "activo": true,
             "permiteUpgrade": false,
             "codigoTipoIdentificacionPcte": codigoTipoIdentificacionPcte,
             "codigoTipoIdentificacion": codigoTipoIdentificacionPcte,
@@ -1112,49 +1245,7 @@ Registro
         
     }
 
-    function actualizarPaciente(id) {
-        const index = pacientes.findIndex(p => p.numeroIdentificacionPcte === id);
-        if (index === -1) return;
-
-        let primerNombre = $('#primerNombre').val().toUpperCase();
-        // let segundoNombre = $('#segundoNombre').val().toUpperCase();
-        let primerApellido = $('#primerApellido').val().toUpperCase();
-        // let segundoApellido = $('#segundoApellido').val().toUpperCase();
-        let genero = $('#genero').val();
-        let fechaNacimiento = $('#fechaNacimiento').val();
-        // let estadoCivil = $('#estadoCivil').val();
-        // let direccion = $('#direccion').val();
-        // let sector = $('#sector').val();
-        // let numeroContrato = $('#numeroContratoAfiliado').val();
-        // let parentesco = $('#parentesco').val();
-        // let telefonoFijo = $('#telefonoFijo').val();
-        let telefonoMovil = $('#telefonoMovil').val();
-        let email = $('#email').val();
-
-        let dateObj = new Date(fechaNacimiento);
-        let dia = String(dateObj.getDate()).padStart(2, '0');
-        let mes = String(dateObj.getMonth() + 1).padStart(2, '0');
-        let anio = dateObj.getFullYear();
-        let fechaFormateada = `${dia}/${mes}/${anio}`;
-
-        pacientes[index] = {
-            ...pacientes[index], // mantiene campos como identificación, etc.
-            primerNombre,
-            // segundoNombre,
-            primerApellido,
-            // segundoApellido,
-            genero,
-            fechaNacimiento: fechaFormateada,
-            // codigoEstadoCivil: estadoCivil,
-            // direccion,
-            // codigoSector: sector,
-            // numeroContrato,
-            // codigoTipoParentesco: parentesco,
-            // telefonoFijo,
-            telefonoMovil,
-            mail: email
-        };
-    }
+    
 
     async function cargarEstadoCivil() {
         const baseUrl = `${api_url}/general/v1/estado_civil`;
@@ -1216,6 +1307,40 @@ Registro
         $('#sector').html(elem);
     }
 
+    async function cargarMotivosInactivacion() {
+        const baseUrl = `${api_url}/comercial/v1/convenios/motivos_inactivacion`;
+
+        const response = await call({
+            method: 'GET',
+            endpoint: baseUrl,
+            bodyType: 'json',
+            showLoader: true,
+        });
+
+        if (response.code === 200 && Array.isArray(response.data)) {
+            const motivos = response.data;
+            const content = document.getElementById('contentMotivosInactivacion');
+
+            content.innerHTML = '';
+
+            let item = '';
+            motivos.forEach((motivo, index) => {
+                const id = `motivo${index + 1}`;
+                item += `
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="motivo" id="${id}" value="${motivo.codigoMotivo}" />
+                        <label class="form-check-label fs-14p fw-semibold" for="${id}">
+                            ${motivo.nombreMotivo}
+                        </label>
+                    </div>
+                `;
+            });
+            content.innerHTML = item;
+        } else {
+            console.error('Error al cargar motivos:', response);
+        }
+    }
+
     async function subirPlantilla(){
         const formData = new FormData();
         formData.append("file", finalFile);
@@ -1254,28 +1379,20 @@ Registro
                     document.body.removeChild(link);
 
                 }else{
-                    //procesar y dibujar en la tabla
-                    /* $.each(data.data.rows, function(key, value){
-                        pacientes.push(value);
-                    });
-                    fillRegistros()
-                    successModal.show(); */
-
                     if (data.code === 200 && !data.data.cargaErronea) {
-                        origenDatos = 'local'; // todos los pacientes están ahora en memoria
+                        origenDatos = 'local';
 
-                        // Combinar sin duplicados
                         const nuevos = data.data.rows;
                         nuevos.forEach(item => {
                             item.permiteUpgrade = false;
+                            item.activo = true;
                             pacientesAgregados.push(item);
                         });
-                        const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
 
+                        const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
                         const noDuplicados = nuevos.filter(p => !existentes.has(p.numeroIdentificacionPcte));
 
                         pacientes = pacientes.concat(noDuplicados);
-
 
                         page = 1;
                         fillRegistros();
@@ -1283,30 +1400,6 @@ Registro
 
                         successModal.show();
                     }
-
-                    /*let elem = ``;
-                    $('#empty-space').remove();
-                    $('#btn-continuar').attr('disabled', false);
-                    $('.box-pagination').removeClass('d-none');
-                    $.each(data.data.rows, function(key, value){
-                        pacientes.push(value);
-                        elem += `<tr id="paciente-${key}">
-                            <td>${value.numeroIdentificacionPcte}</td>
-                            <td>${value.primerApellido} ${value.segundoApellido} ${value.primerNombre} ${value.segundoNombre}</td>
-                            <td>${value.telefonoMovil}</td>
-                            <td>${value.mail}</td>
-                            <td>${value.fechaNacimiento}</td>
-                            <td>
-                                <button type="button" class="btn btn-sm text-aquamarine-300 shadow-none btn-editar-paciente" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm text-rose-bud-300 shadow-none btn-eliminar-paciente" paciente-rel="${key}">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </td>
-                        </tr>`
-                    })
-                    $('#contenido-pacientes').html(elem)*/
                 }
                 return data;
             } else {

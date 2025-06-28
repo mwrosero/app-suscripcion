@@ -926,11 +926,16 @@ $processId = base64_encode(uniqid());
         //section-admin-planes
         let elem = ``;
         $.each(planes, function(key, value){
+            let logoNombre = 'logo-veris.svg';
+            if (value.lineaNegocio === 'PMF') logoNombre = 'parami.png';
+            const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
+
             elem += `<div class="swiper-slide">
                         <div class="card rounded-4 shadow-sm h-100">
                             <div class="card-body px-3 py-3">
                                 <div class="text-center border-start-blue-8 mb-3">
                                     <div class="ms-3">
+                                        <img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${value.lineaNegocio}" width="128">
                                         <div class="d-flex justify-content-between mb-3">
                                             <h6 class="text-bay-many-900 mb-0">${value.nombre}</h6>
                                             <button type="button" class="btn text-grenadier-600 fw-normal p-0 me-2" data-bs-toggle="modal" data-bs-target="#deleteSubscriptionModal"><i class="fa-regular fa-trash-can fs-4"></i></button>
