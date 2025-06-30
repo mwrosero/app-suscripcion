@@ -174,7 +174,7 @@ Registro
         <div class="modal-content p-3 py-md-4 px-md-4">
             <div class="modal-body p-0">
                 <div id="addBeneficiaryForm" class="pt-3">
-                    <h5 class="fw-semibold text-center">Documento 1</h5>
+                    <h5 class="fw-semibold text-center titulo-documento"></h5>
                     <div class="text-center my-3" id="content-file">
                         <iframe src="/assets/file/documento.pdf" width="100%" height="500px" style="border: none;"></iframe>
                     </div>
@@ -200,10 +200,10 @@ Registro
                 <p class="text-primary-veris fw-semibold fs-6">0999999999</p>
 
                 <div class="d-flex justify-content-center gap-2 mb-3">
-                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
-                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
-                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
-                    <input type="text" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
+                    <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
+                    <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
+                    <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
                 </div>
 
                 <p class="fw-semibold fs-6 mb-3">
@@ -211,7 +211,7 @@ Registro
                     <a href="#" class="text-decoration-none text-primary-veris fw-semibold">Reenviar código</a>
                 </p>
 
-                <button type="button" class="btn btn-cerulean-blue-800 w-100 mb-2" disabled>Verificar código</button>
+                <button type="button" class="btn btn-cerulean-blue-800 w-100 mb-2 btn-verificar-otp" disabled>Verificar código</button>
                 <button type="button" class="btn btn-outline-cerulean-blue-800 w-100" data-bs-dismiss="modal">Cerrar</button>
 
             </div>
@@ -417,7 +417,7 @@ Registro
                                                                 <div class="row">
                                                                     <div class="col-12 col-md-6">
                                                                         <h3 class="mb-2">Total a pagar</h3>
-                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar">small></h2>
+                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
                                                                     </div>
                                                                     <div class="col-12 col-md-6">
                                                                         <div class="text-start text-md-end">
@@ -432,7 +432,7 @@ Registro
                                             </div>
                                             <h5 class="mb-3">Método de pago</h5>
                                             <hr>
-                                            <div class="row justify-content-center pb-5">
+                                            <div class="row justify-content-center">
                                                 <ul class="nav nav-pills justify-content-center bg-wild-sand-50 w-auto p-1 rounded-3" id="pills-tab" role="tablist">
                                                     <li class="nav-item nav-metodo-pago d-none pasarela_pagos" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-credit-card-tab" data-bs-toggle="pill" data-bs-target="#pills-credit-card" type="button" role="tab" aria-controls="pills-credit-card" aria-selected="true">Tarjeta de crédito/débito</button>
@@ -489,7 +489,7 @@ Registro
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane tab-debito_cuenta d-none fade" id="pills-debit-account" role="tabpanel" aria-labelledby="pills-debit-account-tab" tabindex="0">
-                                                        <div class="text-center mb-4" id="listTiposCuenta">
+                                                        <div class="text-center mb-3" id="listTiposCuenta">
                                                             {{-- <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="tipoCuenta" id="tipoCuentaAhorro" value="A" />
                                                                 <label class="form-check-label fw-medium" for="tipoCuentaAhorro">Cuenta de ahorros</label>
@@ -499,7 +499,7 @@ Registro
                                                                 <label class="form-check-label fw-medium" for="tipoCuentaCorriente">Cuenta corriente</label>
                                                             </div> --}}
                                                         </div>
-                                                        <div class="row g-3 justify-content-center mb-4">
+                                                        <div class="row g-3 justify-content-center">
                                                             <div class="col-12 col-lg-8">
                                                                 <label for="nombreBanco" class="form-label fs-14p fw-medium text-blue-zodiac-950">Nombre del banco </label>
                                                                 <select class="form-select form-select-lg fs-14p select2" id="nombreBanco" name="nombreBanco" required readonly disabled>
@@ -601,14 +601,16 @@ Registro
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row g-3 justify-content-center">
-                                                <div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
+                                            <div class="row g-3 justify-content-center" id="lista-documentos">
+                                                {{-- <div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
                                                     Documento 1
                                                     <button class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal" data-bs-toggle="modal" data-bs-target="#documentoModal">
                                                         <i class="fa-solid fa-eye me-1"></i>Previsualizar
                                                     </button>
-                                                </div>
-                                                <div class="col0qw">
+                                                </div> --}}
+                                            </div>
+                                            <div class="row g-3 justify-content-center mt-2">
+                                                <div class="col-12">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="aceptaContrato" name="aceptaContrato" required>
                                                         <label class="form-check-label fs-10p" for="aceptaContrato">
@@ -831,7 +833,7 @@ Registro
         document.getElementById(targetId).classList.remove('d-none');
     }
 
-    function renderButtons(idx) {
+    async function renderButtons(idx) {
         console.log({total})
         console.log({idx})
         if (idx === 0) {
@@ -862,15 +864,20 @@ Registro
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
         } else {
+            await obtenerListadoDocumentosFirma()
             actions.innerHTML = `
                 <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
-                <button id="btn-next" class="btn btn-cerulean-blue-800" data-bs-toggle="modal" data-bs-target="#verificationCodeModal" disabled step-rel="${idx+1}">
+                <button id="btn-next" class="btn btn-cerulean-blue-800 btn-generar-solicitud" data-bs-toggle="modal" disabled step-rel="${idx+1}">
                   <span class="d-none d-sm-inline">Firmar contratos</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
+                {{-- <button id="btn-next" class="btn btn-cerulean-blue-800" data-bs-toggle="modal" data-bs-target="#verificationCodeModal" disabled step-rel="${idx+1}">
+                  <span class="d-none d-sm-inline">Firmar contratos</span>
+                  <i class="fa-solid fa-chevron-right ms-2"></i>
+                </button> --}}
         }
         if(total == 4){
             validateFields(); 
@@ -907,7 +914,7 @@ Registro
                 $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
                 $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
                 couldNext = true;//validar
-                await crearSuscripcion();
+                await generarSolicitudFirma();
             }
 
             if(couldNext){
@@ -954,7 +961,7 @@ Registro
         return `
             <li class="mb-2 d-flex align-items-start lh-sm">
                 <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
-                ${beneficio.descripcion}${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
+                ${beneficio.descripcion}
             </li>`;
         }).join('');
         $('.lista-beneficios').html(beneficiosHTML);
@@ -1017,8 +1024,28 @@ Registro
             validateFields();
         })
 
+        $('body').on('click', '.btn-generar-solicitud', async function(){
+            // await generarSolicitudFirma();
+        })
+
+        $('body').on('click', '.btn-previsualizar', async function(){
+            let datos = JSON.parse($(this).attr('data-rel'));
+            await obtenerDocumentoContrato(datos);
+        })
+
+        $('body').on('input', '#input1, #input2, #input3, #input4', async function(){
+            if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != ""){
+                $('.btn-verificar-otp').attr('disabled',false)
+            }else{
+                $('.btn-verificar-otp').attr('disabled',true)
+            }
+        })
+
+        $('body').on('click', '.btn-verificar-otp', async function(){
+            await confirmarOtp();
+        })
+
         {{-- $('body').on('click', '#btn-next', async function(){
-            console.log("-----------------------------")
             let step = $(this).attr('step-rel');
             let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
             let nombresFactura = $('#nombresFactura').val();
@@ -1044,6 +1071,60 @@ Registro
         await cargarMediosPago();
         await cargarTiposCuenta();
     });
+
+    async function obtenerListadoDocumentosFirma(){
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+
+        if(data.code == 200){
+            let elem = ``
+            $.each(data.data, function(key, value){
+                elem += `<div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
+                        <span class="flex-grow-1 text-capitalize">${value.descripcion.toLowerCase()}</span>
+                        <button data-rel='${JSON.stringify(value)}' class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal btn-previsualizar">
+                            <i class="fa-solid fa-eye me-1"></i>Previsualizar
+                        </button>
+                    </div>`;
+            })
+
+            //data-bs-toggle="modal" data-bs-target="#documentoModal"
+
+            $('#lista-documentos').html(elem);
+        }
+    }
+
+    async function obtenerDocumentoContrato(datos){
+        console.log(datos);
+        $('.titulo-documento').html(`${datos.descripcion}`);
+        let args = [];
+        
+        if(datos.nemonico == "AUTORIZACION_DEBITO"){
+            let codigoInstitucion = $('#nombreBanco option:selected').val();
+            let numeroCuenta = $('#numeroCuenta').val();
+            let nombreTitular = $('#nombreTitular').val();
+            let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
+            args["endpoint"] = api_url + `/empresarial/v1/reportes/autorizacion_debito_cuenta?codigoCliente={{ Session::get('infoCliente')->informacionCliente->codigoCliente }}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
+        }else{
+            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
+        }
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+
+        const data = await call(args);
+        console.log(data);
+
+        if(data.code == 200){
+            $('#documentoModal').modal('show');
+        }else{
+            showMessage('warning','Atención',data.message);
+        }
+
+    }
 
     function validateFields(){
         let step = $('#btn-next').attr('step-rel');
@@ -1204,11 +1285,14 @@ Registro
     }
 
     async function crearSuscripcion(){
+        {{-- console.log("crearSuscripcion");
+        let generarSolicitud = await generarSolicitudFirma(); --}}
+
         let codigoInstitucion = $('#nombreBanco option:selected').val();
         let numeroCuenta = $('#numeroCuenta').val();
         let nombreTitular = $('#nombreTitular').val();
         let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
-        let tipoFlujo = "E";
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
 
 
         let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
@@ -1226,7 +1310,8 @@ Registro
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
             "codigoCliente": {{ Session::get('infoCliente')->informacionCliente->codigoCliente }},
-            "secuenciaAfiliado": "",
+            "secuenciaAfiliado": "{{ Session::get('userData')->secuenciaUsuario }}",
+            "codigoSolicitudFirma": codigoSolicitudFirma,
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
@@ -1275,7 +1360,73 @@ Registro
         console.log(data);
         detalleSuscripcion.suscripcion = data.data;
         if(data.code == 200){
+            stepper.next();
             await cargaAfiliadosSuscripcion();
+        }else{
+            showMessage('error','Atención',data.message);
+        }
+    }
+
+    let codigoSolicitudFirma;
+    async function generarSolicitudFirma(){
+        // E - Empresa, C - Colaborador, I - Individual
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tiposDocumentos = ["AUTORIZACION_DEBITO"];
+
+        let codigoInstitucion = $('#nombreBanco option:selected').val();
+        let numeroCuenta = $('#numeroCuenta').val();
+        let nombreTitular = $('#nombreTitular').val();
+        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
+
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "tipoFlujo": tipoFlujo,
+            "nombres": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
+            "apellidos": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
+            "codigoTipoIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
+            "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
+            "correo": "mwrosero@gmail.com",
+            "telefono": "0988302580",
+            "codigoCliente": "{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}",
+            "codigoInstitucion": codigoInstitucion,
+            "tipoCuenta": tipoCuenta,
+            "numeroCuenta": numeroCuenta,
+            "periodo": detalleSuscripcion.detallePlan.tipo,
+            "tiposDocumentos": tiposDocumentos
+        });
+        const data = await call(args);
+        
+        if(data.code == 200){
+            codigoSolicitudFirma = data.data.codigoSolicitud;
+            $('#verificationCodeModal').modal('show');
+        }else{
+            showMessage('error','Atención',data.message);
+        }
+    }
+
+    async function confirmarOtp(){
+        let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}`;
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoOtp": codigoOtp
+        });
+        const data = await call(args);
+        
+        if(data.code == 200){
+            $('#verificationCodeModal').modal('hide');
+            await crearSuscripcion();
+        }else{
+            showMessage('warning','Atención',data.message);
         }
     }
 

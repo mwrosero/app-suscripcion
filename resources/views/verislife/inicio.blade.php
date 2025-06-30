@@ -1011,10 +1011,10 @@ $processId = base64_encode(uniqid());
                 return `
                     <li class="mb-2 d-flex align-items-start lh-sm">
                         <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
-                        ${beneficio.descripcion}${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
+                        ${beneficio.descripcion}
                     </li>`;
             }).join('');
-
+            //${beneficio.cantidadGratuita ? ` (${beneficio.cantidadGratuita})` : ''}
             let logoNombre = 'logo-veris.svg';
             if (value.lineaNegocio === 'PMF') logoNombre = 'parami.png';
             const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
