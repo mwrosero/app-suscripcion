@@ -37,19 +37,19 @@
                                 <div class="card card-body shadow-none">
                                     <!-- Opción seleccionada -->
                                     <div class="d-flex justify-content-between border-perano-300 rounded-4 p-2 mb-4 info-plan">
-                                        <div class="option-info">
+                                        {{-- <div class="option-info">
                                             <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE 36%</span>
-                                            <h4 class="option-title mb-0 nombrePlan">Esencial</h4>
+                                            <h4 class="option-title mb-0 nombrePlan"></h4>
                                         </div>
                                         <div class="price-block text-start">
                                             <h4 class="fw-semibold mb-0">$9000 <small class="fw-normal fs-14p">/100 opciones</small></h4>
                                             <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $9500.00 </p>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <!-- Beneficios -->
                                     <div class="text-start mb-4">
                                         <ul class="list-unstyled mb-0 lista-beneficios">
-                                            <li class="d-flex align-items-start lh-sm mb-3">
+                                            {{-- <li class="d-flex align-items-start lh-sm mb-3">
                                                 <i class="bi bi-patch-check-fill text-primary-veris me-2"></i>
                                                 <span>8 consultas al año<br><small class="text-fiord-700">Uso inmediato</small></span>
                                             </li>
@@ -64,7 +64,7 @@
                                             <li class="d-flex align-items-start lh-sm mb-3">
                                                 <i class="bi bi-patch-check-fill text-dark me-2"></i>
                                                 <span>Descuentos en servicios<br>"Veris" y "Para mí"</span>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -81,14 +81,14 @@
                                 <div class="text-start">Nombre de la empresa:</div>
                                 <div class="detail-value text-end">{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}</div>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                            {{-- <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                 <div>Método de pago:</div>
                                 <div class="detail-value metodo-pago text-capitalize"></div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                 <div>Frecuencia de pago: </div>
                                 <div class="detail-value frecuencia-pago text-capitalize"></div>
-                            </li>
+                            </li> --}}
                             <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                 <div>Monto total:</div>
                                 <div class="detail-value valor-total"></div>
@@ -104,9 +104,11 @@
                         </ul>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="btn btn-cerulean-blue-800 px-lg-5">
-                            <span class="d-none d-sm-inline">Volver al inicio</span>
-                        </button>
+                        <a href="/portal-fidelizacion/dashboard">
+                            <button class="btn btn-cerulean-blue-800 px-lg-5">
+                                <span class="d-none d-sm-inline">Volver al inicio</span>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -116,4 +118,30 @@
 @endsection
 
 @push('scripts')
+<script>
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        $('.info-plan').html(`<div class="option-info">
+                <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRASTE ${detalleSuscripcion.detallePlan.porcentajeDescuento}%</span>
+                <h4 class="option-title mb-0 nombrePlan">${detalleSuscripcion.detallePlan.nombre}</h4>
+            </div>
+            <div class="price-block text-start">
+                <h4 class="fw-semibold mb-0">$${ (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-14p">/${detalleSuscripcion.pacientes.length} plan${ (detalleSuscripcion.pacientes.length == 1) ? `` : `es` }</small></h4>
+                <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $${ (detalleSuscripcion.detallePlan.precio * detalleSuscripcion.pacientes.length ).toFixed(2) } </p>
+            </div>`)
+        $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
+
+        const beneficios = detalleSuscripcion.detallePlan.beneficios;
+        const beneficiosHTML = beneficios.map((beneficio, index) => {
+        const claseIcono = index === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';
+        return `
+            <li class="mb-2 d-flex align-items-start lh-sm">
+                <i class="bi bi-patch-check-fill ${claseIcono} me-2"></i>
+                ${beneficio.descripcion}
+            </li>`;
+        }).join('');
+        $('.lista-beneficios').html(beneficiosHTML);
+    })
+</script>
 @endpush

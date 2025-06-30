@@ -405,7 +405,7 @@ Registro
                             <div class="col-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start gap-4 mb-2 mb-md-0">
                                 <div class="input-group">
                                     <span class="input-group-text bg-wild-sand-50 border-end-0 border-0"><i class="ti ti-search"></i></span>
-                                    <input type="text" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" id="valorFiltro" placeholder="Apellidos/identificación" aria-label="Buscar">
+                                    <input type="search" class="form-control form-control-lg fs-14p bg-wild-sand-50 border-start-0 border-0 py-3" id="valorFiltro" placeholder="Apellidos/identificación" aria-label="Buscar">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 justify-content-end d-none box-options">
@@ -501,6 +501,7 @@ Registro
     let pacientesAgregados = [];
     let page = 1;
     let perPage = 7;
+    let trDelete = null;
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -531,6 +532,19 @@ Registro
             }
         });
 
+        $('body').on('click', '.btn-mejorar-plan', async function(){
+            let planNuevo = JSON.parse($(this).attr('data-rel'));
+            let beneficiarios = [];
+            $('.item-beneficiario:checked').each(function(index) {
+                let beneficiario = JSON.parse($(this).attr('data-rel'));
+                beneficiarios.push(beneficiario);
+            });
+            detalleSuscripcion.origen = "mejora";
+            detalleSuscripcion.beneficiarios = beneficiarios;
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+            location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+        });
+
         $('body').on('click', '.btn-plantilla', async function(){
             await descargarPlantilla();
         });
@@ -554,8 +568,10 @@ Registro
 
         $('body').on('click', '.btn-eliminar-paciente', async function(){
             let keyAEliminar = parseInt($(this).attr('paciente-rel'));
-            // console.log(keyAEliminar);
-            delete pacientes[keyAEliminar];
+            trDelete = keyAEliminar;
+            console.log(keyAEliminar);
+            // delete pacientes[keyAEliminar];
+            // pacientes.splice(keyAEliminar, 1);
             fillRegistros();
         });
 
@@ -607,7 +623,7 @@ Registro
 
             // Opcional: validar tipo y tamaño
             if (!finalFile.name.match(/\.(xls|xlsx)$/)) {
-                alert("Por favor selecciona un archivo Excel válido.");
+                showMessage('warning','Atención',"Por favor selecciona un archivo Excel válido.");
                 return;
             }
 
@@ -649,7 +665,7 @@ Registro
             const secuenciaAfiliado = deleteCollaboratorModal.getAttribute('data-secuencia-afiliado');
             const selectedRadio = document.querySelector('input[name="motivo"]:checked');
             if (!selectedRadio) {
-                alert('Debes seleccionar un motivo para eliminar al colaborador.');
+                showMessage('warning','Atención','Debes seleccionar un motivo para eliminar al colaborador.');
                 return;
             }
 
@@ -753,6 +769,7 @@ Registro
             console.log(pacientes)
             page = 1;
             const pacientesActivos = pacientes.filter(p => p.activo);
+
             fillRegistros();
             drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
         }
@@ -786,12 +803,21 @@ Registro
     }
 
     function fillRegistros() {
-        $('#empty-space').remove();
-        $('#btn-continuar').attr('disabled', false);
-        $('.box-pagination').removeClass('d-none');
         
         const pacientesActivos = pacientes.filter(p => p.activo);
+        if (pacientesActivos.length === 0) {
+            $('.box-pagination').addClass('d-none');
+            return;
+        }
 
+        if(pacientesAgregados.length > 0){
+            $('#btn-continuar').attr('disabled', false);
+        }else{
+            $('#btn-continuar').attr('disabled', true);
+        }
+        $('.box-pagination').removeClass('d-none');
+
+        $('#empty-space').remove();
         const start = (page - 1) * perPage;
         const end = page * perPage;
         const registrosPaginados = pacientesActivos.slice(start, end);
@@ -804,7 +830,7 @@ Registro
             }
             let actionTd = `<td class="text-nowrap align-middle text-center">
                 <div class="form-check d-flex justify-content-center align-items-center me-1">
-                    <input ${disabled} class="form-check-input mx-auto" type="checkbox" />
+                    <input ${disabled} class="form-check-input mx-auto item-beneficiario" type="checkbox" data-rel='${JSON.stringify(value)}'/>
                 </div>
             </td>`;
             if (detalleSuscripcion.origen === "suscripcion") {
@@ -915,13 +941,13 @@ Registro
             });
             
             if (response.code === 200) {
-                alert('Actualización de datos con éxito');
+                showMessage('warning','Atención','Actualización de datos con éxito');
             } else {
-                alert('Error al actualizar en servidor');
+                showMessage('warning','Atención','Error al actualizar en servidor');
             }
         } catch (error) {
             console.error('Error al actualizar paciente', error);
-            alert('Error inesperado');
+            showMessage('error','Atención','Error inesperado')
         }
 
     }
@@ -941,8 +967,12 @@ Registro
         });
 
         if (response.code === 200) {
+
             bootstrap.Modal.getInstance(document.getElementById('deleteCollaboratorModal')).hide();
             collaboratorSuccessRemovedModal.show();
+            $(`#paciente-${trDelete}`).remove();
+            pacientes.splice(trDelete, 1);
+            trDelete = null;
             // fillRegistros();
         } else {
             console.error('Error al eleminar el afiliado:', response);
@@ -1068,20 +1098,20 @@ Registro
         const numero = $('#numeroIdentificacion').val();
 
         if (!tipo || !numero) {
-            alert('Debes seleccionar tipo y número de identificación');
+            showMessage('warning','Atención','Debes seleccionar tipo y número de identificación');
             return false;
         }
 
         let existeMemoria = await existeIdentificacion(tipo, numero)
         if(existeMemoria){
-            alert('Paciente con esa identificación ya se encuentra suscrita - memoria');
+            showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
             return false;
         }
 
         if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
             let existeWS = await existeIdentificionSuscrita(numero);
             if(existeWS){
-                alert('Paciente con esa identificación ya se encuentra suscrita - ws');
+                showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
                 return false;
             }
         }
@@ -1112,12 +1142,12 @@ Registro
 
                 return true;
             } else {
-                alert('Identificación no válida');
+                showMessage('warning','Atención','Identificación no válida');
                 return false;
             }
         } catch (error) {
             console.error('Error al validar', error);
-            alert('Error al validar identificación');
+            showMessage('warning','Atención','Error al validar identificación');
             return false;
         }
     }
@@ -1127,7 +1157,7 @@ Registro
         const numeroIdentificacion = $('#numeroIdentificacion').val();
 
         if (!tipoIdentificacion || !numeroIdentificacion) {
-            alert('Debes seleccionar tipo identificacion y número de identificación');
+            showMessage('warning','Atención','Debes seleccionar tipo identificacion y número de identificación');
             return false;
         }
 
@@ -1153,7 +1183,7 @@ Registro
 
         } catch (error) {
             console.error('Error al consultar datos del paciente', error);
-            alert('Error al obtener datos del paciente');
+            showMessage('error','Atención','Error al obtener datos del paciente');
             return false;
         }
     }
@@ -1205,7 +1235,7 @@ Registro
         );
 
         if (pacienteRegistrado) {
-            alert('Este paciente ya ha sido agregado.');
+            showMessage('warning','Atención','Este paciente ya ha sido agregado.');
             return;
         }
 
@@ -1514,7 +1544,7 @@ Registro
                         </ul>
                     </div>
                     <div class="card-footer p-0 text-center">
-                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Cambiar ahora</a>
+                        <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100 btn-mejorar-plan" data-rel='${JSON.stringify(value)}'>Cambiar ahora</a>
                     </div>
                 </div>
             `;
