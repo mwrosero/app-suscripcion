@@ -1370,7 +1370,7 @@ Registro
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "EMPRESA";// "{{ Session::get('infoCliente')->tipoFlujo }}";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1384,19 +1384,22 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
         args["bodyType"] = "json";
+
         args["data"] = JSON.stringify({
             "tipoFlujo": tipoFlujo,
             "nombres": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
             "apellidos": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
-            "codigoTipoIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
+            "codigoTipoIdentificacion": 3,//"{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
             "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
             "correo": "mwrosero@gmail.com",
             "telefono": "0988302580",
-            "codigoCliente": "{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}",
-            "codigoInstitucion": codigoInstitucion,
-            "tipoCuenta": tipoCuenta,
-            "numeroCuenta": numeroCuenta,
-            "periodo": detalleSuscripcion.detallePlan.tipo,
+            "datosDocumentoDebito" : {
+                "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
+                "codigoInstitucion": parseInt(codigoInstitucion),
+                "tipoCuenta": tipoCuenta,
+                "numeroCuenta": numeroCuenta,
+                "periodo": detalleSuscripcion.detallePlan.tipo,
+            },
             "tiposDocumentos": tiposDocumentos
         });
         const data = await call(args);
