@@ -42,6 +42,8 @@ class Ism extends Model
         }
 
         $header = [];
+
+        $header[] = 'Accept: application/json';
         $header[] = 'Application: ' . self::APPLICATION;
         $header[] = 'IdOrganizacion: ' . self::IDORGANIZACION;
 
