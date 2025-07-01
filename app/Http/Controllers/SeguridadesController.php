@@ -90,9 +90,19 @@ class SeguridadesController extends Controller
                             'token'    => Session::get('accessToken'),
                             'method'   => 'GET'
                         ]);
-
+                        /*$res =  Http::withOptions([
+                            'verify' => false, // Desactivar verificación de certificados
+                        ])->withHeaders([
+                            'Application' => Ism::APPLICATION,
+                            'Authorization' => 'Bearer '.Session::get('accessToken'),
+                            'Application' => Ism::APPLICATION,
+                            //'IdOrganizacion' => Ism::IDORGANIZACION,
+                        ])->post(Ism::BASE_URL.$method);
+                        $response = json_decode($res->body());*/
+                        // dump(Session::get('accessToken'));
+                        // echo Ism::BASE_URL.$method;
+                        // dd($response);
                         Session::put('infoCliente', $response->data);
-                        //dd($response);
 
                         return redirect('portal-fidelizacion/dashboard');
                     break;

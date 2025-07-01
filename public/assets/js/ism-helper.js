@@ -62,7 +62,8 @@ async function call(args){
         // Solo agregas Content-Type si NO es FormData
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     }
-        
+    
+    myHeaders.append("Accept","application/json");
     myHeaders.append("Application", _application);
     myHeaders.append("IdOrganizacion", _idOrganizacion);
     myHeaders.append("Authorization","Bearer "+ _token);

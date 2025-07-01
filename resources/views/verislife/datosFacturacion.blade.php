@@ -176,7 +176,7 @@ Registro
                 <div id="addBeneficiaryForm" class="pt-3">
                     <h5 class="fw-semibold text-center titulo-documento"></h5>
                     <div class="text-center my-3" id="content-file">
-                        <iframe src="/assets/file/documento.pdf" width="100%" height="500px" style="border: none;"></iframe>
+                        <iframe src="/assets/file/documento.pdf" id="documentPreview" width="100%" height="500px" style="border: none;"></iframe>
                     </div>
                     <div class="modal-footer justify-content-center border-0 p-0">
                         <button type="button" class="btn btn-cerulean-blue-800" data-bs-dismiss="modal">Cerrar preview</button>
@@ -188,7 +188,7 @@ Registro
 </div>
 <!-- Modal de Código de Verificación -->
 <div class="modal fade" id="verificationCodeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="verificationCodeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content rounded-4 border-0">
             <div class="modal-body text-center p-4">
 
@@ -204,6 +204,8 @@ Registro
                     <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
                     <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
                     <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input5" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
                 </div>
 
                 <p class="fw-semibold fs-6 mb-3">
@@ -226,7 +228,7 @@ Registro
 
                 <h3 class="modal-title fw-semibold text-primary-veris mb-3" id="signedDocumentModalLabel">Firmando documentos</h3>
 
-                <div class="progress-circle progress-circle-lg my-auto ms-auto" data-percentage="10">
+                <div class="progress-circle progress-circle-lg my-auto ms-auto" data-percentage="w-100">
                     <span class="progress-left">
                         <span class="progress-bar"></span>
                     </span>
@@ -236,7 +238,7 @@ Registro
                     <div class="progress-value">
                         <div>
                             <span><i class="bi bi-hourglass-split fw-medium text-success fs-4"></i></span>
-                            <p class="text-success fw-bold fs-2 mt-3 mb-0">30</p>
+                            {{-- <p class="text-success fw-bold fs-2 mt-3 mb-0">30</p> --}}
                         </div>
                     </div>
                 </div>
@@ -245,7 +247,7 @@ Registro
                     ¡Este proceso puede tardar hasta 30 segundos!
                 </p>
 
-                <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button>
+                {{-- <button type="button" class="btn btn-outline-cerulean-blue-800" data-bs-dismiss="modal">Cerrar</button> --}}
 
             </div>
         </div>
@@ -915,6 +917,7 @@ Registro
                 $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
                 couldNext = true;//validar
                 await generarSolicitudFirma();
+                return;
             }
 
             if(couldNext){
@@ -1033,11 +1036,12 @@ Registro
             await obtenerDocumentoContrato(datos);
         })
 
-        $('body').on('input', '#input1, #input2, #input3, #input4', async function(){
-            if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != ""){
+        $('body').on('input', '#input1, #input2, #input3, #input4, #input5, #input6', async function(){
+            if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != "" && $('#input5').val() != "" && $('#input6').val() != ""){
                 $('.btn-verificar-otp').attr('disabled',false)
             }else{
                 $('.btn-verificar-otp').attr('disabled',true)
+                // showMessage('warning','Atención','Debe ingresar el código OTP recibido mediante SMS');
             }
         })
 
@@ -1115,15 +1119,15 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
 
-        const data = await call(args);
-        console.log(data);
+        const blob = await callDocumento(args);
+        const pdfUrl = URL.createObjectURL(blob);
+        //window.open(pdfUrl, '_blank');
+        $('#documentPreview').attr('src', `${pdfUrl}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`);
+        setTimeout(() => {
+            URL.revokeObjectURL(pdfUrl);
+        }, 100);
 
-        if(data.code == 200){
-            $('#documentoModal').modal('show');
-        }else{
-            showMessage('warning','Atención',data.message);
-        }
-
+        $('#documentoModal').modal('show');
     }
 
     function validateFields(){
@@ -1285,6 +1289,7 @@ Registro
     }
 
     async function crearSuscripcion(){
+        $('#signedDocumentModal').modal('hide')
         {{-- console.log("crearSuscripcion");
         let generarSolicitud = await generarSolicitudFirma(); --}}
 
@@ -1310,7 +1315,7 @@ Registro
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
             "codigoCliente": {{ Session::get('infoCliente')->informacionCliente->codigoCliente }},
-            "secuenciaAfiliado": "{{ Session::get('userData')->secuenciaUsuario }}",
+            "secuenciaAfiliado": "",//"{{ Session::get('userData')->secuenciaUsuario }}",
             "codigoSolicitudFirma": codigoSolicitudFirma,
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
@@ -1362,6 +1367,7 @@ Registro
         if(data.code == 200){
             stepper.next();
             await cargaAfiliadosSuscripcion();
+            $('#successSignatureModal').modal('show')
         }else{
             showMessage('error','Atención',data.message);
         }
@@ -1370,7 +1376,7 @@ Registro
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "EMPRESA";// "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1406,16 +1412,25 @@ Registro
         
         if(data.code == 200){
             codigoSolicitudFirma = data.data.codigoSolicitud;
-            $('#verificationCodeModal').modal('show');
+            if(tipoFlujo == "E"){
+                await confirmarOtp();
+            }else{
+                $('#verificationCodeModal').modal('show');
+            }
         }else{
             showMessage('error','Atención',data.message);
         }
     }
 
     async function confirmarOtp(){
-        let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}`;
+        $('#signedDocumentModal').modal('show')
+        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
+        let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
+        if(tipoFlujo == "E"){
+            //codigoOtp = 0;
+        }
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion`;
+        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1424,7 +1439,7 @@ Registro
             "codigoOtp": codigoOtp
         });
         const data = await call(args);
-        
+        $('#signedDocumentModal').modal('hide')
         if(data.code == 200){
             $('#verificationCodeModal').modal('hide');
             await crearSuscripcion();
