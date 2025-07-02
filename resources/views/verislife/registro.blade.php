@@ -1433,6 +1433,7 @@ Registro
                 }
                 return data;
             } else {
+                showMessage('error','Atención', data.message)
                 console.log("Error en respuesta:", data);
                 uploadedModal.hide();
             }
