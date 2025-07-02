@@ -1433,7 +1433,7 @@ Registro
         
         if(data.code == 200){
             codigoSolicitudFirma = data.data.codigoSolicitud;
-            if(tipoFlujo !== "E"){
+            if(tipoFlujo == "E"){
                 await confirmarOtp();
             }else{
                 $('#verificationCodeModal').modal('show');
@@ -1447,11 +1447,10 @@ Registro
         $('#signedDocumentModal').modal('show')
         let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
-        if(tipoFlujo == "E"){
-            codigoOtp = 0;
-            $('#signedDocumentModal').modal('hide')
-            await crearSuscripcion();
-            return;
+        let payload = {}
+        if(tipoFlujo !== "E"){
+            //codigoOtp = 0;
+            payload.codigoOtp = codigoOtp
         }
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
@@ -1459,9 +1458,7 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
         args["bodyType"] = "json";
-        args["data"] = JSON.stringify({
-            "codigoOtp": codigoOtp
-        });
+        args["data"] = JSON.stringify(payload);
         const data = await call(args);
         $('#signedDocumentModal').modal('hide')
         if(data.code == 200){
