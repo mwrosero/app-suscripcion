@@ -760,6 +760,10 @@ Registro
                                                     <div class="detail-value valor-total"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div>Comprobante de pago:</div>
+                                                    <div type="button" class="detail-value text-decoration-underline btn-outline-cerulean-blue-800 link-comprobante-pago">Visualizar</div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Fecha de inicio de contrato:</div>
                                                     <div class="detail-value">{{ $now->format('d/m/Y') }}</div>
                                                 </li>
@@ -1013,6 +1017,9 @@ Registro
         nombreBancoSelect.disabled = false;
         $('#nombreBanco').select2()
 
+        $('body').on('click', '.link-comprobante-pago', async function(){
+            await mostrarComprobante();
+        })
 
         $('body').on('change', '#numeroIdentificacionFactura', async function(){
             await validarIdentificacionFactura();
@@ -1363,7 +1370,7 @@ Registro
         });
         const data = await call(args);
         console.log(data);
-        detalleSuscripcion.suscripcion = data.data;
+        detalleSuscripcion.suscripcion. = data.data;
         if(data.code == 200){
             stepper.next();
             await cargaAfiliadosSuscripcion();
@@ -1373,10 +1380,24 @@ Registro
         }
     }
 
+    async function mostrarComprobante(){
+        let args = [];
+        args["endpoint"] = api_url + `/reportes/v1/financiero/comprobante_financiero?format=pdf&codigoEmpresa=1&secuenciaComprobante=${detalleSuscripcion.suscripcion.secuenciaComprobante}`;
+        args["method"] = "GET";
+        args["showLoader"] = false;
+        args["token"] = _token;
+        const blob = await callDocumento(args);
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, '_blank');
+        setTimeout(() => {
+            URL.revokeObjectURL(pdfUrl);
+        }, 100);
+    }
+
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1424,7 +1445,7 @@ Registro
 
     async function confirmarOtp(){
         $('#signedDocumentModal').modal('show')
-        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         if(tipoFlujo == "E"){
             //codigoOtp = 0;
