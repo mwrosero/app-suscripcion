@@ -1376,7 +1376,7 @@ Registro
         formData.append("file", finalFile);
 
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_archivo_afiliados?codigoPais=1&codigoProvincia=1&codigoCiudad=1&tipoCredito=CREDITO_SERVICIOS&codigoConvenio=${detalleSuscripcion.detallePlan.codigoConvenio}`;
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_archivo_afiliados?codigoPais=1&codigoProvincia=1&codigoCiudad=1&tipoCredito=CREDITO_FIDELIZACION&codigoConvenio=${detalleSuscripcion.detallePlan.codigoConvenio}`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
