@@ -1433,7 +1433,7 @@ Registro
         
         if(data.code == 200){
             codigoSolicitudFirma = data.data.codigoSolicitud;
-            if(tipoFlujo == "E"){
+            if(tipoFlujo !== "E"){
                 await confirmarOtp();
             }else{
                 $('#verificationCodeModal').modal('show');
@@ -1448,7 +1448,10 @@ Registro
         let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         if(tipoFlujo == "E"){
-            //codigoOtp = 0;
+            codigoOtp = 0;
+            $('#signedDocumentModal').modal('hide')
+            await crearSuscripcion();
+            return;
         }
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
