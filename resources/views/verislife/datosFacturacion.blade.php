@@ -1370,7 +1370,7 @@ Registro
         });
         const data = await call(args);
         console.log(data);
-        detalleSuscripcion.suscripcion. = data.data;
+        detalleSuscripcion.suscripcion = data.data;
         if(data.code == 200){
             stepper.next();
             await cargaAfiliadosSuscripcion();
