@@ -540,7 +540,9 @@ Registro
                 beneficiarios.push(beneficiario);
             });
             detalleSuscripcion.origen = "mejora";
-            detalleSuscripcion.beneficiarios = beneficiarios;
+            detalleSuscripcion.detallePlanOriginal = detalleSuscripcion.detallePlan;
+            detalleSuscripcion.detallePlan = planNuevo;
+            detalleSuscripcion.pacientes = beneficiarios;
             localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
             location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
         });
@@ -761,7 +763,7 @@ Registro
             method: 'GET',
             endpoint: `${baseUrl}?${queryParams.toString()}`,
             bodyType: 'json',
-            showLoader: false,
+            showLoader: true,
         });
 
         if (response.code === 200) {
