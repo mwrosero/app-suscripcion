@@ -1397,7 +1397,7 @@ Registro
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1445,7 +1445,7 @@ Registro
 
     async function confirmarOtp(){
         $('#signedDocumentModal').modal('show')
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         let payload = {}
         if(tipoFlujo !== "E"){
