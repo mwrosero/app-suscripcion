@@ -40,9 +40,11 @@
     --vris-perano-200: #c9dbfc;
     --vris-perano-300: #a9c4f9;
     --vris-perano-400: #85a1f4;
+    --vris-shakespeare-300: #6bb2cf;
     --vris-cornflower-blue-300: #98baf8;
     --vris-cornflower-blue-400: #5489f2;
     --vris-cornflower-blue-500: #4371ee;
+    --vris-congress-blue-900: #024c7c;
     --vris-pattens-blue-50: #f0f9ff;
     --vris-pattens-blue-100: #d7edfd;
     --vris-pattens-blue-200: #bbe5fc;
@@ -52,6 +54,7 @@
     --vris-cerulean-blue-700: #1967b0;
     --vris-cerulean-blue-800: #2156bf;
     --vris-cerulean-blue-900: #1e458a;
+    --vris-astronaut-900: #163d7b;
     --vris-blue-ribbon-500: #3885f9;
     --vris-blue-ribbon-600: #296bef;
     --vris-blue-ribbon-700: #1a50db;
@@ -68,6 +71,9 @@
     --vris-mariner-500: #0c8deb;
     --vris-mariner-600: #0071ce;
     --vris-mariner-700: #0157a3;
+    --vris-mariner-2-400: #5993d7;
+    --vris-mariner-2-500: #306db5;
+    --vris-mariner-2-600: #245ba5;
     --vris-lochmara-400: #53a3dd;
     --vris-lochmara-500: #2c84c6;
     --vris-lochmara-600: #1e6aab;
@@ -114,6 +120,29 @@ body.login-page {
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
+}
+.hero{
+    position: relative;
+    background: linear-gradient(
+            45deg,
+            rgba(251, 251, 251, 0.90) 0%,
+            rgba(248, 251, 255, 0.35) 45.5%,
+            rgba(255, 255, 255, 0) 100%
+        ),
+        url("/assets/img/veris/fondo-veris-care.png") no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    padding-top: 6rem; /* margen para que no tape el navbar */
+    z-index: 1;
+    overflow: hidden;
+}
+.navbar-floating {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
 }
 
 h6,
@@ -196,6 +225,15 @@ h1,
 }
 .bg-robin-egg-blue-400 {
     background-color: var(--vris-robin-egg-blue-400) !important;
+}
+.bg-mariner-2-500{
+    background-color: var(--vris-mariner-2-500) !important;
+}
+.bg-vris-astronaut-900{
+    background-color: var(--vris-astronaut-900) !important;
+}
+.bg-grenadier-600 {
+    background-color: var(--vris-grenadier-600) !important;
 }
 .bg-sail-gradient {
     background: #afdbfc;
@@ -694,6 +732,12 @@ h1,
 }
 .text-robin-egg-blue-400 {
     color: var(--vris-robin-egg-blue-400) !important;
+}
+.text-congress-blue-900{
+    color: var(--vris-congress-blue-900) !important;
+}
+.text-shakespeare-300{
+    color: var(--vris-shakespeare-300) !important;
 }
 .rounded-4 {
     border-radius: 1rem !important;

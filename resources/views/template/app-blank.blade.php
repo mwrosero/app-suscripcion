@@ -68,8 +68,8 @@
 
 <body class="@yield('body-class')">
 
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+    <div class="layout-wrapper layout-content-navbar @yield('layout-wrapper-class')">
+        <div class="layout-container @yield('layout-container-class')">
             @yield('content')
         </div>
     </div>

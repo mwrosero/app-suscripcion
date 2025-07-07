@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeguridadesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CotizadorController;
+use App\Http\Controllers\B2B2CController;
+use App\Http\Controllers\B2CController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,22 +131,12 @@ Route::group(['middleware' => ['loggedUser']], function () {
 
 });
 
-Route::get('/login-veris-care', function () {
-    return view('verislife.b2b2c.login');
-});
+# B2B2C
+Route::get('/login-veris-care', [B2B2CController::class, 'login'])->name('b2b2c.login');
+Route::get('/selecciona-empresa', [B2B2CController::class, 'empresa'])->name('b2b2c.empresa');
+Route::get('/centro-medico', [B2B2CController::class, 'centroMedico'])->name('b2b2c.centroMedico');
+Route::get('/plan-medico-veris', [B2B2CController::class, 'planVeris'])->name('b2b2c.planVeris');
+Route::get('/plan-medico-parami', [B2B2CController::class, 'planParami'])->name('b2b2c.planParami');
 
-Route::get('/selecciona-empresa', function () {
-    return view('verislife.b2b2c.selectorEmpresa');
-});
-
-Route::get('/centro-medico', function () {
-    return view('verislife.b2b2c.centroMedico');
-});
-
-Route::get('/plan-medico-veris', function () {
-   return view('verislife.b2b2c.planes.veris'); 
-});
-
-Route::get('/plan-medico-parami', function () {
-   return view('verislife.b2b2c.planes.parami'); 
-});
+# B2C
+Route::get('/b2c', [B2CController::class, 'index'])->name('b2c.index');
