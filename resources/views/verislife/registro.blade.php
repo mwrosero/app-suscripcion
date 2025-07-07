@@ -162,6 +162,20 @@ Registro
     </div>
 </div>
 
+<div class="modal fade" id="successfullyUploadMasivedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successfullyUploadMasivedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h3 class="text-primary-veris fw-medium title-qty-masivo"></h3>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" />
+                <div class="text-center">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="successfullyAddedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successfullyAddedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
@@ -1418,6 +1432,8 @@ Registro
                             item.activo = true;
                             pacientesAgregados.push(item);
                         });
+
+                        $('.title-qty-masivo').html(`Se han cargado ${data.data.rows.length} usuarios con éxito`);
 
                         const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
                         const noDuplicados = nuevos.filter(p => !existentes.has(p.numeroIdentificacionPcte));

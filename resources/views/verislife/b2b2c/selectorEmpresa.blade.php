@@ -14,7 +14,7 @@ VerisLife - Selecciona la empresa
                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical.svg" width="138" alt="Veris Logo">
                 </div>
                 <div class="col-auto">
-                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami.png" width="256" alt="ParaMí Logo">
+                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami.svg" width="256" alt="ParaMí Logo">
                 </div>
             </div>
 

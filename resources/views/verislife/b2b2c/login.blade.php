@@ -8,7 +8,7 @@
     <div class="w-100 h-100 position-relative d-flex flex-column justify-content-center align-items-start px-4 px-md-5">
         <div class="position-absolute top-0 start-0 mt-4 ms-4 d-flex align-items-center gap-3 z-1">
             <img src="{{ asset('assets/img/veris/logo-veris.svg') }}" alt="Veris" height="40">
-            <img src="{{ asset('assets/img/veris/parami.png') }}" alt="ParaMi" height="40">
+            <img src="{{ asset('assets/img/veris/parami.svg') }}" alt="ParaMi" height="40">
         </div>
 
         
