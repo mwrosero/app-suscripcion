@@ -1435,6 +1435,7 @@ Registro
 
                         $('.title-qty-masivo').html(`Se han cargado ${data.data.rows.length} usuarios con éxito`);
 
+
                         const existentes = new Set(pacientes.map(p => p.numeroIdentificacionPcte));
                         const noDuplicados = nuevos.filter(p => !existentes.has(p.numeroIdentificacionPcte));
 
@@ -1444,7 +1445,8 @@ Registro
                         fillRegistros();
                         drawPaginationAfiliados({ totalRows: pacientes.length }, page);
 
-                        successModal.show();
+                        // successModal.show();
+                        $('#successfullyUploadMasivedModal').modal('show');
                     }
                 }
                 return data;
