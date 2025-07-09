@@ -1419,7 +1419,7 @@ Registro
             "codigoTipoIdentificacion": 3,//"{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
             "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
             "correo": "mwrosero@gmail.com",
-            "telefono": "0988302580",
+            "telefono": "0994174588", 
             "datosDocumentoDebito" : {
                 "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
                 "codigoInstitucion": parseInt(codigoInstitucion),
