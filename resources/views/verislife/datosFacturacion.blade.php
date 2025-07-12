@@ -200,12 +200,12 @@ Registro
                 <p class="text-primary-veris fw-semibold fs-6">0999999999</p>
 
                 <div class="d-flex justify-content-center gap-2 mb-3">
-                    <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
-                    <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
-                    <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
-                    <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
-                    <input type="text" id="input5" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
-                    <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
+                    <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
+                    <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
+                    <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input5" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                    <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
                 </div>
 
                 <p class="fw-semibold fs-6 mb-3">
@@ -324,15 +324,17 @@ Registro
                                             <h5 class="fw-semibold">Datos de facturación</h5>
                                             <hr>
                                             <div class="row justify-content-center my-4">
-                                                <div class="col-md-12 col-xl-8">
+                                                <div class="col-md-12 col-lg-8 col-xl-8">
                                                     <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
                                                         <div class="card-body">
                                                             <div class="row">
-                                                                <div class="col-12 col-md-6">
+                                                                <div class="col-12 col-md-8">
                                                                     <h3 class="mb-2">Total a pagar</h3>
                                                                     <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
+                                                                    <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar"></p>
+                                                                    <p class="fw-normal mb-0 fs-12p label-nombre-plan"></p>
                                                                 </div>
-                                                                <div class="col-12 col-md-6">
+                                                                <div class="col-12 col-md-4 mt-md-3">
                                                                     <div class="text-start text-md-end">
                                                                         <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
                                                                     </div>
@@ -413,15 +415,17 @@ Registro
                                                 <h5 class="mb-3">Valor a pagar</h5>
                                                 <hr>
                                                 <div class="row justify-content-center mt-4">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12 col-lg-8 col-xl-8">
                                                         <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-12 col-md-6">
+                                                                    <div class="col-12 col-md-8">
                                                                         <h3 class="mb-2">Total a pagar</h3>
                                                                         <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
+                                                                        <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar"></p>
+                                                                        <p class="fw-normal mb-0 fs-12p label-nombre-plan"></p>
                                                                     </div>
-                                                                    <div class="col-12 col-md-6">
+                                                                    <div class="col-12 col-md-4">
                                                                         <div class="text-start text-md-end">
                                                                             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
                                                                         </div>
@@ -761,7 +765,7 @@ Registro
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Comprobante de pago:</div>
-                                                    <div type="button" class="detail-value text-decoration-underline btn-outline-cerulean-blue-800 link-comprobante-pago">Visualizar</div>
+                                                    <div type="button" class="detail-value text-decoration-underline btn-outline-cerulean-blue-800 link-comprobante-pago border-0">Visualizar</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Fecha de inicio de contrato:</div>
@@ -987,7 +991,9 @@ Registro
         $('#nombreEmpresa').val("{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}")
         $('#ruc').val("{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}")
 
-        $('.valor-pagar').html(`$${ (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2) } <small class="fw-normal fs-12p">/${detalleSuscripcion.pacientes.length} PLAN${ (detalleSuscripcion.pacientes.length == 1) ? `` : `ES` }</small>`)
+        $('.valor-pagar').html(`$${ (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2) }`)
+        $('.qty-valor-pagar').html(`por ${detalleSuscripcion.pacientes.length} colaborador${ (detalleSuscripcion.pacientes.length == 1) ? `` : `es` } (${detalleSuscripcion.detallePlan.nombre})`)
+        $('.label-nombre-plan').html(`Frecuencia de pago: <b class="text-capitalize">${detalleSuscripcion.detallePlan.tipo.toLowerCase()}</b>`)
 
         const tipoIdentificacionSelect = document.getElementById('tipoIdentificacionFactura');
         tipoIdentificacionSelect.innerHTML = '<option value="" selected>Seleccionar tipo de identificación</option>';
@@ -1055,6 +1061,27 @@ Registro
         $('body').on('click', '.btn-verificar-otp', async function(){
             await confirmarOtp();
         })
+
+        const inputs = document.querySelectorAll(".input-digit");
+
+        inputs.forEach((input, index) => {
+            input.addEventListener("input", function () {
+                // Solo permitir un solo número
+                this.value = this.value.replace(/[^0-9]/g, '').slice(0, 1);
+
+                // Si hay un número, pasar al siguiente input
+                if (this.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener("keydown", function (e) {
+                // Si presionan Backspace en un campo vacío, regresar al anterior
+                if (e.key === "Backspace" && this.value === "" && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
 
         {{-- $('body').on('click', '#btn-next', async function(){
             let step = $(this).attr('step-rel');
@@ -1350,7 +1377,7 @@ Registro
                 "codigoTipoIdentificacion": 3,//cambiar
                 "numeroIdentificacion": "0923796304",//$('#ruc').val(),
                 "representanteLegal": "Michael Rosero",//$('#titular').val(),
-                "telefono": "0994174588",//$('#telefono').val(),
+                "telefono": "0988302580",//$('#telefono').val(),
                 "email": "mwrosero@gmail.com",//$('#emailContacto').val(),
                 "direccion": "Mi casa"
             },
@@ -1384,7 +1411,7 @@ Registro
         let args = [];
         args["endpoint"] = api_url + `/reportes/v1/financiero/comprobante_financiero?format=pdf&codigoEmpresa=1&secuenciaComprobante=${detalleSuscripcion.suscripcion.secuenciaComprobante}`;
         args["method"] = "GET";
-        args["showLoader"] = false;
+        args["showLoader"] = true;
         args["token"] = _token;
         const blob = await callDocumento(args);
         const pdfUrl = URL.createObjectURL(blob);
@@ -1397,7 +1424,7 @@ Registro
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1419,7 +1446,7 @@ Registro
             "codigoTipoIdentificacion": 3,//"{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
             "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
             "correo": "mwrosero@gmail.com",
-            "telefono": "0994174588", 
+            "telefono": "0988302580", 
             "datosDocumentoDebito" : {
                 "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
                 "codigoInstitucion": parseInt(codigoInstitucion),
@@ -1445,7 +1472,7 @@ Registro
 
     async function confirmarOtp(){
         $('#signedDocumentModal').modal('show')
-        let tipoFlujo = "C";//"{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         let payload = {}
         if(tipoFlujo !== "E"){

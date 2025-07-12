@@ -4,6 +4,7 @@
   lang="en"
   class="light-style customizer-hide"
   dir="ltr"
+  translate="no"
   data-theme="theme-default"
   data-assets-path="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/"
   data-template="vertical-menu-template">
