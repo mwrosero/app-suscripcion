@@ -1,48 +1,67 @@
-@extends('template.verisLife.login')
+@extends('template.login')
 @section('title')
     Veris - Actualizar Contraseña
 @endsection
 @section('content')
 
-<!-- Content Actualizar Clave -->
-<p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Actualizar contraseña</p>
-<p class="fs-10 mb-3 text-center bg-colortext">Para acceder al sistema debe realizar el proceso de actualización de la contraseña</p>
+<div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-inner py-4">
+        <div class="card shadow-none">
+            <div class="card-body px-3">
+                <!-- Logo -->
+                <div class="app-brand justify-content-center mb-4 mt-2">
+                    <a href="#!" class="app-brand-link gap-2">
+                        <span class="app-brand-logo">
+                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical.svg" width="135" alt="veris">
+                        </span>
+                    </a>
+                </div>
+                <!-- /Logo -->
+                <div class="row justify-content-center pb-5">
+                    <!-- Content Actualizar Clave -->
+                    <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Actualizar contraseña</p>
+                    <p class="fs-10 mb-3 text-center bg-colortext">Para acceder al sistema debe realizar el proceso de actualización de la contraseña</p>
 
-<form id="formAuthentication" class="mb-3" method="post" action="/actualizar-clave-temporal" onsubmit="return validarClave()">
-    @csrf
-    @if (session()->has('mensaje'))
-        <div class="alert alert-warning">
-        {{ session('mensaje') }}
-        </div>
-    @endif
-    <div class="mb-2">
-        <label for="nuevaClave" class="form-label fw-medium">Nueva contraseña</label>
-        <div class="input-group input-group-merge">
-            <input type="password"
-                class="form-control"
-                id="nuevaClave"
-                name="nuevaClave"
-                autofocus
-                required />
-            <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    <form id="formAuthentication" class="mb-3" method="post" action="/actualizar-clave-temporal" onsubmit="return validarClave()">
+                        @csrf
+                        @if (session()->has('mensaje'))
+                            <div class="alert alert-warning">
+                            {{ session('mensaje') }}
+                            </div>
+                        @endif
+                        <div class="mb-2">
+                            <label for="nuevaClave" class="form-label fw-medium">Nueva contraseña</label>
+                            <div class="input-group input-group-merge">
+                                <input type="password"
+                                    class="form-control"
+                                    id="nuevaClave"
+                                    name="nuevaClave"
+                                    autofocus
+                                    required />
+                                <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmarClave" class="form-label fw-medium">Confirmar nueva contraseña</label>
+                            <div class="input-group input-group-merge">
+                                <input type="password"
+                                    class="form-control"
+                                    id="confirmarClave"
+                                    name="confirmarClave"
+                                    autofocus
+                                    required />
+                                <span id="togglePassword2" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-lg btn-blue-veris d-grid w-100" type="submit" id="recuperarContrasena">Actualizar Contraseña</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="mb-3">
-        <label for="confirmarClave" class="form-label fw-medium">Confirmar nueva contraseña</label>
-        <div class="input-group input-group-merge">
-            <input type="password"
-                class="form-control"
-                id="confirmarClave"
-                name="confirmarClave"
-                autofocus
-                required />
-            <span id="togglePassword2" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
-        </div>
-    </div>
-    <div class="mb-3">
-        <button class="btn btn-lg btn-blue-veris d-grid w-100" type="submit" id="recuperarContrasena">Actualizar Contraseña</button>
-    </div>
-</form>
+</div>
 <!-- /Content Actualizar Clave -->
 <script>
     function validarClave() {
