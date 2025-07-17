@@ -781,13 +781,15 @@ Registro
         });
 
         if (response.code === 200) {
-            pacientes = response.data.rows;
-            console.log(pacientes)
-            page = 1;
-            const pacientesActivos = pacientes.filter(p => p.activo);
+            if(response.data !== null){
+                pacientes = response.data.rows;
+                console.log(pacientes)
+                page = 1;
+                const pacientesActivos = pacientes.filter(p => p.activo);
 
-            fillRegistros();
-            drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
+                fillRegistros();
+                drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
+            }
         }
     }
 
