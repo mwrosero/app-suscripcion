@@ -438,11 +438,10 @@ Registro
                                 <tr>
                                     <th class="align-middle text-center item-action d-none" style="width: 50px;"></th>
                                     <th class="text-center">Identificación</th>
-                                    <th class="text-center">Nombre y Apellido</th>
+                                    <th class="text-center">Apellido y Nombre</th>
                                     <th class="text-center">Teléfono móvil</th>
                                     <th class="text-center">Correo</th>
-                                    <th class="text-center">Fecha de nacimiento</th>
-                                    <th class="text-center">Veris Care</th>
+                                    <th class="text-center">Parentesco</th>
                                     <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -938,8 +937,7 @@ Registro
                 <td class="text-center">${value.primerApellido ?? ''} ${value.segundoApellido ?? ''} ${value.primerNombre ?? ''} ${value.segundoNombre ?? ''}</td>
                 <td class="text-center">${value.telefonoMovil}</td>
                 <td class="text-center">${value.mail ?? value.correo}</td>
-                <td class="text-center">${value.fechaNacimiento}</td>
-                <td class="text-center">${detalleSuscripcion.detallePlan.nombre}</td>
+                <td class="text-center text-capitalize">${value.nombreTipoParentesco.toLowerCase()}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
