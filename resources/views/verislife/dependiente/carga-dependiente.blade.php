@@ -44,17 +44,17 @@ $processId = base64_encode(uniqid());
                     </div>
                     <div class="card-body">
                         <div class="row g-0 justify-content-around align-items-center my-4">
-                            <div class="col-12 col-md-5">
+                            <div class="col-12 col-md-5 d-none con-dependientes">
                                 <div class="avatar avatar-lg me-2">
                                     <span class="avatar-initial rounded-4 bg-cerulean-blue-800">
                                         <i class="fa-solid fa-users text-white fs-2"></i>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-5">
+                            <div class="col-12 col-md-5 d-none con-dependientes">
                                 <h2 class="text-primary-veris text-center mb-0 qtyDependientesAfiliados">1</h2>
                             </div>
-                            <div class="content-message text-center d-none">
+                            <div class="content-message text-center d-none sin-dependientes">
                                 <i class="fa-solid fa-bullhorn fs-3 mb-3"></i>
                                 <h6 class="text-darktext-blue-zodiac-950 mb-0">No tienes dependientes registrados</h6>
                             </div>
@@ -228,7 +228,12 @@ $processId = base64_encode(uniqid());
             </div>`;
         $('.btn-registro').attr('data-rel', JSON.stringify(plan))
         $('#planContratado').html(elem)
-        $('.qtyDependientesAfiliados').html(plan.cantidadAfiliados)
+        if(plan.cantidadDependientes > 0){
+            $('.qtyDependientesAfiliados').html(plan.cantidadDependientes)
+            $('.con-dependientes').removeClass('d-none')
+        }else{
+            $('.sin-dependientes').removeClass('d-none')
+        }
         $('.box-indicadores').removeClass('d-none')
     }
     
