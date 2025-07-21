@@ -49,10 +49,10 @@ Registro
                             <label for="primerApellido" class="form-label fs-14p fw-medium">Primer apellido <span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="primerApellido" name="primerApellido" placeholder="Ingresa tu primer apellido" required />
                         </div>
-                        <!-- <div class="col-12 col-md-10">
+                        <div class="col-12 col-md-10 d-none" id="sapellido-col">
                             <label for="segundoApellido" class="form-label fs-14p fw-medium d-flex justify-content-between">Segundo apellido <small class="text-muted fs-12p">(Opcional)</small></label>
                             <input type="text" class="form-control form-control-lg fs-14p" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
-                        </div> -->
+                        </div>
                         <div class="col-12 col-md-10 d-none" id="fecha-col">
                             <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
                             <input type="date" class="form-control form-control-lg fs-14p" id="fechaNacimiento" name="fechaNacimiento" required />
@@ -655,7 +655,7 @@ Registro
             $('#numeroIdentificacion').val('');
             $('#tipoIdentificacion').val('');
 
-            $('#nombre-col, #apellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
+            $('#nombre-col, #apellido-col, #sapellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
                 .addClass('d-none');
 
             $('#btn-add').text('Validar').attr('disabled', false);
@@ -1209,6 +1209,7 @@ Registro
     function llenarCamposPaciente(paciente) {
         $('#primerNombre').val(paciente.primerNombre || '');
         $('#primerApellido').val(paciente.primerApellido || '');
+        $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
         $('#email').val(paciente.correoElectronico || '');
@@ -1223,7 +1224,7 @@ Registro
     }
 
     function mostrarCamposAdicionales() {
-        $('#nombre-col, #apellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
+        $('#nombre-col, #apellido-col, #sapellido-col, #fecha-col, #genero-col, #email-col, #telefono-col, #terms-col, #privacy-col')
             .removeClass('d-none');
 
         $('#tipoIdentificacion').prop('disabled', true);
@@ -1236,6 +1237,7 @@ Registro
         let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
         let primerNombre = $('#primerNombre').val().toUpperCase();
         let primerApellido = $('#primerApellido').val().toUpperCase();
+        let segundoApellido = $('#segundoApellido').val().toUpperCase();
         let genero = $('#genero option:selected').val();
         let fechaNacimiento = $('#fechaNacimiento').val();
         let telefonoMovil = $('#telefonoMovil').val();
@@ -1264,6 +1266,7 @@ Registro
             "codigoTipoIdentificacion": codigoTipoIdentificacionPcte,
             "numeroIdentificacionPcte": numeroIdentificacionPcte,
             "primerApellido": primerApellido,
+            "segundoApellido": segundoApellido,
             "primerNombre": primerNombre,
             "genero": genero,
             "fechaNacimiento": fechaFormateada,

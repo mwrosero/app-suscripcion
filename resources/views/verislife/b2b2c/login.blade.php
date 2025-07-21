@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 
-@section('title', 'VerisLife - Login')
+@section('title', 'Veris Care - Acceder')
 
 @section('body-class', 'login-page')
 
@@ -17,19 +17,27 @@
             <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid" />
         </div>
         <div class="col-12">
-            <form action="#!" method="POST" class="row g-3 justify-content-start align-items-end">
-                @csrf
+            <div class="row g-3 justify-content-start align-items-end">
                 <div class="col-12 col-lg-8">
                     <label for="dni" class="form-label text-blue-zodiac-950 fw-medium">Número de Identificación*</label>
                     <input type="text" id="dni" name="dni" class="form-control form-control-lg rounded-3" placeholder="0999999999" required />
                 </div>
                 <div class="col-12 col-lg-4">
-                    <button type="submit" class="btn btn-lg btn-blue-veris btn-lg rounded-3 w-100 d-flex align-items-center justify-content-center gap-2">
+                    <button class="btn btn-lg btn-blue-veris btn-lg rounded-3 w-100 d-flex align-items-center justify-content-center gap-2 btn-acceder">
                         Continuar <i class="fa-solid fa-angle-right"></i>
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        $('body').on('click', '.btn-acceder', function() {
+            console.log(0)
+        })
+    })
+</script>
+@endpush
