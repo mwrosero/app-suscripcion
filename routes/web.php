@@ -83,15 +83,21 @@ Route::group(['middleware' => ['loggedUser']], function () {
     Route::get('/refreshToken', [SeguridadesController::class, 'refreshToken'])->name('refreshToken')->withoutMiddleware(['guest']);
 
     Route::get('/', function(){
-        return view('verislife.inicio');
+        // dd(Session::get('infoCliente'));
+
+        if(Session::get('infoCliente')->tipoFlujo == "E" && is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+            return view('verislife.inicio');
+        }else if(Session::get('infoCliente')->tipoFlujo == "E" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+            return view('verislife.dependiente.carga-dependiente');
+        }
     })->withoutMiddleware(['guest']);
     
     Route::get('portal-fidelizacion/dashboard', function () {
+        // dump(Session::get('userData'));
         // dd(Session::get('infoCliente'));
-        // dd(Session::get('userData'));
-        if(Session::get('infoCliente')->tipoFlujo == "E"){
+        if(Session::get('infoCliente')->tipoFlujo == "E" && is_null(Session::get('infoCliente')->secuenciaAfiliado)){
             return view('verislife.inicio');
-        }else{
+        }else if(Session::get('infoCliente')->tipoFlujo == "E" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
             return view('verislife.dependiente.carga-dependiente');
         }
     })->withoutMiddleware(['guest']);
@@ -104,6 +110,11 @@ Route::group(['middleware' => ['loggedUser']], function () {
     Route::get('portal-fidelizacion/registro-plan/{params}', function ($params) {
         // dd(Session::get('userData'));
         return view('verislife.registro')->with('params', $params);
+    })->withoutMiddleware(['guest']);
+
+    Route::get('portal-fidelizacion/registro-dependientes/{params}', function ($params) {
+        // dd(Session::get('userData'));
+        return view('verislife.dependiente.registro')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
     Route::get('portal-fidelizacion/registro-plan', function () {
@@ -137,7 +148,7 @@ Route::group(['middleware' => ['loggedUser']], function () {
 });
 
 # B2B2C
-Route::get('/login-veris-care', [B2B2CController::class, 'login'])->name('b2b2c.login');
+Route::get('/veris-care', [B2B2CController::class, 'login'])->name('b2b2c.login');
 Route::get('/selecciona-empresa', [B2B2CController::class, 'empresa'])->name('b2b2c.empresa');
 Route::get('/centro-medico', [B2B2CController::class, 'centroMedico'])->name('b2b2c.centroMedico');
 Route::get('/plan-medico-veris', [B2B2CController::class, 'planVeris'])->name('b2b2c.planVeris');
