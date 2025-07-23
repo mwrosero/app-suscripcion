@@ -22,6 +22,13 @@ class Ism extends Model
     public const IDORGANIZACION = 'adf4e264-cd20-4653-9a44-025b13050992';
     public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     public const WAR_SEGURIDAD = 'seguridadtest';
+    public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
+    public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
+    public const PASSWORD_VERIS_GENERIC = 'Cl@ve1234';
+    public const ENVIRONMENT_NUVEI = 'stg';
+    public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
+    public const APPLICATION_KEY_NUVEI = 'jQeELdG4N5NXi6ULTv3kcm9quk9hXx';
+
     
     public const CODIGOSUCURSAL = 12;
     public const PERPAGE = 10;
@@ -44,7 +51,11 @@ class Ism extends Model
         $header = [];
 
         $header[] = 'Accept: application/json';
-        $header[] = 'Application: ' . self::APPLICATION;
+        if(isset($config['application'])){
+            $header[] = 'Application: ' . self::APPLICATION_GENERIC;
+        }else{
+            $header[] = 'Application: ' . self::APPLICATION;
+        }
         $header[] = 'IdOrganizacion: ' . self::IDORGANIZACION;
 
         // AUTH

@@ -146,6 +146,7 @@ $processId = base64_encode(uniqid());
 @push('scripts')
 <script>
     let codigoCliente = {{ Session::get('infoCliente')->secuenciaAfiliado  }};
+    let suscripcion = {};
     {{-- let codigoCliente = 13315; --}}
     document.addEventListener('DOMContentLoaded', async () => {
         const planes = await obtenerPlanesSuscripcionDetalleEmpresa();
@@ -158,17 +159,12 @@ $processId = base64_encode(uniqid());
             let suscripcion = {};
             suscripcion.detallePlan = data;
             suscripcion.origen = "suscripcion";
-            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
+            localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
             location.href = '/portal-fidelizacion/verificacion-plan/{{ $processId }}';
         });
 
         $('body').on('click', '.btn-registro', function() {
-            let data = JSON.parse($(this).attr('data-rel'));
-            let suscripcion = {};
-            suscripcion.detallePlan = data;
-            suscripcion.origen = "edicion";
-            localStorage.setItem(`suscripcion-{{ $processId }}`, JSON.stringify(suscripcion));
-            location.href = '/portal-fidelizacion/registro-dependientes/{{ $processId }}';
+            location.href = '/portal-fidelizacion/registrar-dependientes';
         });
 
     });
@@ -200,6 +196,9 @@ $processId = base64_encode(uniqid());
             return;
         }
         let plan = planesContratados[0];
+        suscripcion.detallePlan = plan;
+        suscripcion.origen = "edicion";
+        localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
         let beneficios = ``;
         $.each(plan.beneficios, function(key,value){
             const claseIcono = key === 0 ? 'text-primary-veris' : 'text-blue-zodiac-950';

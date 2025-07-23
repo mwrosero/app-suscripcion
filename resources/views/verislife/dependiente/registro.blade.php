@@ -498,7 +498,7 @@ Registro
     const uploadedModal = new bootstrap.Modal(document.getElementById('uploadedModal'));
     const successModal = new bootstrap.Modal(document.getElementById('successfullyAddedModal'));
     const collaboratorSuccessRemovedModal = new bootstrap.Modal(document.getElementById('collaboratorSuccessRemovedModal'));
-    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     const btnDeleteCollaborador = document.getElementById('btnDeleteCollaborador');
 
     let finalFile = null;
@@ -539,8 +539,8 @@ Registro
             detalleSuscripcion.detallePlanOriginal = detalleSuscripcion.detallePlan;
             detalleSuscripcion.detallePlan = planNuevo;
             detalleSuscripcion.pacientes = beneficiarios;
-            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-            location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+            localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
+            location.href = `/portal-fidelizacion/facturacion`;
         });
 
         $('body').on('click', '.btn-plantilla', async function(){
@@ -576,13 +576,13 @@ Registro
         $('body').on('click', '#btn-continuar', async function(){
             if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
                 detalleSuscripcion.pacientes = pacientes;
-                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-                location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
+                localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
+                location.href = `/portal-fidelizacion/facturacion`;
             }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
                 await cargaAfiliadosSuscripcion();
                 detalleSuscripcion.pacientes = pacientesAgregados;
-                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-                location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
+                localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
+                location.href = `/portal-fidelizacion/confirmacion`;
             }
         });
 
