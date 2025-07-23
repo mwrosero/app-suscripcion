@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 @section('title')
-verisLife - Elegir plan medico
+Veris Care - Elegir plan médico
 @endsection
 
 @section('body-class', 'bg-onahau-gradient-100')
@@ -14,10 +14,10 @@ verisLife - Elegir plan medico
     <div class="row justify-content-center px-xl-5">
         <ul class="nav nav-pills nav-pills-parmi justify-content-center bg-white w-auto p-1 rounded-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link px-4 px-lg-5 active" id="pills-anual-parami-tab" data-bs-toggle="pill" data-bs-target="#pills-anual-parami" type="button" role="tab" aria-controls="pills-anual-parami" aria-selected="true">Anual</button>
+                <button class="nav-link px-4 px-lg-5 active" id="pills-anual-parami-tab" data-bs-toggle="pill" data-bs-target="#pills-anual-parami" tipo-rel="ANUAL" type="button" role="tab" aria-controls="pills-anual-parami" aria-selected="true">Anual</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link px-4 px-lg-5" id="pills-mensual-parami-tab" data-bs-toggle="pill" data-bs-target="#pills-mensual-parami" type="button" role="tab" aria-controls="pills-mensual-parami" aria-selected="false">Mensual</button>
+                <button class="nav-link px-4 px-lg-5" id="pills-mensual-parami-tab" data-bs-toggle="pill" data-bs-target="#pills-mensual-parami" tipo-rel="MENSUAL" type="button" role="tab" aria-controls="pills-mensual-parami" aria-selected="false">Mensual</button>
             </li>
         </ul>
         <div class="tab-content bg-transparent" id="pills-tabContent">
@@ -25,9 +25,8 @@ verisLife - Elegir plan medico
                 <div class="row g-3">
                     <div class="slider-promotions position-relative">
                         <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
-                            <div class="swiper-wrapper" id="planesparamiAnual">
-
-                                <div class="swiper-slide">
+                            <div class="swiper-wrapper" id="planesANUAL">
+                                {{-- <div class="swiper-slide">
                                     <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
                                         <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
                                             Esencial
@@ -63,119 +62,7 @@ verisLife - Elegir plan medico
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Bienestar
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 39%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$129 <small class="fw-medium fs-5">/anual</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $210</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>6 consultas al año<br><small>Uso inmediato</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    2 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Plenitud
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 39%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$172 <small class="fw-medium fs-5">/anual</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $180</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>4 consultas al año<br><small>Uso inmediato</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    1 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Familiar
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 36%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$228 <small class="fw-medium fs-5">/anual</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $240</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>12 consultas al año<br><small>Uso inmediato</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    4 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                </div> --}}
                             </div>
                         </div>
                         <div class="swiper-button-next mt-n5 me-n2 me-lg-n3 box-shadow-2 d-none"></div>
@@ -188,10 +75,10 @@ verisLife - Elegir plan medico
             <div class="tab-pane fade" id="pills-mensual-parami" role="tabpanel" aria-labelledby="pills-mensual-parami-tab" tabindex="0">
                 <div class="row g-3">
                     <div class="slider-promotions position-relative">
-                        <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 4 },"1280": { "slidesPerView": 4 }}'>
-                            <div class="swiper-wrapper" id="planesparamiMensual">
+                        <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
+                            <div class="swiper-wrapper" id="planesMENSUAL">
 
-                                <div class="swiper-slide">
+                                {{-- <div class="swiper-slide">
                                     <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
                                         <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
                                             Opción 1
@@ -227,118 +114,7 @@ verisLife - Elegir plan medico
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Opción 2
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 32%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$11,83 <small class="fw-medium fs-5">/mes</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $210</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>6 consultas al año<br><small>2 consulta por bimestre</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    2 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Opción 3
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 32%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$15,95 <small class="fw-medium fs-5">/mes</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $280</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>8 consultas al año<br><small>2 consulta por trimestre</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    3 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
-                                        <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
-                                            Opción 4
-                                        </h5>
-                                        <div class="px-3 py-2">
-                                            <div class="mt-1">
-                                                <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA 40%</span>
-                                            </div>
-                                            <div class="my-1">
-                                                <h1 class="fw-bold text-blue-zodiac-950 m-0">$20,89 <small class="fw-medium fs-5">/mes</small></h1>
-                                                <small class="text-muted text-decoration-line-through text-xs">PVP: $240</small>
-                                            </div>
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="p-3">
-                                            <h6 class="fw-bold">Beneficios</h6>
-                                            <ul class="list-unstyled text-sm text-blue-zodiac-950 mb-3">
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-robin-egg-blue-400 me-2"></i>
-                                                    <span>12 consultas al año<br><small>1 consulta mensual</small></span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    4 Profilaxis
-                                                </li>
-                                                <li class="d-flex align-items-start lh-sm">
-                                                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
-                                                    Consulta Optométrica<br>y Odontológica
-                                                </li>
-                                            </ul>
-                                            <div class="text-center">
-                                                <a href="#!" class="btn btn-robin-egg-blue-400 rounded-3 py-2 w-100">Continuar registro</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
@@ -401,11 +177,15 @@ verisLife - Elegir plan medico
             </div>
             <div class="mt-5">
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h6 class="text-fiord-700 fw-normal">¿Deseas ver las opciones “Para Mí”?</h6>
-                    <a href="/plan-medico-veris" class="text-robin-egg-blue-400 text-decoration-underline">Ver “Para Mi”</a>
+                    <h6 class="text-fiord-700 fw-normal">¿Deseas ver las opciones “Veris”?</h6>
+                    <a href="/plan-medico-veris" class="text-robin-egg-blue-400 text-decoration-underline">Ver “Veris”</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    let lineaNegocioPage = "PMF"
+</script>
+@include("verislife.b2b2c.planes.funcionalidad")
 @endsection

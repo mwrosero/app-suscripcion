@@ -19,8 +19,8 @@
         <div class="col-12">
             <div class="row g-3 justify-content-start align-items-end">
                 <div class="col-12 col-lg-8">
-                    <label for="dni" class="form-label text-blue-zodiac-950 fw-medium">Número de Identificación*</label>
-                    <input type="text" id="dni" name="dni" class="form-control form-control-lg rounded-3" placeholder="0999999999" required />
+                    <label for="numeroIdentificacion" class="form-label text-blue-zodiac-950 fw-medium">Número de Identificación*</label>
+                    <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="form-control form-control-lg rounded-3" placeholder="0999999999" required />
                 </div>
                 <div class="col-12 col-lg-4">
                     <button class="btn btn-lg btn-blue-veris btn-lg rounded-3 w-100 d-flex align-items-center justify-content-center gap-2 btn-acceder">
@@ -35,9 +35,51 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', async () => {
-        $('body').on('click', '.btn-acceder', function() {
-            console.log(0)
+        $('body').on('click', '.btn-acceder', async function() {
+            await validateUser()
         })
     })
+
+    async function validateUser(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        if(data.code == 200){
+            if(data.data.esIdentificacionValida){
+                {{-- let paciente = await consultarPaciente();
+                console.log(paciente)
+                return; --}}
+                let suscripcion = {
+                    "tipoIdentificacion": 2,
+                    "numeroIdentificacion": numeroIdentificacion
+                }
+                localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
+                location.href = '/selecciona-empresa';
+            }else{
+                showMessage('warning','Atención','Número de identificación incorrecto.')
+            }
+        }else{
+            showMessage('warning','Atención',data.message)
+        }
+    }
+
+    async function consultarPaciente(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+
+        let args = [];
+        args["endpoint"] = `${api_url}/general/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&numeroIdentificacion=${numeroIdentificacion}&page=1&perPage=1`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+
+        const data = await call(args);
+        return data
+    }
 </script>
 @endpush

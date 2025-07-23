@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 @section('title')
-VerisLife - Selecciona la empresa
+Veris Care - Selecciona la empresa
 @endsection
 
 @section('body-class', 'bg-pattens-blue-100-gradient')
@@ -24,16 +24,8 @@ VerisLife - Selecciona la empresa
 
             <div class="row g-3 justify-content-center mb-5">
                 <div class="col-12 col-xl-7">
-                    <label for="companySelect" class="form-label fw-medium text-blue-zodiac-950">Empresas <span class="text-danger">*</span></label>
-                    <select id="companySelect" class="form-select form-select-lg fs-14p" required>
-                        <option selected>Todas las empresas</option>
-                        <option value="">Pronaca</option>
-                        <option value="">Diners</option>
-                        <option value="">Teconomega</option>
-                        <option value="">Grupo Favorita</option>
-                        <option value="">Grupo El Rosado</option>
-                        <option value="">Banco Pichincha</option>
-                        <option value="">Banco Pacífico</option>
+                    <label for="empresa" class="form-label fw-medium text-blue-zodiac-950">Empresas <span class="text-danger">*</span></label>
+                    <select id="empresa" class="form-select form-select-lg fs-14p" required>
                     </select>
                 </div>
                 <div class="col-12 col-xl-7 d-none">
@@ -44,3 +36,51 @@ VerisLife - Selecciona la empresa
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
+    document.addEventListener('DOMContentLoaded', async () => {
+        await obtenerEmpresas();
+
+        $('body').on('change', '#empresa', async function() {
+            detalleSuscripcion.empresa = {
+                "codigoEmpresa": $('#empresa option:selected').val(),
+                "nombreEmpresa": $('#empresa option:selected').html()
+            }
+            localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
+            location.href = '/centro-medico';
+        })
+    })
+
+    async function obtenerEmpresas(){
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/empresas`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        if(data.code == 200){
+            let elem = `<option></option>`;
+            $.each(data.data, function(key, value){
+                elem += `<option value='${value.codigoCliente}'>${value.nombreCliente}</option>`;
+            })
+            $('#empresa').html(elem).select2({
+                placeholder: "Seleccione una empresa",
+                allowClear: true
+            });
+            {{-- if(data.data.esIdentificacionValida){
+                let suscripcion = {
+                    "tipoIdentificacion": 2,
+                    "numeroIdentificacion": numeroIdentificacion
+                }
+                localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
+                location.href = '/selecciona-empresa';
+            }else{
+                showMessage('warning','Atención',data.message)
+            } --}}
+        }else{
+            showMessage('warning','Atención',data.message)
+        }
+    }
+</script>
+@endpush

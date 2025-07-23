@@ -112,9 +112,14 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.registro')->with('params', $params);
     })->withoutMiddleware(['guest']);
 
-    Route::get('portal-fidelizacion/registro-dependientes/{params}', function ($params) {
+    Route::get('portal-fidelizacion/registrar-dependientes', function () {
         // dd(Session::get('userData'));
-        return view('verislife.dependiente.registro')->with('params', $params);
+        return view('verislife.dependiente.registro');
+    })->withoutMiddleware(['guest']);
+
+    Route::get('portal-fidelizacion/editar-dependientes', function () {
+        // dd(Session::get('userData'));
+        return view('verislife.dependiente.registro');
     })->withoutMiddleware(['guest']);
 
     Route::get('portal-fidelizacion/registro-plan', function () {
@@ -153,6 +158,11 @@ Route::get('/selecciona-empresa', [B2B2CController::class, 'empresa'])->name('b2
 Route::get('/centro-medico', [B2B2CController::class, 'centroMedico'])->name('b2b2c.centroMedico');
 Route::get('/plan-medico-veris', [B2B2CController::class, 'planVeris'])->name('b2b2c.planVeris');
 Route::get('/plan-medico-parami', [B2B2CController::class, 'planParami'])->name('b2b2c.planParami');
+Route::get('portal-fidelizacion/facturacion-externa', function () {
+    // dd(Session::get('userData'));
+    // dd(Session::get('infoCliente'));
+    return view('verislife.b2b2c.datosFacturacionExterno');
+})->withoutMiddleware(['guest']);
 
 # B2C
 Route::get('/b2c', [B2CController::class, 'index'])->name('b2c.index');
