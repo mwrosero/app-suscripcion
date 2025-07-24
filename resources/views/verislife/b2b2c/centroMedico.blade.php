@@ -24,7 +24,7 @@ Veris Care - Selecciona el Centro médico
         <!-- Right side -->
         <div class="right-panel">
             <div class="text-center w-100 mt-4">
-                <h4 class="text-fiord-700 fw-semibold mb-2">Hola <span class="text-primary-veris">(nombre del usuario)</span>,</h4>
+                <h4 class="text-fiord-700 fw-semibold mb-2">Hola <span class="text-primary-veris nombrePresona"></span>,</h4>
                 <h5 class="text-fiord-700 fw-medium mb-4">Te damos la bienvenida a Veris care</h5>
                 <h5 class="fw-medium text-primary-veris mb-5">Escoge el programa de fidelización a tu medida:</h5>
 
@@ -104,6 +104,9 @@ Veris Care - Selecciona el Centro médico
             let lineaNegocio = $(this).attr('lineaNegocio-rel');
             detalleSuscripcion.lineaNegocio = lineaNegocio;
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
+            if(detalleSuscripcion.persona !== {}){
+                $('.nombrePersona').html(`(${detalleSuscripcion.persona.primerNombre.toLowerCase()})`)
+            }
             let url;
             if(lineaNegocio == "CMV"){
                 url = 'plan-medico-veris';

@@ -1407,12 +1407,12 @@ Veris Care - Suscripción
         console.log(step)
         if(step == 1){
             //let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-            let nombresFactura = $('#nombres').val();
+            let nombres = $('#nombres').val();
             let primerApellido = $('#primerApellido').val();
             let segundoApellido = $('#segundoApellido').val();
             let celular = $('#celular').val();
             //tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido
-            if(nombresFactura.length > 4 && celular.length > 6 && primerApellido.length > 5 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
+            if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
                 $('#btn-next').attr('disabled', false);
             }else{
                 $('#btn-next').attr('disabled', true);
