@@ -30,13 +30,14 @@ async function updateToken() {
     // Realizar una solicitud para actualizar el token
     console.log("Realizar una solicitud para actualizar el token");
     let args = [];
-    args["endpoint"] = url_site+"/refreshToken";
+    args["endpoint"] = `${url_site}/refreshToken?generic=${isGeneric}`;
     args["method"] = "GET";
     args["bodyType"] = "json";
     args["showLoader"] = false;
 
     const data = await call(args);
     console.log(data);
+    return;
     if(!data || data.code != 200){
         //showMessage("warning","Atención",data.message);
         logout();
