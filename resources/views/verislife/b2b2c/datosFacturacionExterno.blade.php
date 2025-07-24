@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 @section('title')
-Veris Care - Selecciona el Centro médico
+Veris Care - Suscripción
 @endsection
 
 {{-- @section('body-class', 'bg-pattens-blue-100-gradient') --}}
@@ -42,7 +42,7 @@ Veris Care - Selecciona el Centro médico
     </div>
 </div>
 
-<div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-simple modal-dialog-centered">
         <div class="modal-content p-3 py-md-4 px-md-5">
             <div class="modal-body p-0">
@@ -166,7 +166,7 @@ Veris Care - Selecciona el Centro médico
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="modal fade" id="documentoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="documentoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-simple modal-dialog-centered">
@@ -281,7 +281,7 @@ Veris Care - Selecciona el Centro médico
                                 <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">1</span>
                                 <span class="bs-stepper-label">
                                     <span class="bs-stepper-title">Datos de facturación</span>
-                                    <span class="bs-stepper-subtitle">Detalles</span>
+                                    {{-- <span class="bs-stepper-subtitle">Detalles</span> --}}
                                 </span>
                             </button>
                         </div>
@@ -291,7 +291,7 @@ Veris Care - Selecciona el Centro médico
                                 <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">2</span>
                                 <span class="bs-stepper-label">
                                     <span class="bs-stepper-title">Forma de pago</span>
-                                    <span class="bs-stepper-subtitle">Selecciona el método</span>
+                                    {{-- <span class="bs-stepper-subtitle">Selecciona el método</span> --}}
                                 </span>
                             </button>
                         </div>
@@ -301,7 +301,7 @@ Veris Care - Selecciona el Centro médico
                                 <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">3</span>
                                 <span class="bs-stepper-label mt-1">
                                     <span class="bs-stepper-title">Firma documentos</span>
-                                    <span class="bs-stepper-subtitle">Documento</span>
+                                    {{-- <span class="bs-stepper-subtitle">Documento</span> --}}
                                 </span>
                             </button>
                         </div>
@@ -311,7 +311,7 @@ Veris Care - Selecciona el Centro médico
                                 <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">4</span>
                                 <span class="bs-stepper-label">
                                     <span class="bs-stepper-title">Confirmación</span>
-                                    <span class="bs-stepper-subtitle">Revisa y finaliza</span>
+                                    {{-- <span class="bs-stepper-subtitle">Revisa y finaliza</span> --}}
                                 </span>
                             </button>
                         </div>
@@ -384,6 +384,16 @@ Veris Care - Selecciona el Centro médico
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
+                                                    <label for="segundoApellido" class="form-label fs-14p fw-medium">Segundo Apellido <span class="text-danger">*</span></label>
+                                                    <input
+                                                        type="text"
+                                                        class="form-control form-control-lg fs-14p"
+                                                        id="segundoApellido"
+                                                        name="segundoApellido"
+                                                        placeholder="Ingresa tu segundo apellido"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-12 col-xl-8">
                                                     <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
                                                     <input
                                                         type="date"
@@ -451,7 +461,7 @@ Veris Care - Selecciona el Centro médico
                                                     </select>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-input-datos-factura">
-                                                    <label for="numeroIdentificacionFactura" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
+                                                    <label for="numeroIdentificacionFactura" class="form-label fs-14p fw-medium">Número de documento <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
@@ -957,7 +967,7 @@ Veris Care - Selecciona el Centro médico
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </a>
-                <button id="btn-next" class="btn btn-cerulean-blue-800" step-rel="1">
+                <button id="btn-next" class="btn btn-cerulean-blue-800" disabled step-rel="1">
                   <span class="d-none d-sm-inline">Continuar</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>
@@ -1095,6 +1105,29 @@ Veris Care - Selecciona el Centro médico
         });
 
         $('#numeroIdentificacion').val(detalleSuscripcion.numeroIdentificacion)
+
+        if(detalleSuscripcion.persona !== {}){
+            $('#nombres').val(detalleSuscripcion.persona.primerNombre);
+            $('#primerApellido').val(detalleSuscripcion.persona.primerApellido);
+            $('#segundoApellido').val(detalleSuscripcion.persona.segundoApellido);
+            var partes = detalleSuscripcion.persona.fechaNacimiento.split('/');
+            var fechaFormateada = partes[2] + '-' + partes[1] + '-' + partes[0];
+            $('#fechaNacimiento').val(fechaFormateada);
+            $('#genero').val(detalleSuscripcion.persona.genero);
+            $('#email').val(detalleSuscripcion.persona.correoElectronico);
+            $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+        }
+
+        $('body').on('change', '#terms, #privacy', function(){
+            validateFields()
+            {{-- if($('#terms').is(':checked') && $('#privacy').is(':checked')) {
+                console.log(1)
+                $('#btn-next').attr('disabled', false);
+            } else {
+                console.log(2)
+                $('#btn-next').attr('disabled', true);
+            } --}}
+        });
 
         $('.logo-box').html(`<img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${detalleSuscripcion.lineaNegocio}" width="128">`);
         $('.nombrePlanTransferencia').html(`Compra - ${detalleSuscripcion.detallePlan.nombre}`)
@@ -1301,8 +1334,9 @@ Veris Care - Selecciona el Centro médico
     };
 
     let errorHandler = function (err) {
-        window.removeEventListener("beforeunload", beforeUnloadHandler);
+        //window.removeEventListener("beforeunload", beforeUnloadHandler);
         console.log(err.error);
+        showMessage('warning','Atención',err.error.type)
         // $('#messages').html(err.error.type);
         if(err.error.help == "If you want to update the card, first delete it"){
             $('#informacion').modal('show');
@@ -1372,11 +1406,13 @@ Veris Care - Selecciona el Centro médico
         let step = $('#btn-next').attr('step-rel');
         console.log(step)
         if(step == 1){
-            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-            let nombresFactura = $('#nombresFactura').val();
-            let telefonoFactura = $('#celular').val();
-            let direccionFactura = $('#direccionFactura').val();
-            if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 5 && numeroIdentificacionFacturaValido && emailFacturaValido){
+            //let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let nombresFactura = $('#nombres').val();
+            let primerApellido = $('#primerApellido').val();
+            let segundoApellido = $('#segundoApellido').val();
+            let celular = $('#celular').val();
+            //tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido
+            if(nombresFactura.length > 4 && celular.length > 6 && primerApellido.length > 5 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
                 $('#btn-next').attr('disabled', false);
             }else{
                 $('#btn-next').attr('disabled', true);
@@ -1703,6 +1739,9 @@ Veris Care - Selecciona el Centro médico
     }
 
     async function cargaAfiliadosSuscripcion(){
+        detalleSuscripcion.pacientes = [{
+            
+        }]
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";

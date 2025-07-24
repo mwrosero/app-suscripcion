@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 
-@section('title', 'Veris Care - Acceder')
+@section('title', 'Veris Care')
 
 @section('body-class', 'login-page')
 
@@ -36,6 +36,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', async () => {
         $('body').on('click', '.btn-acceder', async function() {
+            localStorage.removeItem("suscripcion");
+
             await validateUser()
         })
     })
@@ -51,12 +53,16 @@
         const data = await call(args);
         if(data.code == 200){
             if(data.data.esIdentificacionValida){
-                {{-- let paciente = await consultarPaciente();
-                console.log(paciente)
-                return; --}}
+                let paciente = await consultarPaciente();
+                let persona = {};
+                if(paciente.data.totalRows > 0){
+                    persona = paciente.data.rows[0]
+                }
+                
                 let suscripcion = {
                     "tipoIdentificacion": 2,
-                    "numeroIdentificacion": numeroIdentificacion
+                    "numeroIdentificacion": numeroIdentificacion,
+                    "persona": persona
                 }
                 localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
                 location.href = '/selecciona-empresa';
@@ -73,7 +79,7 @@
         let numeroIdentificacion = $('#numeroIdentificacion').val();
 
         let args = [];
-        args["endpoint"] = `${api_url}/general/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&numeroIdentificacion=${numeroIdentificacion}&page=1&perPage=1`;
+        args["endpoint"] = `${api_url}/general/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&valorFiltro=${numeroIdentificacion}&page=1&perPage=1`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;

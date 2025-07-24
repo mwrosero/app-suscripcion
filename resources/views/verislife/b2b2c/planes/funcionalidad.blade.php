@@ -19,7 +19,7 @@
             detalleSuscripcion.detallePlan = data;
             detalleSuscripcion.origen = "suscripcion";
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
-            location.href = '/portal-fidelizacion/facturacion-externa';
+            location.href = '/facturacion-externa';
         });
     })
 
