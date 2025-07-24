@@ -158,7 +158,7 @@ Route::get('/selecciona-empresa', [B2B2CController::class, 'empresa'])->name('b2
 Route::get('/centro-medico', [B2B2CController::class, 'centroMedico'])->name('b2b2c.centroMedico');
 Route::get('/plan-medico-veris', [B2B2CController::class, 'planVeris'])->name('b2b2c.planVeris');
 Route::get('/plan-medico-parami', [B2B2CController::class, 'planParami'])->name('b2b2c.planParami');
-Route::get('portal-fidelizacion/facturacion-externa', function () {
+Route::get('/facturacion-externa', function () {
     // dd(Session::get('userData'));
     // dd(Session::get('infoCliente'));
     return view('verislife.b2b2c.datosFacturacionExterno');
