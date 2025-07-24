@@ -210,14 +210,25 @@ class SeguridadesController extends Controller
     }
 
     /*Refresh Token*/
-    public function refreshToken(){
+    public function refreshToken(Request $request){
+        $data = $request->all();
+        $isGeneric = $data['generic'];
         $info = Session::get('userData');
         $method = '/'.Ism::WAR_SEGURIDAD.'/v1/autenticacion/refresh_token';
-        $response = Ism::call([
-            'endpoint'  => Ism::BASE_URL.$method,
-            'data'      => ["refreshToken" => $info->refreshToken],
-            'method'    => 'POST'
-        ]);
+        if($isGeneric == "S"){
+            $response = Ism::call([
+                'endpoint'  => Ism::BASE_URL.$method,
+                'data'      => ["refreshToken" => $info->refreshToken],
+                'method'    => 'POST',
+                'application' => Ism::APPLICATION_GENERIC,
+            ]);
+        }else{
+            $response = Ism::call([
+                'endpoint'  => Ism::BASE_URL.$method,
+                'data'      => ["refreshToken" => $info->refreshToken],
+                'method'    => 'POST',
+            ]);
+        }
 
         Session::put('accessToken', $response->data->idToken);
 
