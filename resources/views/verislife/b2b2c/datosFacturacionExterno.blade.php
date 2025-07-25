@@ -1586,8 +1586,6 @@ Veris Care - Suscripción
 
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
-        {{-- console.log("crearSuscripcion");
-        let generarSolicitud = await generarSolicitudFirma(); --}}
 
         // let codigoInstitucion = $('#nombreBanco option:selected').val();
         // let numeroCuenta = $('#numeroCuenta').val();
@@ -1636,7 +1634,7 @@ Veris Care - Suscripción
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
             "codigoCliente": detalleSuscripcion.empresa.codigoEmpresa,
-            "secuenciaAfiliado": "",//"{{ Session::get('userData')->secuenciaUsuario }}",
+            "secuenciaAfiliado": "",
             "codigoSolicitudFirma": codigoSolicitudFirma,
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
@@ -1646,19 +1644,20 @@ Veris Care - Suscripción
                 "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * 1).toFixed(2),
                 "detalle": {
                     "metadata": JSON.stringify(detalleSuscripcion.tarjeta),
-                    "cardToken": detalleSuscripcion.tarjeta.token
-                    // "numeroTarjeta": "",
-                    // "mesExpiracion": 0,
-                    // "anioExpiracion": 0,
-                    // "codigoSeguridad": 0,
-                    // "tipoCobro": "CORRIENTE",
-                    // "numeroCuenta": numeroCuenta,
-                    // "nombreTitular": nombreTitular,
-                    // "tipoCuenta": tipoCuenta,
-                    // "codigoInstitucion": codigoInstitucion,
-                    // "autorizaDebitoCargado": true,
-                    // "autorizaAcuerdoCargado": true,
-                    // "comprobantePagoCargado": true
+                    "cardToken": detalleSuscripcion.tarjeta.token,
+
+                    "numeroTarjeta": "4000996174334475",
+                    "mesExpiracion": 10,
+                    "anioExpiracion": 2028,
+                    "codigoSeguridad": 123,
+                    "tipoCobro": "CORRIENTE",
+                    "numeroCuenta": "123213",
+                    "nombreTitular": "CUALQUIERA",
+                    "tipoCuenta": "AH",
+                    "codigoInstitucion": 5,
+                    "autorizaDebitoCargado": true,
+                    "autorizaAcuerdoCargado": true,
+                    "comprobantePagoCargado": true
                 }
             },
             "datosFirmaDocumentos": {
@@ -1666,7 +1665,7 @@ Veris Care - Suscripción
                 "codigoTipoIdentificacion": 2,//cambiar
                 "numeroIdentificacion": detalleSuscripcion.numeroIdentificacion,//$('#ruc').val(),
                 "representanteLegal": $('#nombres').val() + " " + $('#primerApellido').val(),//$('#titular').val(),
-                "telefono": $('#email').val(),//$('#telefono').val(),
+                "telefono": $('#celular').val(),//$('#telefono').val(),
                 "email": $('#email').val(),//$('#emailContacto').val(),
                 "direccion": ""
             },
