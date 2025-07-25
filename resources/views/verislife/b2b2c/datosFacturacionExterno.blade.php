@@ -543,7 +543,7 @@ Veris Care - Suscripción
                                                 <div class="tab-content bg-transparent" id="pills-tabContent">
                                                     <div class="tab-pane tab-pasarela_pagos d-none fade" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
                                                         <form id="add-card-form" class="row g-3 justify-content-center">
-                                                            <div class="col-12">
+                                                            <div class="col-12 col-md-8 col-lg-7 col-xl-6">
                                                                 <div class="payment-form mb-3" id="my-card" data-capture-name="true"></div>
                                                                 {{-- <button id="btn-pagar" class="btn btn-primary-veris fs--18 fw-medium line-height-24 w-100 m-0 px-4 py-3">Pagar</button> --}}
                                                                 <br/>
@@ -944,16 +944,17 @@ Veris Care - Suscripción
     }
 
     async function suscribirTarjeta(){
+        showLoader()
         let myCard = $('#my-card');
         $('#messages').text("");
         let cardToSave = myCard.PaymentForm('card');
-        //console.log(cardToSave);
+        console.log(cardToSave);
         if (cardToSave == null) {
             $('#messages').text("Invalid Card Data");
         }else{
             // submitButton.attr("disabled", "disabled").text("Procesando pago...");
             let uid = `${detalleSuscripcion.numeroIdentificacion}`;
-            let email = $('#emailFactura').val();
+            let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
     }
@@ -1164,7 +1165,7 @@ Veris Care - Suscripción
         $('.label-nombre-plan').html(`Frecuencia de pago: <b class="text-capitalize">${detalleSuscripcion.detallePlan.tipo.toLowerCase()}</b>`)
 
         const tipoIdentificacionSelect = document.getElementById('tipoIdentificacionFactura');
-        tipoIdentificacionSelect.innerHTML = '<option value="" selected>Seleccionar tipo de identificación</option>';
+        tipoIdentificacionSelect.innerHTML = '<option value="" selected>Seleccionar tipo de documento</option>';
 
         const tiposIdentificacion = await obtenerTiposIdentificacion();
 
@@ -1302,7 +1303,7 @@ Veris Care - Suscripción
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
             let uid = `${detalleSuscripcion.numeroIdentificacion}`;
-            let email = $('#emailFactura').val();
+            let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
 
@@ -1310,6 +1311,7 @@ Veris Care - Suscripción
     });
 
     let successHandler = async function (cardResponse) {
+        hideLoader();
         console.log(cardResponse.card);
         if (cardResponse.card.status === 'valid') {
             detalleSuscripcion.tarjeta = cardResponse.card;
@@ -1334,6 +1336,7 @@ Veris Care - Suscripción
     };
 
     let errorHandler = function (err) {
+        hideLoader();
         //window.removeEventListener("beforeunload", beforeUnloadHandler);
         console.log(err.error);
         showMessage('warning','Atención',err.error.type)
@@ -1411,10 +1414,29 @@ Veris Care - Suscripción
             let primerApellido = $('#primerApellido').val();
             let segundoApellido = $('#segundoApellido').val();
             let celular = $('#celular').val();
-            //tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido
-            if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
-                $('#btn-next').attr('disabled', false);
+
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
+            let nombresFactura = $('#nombresFactura').val();
+
+            console.log(0)
+            if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && segundoApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
+                console.log(1)
+                if(!$('#mismosDatos').is(':checked')){
+                    console.log(2)
+                    if(nombresFactura.length > 0 && tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido){
+                        console.log(3)
+                        $('#btn-next').attr('disabled', false);
+                    }else{
+                        console.log(4)
+                        $('#btn-next').attr('disabled', true);
+                    }
+                }else{
+                    console.log(5)
+                    $('#btn-next').attr('disabled', false);
+                }
             }else{
+                console.log(6)
                 $('#btn-next').attr('disabled', true);
             }
         }
@@ -1567,19 +1589,44 @@ Veris Care - Suscripción
         {{-- console.log("crearSuscripcion");
         let generarSolicitud = await generarSolicitudFirma(); --}}
 
-        let codigoInstitucion = $('#nombreBanco option:selected').val();
-        let numeroCuenta = $('#numeroCuenta').val();
-        let nombreTitular = $('#nombreTitular').val();
-        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        // let codigoInstitucion = $('#nombreBanco option:selected').val();
+        // let numeroCuenta = $('#numeroCuenta').val();
+        // let nombreTitular = $('#nombreTitular').val();
+        // let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
+        let tipoFlujo = "E";
 
+        let direccionFactura = "";
 
-        let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-        let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
-        let nombresFactura = $('#nombresFactura').val();
-        let telefonoFactura = $('#celular').val();
-        let emailFactura = $('#emailFactura').val();
-        let direccionFactura = $('#direccionFactura').val();
+        let datosFacturacion;
+        if($('#mismosDatos').is(':checked')){
+            let tipoIdentificacionFactura = detalleSuscripcion.tipoIdentificacion;
+            let numeroIdentificacionFactura = detalleSuscripcion.numeroIdentificacion;
+            let nombresFactura = `${ $('#nombres').val() } ${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`;
+            let telefonoFactura = $('#celular').val();
+            let emailFactura = $('#email').val();
+            datosFacturacion = {
+                "codigoTipoIdentificacion": tipoIdentificacionFactura,
+                "numeroIdentificacion": numeroIdentificacionFactura,
+                "nombres": nombresFactura,
+                "telefono": telefonoFactura,
+                "email": emailFactura,
+                "direccion": direccionFactura
+            }
+        }else{
+            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
+            let nombresFactura = $('#nombresFactura').val();
+            let telefonoFactura = $('#celular').val();
+            let emailFactura = $('#emailFactura').val();
+            datosFacturacion = {
+                "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
+                "numeroIdentificacion": numeroIdentificacionFactura,
+                "nombres": nombresFactura,
+                "telefono": telefonoFactura,
+                "email": emailFactura,
+                "direccion": direccionFactura
+            }
+        }
 
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
@@ -1623,14 +1670,7 @@ Veris Care - Suscripción
                 "email": $('#email').val(),//$('#emailContacto').val(),
                 "direccion": ""
             },
-            "datosFacturacion": {
-                "codigoTipoIdentificacion": tipoIdentificacionFactura,
-                "numeroIdentificacion": numeroIdentificacionFactura,
-                "nombres": nombresFactura,
-                "telefono": telefonoFactura,
-                "email": emailFactura,
-                "direccion": direccionFactura
-            },
+            "datosFacturacion": datosFacturacion,
             "terminosCondiciones": {
                 "aceptaPolitica": true,
                 "aceptaTratamientoDatos": true,
@@ -1666,13 +1706,13 @@ Veris Care - Suscripción
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "E";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
-        let codigoInstitucion = $('#nombreBanco option:selected').val();
+        {{-- let codigoInstitucion = $('#nombreBanco option:selected').val();
         let numeroCuenta = $('#numeroCuenta').val();
         let nombreTitular = $('#nombreTitular').val();
-        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
+        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE"; --}}
 
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
@@ -1683,18 +1723,18 @@ Veris Care - Suscripción
 
         args["data"] = JSON.stringify({
             "tipoFlujo": tipoFlujo,
-            "nombres": detalleSuscripcion.empresa.nombreEmpresa,
-            "apellidos": detalleSuscripcion.empresa.nombreEmpresa,
+            "nombres": $('#nombres').val(),
+            "apellidos": `${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`,
             "codigoTipoIdentificacion": 2,
-            "numeroIdentificacion": "detalleSuscripcion.numeroIdentificacion",
+            "numeroIdentificacion": detalleSuscripcion.numeroIdentificacion,
             "correo": $('#email').val(),
             "telefono": $('#celular').val(), 
             "datosDocumentoDebito" : {
-                "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
-                "codigoInstitucion": parseInt(codigoInstitucion),
-                "tipoCuenta": tipoCuenta,
-                "numeroCuenta": numeroCuenta,
-                "periodo": detalleSuscripcion.detallePlan.tipo,
+                "codigoCliente": 24536,
+                "codigoInstitucion": 5,
+                "tipoCuenta": "AHORROS",
+                "numeroCuenta": "12345678",
+                "periodo": "MENSUAL"
             },
             "tiposDocumentos": tiposDocumentos
         });
@@ -1714,7 +1754,7 @@ Veris Care - Suscripción
 
     async function confirmarOtp(){
         $('#signedDocumentModal').modal('show')
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
+        let tipoFlujo = "E";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         let payload = {}
         if(tipoFlujo !== "E"){
@@ -1739,8 +1779,37 @@ Veris Care - Suscripción
     }
 
     async function cargaAfiliadosSuscripcion(){
+        var fechaOriginal = '1989-11-17';
+
+        // Separar la fecha
+        var partes = $('#fechaNacimiento').val().split('-');
+        var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
+
         detalleSuscripcion.pacientes = [{
-            
+            "activo": true,
+            "permiteUpgrade": false,
+            "codigoTipoIdentificacionPcte": 2,
+            "codigoTipoIdentificacion": 2,
+            "numeroIdentificacionPcte": detalleSuscripcion.numeroIdentificacion,
+            "primerNombre": $('#nombres').val(),
+            "primerApellido": $('#primerApellido').val(),
+            "segundoApellido": $('#segundoApellido').val(),
+            "genero": $('#genero option:selected').val(),
+            "fechaNacimiento": fechaNacimiento,
+            "mail": $('#email').val(),
+            "telefonoMovil": parseInt($('#celular').val()),
+            "codigoRegion": 1,
+            "codigoCiudad": 1,
+            "codigoPais": 1,
+            "codigoProvincia": 1,
+            "titularDependiente": "T",
+            "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
+            "titularOtroContrato": null,
+            "yaEsTitularContrato": null,
+            "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
+            "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
+            "tipoIdentificacionPcte": "CEDULA",
+            "observacionesError": null
         }]
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
