@@ -975,7 +975,7 @@ Veris Care - Suscripción
               `;
         } else if (idx === total - 1) {
             actions.innerHTML = `
-                <a href="/portal-fidelizacion/dashboard" class="btn btn-cerulean-blue-800">
+                <a href="/veris-care" class="btn btn-cerulean-blue-800">
                   <span class="d-none d-sm-inline">Volver al inicio</span>
                 </a>
               `;
