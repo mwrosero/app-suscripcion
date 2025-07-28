@@ -1591,6 +1591,7 @@ Veris Care - Suscripción
         // let numeroCuenta = $('#numeroCuenta').val();
         // let nombreTitular = $('#nombreTitular').val();
         // let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
+        {{-- let tipoFlujo = "C"; --}}
         let tipoFlujo = "E";
 
         let direccionFactura = "";
@@ -1705,7 +1706,7 @@ Veris Care - Suscripción
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
-        let tipoFlujo = "E";
+        let tipoFlujo = "C";
         let tiposDocumentos = ["AUTORIZACION_DEBITO"];
 
         {{-- let codigoInstitucion = $('#nombreBanco option:selected').val();
@@ -1753,7 +1754,7 @@ Veris Care - Suscripción
 
     async function confirmarOtp(){
         $('#signedDocumentModal').modal('show')
-        let tipoFlujo = "E";
+        let tipoFlujo = "C";
         let codigoOtp = `${$('#input1').val()}${$('#input2').val()}${$('#input3').val()}${$('#input4').val()}${$('#input5').val()}${$('#input6').val()}`;
         let payload = {}
         if(tipoFlujo !== "E"){

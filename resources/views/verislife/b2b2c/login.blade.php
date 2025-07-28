@@ -53,19 +53,24 @@
         const data = await call(args);
         if(data.code == 200){
             if(data.data.esIdentificacionValida){
-                let paciente = await consultarPaciente();
-                let persona = {};
-                if(paciente.data.totalRows > 0){
-                    persona = paciente.data.rows[0]
+                let estaRegistrado = await validaInfoAfiliado();
+                if(!estaRegistrado){
+                    let paciente = await consultarPaciente();
+                    let persona = {};
+                    if(paciente.data.totalRows > 0){
+                        persona = paciente.data.rows[0]
+                    }
+                    
+                    let suscripcion = {
+                        "tipoIdentificacion": 2,
+                        "numeroIdentificacion": numeroIdentificacion,
+                        "persona": persona
+                    }
+                    localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
+                    location.href = '/selecciona-empresa';
+                }else{
+                    showMessage('warning','Atención','Ya dispones de un contrato de fidelización activo.')
                 }
-                
-                let suscripcion = {
-                    "tipoIdentificacion": 2,
-                    "numeroIdentificacion": numeroIdentificacion,
-                    "persona": persona
-                }
-                localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));
-                location.href = '/selecciona-empresa';
             }else{
                 showMessage('warning','Atención','Número de identificación incorrecto.')
             }
@@ -85,7 +90,27 @@
         args["token"] = _token;
 
         const data = await call(args);
+        console.log(data)
         return data
+    }
+
+    async function validaInfoAfiliado(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoTipoIdentificacionPcte": tipoIdentificacion,
+            "numeroIdentificacionPcte": numeroIdentificacion,
+            "titularDependiente": "T"
+        });
+        const data = await call(args);
+        const mensajeBuscado = "El afiliado {0} ya tiene un contrato de fidelización activo.";
+        return data.data.includes(mensajeBuscado);
     }
 </script>
 @endpush
