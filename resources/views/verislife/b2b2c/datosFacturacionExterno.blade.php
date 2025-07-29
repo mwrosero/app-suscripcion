@@ -1689,7 +1689,7 @@ Veris Care - Suscripción
 
     async function mostrarComprobante(){
         let args = [];
-        args["endpoint"] = api_url + `/reportes/v1/financiero/comprobante_paciente?codigoEmpresa=1&format=pdf&numeroTransaccion=${detalleSuscripcion.suscripcion.numeroTransaccion}&tipoBusqueda=COMPROBANTE_CON_FACTURA&codigoSucursalImpresion=1&usuarioRealizaImpresion=true`;
+        args["endpoint"] = api_url + `/reportes/v1/financiero/comprobante_paciente?format=text_plain&codigoEmpresa=1&numeroTransaccion=${detalleSuscripcion.suscripcion.numeroTransaccion}&codigoSucursalImpresion=1&usuarioRealizaImpresion=true`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
