@@ -29,6 +29,7 @@
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             frecuencia: tipo,
+            contratado: false,
             lineaNegocio: detalleSuscripcion.lineaNegocio,
             codigoCliente: codigoCliente
         });
