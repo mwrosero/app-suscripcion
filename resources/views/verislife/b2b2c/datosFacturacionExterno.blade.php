@@ -196,7 +196,7 @@ Veris Care - Suscripción
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/enter-otp.svg" alt="Código de verificación" class="img-fluid mb-4" style="max-height: 256px;">
 
                 <p class="mb-2 fw-semibold fs-6">Ingresa el código de verificación que ha sido enviado por SMS al número:</p>
-                <p class="text-primary-veris fw-semibold fs-6">0999999999</p>
+                <p class="text-primary-veris fw-semibold fs-6 telefonoOtp"></p>
 
                 <div class="d-flex justify-content-center gap-2 mb-3">
                     <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
@@ -207,11 +207,10 @@ Veris Care - Suscripción
                     <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
                 </div>
 
-                <p class="fw-semibold fs-6 mb-3">
+                <p class="fw-semibold fs-6 mb-3 d-none">
                     ¿Recibiste el código?
                     <a href="#" class="text-decoration-none text-primary-veris fw-semibold">Reenviar código</a>
                 </p>
-
                 <button type="button" class="btn btn-cerulean-blue-800 w-100 mb-2 btn-verificar-otp" disabled>Verificar código</button>
                 <button type="button" class="btn btn-outline-cerulean-blue-800 w-100" data-bs-dismiss="modal">Cerrar</button>
 
@@ -1591,8 +1590,8 @@ Veris Care - Suscripción
         // let numeroCuenta = $('#numeroCuenta').val();
         // let nombreTitular = $('#nombreTitular').val();
         // let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
-        {{-- let tipoFlujo = "C"; --}}
-        let tipoFlujo = "E";
+        let tipoFlujo = "C";
+        // let tipoFlujo = "E";
 
         let direccionFactura = "";
 
@@ -1634,19 +1633,18 @@ Veris Care - Suscripción
         args["token"] = _token;
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
-            "codigoCliente": detalleSuscripcion.empresa.codigoEmpresa,
-            "secuenciaAfiliado": "",
+            "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
+            "secuenciaAfiliado": detalleSuscripcion.carga.secuenciaAfiliado,
             "codigoSolicitudFirma": codigoSolicitudFirma,
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
             "pago": {
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
-                "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * 1).toFixed(2),
+                "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * 1).toFixed(2)),
                 "detalle": {
                     "metadata": JSON.stringify(detalleSuscripcion.tarjeta),
                     "cardToken": detalleSuscripcion.tarjeta.token,
-
                     "numeroTarjeta": "4000996174334475",
                     "mesExpiracion": 10,
                     "anioExpiracion": 2028,
@@ -1682,7 +1680,7 @@ Veris Care - Suscripción
         detalleSuscripcion.suscripcion = data.data;
         if(data.code == 200){
             stepper.next();
-            await cargaAfiliadosSuscripcion();
+            //await cargaAfiliadosSuscripcion();
             $('#successSignatureModal').modal('show')
         }else{
             showMessage('error','Atención',data.message);
@@ -1745,6 +1743,7 @@ Veris Care - Suscripción
             if(tipoFlujo == "E"){
                 await confirmarOtp();
             }else{
+                $('.telefonoOtp').html($('#celular').val());
                 $('#verificationCodeModal').modal('show');
             }
         }else{
@@ -1772,16 +1771,14 @@ Veris Care - Suscripción
         $('#signedDocumentModal').modal('hide')
         if(data.code == 200){
             $('#verificationCodeModal').modal('hide');
-            await crearSuscripcion();
+            // await crearSuscripcion();
+            await cargaAfiliadosSuscripcion()
         }else{
             showMessage('warning','Atención',data.message);
         }
     }
 
     async function cargaAfiliadosSuscripcion(){
-        var fechaOriginal = '1989-11-17';
-
-        // Separar la fecha
         var partes = $('#fechaNacimiento').val().split('-');
         var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
 
@@ -1819,11 +1816,15 @@ Veris Care - Suscripción
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
-            "secuenciaSuscripcion": detalleSuscripcion.suscripcion.secuenciaSuscripcion,
+            //"secuenciaSuscripcion": detalleSuscripcion.suscripcion.secuenciaSuscripcion,
             "afiliados": detalleSuscripcion.pacientes
         });
         const data = await call(args);
         console.log(data);
+        if(data.code == 200){
+            detalleSuscripcion.carga = data.data
+            await crearSuscripcion();
+        }
     }
 </script>
 @endpush

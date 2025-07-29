@@ -20,7 +20,7 @@
             <div class="row g-3 justify-content-start align-items-end">
                 <div class="col-12 col-lg-8">
                     <label for="numeroIdentificacion" class="form-label text-blue-zodiac-950 fw-medium">Número de Identificación*</label>
-                    <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="form-control form-control-lg rounded-3" placeholder="0999999999" required />
+                    <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="form-control form-control-lg rounded-3" placeholder="Ingresa tu identificación" required />
                 </div>
                 <div class="col-12 col-lg-4">
                     <button class="btn btn-lg btn-blue-veris btn-lg rounded-3 w-100 d-flex align-items-center justify-content-center gap-2 btn-acceder">
