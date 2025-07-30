@@ -543,6 +543,7 @@ Veris Care - Suscripción
                                                     <div class="tab-pane tab-pasarela_pagos d-none fade" id="pills-credit-card" role="tabpanel" aria-labelledby="pills-credit-card-tab" tabindex="0">
                                                         <form id="add-card-form" class="row g-3 justify-content-center">
                                                             <div class="col-12 col-md-8 col-lg-7 col-xl-6">
+                                                                <img class="w-100 mb-3" src="{{ asset('assets/img/veris/marcas-tarjetas-2048x176.png') }}">
                                                                 <div class="payment-form mb-3" id="my-card" data-capture-name="true"></div>
                                                                 {{-- <button id="btn-pagar" class="btn btn-primary-veris fs--18 fw-medium line-height-24 w-100 m-0 px-4 py-3">Pagar</button> --}}
                                                                 <br/>
@@ -979,6 +980,9 @@ Veris Care - Suscripción
                 </a>
               `;
         } else if(idx === 1) {
+            if(detalleSuscripcion.hasOwnProperty('tarjeta')){
+                await deleteTokenNuvei();
+            }
             actions.innerHTML = `
                 <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
@@ -1077,6 +1081,8 @@ Veris Care - Suscripción
 
     let numeroIdentificacionFacturaValido = false;
     let emailFacturaValido = false;
+
+    {{-- let tokenAuthNuvei = "{{ $auth_token }}"; --}}
 
     let dataCita = {};
  
@@ -1825,6 +1831,36 @@ Veris Care - Suscripción
             detalleSuscripcion.carga = data.data
             await crearSuscripcion();
         }
+    }
+
+    async function deleteTokenNuvei(){
+        let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+        let args = [];
+        args["endpoint"] = `${api_url_nuvei}/v2/card/delete/`;
+        args["method"] = "POST";
+        args["showLoader"] = false;
+        args["tokenNuvei"] = await getTokenNuvei();
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "card": {
+                "token": `${detalleSuscripcion.tarjeta.token}`
+            },
+            "user": {
+                "id": `${uid}`
+            }
+        });
+        const data = await call(args);
+        console.log(data);
+        delete detalleSuscripcion.tarjeta
+    }
+
+    async function getTokenNuvei(){
+        let args = [];
+        args["endpoint"] = `/get-auth-token-nuvei`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        const data = await call(args);
+        return data.token;
     }
 </script>
 @endpush
