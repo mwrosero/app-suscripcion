@@ -7,6 +7,7 @@ use App\Http\Controllers\CotizadorController;
 use App\Http\Controllers\B2B2CController;
 use App\Http\Controllers\B2CController;
 
+use App\Models\Ism;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -161,7 +162,25 @@ Route::get('/plan-medico-parami', [B2B2CController::class, 'planParami'])->name(
 Route::get('/facturacion-externa', function () {
     // dd(Session::get('userData'));
     // dd(Session::get('infoCliente'));
+
     return view('verislife.b2b2c.datosFacturacionExterno');
+})->withoutMiddleware(['guest']);
+
+Route::get('/get-auth-token-nuvei', function () {
+    $server_application_code = Ism::SERVER_CODE_NUVEI;
+    $server_app_key = Ism::SERVER_KEY_NUVEI ;
+    $date = new DateTime();
+    $unix_timestamp = $date->getTimestamp();
+    // $unix_timestamp = "1546543146";
+    $uniq_token_string = $server_app_key.$unix_timestamp;
+    $uniq_token_hash = hash('sha256', $uniq_token_string);
+    $auth_token = base64_encode($server_application_code.";".$unix_timestamp.";".$uniq_token_hash);
+    // echo "TIMESTAMP: $unix_timestamp";
+    // echo "\nUNIQTOKENST: $uniq_token_string";
+    // echo "\nUNIQTOHAS: $uniq_token_hash";
+    return response()->json([
+        'token' => $auth_token
+    ]);
 })->withoutMiddleware(['guest']);
 
 # B2C
