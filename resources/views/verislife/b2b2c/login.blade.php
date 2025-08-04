@@ -92,7 +92,7 @@
 
         const data = await call(args);
         console.log(data)
-        return data
+        return data;
     }
 
     async function validaInfoAfiliado(){

@@ -1112,7 +1112,7 @@ Registro
 
     async function obtenerListadoDocumentosFirma(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true`;
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=EMPRESA`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;

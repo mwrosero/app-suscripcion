@@ -345,16 +345,19 @@ Veris Care - Suscripción
                                                 </div>
                                             </div>
                                             <div class="row g-3 justify-content-center box-data-registro">
-                                                <div class="col-md-12 col-xl-8">
+                                                <div class="col-md-12 col-xl-8 box-form-1">
                                                     <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de documento <span class="text-danger">*</span></label>
                                                     <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" autocomplete="off" required>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8">
+                                                <div class="col-md-12 col-xl-8 box-form-1">
                                                     <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="nombre-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
+                                                    <p class="mb-0">Necesitamos validar tus datos para iniciar el proceso de compra</p>
+                                                </div>
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="nombres" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
@@ -364,7 +367,7 @@ Veris Care - Suscripción
                                                         placeholder="Ingresa tu nombre"
                                                         required>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="apellido-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="primerApellido" class="form-label fs-14p fw-medium">Primer Apellido <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
@@ -374,7 +377,7 @@ Veris Care - Suscripción
                                                         placeholder="Ingresa tu primer apellido"
                                                         required>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="sapellido-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="segundoApellido" class="form-label fs-14p fw-medium">Segundo Apellido <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
@@ -384,7 +387,7 @@ Veris Care - Suscripción
                                                         placeholder="Ingresa tu segundo apellido"
                                                         required>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="fecha-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
                                                     <input
                                                         type="date"
@@ -393,7 +396,7 @@ Veris Care - Suscripción
                                                         name="fechaNacimiento"
                                                         required>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="genero-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
                                                     <select class="form-select form-select-lg fs-14p" id="genero" name="genero" required>
                                                         <option value="" hidden selected>Elegir género</option>
@@ -401,7 +404,7 @@ Veris Care - Suscripción
                                                         <option value="F">Femenino</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="email-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="email" class="form-label fs-14p fw-medium">Correo electrónico <span class="text-danger">*</span></label>
                                                     <input
                                                         type="email"
@@ -411,7 +414,7 @@ Veris Care - Suscripción
                                                         placeholder="Ingresa el correo electrónico"
                                                         required>
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 d-none" id="telefono-col">
+                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="celular" class="form-label fs-14p fw-medium">Celular <span class="text-danger">*</span></label>
                                                     <input
                                                         type="tel"
@@ -437,7 +440,7 @@ Veris Care - Suscripción
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <hr>
+                                                <hr class="d-none box-form-2">
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="mismosDatos" name="mismosDatos" checked>
@@ -956,7 +959,7 @@ Veris Care - Suscripción
         console.log({idx})
         if (idx === 0) {
             actions.innerHTML = `
-                <a id="btn-prev" href="javascript:history.back()" class="btn btn-outline-cerulean-blue-800">
+                <a id="btn-prev" class="btn btn-outline-cerulean-blue-800">
                   <i class="fa-solid fa-chevron-left me-2"></i>
                   <span class="d-none d-sm-inline">Regresar</span>
                 </a>
@@ -1008,6 +1011,7 @@ Veris Care - Suscripción
         if (btnPrev && idx > 0 && idx < total - 1) btnPrev.addEventListener('click', () => stepper.previous());
         if (btnNext && idx < total - 1) btnNext.addEventListener('click', async () => {
             let couldNext = true;
+
             //stepper.next();
             console.log('Siguiente paso activado');
             let step = $('#btn-next').attr('step-rel');
@@ -1016,9 +1020,16 @@ Veris Care - Suscripción
             let telefonoFactura = $('#celular').val();
             let direccionFactura = $('#direccionFactura').val();
 
-            console.log(step);
             
             if(step == 1){
+                if(busqueda){
+                    couldNext = false;
+                    busqueda = false;
+                    $('.box-form-2').removeClass('d-none');
+                    $('.box-form-1').addClass('d-none');
+                    $('#btn-next').attr('disabled', true);
+                    validateFields()
+                }
                 detalleSuscripcion.datosFactura = {
                     "tipoIdentificacion": tipoIdentificacionFactura,
                     "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
@@ -1048,7 +1059,7 @@ Veris Care - Suscripción
             if(couldNext){
                 stepper.next();
             }else{
-                alert("Error")
+                //alert("Error")
             }
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
         });
@@ -1222,6 +1233,17 @@ Veris Care - Suscripción
             await obtenerDocumentoContrato(datos);
         })
 
+        $('body').on('click', '#btn-prev', async function(){
+            if(busqueda){
+                history.back()
+            }else{
+                busqueda = true;
+                $('.box-form-1').removeClass('d-none')
+                $('.box-form-2').addClass('d-none')
+
+            }
+        })
+
         $('body').on('input', '#input1, #input2, #input3, #input4, #input5, #input6', async function(){
             if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != "" && $('#input5').val() != "" && $('#input6').val() != ""){
                 $('.btn-verificar-otp').attr('disabled',false)
@@ -1356,8 +1378,9 @@ Veris Care - Suscripción
     };
     
     async function obtenerListadoDocumentosFirma(){
+        //let nemonicoTipoDocumento = '';
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true`;
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=INDIVIDUAL`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1409,14 +1432,69 @@ Veris Care - Suscripción
         $('#documentoModal').modal('show');
     }
 
+    async function validaInfoAfiliado(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoTipoIdentificacionPcte": tipoIdentificacion,
+            "numeroIdentificacionPcte": numeroIdentificacion,
+            "titularDependiente": "T"
+        });
+        const data = await call(args);
+        const mensajeBuscado = "El afiliado {0} ya tiene un contrato de fidelización activo.";
+        return data.data.includes(mensajeBuscado);
+    }
+
+    async function consultarPaciente(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+
+        let args = [];
+        args["endpoint"] = `${api_url}/general/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&valorFiltro=${numeroIdentificacion}&page=1&perPage=1`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+
+        const data = await call(args);
+        console.log(data)
+        return data;
+    }
+
     async function validateFields(){
         let step = $('#btn-next').attr('step-rel');
-        console.log(step)
         if(step == 1){
-            console.log(busqueda)
             if(busqueda){
                 if(numeroIdentificacionValido){
-                    $('#btn-next').attr('disabled', false);
+                    let estaRegistrado = await validaInfoAfiliado();
+                    if(!estaRegistrado){
+                        let paciente = await consultarPaciente();
+                        let persona = {};
+                        if(paciente.data.totalRows > 0){
+                            persona = paciente.data.rows[0]
+                            detalleSuscripcion.persona = persona;
+                            $('#nombres').val(detalleSuscripcion.persona.primerNombre);
+                            $('#primerApellido').val(detalleSuscripcion.persona.primerApellido);
+                            if(detalleSuscripcion.persona.segundoApellido !== null){
+                                $('#segundoApellido').val(detalleSuscripcion.persona.segundoApellido);
+                            }
+                            var partes = detalleSuscripcion.persona.fechaNacimiento.split('/');
+                            var fechaFormateada = partes[2] + '-' + partes[1] + '-' + partes[0];
+                            $('#fechaNacimiento').val(fechaFormateada);
+                            $('#genero').val(detalleSuscripcion.persona.genero);
+                            $('#email').val(detalleSuscripcion.persona.correoElectronico);
+                            $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+                        }
+                        $('#btn-next').attr('disabled', false);
+                    }else{
+                        showMessage('warning','Atención','Ya dispones de un contrato de fidelización activo.')
+                        $('#btn-next').attr('disabled', true);
+                    }
                 }else{
                     $('#btn-next').attr('disabled', true);
                 }
@@ -1523,9 +1601,17 @@ Veris Care - Suscripción
     }
 
     async function validarIdentificacionFactura(id){
-        if(id == "tipoIdentificacion"){
-            let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
-            let numeroIdentificacion = $('#numeroIdentificacionFactura').val();
+        console.log(id)
+        var tipoIdentificacion;
+        var numeroIdentificacion;
+        if(id == "numeroIdentificacion"){
+            tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
+            numeroIdentificacion = $('#numeroIdentificacion').val();
+        }else{
+            tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
+            numeroIdentificacion = $('#numeroIdentificacionFactura').val();
+        }
+        console.log(tipoIdentificacion,numeroIdentificacion)
         let args = [];
         args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
         args["method"] = "GET";
@@ -1533,7 +1619,7 @@ Veris Care - Suscripción
         args["token"] = _token;
         const data = await call(args);
         if(data.code == 200){
-            if(id == "tipoIdentificacion"){
+            if(id == "numeroIdentificacion"){
                 numeroIdentificacionValido = data.data.esIdentificacionValida;
             }else{
                 numeroIdentificacionFacturaValido = data.data.esIdentificacionValida;
@@ -1743,7 +1829,7 @@ Veris Care - Suscripción
                 "codigoInstitucion": 5,
                 "tipoCuenta": "AHORROS",
                 "numeroCuenta": "12345678",
-                "periodo": "MENSUAL"
+                "periodo": detalleSuscripcion.detallePlan.tipo
             },
             "tiposDocumentos": tiposDocumentos
         });

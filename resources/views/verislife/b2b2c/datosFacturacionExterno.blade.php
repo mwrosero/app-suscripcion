@@ -1358,7 +1358,7 @@ Veris Care - Suscripción
     
     async function obtenerListadoDocumentosFirma(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true`;
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=COLABORADOR`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1738,7 +1738,7 @@ Veris Care - Suscripción
                 "codigoInstitucion": 5,
                 "tipoCuenta": "AHORROS",
                 "numeroCuenta": "12345678",
-                "periodo": "MENSUAL"
+                "periodo": detalleSuscripcion.detallePlan.tipo
             },
             "tiposDocumentos": tiposDocumentos
         });
