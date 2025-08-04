@@ -1523,8 +1523,9 @@ Veris Care - Suscripción
     }
 
     async function validarIdentificacionFactura(id){
-        let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
-        let numeroIdentificacion = $('#numeroIdentificacionFactura').val();
+        if(id == "tipoIdentificacion"){
+            let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
+            let numeroIdentificacion = $('#numeroIdentificacionFactura').val();
         let args = [];
         args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
         args["method"] = "GET";

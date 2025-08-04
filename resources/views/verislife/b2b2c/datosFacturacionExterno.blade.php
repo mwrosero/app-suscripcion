@@ -1112,7 +1112,7 @@ Veris Care - Suscripción
 
         $('#numeroIdentificacion').val(detalleSuscripcion.numeroIdentificacion)
 
-        if(detalleSuscripcion.hasOwnProperty('persona') && detalleSuscripcion.persona !== {}){
+        if(Object.keys(detalleSuscripcion.persona).length > 0){
             $('#nombres').val(detalleSuscripcion.persona.primerNombre);
             $('#primerApellido').val(detalleSuscripcion.persona.primerApellido);
             $('#segundoApellido').val(detalleSuscripcion.persona.segundoApellido);
