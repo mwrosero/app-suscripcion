@@ -1056,27 +1056,6 @@ Registro
         }
     }
 
-    async function cargarTiposIdentificacion() {
-        const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
-        const queryParams = new URLSearchParams({
-            codigoEmpresa: '1',
-            usoTipoIdentificacion: 'GESTION_FACTURACION'
-        });
-
-        const response = await call({
-            method: 'GET',
-            endpoint: `${baseUrl}?${queryParams.toString()}`,
-            bodyType: 'json',
-            showLoader: false,
-        });
-
-        let elem = `<option value="" selected disabled>Seleccionar</option>`;
-        response.data.forEach(item => {
-            elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
-        });
-        $('#tipoIdentificacion').html(elem);
-    }
-
     async function existeIdentificacion(codigo, numero) {
         console.log(codigo, numero)
         return pacientes.some(item => 

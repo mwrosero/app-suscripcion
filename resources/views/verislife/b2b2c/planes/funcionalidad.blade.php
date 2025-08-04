@@ -19,7 +19,11 @@
             detalleSuscripcion.detallePlan = data;
             detalleSuscripcion.origen = "suscripcion";
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
-            location.href = '/facturacion-externa';
+            if(detalleSuscripcion.tipoFlujo == "C"){
+                location.href = '/facturacion-externa';
+            }else{
+                location.href = '/facturacion-externa-b2c';
+            }
         });
     })
 

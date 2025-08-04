@@ -64,6 +64,7 @@
                     let suscripcion = {
                         "tipoIdentificacion": 2,
                         "numeroIdentificacion": numeroIdentificacion,
+                        "tipoFlujo": "C",
                         "persona": persona
                     }
                     localStorage.setItem(`suscripcion`, JSON.stringify(suscripcion));

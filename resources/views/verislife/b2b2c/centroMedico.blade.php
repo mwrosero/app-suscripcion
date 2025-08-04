@@ -24,7 +24,7 @@ Veris Care - Selecciona el Centro médico
         <!-- Right side -->
         <div class="right-panel">
             <div class="text-center w-100 mt-4">
-                <h4 class="text-fiord-700 fw-semibold mb-2">Hola<span class="text-primary-veris text-capitalize nombrePersona"></span>,</h4>
+                <h4 class="text-fiord-700 fw-semibold mb-2">Hola<span class="text-primary-veris text-capitalize nombrePersona"></span></h4>
                 <h5 class="text-fiord-700 fw-medium mb-4">Te damos la bienvenida a Veris care</h5>
                 <h5 class="fw-medium text-primary-veris mb-5">Escoge el programa de fidelización a tu medida:</h5>
 
@@ -100,8 +100,8 @@ Veris Care - Selecciona el Centro médico
 <script>
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     document.addEventListener('DOMContentLoaded', async () => {
-        if(detalleSuscripcion.persona !== {}){
-            $('.nombrePersona').html(` ${detalleSuscripcion.persona.primerNombre.toLowerCase()}`)
+        if(Object.keys(detalleSuscripcion.persona).length > 0){
+            $('.nombrePersona').html(` ${detalleSuscripcion.persona.primerNombre.toLowerCase()}, `)
         }
         $('body').on('click', '.linea-item', async function() {
             let lineaNegocio = $(this).attr('lineaNegocio-rel');

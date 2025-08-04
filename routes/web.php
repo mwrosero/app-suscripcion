@@ -166,6 +166,13 @@ Route::get('/facturacion-externa', function () {
     return view('verislife.b2b2c.datosFacturacionExterno');
 })->withoutMiddleware(['guest']);
 
+Route::get('/facturacion-externa-b2c', function () {
+    // dd(Session::get('userData'));
+    // dd(Session::get('infoCliente'));
+
+    return view('verislife.b2c.datosFacturacionExternoB2C');
+})->withoutMiddleware(['guest']);
+
 Route::get('/get-auth-token-nuvei', function () {
     $server_application_code = Ism::SERVER_CODE_NUVEI;
     $server_app_key = Ism::SERVER_KEY_NUVEI ;
