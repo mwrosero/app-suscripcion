@@ -1226,7 +1226,9 @@ Veris Care - Suscripción
             $('#fechaNacimiento').val(fechaFormateada);
             $('#genero').val(detalleSuscripcion.persona.genero);
             $('#email').val(detalleSuscripcion.persona.correoElectronico);
-            $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+            if(detalleSuscripcion.persona.telefonoCelular !== null){
+                $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+            }
         }
 
         $('body').on('change', '#terms, #privacy', function(){
