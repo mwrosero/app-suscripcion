@@ -1454,7 +1454,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+            let uid = $('#numeroIdentificacion').val();
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
