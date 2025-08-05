@@ -452,7 +452,7 @@
             "codigoEmpresa": "68",
             "nombreEmpresa": "VERIS S.A."
         },
-        "tipoFlujo": "E"
+        "tipoFlujo": "I"
     }
     localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcionTmp));
     let lineaNegocioPage = "CMV"

@@ -273,7 +273,8 @@ async function cargarTiposIdentificacion() {
         showLoader: false,
     });
 
-    let elem = `<option value="" selected disabled>Seleccionar</option>`;
+    // let elem = `<option value="" selected disabled>Seleccionar</option>`;
+    let elem = ``;
     response.data.forEach(item => {
         elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
     });

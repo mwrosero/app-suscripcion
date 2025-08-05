@@ -957,6 +957,7 @@ Veris Care - Suscripción
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
+        hideLoader();
     }
 
     async function renderButtons(idx) {
@@ -1162,6 +1163,7 @@ Veris Care - Suscripción
 
         $('#nombreEmpresa').val(detalleSuscripcion.empresa.nombreEmpresa)
         $('.nombreEmpresa').val(detalleSuscripcion.empresa.nombreEmpresa)
+        $('.nombreEmpresa').html(detalleSuscripcion.empresa.nombreEmpresa)
         
         $('#ruc').val(detalleSuscripcion.numeroIdentificacion)
 

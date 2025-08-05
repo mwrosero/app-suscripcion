@@ -2,6 +2,7 @@
 
 <html
     lang="en"
+    translate="no"
     class="light-style"
     dir="ltr"
     data-theme="theme-default"
