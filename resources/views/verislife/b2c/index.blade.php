@@ -271,6 +271,69 @@
     <div class="container">
         <h2 class="text-center text-white mb-4">Todas las opciones incluyen</h2>
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+            <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+                <h5 class="fw-medium ps-3 fs-18 mb-0 me-3 text-white">Descuentos en</h5>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-veris-bn.svg" class="me-4" alt="parami">
+            </div>
+        </div>
+        <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+            <div class="col-12 col-md-3">
+                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                    <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                        -15% en:
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
+                        <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <p class="fs-12p fw-normal text-white mb-0 lh-1">Consultas adicionales</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                    <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                        -20% en:
+                    </div>
+                    <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
+                        <div class="col-6 col-xl-3 text-center">
+                            <i class="fa-solid fa-flask fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <p class="fs-12p text-white mb-0 lh-1">Laboratorio clínico</p>
+                        </div>
+                        <div class="col-6 col-xl-3 text-center">
+                            <i class="fa-solid fa-x-ray fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <p class="fs-12p text-white mb-0 lh-1">Imágenes</p>
+                        </div>
+                        <div class="col-6 col-xl-3 text-center">
+                            <i class="fa-solid fa-crutch fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <p class="fs-12p text-white mb-0 lh-1">Terapias</p>
+                        </div>
+                        <div class="col-6 col-xl-3 text-center">
+                            <i class="fa-solid fa-file-prescription fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <p class="fs-12p text-white mb-0 lh-1">Procedimientos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                    <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                        -5% en:
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
+                        <i class="fa-solid fa-pills fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <p class="fs-12p fw-normal text-white mb-0 lh-1">Farmacia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+            <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+                <h5 class="fw-medium ps-3 fs-18 mb-0 me-3 text-white">Descuentos en</h5>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-parami-bn.svg" class="me-4" alt="parami">
+            </div>
+        </div>
+        <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
@@ -286,7 +349,7 @@
             <div class="col-12 col-md-5">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -15% en:
+                        -20% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
@@ -332,10 +395,15 @@
                 <div class="card border-perano-300 rounded-4 shadow-none h-100">
                     <div class="card-body">
                         <h5 class="card-title">Esto es:</h5>
+                        <hr>
                         <ul class="list-unstyled mb-0">
-                            <li class="d-flex mb-2"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Programa de fidelización</li>
-                            <li class="d-flex mb-2"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Atención en todos los centros Veris y ParaMí</li>
-                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Uso inmediato tras la compra</li>
+                            <li class="d-flex mb-2"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Es un programa de fidelización.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Puedes hacerte atender tanto en los centros Veris y Para Mí.</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Puedes hacer uso del producto de manera inmediata.</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Puedes atender tus enfermedades que ya tienes (preexistentes).</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Atención médica oportuna y sin complicaciones.</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Beneficios inmediatos desde el primer día de afiliación</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Acceso a todo el ecosistema Veris.</li>
                         </ul>
                     </div>
                 </div>
@@ -345,10 +413,14 @@
                 <div class="card border-perano-300 rounded-4 shadow-none h-100">
                     <div class="card-body">
                         <h5 class="card-title">Esto no es:</h5>
+                        <hr>
                         <ul class="list-unstyled mb-0">
-                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>Seguro médico</li>
-                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>Coparticipación</li>
-                            <li class="d-flex"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>Aplicable para urgencias ni hospitalización</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No es un seguro médico.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No incluye preexistencias.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No aplica para vacunas ni vitamina C.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No require trámites de autorización o deducibles.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No cubre emergencias hospitalarias.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No está limitado a una especialidad médica.</li>
                         </ul>
                     </div>
                 </div>

@@ -1025,7 +1025,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             // submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+            let uid = $('#numeroIdentificacion').val();
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -1551,6 +1551,12 @@ Veris Care - Suscripción
         }else{
             {{-- args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`; --}}
             args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}`;
+            /*{
+                "codigoCliente": 0,
+                "numeroIdentificacion": "string",
+                "nombreCliente": "string",
+                "email": "string"
+            }*/
         }
         args["method"] = "GET";
         args["showLoader"] = true;
@@ -1623,7 +1629,9 @@ Veris Care - Suscripción
                             $('#fechaNacimiento').val(fechaFormateada);
                             $('#genero').val(detalleSuscripcion.persona.genero);
                             $('#email').val(detalleSuscripcion.persona.correoElectronico);
-                            $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+                            if(detalleSuscripcion.persona.telefonoCelular !== null){
+                                $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
+                            }
                         }
                         $('#btn-next').attr('disabled', false);
                     }else{
