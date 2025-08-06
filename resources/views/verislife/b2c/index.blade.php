@@ -30,7 +30,7 @@
 </section>
 
 <section class="py-5">
-    <div class="container">
+    <div class="container" id="planes">
         <h2 class="fw-medium text-primary-veris text-center">Escoge la opción ideal para ti</h2>
         <div class="row justify-content-center px-xl-5">
             <ul class="nav nav-pills justify-content-center bg-white w-auto p-1 rounded-3" id="pills-tab" role="tablist">
@@ -259,7 +259,9 @@
 
                 <div class="mt-5">
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h6 class="text-fiord-700 fw-normal">*Los beneficios del programa se extiende a familiares de hasta tercer grado de consanguinidad</h6>
+                        <h6 class="text-fiord-700 fw-normal text-center">*Los beneficios  del programa se extiende a familiares de hasta tercer grado de consanguinidad y primer grado de afinidad.</h6>
+                        <p class="fw-medium mt-3 mb-2">¿Tienes dudas?</p>
+                        <a href="#dudas" class="btn btn-outline-blue-veris">Clic quí</a>
                     </div>
                 </div>
             </div>
@@ -280,7 +282,7 @@
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -15% en:
+                        Hasta 15% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
                         <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
@@ -292,7 +294,7 @@
             <div class="col-12 col-md-5">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -20% en:
+                        Hasta 20% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
@@ -318,7 +320,7 @@
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -5% en:
+                        Hasta 5% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
                         <i class="fa-solid fa-pills fs-2 text-shakespeare-300 mt-3 mb-2"></i>
@@ -337,7 +339,7 @@
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -20% en:
+                        Hasta 20% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
                         <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
@@ -349,7 +351,7 @@
             <div class="col-12 col-md-5">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -20% en:
+                        Hasta 20% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
@@ -375,11 +377,35 @@
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        -5% en:
+                        Hasta 5% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
                         <i class="fa-solid fa-pills fs-2 text-shakespeare-300 mt-3 mb-2"></i>
                         <p class="fs-12p fw-normal text-white mb-0 lh-1">Farmacia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section class="bg-menu-theme-veris-life py-5">
+    <h2 class="text-center text-white mb-4">Servicios adicionales</h2>
+    <div class="row mx-0 px-0 justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+            <div class="card border-perano rounded-4 text-center">
+                <div class="card-body text-blue-zodiac-950">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong class="text-blue-zodiac-950">Veris Urgencias</strong><br>
+                            <small>Hasta 15% de descuento (Gye)</small>
+                        </div>
+                        <div class="col-md-6 border-start">
+                            <strong class="text-blue-zodiac-950">Asesoría Médica</strong><br>
+                            <small>Asesoría médica ilimitada a través del contact center</small>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-zodiac-blue small fw-medium">
+                        **NO APLICA PARA VACUNAS NI VITAMINA C**
                     </div>
                 </div>
             </div>
@@ -391,7 +417,7 @@
     <div class="container">
         <h2 class="text-center text-primary-veris mb-4">Así funcionan nuestras opciones</h2>
         <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
+            <div class="col-md-6 col-lg-5 col-xl-4">
                 <div class="card border-perano-300 rounded-4 shadow-none h-100">
                     <div class="card-body">
                         <h5 class="card-title">Esto es:</h5>
@@ -409,7 +435,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6 col-lg-5 col-xl-4">
                 <div class="card border-perano-300 rounded-4 shadow-none h-100">
                     <div class="card-body">
                         <h5 class="card-title">Esto no es:</h5>
@@ -426,10 +452,15 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="#planes" class="btn btn-blue-veris mt-3">Quiero unirme a Veris Care</a>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="bg-white py-5">
+<section class="bg-white py-5" id="dudas">
     <div class="container">
         <h2 class="text-center text-primary-veris mb-2">¿Tienes dudas sobre nuestro programa?</h2>
         <p class="text-center text-fiord-700 mb-5">Esto cubrimos / no cubrimos</p>
@@ -441,12 +472,12 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-0"
                         aria-expanded="false" aria-controls="collapse-0">
-                        ¿Desde cuándo puedo usar el programa Veris care?
+                        ¿Desde cuándo puedo empezar a usar los servicios de Veris Care?
                     </button>
                 </h2>
                 <div id="collapse-0" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Desde el momento en que finalizas tu compra y recibes tu confirmación.
+                        Desde el primer día de activación de Veris Care.
                     </div>
                 </div>
             </div>
@@ -461,7 +492,46 @@
                 </h2>
                 <div id="collapse-1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Son planes prepagados de salud con precios fijos y beneficios concretos.
+                        1. Acceso inmediato a servicios de salud ambulatoria
+                        <ul>
+                            <li>Consultas médicas generales y especializadas.</li>
+                            <li>Exámenes de laboratorio, imagenología y procedimientos diagnósticos.</li>
+                            <li>Atención prioritaria sin tiempos de espera extensos.</li>
+                        </ul>
+                        2. Cobertura familiar ampliada
+                        <ul>
+                            <li>Permite incluir familiares hasta 3° grado de consanguinidad y 1° de afinidad.</li>
+                            <li>Sin límite en el número de beneficiarios incluidos por colaborador.</li>
+                        </ul>
+                        3. Sin restricciones ni barreras de acceso
+                        <ul>
+                            <li>No aplica carencias ni exclusión por preexistencias.</li>
+                            <li>Acceso voluntario, sin trámites engorrosos ni deducibles.</li>
+                            <li>No es un seguro ni un plan de medicina prepagada.</li>
+                        </ul>
+                        4. Red médica nacional
+                        <ul>
+                            <li>Más de 14 centrales médicas Veris, 5 centros “Para Mi”, 1 centro de urgencias y 8 sedes de laboratorio.</li>
+                            <li>Telemedicina a través de Central Médica Virtual con más de 21 especialidades y 500 médicos conectados.</li>
+                            <li>Servicios a domicilio en Quito y Guayaquil (laboratorio y farmacia).</li>
+                        </ul>
+                        5. Beneficios corporativos
+                        <ul>
+                            <li>Descuentos importantes en todos los servicios del ecosistema Veris.</li>
+                            <li>Programas adaptables al tamaño y necesidades de cada empresa.</li>
+                            <li>Mejora de la productividad y reducción del ausentismo laboral.</li>
+                        </ul>
+                        6. Tecnología y atención continua
+                        <ul>
+                            <li>Agendamiento 24/7, resultados en línea, recetas electrónicas y recordatorios médicos.</li>
+                            <li>Atención los 365 días del año de 07h00 a 21h00.</li>
+                            <li>Plataforma digital con historia clínica en red y seguimiento personalizado.</li>
+                        </ul>
+                        7. Compromiso ambiental y social
+                        <ul>
+                            <li>Empresa con Huella de Carbono, comprometida con la sostenibilidad.</li>
+                            <li>Digitalización de procesos y reducción del uso de papel.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -471,12 +541,21 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-2"
                         aria-expanded="false" aria-controls="collapse-2">
-                        ¿Qué requisitos debo cumplir para inscribirme?
+                        ¿A quiénes puedo incluir en el programa?
                     </button>
                 </h2>
                 <div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Ser mayor de edad y tener un documento de identidad válido.
+                        <ul>
+                            <li>El colaborador de la empresa o persona individual que accede al plan.</li>
+                            <li>Familiares hasta 3er grado de consanguinidad, como por ejemplo: Padres Hijos Hermanos Abuelos Nietos Tíos Sobrinos</li>
+                            <li>Familiares hasta 1er grado de afinidad, como: Cónyuge o pareja Suegros Yerno o nuera.</li>
+                        </ul>
+                        Importante:
+                        <ul>
+                            <li>No existe un límite en el número de familiares que el colaborador puede incluir dentro del programa.</li>
+                            <li>El acceso es voluntario y puede adaptarse a las necesidades individuales de cada familia.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -486,12 +565,14 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-3"
                         aria-expanded="false" aria-controls="collapse-3">
-                        ¿Existen costos ocultos en el programa?
+                        ¿Qué es tercer grado de consanguinidad y primer grado de afinidad?
                     </button>
                 </h2>
                 <div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        No. Pagas solo el valor del plan que escojas.
+                        Familiares hasta 3er grado de consanguinidad, como por ejemplo: Padres Hijos Hermanos Abuelos Nietos Tíos Sobrinos.
+                        <br>
+                        Familiares hasta 1er grado de afinidad, como: Cónyuge o pareja Suegros Yerno o nuera
                     </div>
                 </div>
             </div>
@@ -501,12 +582,96 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-4"
                         aria-expanded="false" aria-controls="collapse-4">
-                        ¿Cómo puedo contactar al soporte técnico?
+                        ¿El precio del programa aplica para todos?
                     </button>
                 </h2>
                 <div id="collapse-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        A través de WhatsApp, call‑center o en cualquiera de nuestros centros.
+                        Sí. La tarifa del programa Veris Care no es por persona, sino por grupo, y aplica para todos los beneficiarios que el colaborador desee incluir, sin límite en el número de personas.
+                        <br>
+                        Esto significa que con una sola tarifa fija anual, el colaborador puede incluir a todos los familiares que cumplan con los criterios (hasta 3er grado de consanguinidad y 1er grado de afinidad).
+                        <br>
+                        Por ello, es importante elegir la opción del programa que mejor se ajuste a las necesidades del colaborador o de la empresa, considerando la amplitud de cobertura que se desea brindar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-5">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse-5"
+                        aria-expanded="false" aria-controls="collapse-5">
+                        ¿Necesito tener seguro médico para acceder a Veris Care?
+                    </button>
+                </h2>
+                <div id="collapse-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        No. No necesitas tener un seguro médico para acceder a Veris Care. El programa está diseñado para ser una alternativa independiente, ideal para personas o empresas que no cuentan con cobertura de seguro.
+                        <br>
+                        Sin embargo, si ya tienes un seguro médico, puedes complementar tu cobertura con Veris Care, accediendo a servicios ambulatorios inmediatos, descuentos en toda la red Veris y atención prioritaria, sin trámites ni deducibles.
+                        <br>
+                        Veris Care es una solución flexible que se adapta tanto a quienes no tienen seguro, como a quienes desean mejorar su acceso a salud preventiva y continua.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-6">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse-6"
+                        aria-expanded="false" aria-controls="collapse-6">
+                        ¿Qué servicios incluye Veris Care?
+                    </button>
+                </h2>
+                <div id="collapse-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Veris Care incluye una amplia gama de servicios de salud ambulatoria dentro del ecosistema Veris y Centros Para Mi, diseñados para garantizar una atención integral, oportuna y accesible. Entre los principales servicios se encuentran:
+                        <br>
+                        Atención médica:
+                        <ul>
+                            <li>Consultas médicas generales y especializadas.</li>
+                            <li>Telemedicina en más de 21 especialidades a través de la Central Médica Virtual.</li>
+                        </ul>
+                        Servicios diagnósticos:
+                        <ul>
+                            <li>Exámenes de laboratorio clínico.</li>
+                            <li>Estudios de imagenología (rayos X, ecografías, entre otros).</li>
+                            <li>Procedimientos como MAPA, Holter, electrocardiogramas, endoscopias, colonoscopias, etc.</li>
+                        </ul>
+                        Servicios complementarios:
+                        <ul>
+                            <li>Odontología</li>
+                            <li>Optometría.</li>
+                            <li>Terapias físicas y respiratorias.</li>
+                        </ul>
+                        Beneficios adicionales:
+                        <ul>
+                            <li>Descuentos importantes en todos los servicios del ecosistema Veris.</li>
+                            <li>Atención prioritaria sin tiempos de espera extensos.</li>
+                            <li>Servicios de laboratorio, procedimientos y farmacia a domicilio en Quito y Guayaquil.</li>
+                            <li>Resultados de exámenes y recetas médicas en línea.</li>
+                            <li>Agendamiento 24/7 y pagos multicanal.</li>
+                            <li>Historia clínica en red disponible desde cualquier punto de atención.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-7">
+                    <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse-7"
+                        aria-expanded="false" aria-controls="collapse-7">
+                        ¿Dónde puedo usar Veris Care?
+                    </button>
+                </h2>
+                <div id="collapse-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Puedes usar Veris Care en todos los centros Veris y Para Mí en las ciudades de Guayaquil, Quito y Cuenca. 
+                        <br>
+                        Centros Veris <a target="_blank" href="https://www.veris.com.ec/ubicaciones">https://www.veris.com.ec/ubicaciones</a>
+                        <br>
+                        Centros Veris <a target="_blank" href="https://www.parami.com.ec/nosotros">https://www.parami.com.ec/nosotros</a>
                     </div>
                 </div>
             </div>
