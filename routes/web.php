@@ -85,10 +85,13 @@ Route::group(['middleware' => ['loggedUser']], function () {
 
     Route::get('/', function(){
         // dd(Session::get('infoCliente'));
-
+        if(Session::get('userData')->codigoUsuario == "BACKENDFIDELIZACION"){
+            return view('login.login');
+        }
         if(Session::get('infoCliente')->tipoFlujo == "E" && is_null(Session::get('infoCliente')->secuenciaAfiliado)){
             return view('verislife.inicio');
-        }else if(Session::get('infoCliente')->tipoFlujo == "E" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+        // }else if(Session::get('infoCliente')->tipoFlujo == "E" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+        }else{
             return view('verislife.dependiente.carga-dependiente');
         }
     })->withoutMiddleware(['guest']);
@@ -98,7 +101,8 @@ Route::group(['middleware' => ['loggedUser']], function () {
         // dd(Session::get('infoCliente'));
         if(Session::get('infoCliente')->tipoFlujo == "E" && is_null(Session::get('infoCliente')->secuenciaAfiliado)){
             return view('verislife.inicio');
-        }else if(Session::get('infoCliente')->tipoFlujo == "E" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+        // }else if(Session::get('infoCliente')->tipoFlujo == "C" && !is_null(Session::get('infoCliente')->secuenciaAfiliado)){
+        }else{
             return view('verislife.dependiente.carga-dependiente');
         }
     })->withoutMiddleware(['guest']);

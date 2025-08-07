@@ -172,7 +172,7 @@
             <div class="col-12 col-md-5">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        Hasta 20% en:
+                        Hasta 15% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
@@ -198,7 +198,7 @@
             <div class="col-12 col-md-3">
                 <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        Hasta 15% en:
+                        Hasta 20% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
                         <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
