@@ -841,9 +841,17 @@ Veris Care - Suscripción
                                             <hr>
                                             <!-- Detalles de la compra -->
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0 d-none">
                                                     <div>Colaboradores registrados:</div>
                                                     <div class="detail-value colaboradores-registrados"></div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0 d-none">
+                                                    <div class="text-start">Nombre de la empresa:</div>
+                                                    <div class="detail-value text-end nombreEmpresa"></div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
+                                                    <div class="text-start" style="color: #0071CE;">Nombre:</div>
+                                                    <div style="color: #0A2240" class="detail-value text-end nombrePersonaRegistrada text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div class="text-start">Nombre de la empresa:</div>
@@ -858,7 +866,7 @@ Veris Care - Suscripción
                                                     <div class="detail-value frecuencia-pago text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Monto total:</div>
+                                                    <div>Monto:</div>
                                                     <div class="detail-value valor-total"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
@@ -1157,7 +1165,7 @@ Veris Care - Suscripción
                 <h4 class="option-title mb-0 nombrePlan">${detalleSuscripcion.detallePlan.nombre}</h4>
             </div>
             <div class="price-block text-start">
-                <h4 class="fw-semibold mb-0">$${ (detalleSuscripcion.detallePlan.valorFinal * 1 ).toFixed(2) } <small class="fw-normal fs-14p">/${1} plan${ (1 == 1) ? `` : `es` }</small></h4>
+                <h4 class="fw-semibold mb-0">$${ (detalleSuscripcion.detallePlan.valorFinal * 1 ).toFixed(2) } <small class="fw-normal fs-14p">/${1} opción${ (1 == 1) ? `` : `es` }</small></h4>
                 <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $${ (detalleSuscripcion.detallePlan.precio * 1 ).toFixed(2) } </p>
             </div>`)
 
@@ -1702,6 +1710,8 @@ Veris Care - Suscripción
             stepper.next();
             //await cargaAfiliadosSuscripcion();
             $('#successSignatureModal').modal('show')
+            let nombreRegistrado = `${ $('#nombres').val() } ${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`
+            $('.nombrePersonaRegistrada').html(nombreRegistrado.toLowerCase());
         }else{
             showMessage('error','Atención',data.message);
         }

@@ -788,7 +788,7 @@ Veris Care - Suscripción
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
                                         <div class="card-body p-4 text-center">
-                                            <div class="text-center mb-4">
+                                            <div class="text-center mb-4 d-none">
                                                 <i class="fa-solid fa-circle-check text-primary-veris fs-1"></i>
                                             </div>
                                             <h4 class="text-primary-veris fw-semibold mb-4">Registro exitoso</h4>
@@ -808,7 +808,7 @@ Veris Care - Suscripción
 
                                                 <div class="col-12 col-lg-8 text-center">
                                                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/agradecimiento.svg" alt="" class="img-fluid mb-4">
-                                                    <p class="mb-2">¡Gracias por elegirnos <span class="nombreCliente text-capitalize"></span>!</p>
+                                                    <p class="mb-2">¡Gracias por elegirnos <span class="nombreCliente text-capitalize fw-medium"></span>!</p>
                                                     <p class="mb-2">Estos son los datos de tu compra</p>
                                                     <div class="card card-body shadow-none d-none">
                                                         <!-- Opción seleccionada -->
@@ -826,39 +826,43 @@ Veris Care - Suscripción
                                             <hr>
                                             <!-- Detalles de la compra -->
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Colaboradores registrados:</div>
-                                                    <div class="detail-value colaboradores-registrados"></div>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0 d-none">
+                                                    <div style="color: #0071CE;">Colaboradores registrados:</div>
+                                                    <div style="color: #0A2240" class="detail-value colaboradores-registrados"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div class="text-start">Nombre de la empresa:</div>
-                                                    <div class="detail-value text-end nombreEmpresa"></div>
+                                                    <div class="text-start" style="color: #0071CE;">Nombre:</div>
+                                                    <div style="color: #0A2240" class="detail-value text-end nombrePersonaRegistrada text-capitalize"></div>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0 d-none">
+                                                    <div style="color: #0071CE;">Método de pago:</div>
+                                                    <div style="color: #0A2240" class="detail-value metodo-pago text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Método de pago:</div>
-                                                    <div class="detail-value metodo-pago text-capitalize"></div>
+                                                    <div style="color: #0071CE;">Frecuencia de pago: </div>
+                                                    <div style="color: #0A2240" class="detail-value frecuencia-pago text-capitalize"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Frecuencia de pago: </div>
-                                                    <div class="detail-value frecuencia-pago text-capitalize"></div>
+                                                    <div style="color: #0071CE;">Monto:</div>
+                                                    <div style="color: #0A2240" class="detail-value valor-total"></div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Monto total:</div>
-                                                    <div class="detail-value valor-total"></div>
+                                                    <div style="color: #0071CE;">Inicio de contrato:</div>
+                                                    <div style="color: #0A2240" class="detail-value">{{ $now->format('d/m/Y') }}</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Fecha de inicio de contrato:</div>
-                                                    <div class="detail-value">{{ $now->format('d/m/Y') }}</div>
+                                                    <div style="color: #0071CE;">Fin de contrato:</div>
+                                                    <div style="color: #0A2240" class="detail-value">{{ $nextYear->format('d/m/Y') }}</div>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Fecha de fin de contrato:</div>
-                                                    <div class="detail-value">{{ $nextYear->format('d/m/Y') }}</div>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
-                                                    <div>Comprobante de pago:</div>
+                                                    <div style="color: #0071CE;">Comprobante de pago:</div>
                                                     <div type="button" class="detail-value text-decoration-underline btn-outline-cerulean-blue-800 link-comprobante-pago border-0">Visualizar</div>
                                                 </li>
                                             </ul>
+                                            <hr>
+                                            <a href="/" class="btn btn-cerulean-blue-800" id="btnEnd">
+                                                <span class="d-none d-sm-inline">Cerrar</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -1183,9 +1187,11 @@ Veris Care - Suscripción
         if(detalleSuscripcion.lineaNegocio === 'PMF'){
             $('body').addClass('bg-onahau-gradient-100')
             $('.subtitle-card').addClass('subtitle-parami');
+            $('#btnEnd').attr('href','/b2c-parami');
         }else{
             $('.subtitle-card').addClass('subtitle-veris');
             $('body').addClass('bg-pattens-blue-100-gradient')
+            $('#btnEnd').attr('href','/b2c');
         }
 
         $('body').on('click', '.btn-suscribir-tarjeta', async function(){
@@ -1826,11 +1832,6 @@ Veris Care - Suscripción
 
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
-
-        // let codigoInstitucion = $('#nombreBanco option:selected').val();
-        // let numeroCuenta = $('#numeroCuenta').val();
-        // let nombreTitular = $('#nombreTitular').val();
-        // let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC";
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
         // let tipoFlujo = "E";
 
@@ -1838,8 +1839,8 @@ Veris Care - Suscripción
 
         let datosFacturacion;
         if($('#mismosDatos').is(':checked')){
-            let tipoIdentificacionFactura = detalleSuscripcion.tipoIdentificacion;
-            let numeroIdentificacionFactura = detalleSuscripcion.numeroIdentificacion;
+            let tipoIdentificacionFactura = $('#tipoIdentificacion option:selected').val();
+            let numeroIdentificacionFactura = $('#numeroIdentificacion').val();
             let nombresFactura = `${ $('#nombres').val() } ${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`;
             let telefonoFactura = $('#celular').val();
             let emailFactura = $('#email').val();
@@ -1874,7 +1875,7 @@ Veris Care - Suscripción
         args["token"] = _token;
         args["bodyType"] = "json";
         args["data"] = JSON.stringify({
-            "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
+            // "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
             "secuenciaAfiliado": detalleSuscripcion.carga.secuenciaAfiliado,
             "codigoSolicitudFirma": codigoSolicitudFirma,
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
@@ -1903,7 +1904,7 @@ Veris Care - Suscripción
             "datosFirmaDocumentos": {
                 "nombreEmpresa": detalleSuscripcion.empresa.nombreEmpresa,
                 "codigoTipoIdentificacion": 2,//cambiar
-                "numeroIdentificacion": detalleSuscripcion.numeroIdentificacion,//$('#ruc').val(),
+                "numeroIdentificacion": $('#numeroIdentificacion').val(),//$('#ruc').val(),
                 "representanteLegal": $('#nombres').val() + " " + $('#primerApellido').val(),//$('#titular').val(),
                 "telefono": $('#celular').val(),//$('#telefono').val(),
                 "email": $('#email').val(),//$('#emailContacto').val(),
@@ -1926,6 +1927,8 @@ Veris Care - Suscripción
             $('.step.active').addClass('crossed').removeClass('.active')
             $('.bs-stepper-circle').html(`<i class="bi bi-check-lg"></i>`)
             $('.colaboradores-registrados').html(1);
+            let nombreRegistrado = `${ $('#nombres').val() } ${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`
+            $('.nombrePersonaRegistrada').html(nombreRegistrado.toLowerCase());
             $('.metodo-pago').html($('.nav-metodo-pago button.active').attr('descripcion-rel').toLowerCase());
             $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
             $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * 1 ).toFixed(2)}`);
