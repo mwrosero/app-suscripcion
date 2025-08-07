@@ -319,7 +319,7 @@
                             <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Puedes hacer uso del producto de manera inmediata.</li>
                             <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Puedes atender tus enfermedades que ya tienes (preexistentes).</li>
                             <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Atención médica oportuna y sin complicaciones.</li>
-                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Beneficios inmediatos desde el primer día de afiliación</li>
+                            <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Beneficios inmediatos desde el primer día de contratación</li>
                             <li class="d-flex"><i class="bi bi-patch-check-fill text-primary-veris me-2"></i>Acceso a todo el ecosistema Veris.</li>
                         </ul>
                     </div>
@@ -333,7 +333,6 @@
                         <hr>
                         <ul class="list-unstyled mb-0">
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No es un seguro médico.</li>
-                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No incluye preexistencias.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No aplica para vacunas ni vitamina C.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No require trámites de autorización o deducibles.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No cubre emergencias hospitalarias.</li>
@@ -439,8 +438,8 @@
                     <div class="accordion-body">
                         <ul>
                             <li>El colaborador de la empresa o persona individual que accede al plan.</li>
-                            <li>Familiares hasta 3er grado de consanguinidad, como por ejemplo: Padres Hijos Hermanos Abuelos Nietos Tíos Sobrinos</li>
-                            <li>Familiares hasta 1er grado de afinidad, como: Cónyuge o pareja Suegros Yerno o nuera.</li>
+                            <li>Familiares hasta 3er grado de consanguinidad, como por ejemplo: Padres, Hijos, Hermanos, Abuelos, Nietos, Tíos, Sobrinos</li>
+                            <li>Familiares hasta 1er grado de afinidad, como: Cónyuge o pareja, Suegros, Yerno o nuera.</li>
                         </ul>
                         Importante:
                         <ul>
