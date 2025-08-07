@@ -192,3 +192,4 @@ Route::get('/get-auth-token-nuvei', function () {
 
 # B2C
 Route::get('/b2c', [B2CController::class, 'index'])->name('b2c.index');
+Route::get('/b2c-parami', [B2CController::class, 'indexParaMi'])->name('b2c.index_parami');

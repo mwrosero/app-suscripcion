@@ -1,6 +1,6 @@
 @extends('template.app-blank')
 
-@section('title', 'Veris Care - B2C')
+@section('title', 'ParaMi - B2C')
 @section('body-class', '')
 
 @section('layout-wrapper-class', 'flex-column')
@@ -24,7 +24,7 @@
 </header>
 <section class="hero d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
-        <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid mb-4" />
+        <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4" />
         <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
     </div>
 </section>
@@ -269,7 +269,7 @@
     </div>
 </section>
 
-<section class="bg-mariner-2-500 py-5">
+<section class="py-5" style="background: #0071CF;">
     <div class="container">
         <h2 class="text-center text-white mb-4">Todas las opciones incluyen</h2>
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
@@ -281,25 +281,25 @@
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
 
             <div class="col-12 col-md-5">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 20% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-flask fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-flask fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Laboratorio clínico</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-x-ray fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-x-ray fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Imágenes</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-crutch fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-crutch fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Terapias</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-file-prescription fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-file-prescription fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Procedimientos</p>
                         </div>
                     </div>
@@ -307,24 +307,24 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 15% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
-                        <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <i class="fa-solid fa-stethoscope fs-2 text-white mt-3 mb-2"></i>
                         <p class="fs-12p fw-normal text-white mb-0 lh-1">Consultas adicionales</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-md-3">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 5% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
-                        <i class="fa-solid fa-pills fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <i class="fa-solid fa-pills fs-2 text-white mt-3 mb-2"></i>
                         <p class="fs-12p fw-normal text-white mb-0 lh-1">Farmacia</p>
                     </div>
                 </div>
@@ -339,25 +339,25 @@
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
 
             <div class="col-12 col-md-5">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 20% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-flask fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-flask fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Laboratorio clínico</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-x-ray fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-x-ray fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Imágenes</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-crutch fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-crutch fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Terapias</p>
                         </div>
                         <div class="col-6 col-xl-3 text-center">
-                            <i class="fa-solid fa-file-prescription fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                            <i class="fa-solid fa-file-prescription fs-2 text-white mt-3 mb-2"></i>
                             <p class="fs-12p text-white mb-0 lh-1">Procedimientos</p>
                         </div>
                     </div>
@@ -365,24 +365,24 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 20% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
-                        <i class="fa-solid fa-stethoscope fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <i class="fa-solid fa-stethoscope fs-2 text-white mt-3 mb-2"></i>
                         <p class="fs-12p fw-normal text-white mb-0 lh-1">Consultas adicionales</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-md-3">
-                <div class="card bg-vris-astronaut-900 border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                         Hasta 5% en:
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
-                        <i class="fa-solid fa-pills fs-2 text-shakespeare-300 mt-3 mb-2"></i>
+                        <i class="fa-solid fa-pills fs-2 text-white mt-3 mb-2"></i>
                         <p class="fs-12p fw-normal text-white mb-0 lh-1">Farmacia</p>
                     </div>
                 </div>
@@ -456,7 +456,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <a href="#planes" class="btn btn-blue-veris mt-3">Quiero unirme a Veris Care</a>
+                <a href="#planes" class="btn btn-blue-veris mt-3">Quiero unirme a Para Mí Cuidado Familiar</a>
             </div>
         </div>
     </div>
@@ -474,12 +474,12 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-0"
                         aria-expanded="false" aria-controls="collapse-0">
-                        ¿Desde cuándo puedo empezar a usar los servicios de Veris Care?
+                        ¿Desde cuándo puedo empezar a usar los servicios de Para Mí Cuidado Familiar?
                     </button>
                 </h2>
                 <div id="collapse-0" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Desde el primer día de activación de Veris Care.
+                        Desde el primer día de activación de Para Mí Cuidado Familiar.
                     </div>
                 </div>
             </div>
@@ -589,7 +589,7 @@
                 </h2>
                 <div id="collapse-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Sí. La tarifa del programa Veris Care no es por persona, sino por grupo, y aplica para todos los beneficiarios que el colaborador desee incluir, sin límite en el número de personas.
+                        Sí. La tarifa del programa Para Mí Cuidado Familiar no es por persona, sino por grupo, y aplica para todos los beneficiarios que el colaborador desee incluir, sin límite en el número de personas.
                         <br>
                         Esto significa que con una sola tarifa fija anual, el colaborador puede incluir a todos los familiares que cumplan con los criterios (hasta 3er grado de consanguinidad y 1er grado de afinidad).
                         <br>
@@ -603,16 +603,16 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-5"
                         aria-expanded="false" aria-controls="collapse-5">
-                        ¿Necesito tener seguro médico para acceder a Veris Care?
+                        ¿Necesito tener seguro médico para acceder a Para Mí Cuidado Familiar?
                     </button>
                 </h2>
                 <div id="collapse-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        No. No necesitas tener un seguro médico para acceder a Veris Care. El programa está diseñado para ser una alternativa independiente, ideal para personas o empresas que no cuentan con cobertura de seguro.
+                        No. No necesitas tener un seguro médico para acceder a Para Mí Cuidado Familiar. El programa está diseñado para ser una alternativa independiente, ideal para personas o empresas que no cuentan con cobertura de seguro.
                         <br>
-                        Sin embargo, si ya tienes un seguro médico, puedes complementar tu cobertura con Veris Care, accediendo a servicios ambulatorios inmediatos, descuentos en toda la red Veris y atención prioritaria, sin trámites ni deducibles.
+                        Sin embargo, si ya tienes un seguro médico, puedes complementar tu cobertura con Para Mí Cuidado Familiar, accediendo a servicios ambulatorios inmediatos, descuentos en toda la red Veris y atención prioritaria, sin trámites ni deducibles.
                         <br>
-                        Veris Care es una solución flexible que se adapta tanto a quienes no tienen seguro, como a quienes desean mejorar su acceso a salud preventiva y continua.
+                        Para Mí Cuidado Familiar es una solución flexible que se adapta tanto a quienes no tienen seguro, como a quienes desean mejorar su acceso a salud preventiva y continua.
                     </div>
                 </div>
             </div>
@@ -622,12 +622,12 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-6"
                         aria-expanded="false" aria-controls="collapse-6">
-                        ¿Qué servicios incluye Veris Care?
+                        ¿Qué servicios incluye Para Mí Cuidado Familiar?
                     </button>
                 </h2>
                 <div id="collapse-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Veris Care incluye una amplia gama de servicios de salud ambulatoria dentro del ecosistema Veris y Centros Para Mi, diseñados para garantizar una atención integral, oportuna y accesible. Entre los principales servicios se encuentran:
+                        Para Mí Cuidado Familiar incluye una amplia gama de servicios de salud ambulatoria dentro del ecosistema Veris y Centros Para Mi, diseñados para garantizar una atención integral, oportuna y accesible. Entre los principales servicios se encuentran:
                         <br>
                         Atención médica:
                         <ul>
@@ -664,7 +664,7 @@
                     <button class="accordion-button collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapse-7"
                         aria-expanded="false" aria-controls="collapse-7">
-                        ¿Dónde puedo usar Veris Care?
+                        ¿Dónde puedo usar Para Mí Cuidado Familiar?
                     </button>
                 </h2>
                 <div id="collapse-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -693,9 +693,14 @@
         },
         "tipoFlujo": "I"
     }
-    let lineaNegocioPage = "CMV"
+    let lineaNegocioPage = "PMF"
     detalleSuscripcionTmp.lineaNegocio = lineaNegocioPage;
     localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcionTmp));
 </script>
 @include("verislife.b2c.funcionalidadB2C")
+<style>
+    .nav-pills li.nav-item .nav-link.active {
+        background: #25CAD2 !important;
+    }
+</style>
 @endsection

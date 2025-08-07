@@ -1367,7 +1367,7 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         args["token"] = _token;
         const data = await call(args);
-
+        detalleSuscripcion.documentos = data.data
         if(data.code == 200){
             let elem = ``
             $.each(data.data, function(key, value){
@@ -1399,11 +1399,14 @@ Veris Care - Suscripción
             args["method"] = "GET";
         }else{
             {{-- args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`; --}}
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}`;
+            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=C`;
             args["method"] = "POST";
             args["bodyType"] = "json";
             args["data"] = JSON.stringify({
-                "codigoCliente": detalleSuscripcion.empresa.codigoEmpresa
+                "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
+                "numeroIdentificacion": detalleSuscripcion.numeroIdentificacion,
+                "nombreCliente": `${$('#nombres').val()} ${$('#primerApellido').val()} ${$('#segundoApellido').val()}`,
+                "email": $('#email').val()
             });
         }
         
@@ -1722,7 +1725,10 @@ Veris Care - Suscripción
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
-        let tiposDocumentos = ["AUTORIZACION_DEBITO"];
+        let tiposDocumentos = [];
+        $.each(detalleSuscripcion.documentos, function(key, value){
+            tiposDocumentos.push(value.nemonico)
+        })
 
         {{-- let codigoInstitucion = $('#nombreBanco option:selected').val();
         let numeroCuenta = $('#numeroCuenta').val();

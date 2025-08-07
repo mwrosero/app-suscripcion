@@ -274,29 +274,20 @@ Veris Care - Suscripción
             </div>
             <div class="col-12 mb-4">
                 <div id="wizard-validation" class="bs-stepper wizard-modern mt-2 mb-4">
-                    <div class="bs-stepper-header justify-content-center pb-5">
+                    <div class="bs-stepper-header d-flex align-items-start justify-content-around pb-5 invisible">
                         <div class="step" data-target="#dato-facturacion-validation">
-                            <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">1</span>
+                            <button type="button" class="step-trigger d-block pt-2 pt-lg-0">
+                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950 d-block mx-auto">1</span>
                                 <span class="bs-stepper-label">
                                     <span class="bs-stepper-title">Registrar titular</span>
                                     {{-- <span class="bs-stepper-subtitle">Detalles</span> --}}
                                 </span>
                             </button>
                         </div>
-                        {{-- <div class="line"><i class="ti ti-chevron-right"></i></div>
-                        <div class="step" data-target="#forma-pago-validation">
-                            <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">2</span>
-                                <span class="bs-stepper-label">
-                                    <span class="bs-stepper-title">Forma de pago</span>
-                                </span>
-                            </button>
-                        </div> --}}
                         <div class="line"><i class="ti ti-chevron-right"></i></div>
                         <div class="step" data-target="#resumen-plan">
-                            <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">2</span>
+                            <button type="button" class="step-trigger d-block">
+                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950 d-block mx-auto">2</span>
                                 <span class="bs-stepper-label mt-1">
                                     <span class="bs-stepper-title">Resumen</span>
                                     {{-- <span class="bs-stepper-subtitle">Documento</span> --}}
@@ -306,8 +297,8 @@ Veris Care - Suscripción
                         <div class="line"><i class="ti ti-chevron-right"></i></div>
                         <div class="step" data-target="#forma-pago-validation">
                             {{-- confirmacion-validation --}}
-                            <button type="button" class="step-trigger">
-                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950">3</span>
+                            <button type="button" class="step-trigger d-block">
+                                <span class="bs-stepper-circle rounded-circle bg-blue-zodiac-950 d-block mx-auto">3</span>
                                 <span class="bs-stepper-label">
                                     <span class="bs-stepper-title">Forma de pago</span>
                                     {{-- <span class="bs-stepper-subtitle">Revisa y finaliza</span> --}}
@@ -321,7 +312,7 @@ Veris Care - Suscripción
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
                                         <div class="card-body px-lg-5">
-                                            <h5 style="color: #296BEF !important;" class="fw-semibold">Registro titular</h5>
+                                            <h5 class="fw-semibold subtitle-card text-white">Registro titular</h5>
                                             <hr>
                                             <div class="row justify-content-center my-4 d-none">
                                                 <div class="col-md-12 col-lg-8 col-xl-8">
@@ -345,6 +336,9 @@ Veris Care - Suscripción
                                                 </div>
                                             </div>
                                             <div class="row g-3 justify-content-center box-data-registro">
+                                                <div class="col-md-12 col-xl-8">
+                                                    <p class="mb-0">Necesitamos validar tus datos para iniciar el proceso de compra</p>
+                                                </div>
                                                 <div class="col-md-12 col-xl-8 box-form-1">
                                                     <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de documento <span class="text-danger">*</span></label>
                                                     <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" autocomplete="off" required>
@@ -353,9 +347,6 @@ Veris Care - Suscripción
                                                 <div class="col-md-12 col-xl-8 box-form-1">
                                                     <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
-                                                </div>
-                                                <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <p class="mb-0">Necesitamos validar tus datos para iniciar el proceso de compra</p>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="nombres" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
@@ -495,7 +486,7 @@ Veris Care - Suscripción
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
                                         <div class="card-body px-lg-5">
-                                            <h5 style="color: #296BEF !important;" class="fw-semibold"><span class="nombreCliente text-capitalize"></span>, mira el resumen de lo que vas a comprar</h5>
+                                            <h5 class="fw-semibold subtitle-card text-white"><span class="nombreCliente text-capitalize"></span>, mira el resumen de lo que vas a comprar</h5>
                                             <hr>
                                             <div class="row justify-content-center my-4">
                                                 <div class="col-md-12 col-xl-8" id="detalleSuscripcion">
@@ -512,7 +503,7 @@ Veris Care - Suscripción
                                     <div class="card shadow-sm">
                                         <div class="card-body">
                                             <div class="mb-4">
-                                                <h5 style="color: #296BEF !important;" class="fw-semibold"><span class="nombreCliente text-capitalize"></span>, ingresa los datos para el pago</h5>
+                                                <h5 class="fw-semibold subtitle-card text-white"><span class="nombreCliente text-capitalize"></span>, ingresa los datos para el pago</h5>
                                                 <hr>
                                                 <div class="row justify-content-center mt-4">
                                                     <div class="col-md-12 col-md-10 col-lg-8 col-xl-8">
@@ -694,7 +685,7 @@ Veris Care - Suscripción
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
                                         <div class="card-body px-lg-5">
-                                            <h5 style="color: #296BEF !important;" class="fw-semibold"><span class="nombreCliente text-capitalize"></span>, estás a un paso de obtener grandes beneficios para tu salud</h5>
+                                            <h5 class="fw-semibold subtitle-card text-white"><span class="nombreCliente text-capitalize"></span>, estás a un paso de obtener grandes beneficios para tu salud</h5>
                                             <hr>
                                             <div class="row justify-content-center my-4 d-none">
                                                 <div class="col-md-12 col-xl-8">
@@ -1183,6 +1174,7 @@ Veris Care - Suscripción
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     document.addEventListener('DOMContentLoaded', async () => {
+        $('.bs-stepper-header').removeClass('invisible')
         await cargarTiposIdentificacion();
         
         let logoNombre = 'logo-veris.svg';
@@ -1190,7 +1182,9 @@ Veris Care - Suscripción
         const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
         if(detalleSuscripcion.lineaNegocio === 'PMF'){
             $('body').addClass('bg-onahau-gradient-100')
+            $('.subtitle-card').addClass('subtitle-parami');
         }else{
+            $('.subtitle-card').addClass('subtitle-veris');
             $('body').addClass('bg-pattens-blue-100-gradient')
         }
 
@@ -1519,7 +1513,7 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         args["token"] = _token;
         const data = await call(args);
-
+        detalleSuscripcion.documentos = data.data
         if(data.code == 200){
             let elem = ``
             $.each(data.data, function(key, value){
@@ -1548,27 +1542,34 @@ Veris Care - Suscripción
             let nombreTitular = $('#nombreTitular').val();
             let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
             args["endpoint"] = api_url + `/empresarial/v1/reportes/autorizacion_debito_cuenta?codigoCliente=${detalleSuscripcion.empresa.nombreEmpresa}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
+            args["method"] = "GET";
         }else{
-            {{-- args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`; --}}
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}`;
-            /*{
-                "codigoCliente": 0,
-                "numeroIdentificacion": "string",
-                "nombreCliente": "string",
-                "email": "string"
-            }*/
+            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=I`;
+            args["method"] = "POST";
+            args["bodyType"] = "json";
+            args["data"] = JSON.stringify({
+                "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
+                "numeroIdentificacion": $('#numeroIdentificacion').val(),
+                "nombreCliente": `${$('#nombres').val()} ${$('#primerApellido').val()} ${$('#segundoApellido').val()}`,
+                "email": $('#email').val()
+            });
         }
-        args["method"] = "GET";
+        
         args["showLoader"] = true;
         args["token"] = _token;
 
         const blob = await callDocumento(args);
+        console.log(99)
+        console.log('Tipo de archivo:', blob.type);
+        console.log('Tamaño del archivo:', blob.size);
+
+        console.log(blob);
         const pdfUrl = URL.createObjectURL(blob);
-        //window.open(pdfUrl, '_blank');
+        // window.open(pdfUrl, '_blank');
         $('#documentPreview').attr('src', `${pdfUrl}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`);
         setTimeout(() => {
             URL.revokeObjectURL(pdfUrl);
-        }, 100);
+        }, 500);
 
         $('#documentoModal').modal('show');
     }
@@ -1954,12 +1955,10 @@ Veris Care - Suscripción
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
-        let tiposDocumentos = ["AUTORIZACION_DEBITO"];
-
-        {{-- let codigoInstitucion = $('#nombreBanco option:selected').val();
-        let numeroCuenta = $('#numeroCuenta').val();
-        let nombreTitular = $('#nombreTitular').val();
-        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE"; --}}
+        let tiposDocumentos = [];
+        $.each(detalleSuscripcion.documentos, function(key, value){
+            tiposDocumentos.push(value.nemonico)
+        })
 
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
@@ -1973,11 +1972,11 @@ Veris Care - Suscripción
             "nombres": $('#nombres').val(),
             "apellidos": `${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`,
             "codigoTipoIdentificacion": 2,
-            "numeroIdentificacion": detalleSuscripcion.numeroIdentificacion,
+            "numeroIdentificacion": $('#numeroIdentificacion').val(),
             "correo": $('#email').val(),
             "telefono": $('#celular').val(), 
             "datosDocumentoDebito" : {
-                "codigoCliente": 24536,
+                "codigoCliente": detalleSuscripcion.empresa.codigoEmpresa,
                 "codigoInstitucion": 5,
                 "tipoCuenta": "AHORROS",
                 "numeroCuenta": "12345678",
@@ -2036,7 +2035,7 @@ Veris Care - Suscripción
             "permiteUpgrade": false,
             "codigoTipoIdentificacionPcte": 2,
             "codigoTipoIdentificacion": 2,
-            "numeroIdentificacionPcte": detalleSuscripcion.numeroIdentificacion,
+            "numeroIdentificacionPcte": $('#numeroIdentificacion').val(),
             "primerNombre": $('#nombres').val(),
             "primerApellido": $('#primerApellido').val(),
             "segundoApellido": $('#segundoApellido').val(),
@@ -2077,7 +2076,7 @@ Veris Care - Suscripción
     }
 
     async function deleteTokenNuvei(){
-        let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+        let uid = `${$('#numeroIdentificacion').val()}`;
         let args = [];
         args["endpoint"] = `${api_url_nuvei}/v2/card/delete/`;
         args["method"] = "POST";
@@ -2123,6 +2122,21 @@ Veris Care - Suscripción
         background-color: #00C853 !important;
         color: #FFF !important;
         font-size: 25px !important;
+        padding: 0px;
+    }
+    .bs-stepper .bs-stepper-header {
+        flex-direction: row;
+        align-items: start !important;
+    }
+    .bs-stepper:not(.vertical) .bs-stepper-header .line i {
+        display: block !important;
+        margin-top: 30px !important;
+    }
+    .subtitle-veris{
+        color: #296BEF !important
+    }
+    .subtitle-parami{
+        color: #25CAD2 !important
     }
 </style>
 @endpush

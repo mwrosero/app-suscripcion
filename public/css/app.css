@@ -129,10 +129,10 @@ body.login-page {
             rgba(248, 251, 255, 0.35) 45.5%,
             rgba(255, 255, 255, 0) 100%
         ),
-        url("/assets/img/veris/fondo-veris-care.png") no-repeat center center;
+        url("/assets/img/veris/fondo-veris-care.png") no-repeat top center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     min-height: 100vh;
     padding-top: 6rem; /* margen para que no tape el navbar */
     z-index: 1;

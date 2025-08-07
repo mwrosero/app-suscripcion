@@ -12,6 +12,16 @@ use App\Models\Ism;
 class B2CController extends Controller
 {
     public function index() {
+        $this->generarCredenciales();
+        return view('verislife.b2c.index');
+    }
+
+    public function indexParaMi() {
+        $this->generarCredenciales();
+        return view('verislife.b2c.index_parami');
+    }
+
+    public function generarCredenciales(){
         Session::flush();
         $method = '/'.Ism::WAR_SEGURIDAD.'/v1/autenticacion/login';
         $user = Ism::USER_VERIS_GENERIC;
@@ -37,6 +47,5 @@ class B2CController extends Controller
         ]);
         //dd($response);
         Session::put('infoCliente', $response->data);
-        return view('verislife.b2c.index');
     }
 }

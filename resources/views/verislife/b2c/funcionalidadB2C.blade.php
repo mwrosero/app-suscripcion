@@ -5,8 +5,9 @@
 	let logoNombre = 'logo-veris.svg';
     if (detalleSuscripcion.lineaNegocio === 'PMF') logoNombre = 'parami.png';
     const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
-
+    console.log(4);
     document.addEventListener('DOMContentLoaded', async () => {
+        console.log(detalleSuscripcion)
     	await cargarPlanes();
 
     	$(document).on('click', '.nav-link', async function(){
@@ -74,18 +75,20 @@
                     ${beneficio.descripcion}
                 </li>`;
         }).join('');
+        let imgFeatured = `b2c-plan-veris-2.png`;
     	return `<div class="swiper-slide">
             <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
     			<img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${detalleSuscripcion.lineaNegocio}" width="128">
-                <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
+                <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
+                <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-60px;">
                     ${detalle.nombre}
-                </h5>
-                <div class="px-3 py-2">
-                    <div class="mt-1">
+                    <div class="position-absolute">
                         <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${detalle.porcentajeDescuento}%</span>
                     </div>
+                </h5>
+                <div class="px-3 py-2">
                     <div class="my-1">
-                        <h1 class="fw-bold text-blue-zodiac-950 m-0">$${detalle.valorFinal} <small class="fw-medium fs-4 text-capitalize">/${detalle.tipo.toLowerCase()}</small></h1>
+                        <h2 class="fw-bold text-blue-zodiac-950 m-0">$${detalle.valorFinal} <small class="fw-medium">/${detalle.tipo.toLowerCase()}</small></h2>
                         <small class="text-muted text-decoration-line-through text-xs">PVP: $${detalle.precio}</small>
                     </div>
                 </div>
@@ -97,7 +100,7 @@
                     </ul>
                     <div class="text-center">
                         {{-- <a href="#!" class="btn btn-blue-veris rounded-3 py-2 w-100">Continuar registro</a> --}}
-    					<button type="button" data-rel='${JSON.stringify(detalle)}' class="btn btn-blue-veris rounded-3 py-2 w-100 btn-continuar-registro">Continuar registro</button>
+    					<button type="button" data-rel='${JSON.stringify(detalle)}' class="btn btn-blue-veris rounded-3 py-2 w-100 btn-continuar-registro">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -127,7 +130,7 @@
                         <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${detalle.porcentajeDescuento}%</span>
                     </div>
                     <div class="my-1">
-                        <h2 class="fw-bold text-blue-zodiac-950 m-0">$${detalle.valorFinal} <small class="fw-medium">/${detalle.tipo.toLowerCase()}</small></h2>
+                        <h1 class="fw-bold text-blue-zodiac-950 m-0">$${detalle.valorFinal} <small class="fw-medium fs-4 text-capitalize">/${detalle.tipo.toLowerCase()}</small></h1>
                         <small class="text-muted text-decoration-line-through text-xs">PVP: $${detalle.precio}</small>
                     </div>
                 </div>
