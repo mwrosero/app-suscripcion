@@ -11,7 +11,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{{ asset('assets/img/veris/logo-veris.svg') }}" alt="Veris" height="40" class="me-2">
+                <img src="{{ asset('assets/img/veris/logo-parami-bn.svg') }}" alt="Veris" height="40" class="me-2">
             </a>
 
             {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -24,7 +24,7 @@
 </header>
 <section class="hero d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
-        <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4" />
+        <img src="{{ asset('assets/img/veris/titular-parami.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4" style="opacity: 0.7" />
         <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
     </div>
 </section>
@@ -699,6 +699,23 @@
 </script>
 @include("verislife.b2c.funcionalidadB2C")
 <style>
+    .hero{
+        position: relative;
+        background: linear-gradient(
+                45deg,
+                rgba(251, 251, 251, 0.90) 0%,
+                rgba(248, 251, 255, 0.35) 45.5%,
+                rgba(255, 255, 255, 0) 100%
+            ),
+            url("/assets/img/veris/fondo-parami-b2c.jpg") no-repeat top right;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top left;
+        min-height: 100vh;
+        padding-top: 6rem; /* margen para que no tape el navbar */
+        z-index: 1;
+        overflow: hidden;
+    }
     .nav-pills li.nav-item .nav-link.active {
         background: #25CAD2 !important;
     }
