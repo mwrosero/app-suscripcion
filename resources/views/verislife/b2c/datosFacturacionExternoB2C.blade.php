@@ -705,6 +705,11 @@ Veris Care - Suscripción
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row justify-content-center my-4">
+                                                <div class="col-12">
+                                                    <p class="mb-0">Lee los documentos y procede a firmarlos</p>
+                                                </div>
+                                            </div>
                                             <div class="row g-3 justify-content-center" id="lista-documentos">
                                                 {{-- <div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
                                                     Documento 1
@@ -1076,7 +1081,7 @@ Veris Care - Suscripción
                   <span class="d-none d-sm-inline">Regresar</span>
                 </button>
                 <button id="btn-next" class="btn btn-cerulean-blue-800 btn-generar-solicitud" data-bs-toggle="modal" disabled step-rel="${idx+1}">
-                  <span class="d-none d-sm-inline">Firmar contratos</span>
+                  <span class="d-none d-sm-inline">Firmar documentos</span>
                   <i class="fa-solid fa-chevron-right ms-2"></i>
                 </button>`;
                 {{-- <button id="btn-next" class="btn btn-cerulean-blue-800" data-bs-toggle="modal" data-bs-target="#verificationCodeModal" disabled step-rel="${idx+1}">
@@ -1957,6 +1962,12 @@ Veris Care - Suscripción
     let codigoSolicitudFirma;
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
+        $('#input1').val("");
+        $('#input2').val("");
+        $('#input3').val("");
+        $('#input4').val("");
+        $('#input5').val("");
+        $('#input6').val("");
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
         let tiposDocumentos = [];
         $.each(detalleSuscripcion.documentos, function(key, value){
