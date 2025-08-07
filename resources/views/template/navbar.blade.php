@@ -10,8 +10,10 @@
             {{-- <h5 class="mb-0">Bienvenido 👋🏻 </h5> --}}
             @if(Session::get('infoCliente')->nombrePacienteTitular !== null)
             <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->nombrePacienteTitular) }}</span></h5>
-            @else
+            @elseif(Session::get('infoCliente')->nombreCliente !== null)
             <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->informacionCliente->nombreCliente) }}</span></h5>
+            @else
+            <h5 class="mb-0">Bienvenido</h5>
             @endif
         </div>
         <a href="#!" class="navbar-brand mx-auto d-none">
