@@ -1355,6 +1355,7 @@ Registro
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
             "pago": {
+                "cantidad": detalleSuscripcion.pacientes.length,
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
                 "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2),
                 "detalle": {

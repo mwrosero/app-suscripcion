@@ -334,7 +334,7 @@
                         <ul class="list-unstyled mb-0">
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No es un seguro médico.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No aplica para vacunas ni vitamina C.</li>
-                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No require trámites de autorización o deducibles.</li>
+                            <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No requiere trámites de autorización o deducibles.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No cubre emergencias hospitalarias.</li>
                             <li class="d-flex mb-2"><i class="bi bi-x-circle-fill text-grenadier-600 me-2"></i>No está limitado a una especialidad médica.</li>
                         </ul>
