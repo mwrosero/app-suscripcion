@@ -1357,7 +1357,7 @@ Registro
             "pago": {
                 "cantidad": detalleSuscripcion.pacientes.length,
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
-                "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2),
+                "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2)),
                 "detalle": {
                     // "numeroTarjeta": "",
                     // "mesExpiracion": 0,
