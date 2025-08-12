@@ -8,7 +8,14 @@
     <div class="navbar-nav-right d-flex justify-content-end justify-content-md-between align-items-center ps-3" id="navbar-collapse">
         <div class="d-none d-md-block ">
             {{-- <h5 class="mb-0">Bienvenido 👋🏻 </h5> --}}
-            <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->informacionCliente->nombreCliente) }}</span></h5>
+            @if(Session::get('infoCliente')?->nombrePacienteTitular !== null)
+                <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->nombrePacienteTitular) }}</span></h5>
+            @elseif(Session::get('infoCliente')?->informacionCliente?->nombreCliente !== null)
+                <h5 class="mb-0">Bienvenido, <span class="text-capitalize">{{ strtolower(Session::get('infoCliente')->informacionCliente->nombreCliente) }}</span></h5>
+            @else
+                <h5 class="mb-0">Bienvenido</h5>
+            @endif
+
         </div>
         <a href="#!" class="navbar-brand mx-auto d-none">
             <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-azul.svg" alt="veris" width="40">

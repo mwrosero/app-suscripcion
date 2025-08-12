@@ -24,7 +24,7 @@ Veris Care - Selecciona el Centro médico
         <!-- Right side -->
         <div class="right-panel">
             <div class="text-center w-100 mt-4">
-                <h4 class="text-fiord-700 fw-semibold mb-2">Hola <span class="text-primary-veris nombrePresona"></span>,</h4>
+                <h4 class="text-fiord-700 fw-semibold mb-2">Hola<span class="text-primary-veris text-capitalize nombrePersona"></span></h4>
                 <h5 class="text-fiord-700 fw-medium mb-4">Te damos la bienvenida a Veris care</h5>
                 <h5 class="fw-medium text-primary-veris mb-5">Escoge el programa de fidelización a tu medida:</h5>
 
@@ -66,7 +66,7 @@ Veris Care - Selecciona el Centro médico
                                 <div class="card-body position-relative linea-item" lineaNegocio-rel='PMF'>
                                     <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-vertical.png" class="my-auto" alt="ParaMí" />
                                     <div class="card-info pt-5 p-4">
-                                        <div class="badge-descuento">-15% en:</div>
+                                        <div class="badge-descuento">-20% en:</div>
                                         <div class="row g-0 justify-content-center">
                                             <div class="col-6 col-md-6">
                                                 <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
@@ -100,13 +100,13 @@ Veris Care - Selecciona el Centro médico
 <script>
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     document.addEventListener('DOMContentLoaded', async () => {
+        if(Object.keys(detalleSuscripcion.persona).length > 0){
+            $('.nombrePersona').html(` ${detalleSuscripcion.persona.primerNombre.toLowerCase()}, `)
+        }
         $('body').on('click', '.linea-item', async function() {
             let lineaNegocio = $(this).attr('lineaNegocio-rel');
             detalleSuscripcion.lineaNegocio = lineaNegocio;
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
-            if(detalleSuscripcion.persona !== {}){
-                $('.nombrePersona').html(`(${detalleSuscripcion.persona.primerNombre.toLowerCase()})`)
-            }
             let url;
             if(lineaNegocio == "CMV"){
                 url = 'plan-medico-veris';

@@ -19,7 +19,7 @@ Veris Care - Selecciona la empresa
             </div>
 
             <div class="text-center">
-                <h5 class="mb-4 fw-semibold text-fiord-700">Hola <span class="nombrePersona text-capitalize"></span>, elige la empresa en la que trabajas</h5>
+                <h5 class="mb-4 fw-semibold text-fiord-700">Hola<span class="nombrePersona text-capitalize">, </span> elige la empresa en la que trabajas</h5>
             </div>
 
             <div class="row g-3 justify-content-center mb-5">
@@ -42,8 +42,8 @@ Veris Care - Selecciona la empresa
     document.addEventListener('DOMContentLoaded', async () => {
         await obtenerEmpresas();
 
-        if(detalleSuscripcion.persona !== {}){
-            $('.nombrePersona').html(detalleSuscripcion.persona.primerNombre.toLowerCase())
+        if(Object.keys(detalleSuscripcion.persona).length > 0){
+            $('.nombrePersona').html(` ${detalleSuscripcion.persona.primerNombre.toLowerCase()}, `)
         }
 
         $('body').on('change', '#empresa', async function() {

@@ -1112,7 +1112,7 @@ Registro
 
     async function obtenerListadoDocumentosFirma(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true`;
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=EMPRESA`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1355,8 +1355,9 @@ Registro
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
             "pago": {
+                "cantidad": detalleSuscripcion.pacientes.length,
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
-                "montoTotal": (detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2),
+                "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2)),
                 "detalle": {
                     // "numeroTarjeta": "",
                     // "mesExpiracion": 0,
@@ -1497,6 +1498,7 @@ Registro
     }
 
     async function cargaAfiliadosSuscripcion(){
+        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
@@ -1506,6 +1508,7 @@ Registro
         args["data"] = JSON.stringify({
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaSuscripcion": detalleSuscripcion.suscripcion.secuenciaSuscripcion,
+            "tipoFlujo": tipoFlujo,
             "afiliados": detalleSuscripcion.pacientes
         });
         const data = await call(args);

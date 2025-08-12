@@ -61,8 +61,8 @@ class SeguridadesController extends Controller
                 'endpoint' => Ism::BASE_URL.$method.$param,
                 'token'    => $response->data->idToken,
                 'method'   => 'GET'
-            ]);
-            dd($response);*/
+            ]);*/
+            // dd($response);
             if($response->code == 200){
                 $secuenciaUsuario = $response->data->secuenciaUsuario;
                 switch($response->data->estadoUsuario) {

@@ -782,7 +782,7 @@ Registro
             "genero": genero,
             "fechaNacimiento": fechaFormateada,
             "mail": email,
-            "telefonoMovil": telefonoMovil.replace(/\D/g, ''),
+            "telefonoMovil": parseInt(telefonoMovil.replace(/\D/g, '')),
             "codigoRegion": 1,
             "codigoCiudad": 1,
             "codigoPais": 1,
@@ -839,7 +839,7 @@ Registro
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
-            tipoCredito: 'CREDITO_FIDELIZACION',
+            nemonicoTipoCredito: 'CREDITO_FIDELIZACION',
             tipoFiltro: '',//$('#tipoFiltro option:selected').val(),
             valorFiltro: $('#valorFiltro').val(),
             secuenciaAfiliadoTitular: {{ Session::get('infoCliente')->secuenciaAfiliado  }},
@@ -1286,7 +1286,9 @@ Registro
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
         $('#email').val(paciente.correoElectronico || '');
-        $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');
+        if(paciente.telefonoCelular !== null){
+            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');
+        }
     }
 
     function formatearFechaInput(fecha) {

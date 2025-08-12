@@ -63,11 +63,15 @@ async function call(args){
         // Solo agregas Content-Type si NO es FormData
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     }
-    
-    myHeaders.append("Accept","application/json");
-    myHeaders.append("Application", _application);
-    myHeaders.append("IdOrganizacion", _idOrganizacion);
-    myHeaders.append("Authorization","Bearer "+ _token);
+
+    if(args.tokenNuvei){
+        myHeaders.append("Auth-Token", args.tokenNuvei);
+    }else{
+        myHeaders.append("Accept","application/json");
+        myHeaders.append("Application", _application);
+        myHeaders.append("IdOrganizacion", _idOrganizacion);
+        myHeaders.append("Authorization","Bearer "+ _token);
+    }
     requestOptions.headers = myHeaders;
 
     if(args.method == "POST" || args.method == "PUT" || args.method == "DELETE"){
@@ -253,4 +257,26 @@ async function cargarDocumento(nemonico){
     } catch (error) {
         console.error('Error al obtener el PDF:', error);
     }
+}
+
+async function cargarTiposIdentificacion() {
+    const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
+    const queryParams = new URLSearchParams({
+        codigoEmpresa: '1',
+        usoTipoIdentificacion: 'GESTION_FACTURACION'
+    });
+
+    const response = await call({
+        method: 'GET',
+        endpoint: `${baseUrl}?${queryParams.toString()}`,
+        bodyType: 'json',
+        showLoader: false,
+    });
+
+    // let elem = `<option value="" selected disabled>Seleccionar</option>`;
+    let elem = ``;
+    response.data.forEach(item => {
+        elem += `<option data-rel='${JSON.stringify(item)}' class="text-capitalize" value="${item.codigoTipoIdentificacion}">${item.nombreTipoIdentificacion.toLowerCase()}</option>`
+    });
+    $('#tipoIdentificacion').html(elem);
 }
