@@ -28,15 +28,15 @@ class B2B2CController extends Controller
         $secuenciaUsuario = $response->data->secuenciaUsuario;
         Session::put('userData', $response->data);
         Session::put('accessToken', $response->data->idToken);
-        $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
-        $response = Ism::call([
-            'endpoint' => Ism::BASE_URL.$method,
-            'token'    => Session::get('accessToken'),
-            'application' => Ism::APPLICATION_GENERIC,
-            'method'   => 'GET'
-        ]);
-        //dd($response);
-        Session::put('infoCliente', $response->data);
+        // $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
+        // $response = Ism::call([
+        //     'endpoint' => Ism::BASE_URL.$method,
+        //     'token'    => Session::get('accessToken'),
+        //     'application' => Ism::APPLICATION_GENERIC,
+        //     'method'   => 'GET'
+        // ]);
+        // Session::put('infoCliente', $response->data);
+        Session::put('infoCliente', '');
         return view('verislife.b2b2c.login');    
     }
     

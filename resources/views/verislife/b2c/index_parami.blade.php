@@ -641,8 +641,8 @@
                         </ul>
                         Servicios complementarios:
                         <ul>
-                            <li>Odontología</li>
-                            <li>Optometría.</li>
+                            {{-- <li>Odontología</li>
+                            <li>Optometría.</li> --}}
                             <li>Terapias físicas y respiratorias.</li>
                         </ul>
                         Beneficios adicionales:

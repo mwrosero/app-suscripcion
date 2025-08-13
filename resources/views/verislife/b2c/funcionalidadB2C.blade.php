@@ -75,12 +75,12 @@
                     ${beneficio.descripcion}
                 </li>`;
         }).join('');
-        let imgFeatured = `b2c-plan-veris-2.png`;
+        let imgFeatured = `${detalle.lineaNegocio}/${detalle.nombre.toLowerCase()}.png`;
     	return `<div class="swiper-slide">
             <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
     			<img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${detalleSuscripcion.lineaNegocio}" width="128">
-                <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
-                <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-50px;">
+                <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/planes/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
+                <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-25px;">
                     ${detalle.nombre}
                     <div class="position-absolute">
                         <span class="badge rounded-pill bg-blue-ribbon-600 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${detalle.porcentajeDescuento}%</span>
@@ -119,12 +119,12 @@
                     ${beneficio.descripcion}
                 </li>`;
         }).join('');
-        let imgFeatured = `b2c-plan-veris-2.png`;
+        let imgFeatured = `${detalle.lineaNegocio}/${detalle.nombre.toLowerCase()}.png`;
     	return `<div class="swiper-slide">
             <div class="card card-transition border-aquamarine-blue-300 rounded-3 shadow-sm p-3 h-100">
     			<img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${detalleSuscripcion.lineaNegocio}" width="128">
-                <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
-                <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-50px;">
+                <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/planes/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
+                <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-25px;">
                     ${detalle.nombre}
                     <div class="position-absolute">
                         <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${detalle.porcentajeDescuento}%</span>
