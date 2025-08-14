@@ -31,6 +31,7 @@
     --vris-zumthor-50: #eaf0fd;
     --vris-zumthor-100: #e3eafc;
     --vris-zumthor-200: #ccd9f9;
+    --vris-mine-shaft-950: #282828;
     --vris-fiord-600: #4f607a;
     --vris-fiord-700: #425065;
     --vris-fiord-800: #384354;
@@ -138,6 +139,25 @@ body.login-page {
     z-index: 1;
     overflow: hidden;
 }
+
+.hero-b2c{
+    position: relative;
+    background: linear-gradient(
+            0deg,
+            rgba(251, 251, 251, 0.90) 0%,
+            rgba(248, 251, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 90%
+        ),
+        url("/assets/img/veris/fondo-veris-care.png") no-repeat top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    min-height: 100vh;
+    padding-top: 6rem; /* margen para que no tape el navbar */
+    z-index: 1;
+    overflow: hidden;
+}
+
 .navbar-floating {
   position: absolute;
   top: 20px;
@@ -739,6 +759,9 @@ h1,
 .text-shakespeare-300{
     color: var(--vris-shakespeare-300) !important;
 }
+.text-vris-mine-shaft-950{
+    color: var(--vris-mine-shaft-950) !important
+}
 .rounded-4 {
     border-radius: 1rem !important;
 }
@@ -1142,6 +1165,33 @@ fieldset:disabled .btn.btn-eliminar-paciente {
         transform: rotate(1turn);
     }
 }
+
+/* Ocultar el caret que pone Bootstrap por defecto */
+.accordion-question .accordion-button::after {
+    background-image: none !important;
+}
+
+.accordion-question .accordion-button:not(.collapsed)::after {
+    transform: rotate(0deg) !important;
+}
+/* Estado cerrado: chevron-down */
+.accordion-question .accordion-button.collapsed::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f078"; /* fa-chevron-down */
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+/* Estado abierto: chevron-up */
+.accordion-question .accordion-button:not(.collapsed)::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f077"; /* fa-chevron-up */
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
 
 @font-face {
     font-family: "Gotham Rounded";

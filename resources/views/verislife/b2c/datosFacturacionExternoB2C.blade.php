@@ -337,19 +337,19 @@ Veris Care - Suscripción
                                             </div>
                                             <div class="row g-3 justify-content-center box-data-registro">
                                                 <div class="col-md-12 col-xl-8">
-                                                    <p class="mb-0">Necesitamos validar tus datos para iniciar el proceso de compra</p>
+                                                    <p class="text-blue-zodiac-950 mb-0">Necesitamos validar tus datos para iniciar el proceso de compra</p>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 box-form-1">
-                                                    <label for="tipoIdentificacion" class="form-label fs-14p fw-medium">Tipo de documento <span class="text-danger">*</span></label>
+                                                    <label for="tipoIdentificacion" class="form-label fs-14p fw-medium text-raven-700">Tipo de documento <span class="text-raven-700">*</span></label>
                                                     <select class="form-select form-select-lg fs-14p text-capitalize" id="tipoIdentificacion" name="tipoIdentificacion" autocomplete="off" required>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 box-form-1">
-                                                    <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
+                                                    <label for="numeroIdentificacion" class="form-label fs-14p fw-medium text-raven-700">Número de identificación <span class="text-raven-700">*</span></label>
                                                     <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="nombres" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
+                                                    <label for="nombres" class="form-label fs-14p fw-medium text-raven-700">Nombre <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
@@ -359,7 +359,7 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="primerApellido" class="form-label fs-14p fw-medium">Primer Apellido <span class="text-danger">*</span></label>
+                                                    <label for="primerApellido" class="form-label fs-14p fw-medium text-raven-700">Primer Apellido <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
@@ -369,7 +369,7 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="segundoApellido" class="form-label fs-14p fw-medium">Segundo Apellido <span class="text-danger">*</span></label>
+                                                    <label for="segundoApellido" class="form-label fs-14p fw-medium text-raven-700">Segundo Apellido <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
                                                         class="form-control form-control-lg fs-14p"
@@ -379,7 +379,7 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="fechaNacimiento" class="form-label fs-14p fw-medium">Fecha de nacimiento <span class="text-danger">*</span></label>
+                                                    <label for="fechaNacimiento" class="form-label fs-14p fw-medium text-raven-700">Fecha de nacimiento <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="date"
                                                         class="form-control form-control-lg fs-14p"
@@ -388,7 +388,7 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="genero" class="form-label fs-14p fw-medium">Género <span class="text-danger">*</span></label>
+                                                    <label for="genero" class="form-label fs-14p fw-medium text-raven-700">Género <span class="text-raven-700">*</span></label>
                                                     <select class="form-select form-select-lg fs-14p" id="genero" name="genero" required>
                                                         <option value="" hidden selected>Elegir género</option>
                                                         <option value="M">Masculino</option>
@@ -396,7 +396,7 @@ Veris Care - Suscripción
                                                     </select>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="email" class="form-label fs-14p fw-medium">Correo electrónico <span class="text-danger">*</span></label>
+                                                    <label for="email" class="form-label fs-14p fw-medium text-raven-700">Correo electrónico <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="email"
                                                         class="form-control form-control-lg fs-14p"
@@ -406,7 +406,7 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
-                                                    <label for="celular" class="form-label fs-14p fw-medium">Celular <span class="text-danger">*</span></label>
+                                                    <label for="celular" class="form-label fs-14p fw-medium text-raven-700">Celular <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="tel"
                                                         class="form-control form-control-lg fs-14p"
