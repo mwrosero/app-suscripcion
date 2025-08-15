@@ -1192,6 +1192,19 @@ fieldset:disabled .btn.btn-eliminar-paciente {
     transition: transform 0.3s ease;
 }
 
+@media (max-width: 576px) {
+  .verification-inputs {
+    gap: 0.5rem; /* menos espacio entre inputs */
+  }
+
+  .verification-inputs .input-digit {
+    flex: 1;                  /* que cada input use el mismo ancho */
+    max-width: 45px;           /* tope para que no sean demasiado grandes */
+    height: 55px;              /* altura más compacta */
+    font-size: 1.25rem;        /* tamaño de fuente ajustado */
+  }
+}
+
 
 @font-face {
     font-family: "Gotham Rounded";
