@@ -566,11 +566,14 @@ Registro
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-lg-8">
-                                                                <div class="text-center">
-                                                                    <h6 class="fs-14p mb-1">Comprobante de pago</h6>
-                                                                    <button type="button" class="btn btn-cerulean-blue-800 fs-14p">Cargar</button>
-                                                                </div>
+                                                            <div class="col-12 col-lg-8 text-center">
+                                                                <h6 class="fs-14p mb-1">Comprobante de pago</h6>
+                                                                <label for="file" class="text-center">
+                                                                    <div type="button" class="btn btn-cerulean-blue-800 fs-14p">
+                                                                        Cargar
+                                                                        <input type="file" name="file" id="file" class="d-none">
+                                                                    </div>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -956,6 +959,7 @@ Registro
 
     let numeroIdentificacionFacturaValido = false;
     let emailFacturaValido = false;
+    let finalFile = null;
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1049,6 +1053,14 @@ Registro
             await obtenerDocumentoContrato(datos);
         })
 
+        $('#file').on('change', async function (e) {
+            console.log(0)
+            $('#btn-next').attr('disabled', true);
+            finalFile = e.target.files[0];
+            if (!finalFile) return;
+
+        });
+
         $('body').on('input', '#input1, #input2, #input3, #input4, #input5, #input6', async function(){
             if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != "" && $('#input5').val() != "" && $('#input6').val() != ""){
                 $('.btn-verificar-otp').attr('disabled',false)
@@ -1117,21 +1129,57 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
         const data = await call(args);
-
+        detalleSuscripcion.documentos = data.data
         if(data.code == 200){
             let elem = ``
             $.each(data.data, function(key, value){
-                elem += `<div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
-                        <span class="flex-grow-1 text-capitalize">${value.descripcion.toLowerCase()}</span>
-                        <button data-rel='${JSON.stringify(value)}' class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal btn-previsualizar">
-                            <i class="fa-solid fa-eye me-1"></i>Previsualizar
-                        </button>
-                    </div>`;
+                if(value.nemonico == "AUTORIZACION_DEBITO"){
+                    if(finalFile === null){
+                        elem += `<div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
+                            <span class="flex-grow-1 text-capitalize">${value.descripcion.toLowerCase()}</span>
+                            <button data-rel='${JSON.stringify(value)}' class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal btn-previsualizar">
+                                <i class="fa-solid fa-eye me-1"></i>Previsualizar
+                            </button>
+                        </div>`;
+                    }
+                }else{
+                    elem += `<div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
+                            <span class="flex-grow-1 text-capitalize">${value.descripcion.toLowerCase()}</span>
+                            <button data-rel='${JSON.stringify(value)}' class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal btn-previsualizar">
+                                <i class="fa-solid fa-eye me-1"></i>Previsualizar
+                            </button>
+                        </div>`;
+                    }
             })
 
             //data-bs-toggle="modal" data-bs-target="#documentoModal"
 
             $('#lista-documentos').html(elem);
+        }
+    }
+
+    async function uploadComprobante(){
+        const formData = new FormData();
+        formData.append("file", finalFile);
+
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=COMPROBANTE_PAGO&=secuenciaSuscripcion${detalleSuscripcion.suscripcion.secuenciaSuscripcion}`;
+        args["method"] = "POST";
+        args["token"] = _token;
+        args["showLoader"] = true;
+        args["data"] = formData;
+        args["bodyType"] = "formdata";
+        try {
+            const data = await call(args);
+            console.log(data);
+            if (data.code == 200) {
+                detalleSuscripcion.comprobante = data.data;
+            } else {
+                showMessage('error','Atención', data.message)
+                console.log("Error en respuesta:", data);
+            }
+        } catch (error) {
+            console.error("Error en uploadFile:", error);
         }
     }
 
@@ -1179,6 +1227,13 @@ Registro
         }
 
         if(step == 2){
+            if(finalFile !== null){
+                console.log(88)
+                $('#btn-next').attr('disabled', false);
+                return;
+            }
+
+            console.log(99)
             let frecuenciaPago = $('#frecuenciaPago').val();
             let nombreBanco = $('#nombreBanco').val();
             let numeroCuenta = $('#numeroCuenta').val();
@@ -1426,7 +1481,17 @@ Registro
     async function generarSolicitudFirma(){
         // E - Empresa, C - Colaborador, I - Individual
         let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
-        let tiposDocumentos = ["AUTORIZACION_DEBITO"];
+        {{-- let tiposDocumentos = ["AUTORIZACION_DEBITO"]; --}}
+        let tiposDocumentos = [];
+        $.each(detalleSuscripcion.documentos, function(key, value){
+            if(value.nemonico == "AUTORIZACION_DEBITO"){
+                if(finalFile === null){
+                    tiposDocumentos.push(value.nemonico)
+                }
+            }else{
+                tiposDocumentos.push(value.nemonico)
+            }
+        })
 
         let codigoInstitucion = $('#nombreBanco option:selected').val();
         let numeroCuenta = $('#numeroCuenta').val();
@@ -1440,6 +1505,17 @@ Registro
         args["token"] = _token;
         args["bodyType"] = "json";
 
+        let datosDocumentoDebito = null
+        if(finalFile === null){
+            datosDocumentoDebito = {
+                "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
+                "codigoInstitucion": parseInt(codigoInstitucion),
+                "tipoCuenta": tipoCuenta,
+                "numeroCuenta": numeroCuenta,
+                "periodo": detalleSuscripcion.detallePlan.tipo,
+            }
+        }
+
         args["data"] = JSON.stringify({
             "tipoFlujo": tipoFlujo,
             "nombres": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
@@ -1448,13 +1524,7 @@ Registro
             "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
             "correo": "mwrosero@gmail.com",
             "telefono": "0988302580", 
-            "datosDocumentoDebito" : {
-                "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
-                "codigoInstitucion": parseInt(codigoInstitucion),
-                "tipoCuenta": tipoCuenta,
-                "numeroCuenta": numeroCuenta,
-                "periodo": detalleSuscripcion.detallePlan.tipo,
-            },
+            "datosDocumentoDebito" : datosDocumentoDebito,
             "tiposDocumentos": tiposDocumentos
         });
         const data = await call(args);
@@ -1513,6 +1583,9 @@ Registro
         });
         const data = await call(args);
         console.log(data);
+        if(finalFile !== null){
+            await uploadComprobante()
+        }
     }
 </script>
 @endpush
