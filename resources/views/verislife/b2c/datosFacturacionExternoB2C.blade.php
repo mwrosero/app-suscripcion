@@ -198,13 +198,13 @@ Veris Care - Suscripción
                 <p class="mb-2 fw-semibold fs-6">Ingresa el código de verificación que ha sido enviado por SMS al número:</p>
                 <p class="text-primary-veris fw-semibold fs-6 telefonoOtp"></p>
 
-                <div class="d-flex justify-content-center gap-2 mb-3">
-                    <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 1">
-                    <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 2">
-                    <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 3">
-                    <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
-                    <input type="text" id="input5" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
-                    <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" style="width: 65px; height: 70px" aria-label="Dígito 4">
+                <div class="d-flex justify-content-center gap-2 mb-3 verification-inputs">
+                    <input type="text" id="input1" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 1">
+                    <input type="text" id="input2" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 2">
+                    <input type="text" id="input3" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 3">
+                    <input type="text" id="input4" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
+                    <input type="text" id="input5" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
+                    <input type="text" id="input6" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
                 </div>
 
                 <p class="fw-semibold fs-6 mb-3 d-none">

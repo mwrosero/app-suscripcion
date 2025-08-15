@@ -125,7 +125,7 @@
     			<img src="${logoSrc}" class="img-fluid mx-auto mb-3" alt="${detalleSuscripcion.lineaNegocio}" width="128">
                 <div class="w-100 box-img-plan rounded" style="background: url(${url_site}/assets/img/veris/planes/${imgFeatured}) no-repeat top center; background-size: cover; height: 165px;"></div>
                 <h5 class="bg-vris-onahau-100 text-blue-zodiac-950 fw-medium text-start px-3 py-3 position-relative rounded" style="margin-top:-25px;">
-                    ${detalle.nombre}
+                    ${capitalizeWords(detalle.nombre)}
                     <div class="position-absolute">
                         <span class="badge rounded-pill bg-robin-egg-blue-400 text-white fw-normal" style="font-size: 0.625rem;">AHORRA ${detalle.porcentajeDescuento}%</span>
                     </div>
@@ -153,8 +153,8 @@
 
     function capitalizeWords(str) {
         return str
-            .toLowerCase()
-            .replace(/\b\w/g, char => char.toUpperCase());
+            .toLocaleLowerCase("es-ES")
+            .replace(/(^|\s)\S/g, char => char.toLocaleUpperCase("es-ES"));
     }
 
 
