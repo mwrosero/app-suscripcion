@@ -960,6 +960,8 @@ Registro
     let numeroIdentificacionFacturaValido = false;
     let emailFacturaValido = false;
     let finalFile = null;
+
+    let aplicaCredito = {!! json_encode(Session::get('infoCliente')->informacionCliente->aplicaCredito) !!};
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1061,6 +1063,10 @@ Registro
 
         });
 
+        $('body').on('click', '.nav-metodo-pago .nav-link', async function(){
+            await validateFields();
+        })
+
         $('body').on('input', '#input1, #input2, #input3, #input4, #input5, #input6', async function(){
             if( $('#input1').val() != "" && $('#input2').val() != "" && $('#input3').val() != "" && $('#input4').val() != "" && $('#input5').val() != "" && $('#input6').val() != ""){
                 $('.btn-verificar-otp').attr('disabled',false)
@@ -1129,12 +1135,24 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
         const data = await call(args);
-        detalleSuscripcion.documentos = data.data
+        
         if(data.code == 200){
+            let documentosFiltrados = data.data.filter(doc => {
+                if (aplicaCredito) {
+                    // mostrar todos MENOS CONTRATO_PAGO_ANTICIPADO
+                    return doc.nemonico !== "CONTRATO_PAGO_ANTICIPADO";
+                } else {
+                    // mostrar todos MENOS CONTRATO
+                    return doc.nemonico !== "CONTRATO";
+                }
+            });
+
+            detalleSuscripcion.documentos = documentosFiltrados;
+            let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
             let elem = ``
-            $.each(data.data, function(key, value){
+            $.each(documentosFiltrados, function(key, value){
                 if(value.nemonico == "AUTORIZACION_DEBITO"){
-                    if(finalFile === null){
+                    if(_idMethod == "pills-debit-account-tab"){
                         elem += `<div class="col-12 d-flex justify-content-between align-items-center py-2 px-3 rounded-3" style="border: 1px solid #D0D3D9">
                             <span class="flex-grow-1 text-capitalize">${value.descripcion.toLowerCase()}</span>
                             <button data-rel='${JSON.stringify(value)}' class="btn bg-transparent border-0 btn-outline-cerulean-blue-800 fw-normal btn-previsualizar">
@@ -1151,8 +1169,6 @@ Registro
                         </div>`;
                     }
             })
-
-            //data-bs-toggle="modal" data-bs-target="#documentoModal"
 
             $('#lista-documentos').html(elem);
         }
@@ -1227,22 +1243,24 @@ Registro
         }
 
         if(step == 2){
-            if(finalFile !== null){
-                console.log(88)
-                $('#btn-next').attr('disabled', false);
-                return;
-            }
-
-            console.log(99)
-            let frecuenciaPago = $('#frecuenciaPago').val();
-            let nombreBanco = $('#nombreBanco').val();
-            let numeroCuenta = $('#numeroCuenta').val();
-            let nombreTitular = $('#nombreTitular').val();
-            let autorizacionCobro = $('#autorizacionCobro').is(':checked')
-            if(nombreBanco !== '' && frecuenciaPago.length > 4 && numeroCuenta.length > 4 && nombreTitular && autorizacionCobro){
-                $('#btn-next').attr('disabled', false);
+            let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
+            if(_idMethod == "pills-bank-transfer-tab"){
+                if(finalFile !== null){
+                    $('#btn-next').attr('disabled', false);
+                }else{
+                    $('#btn-next').attr('disabled', true);
+                }
             }else{
-                $('#btn-next').attr('disabled', true);
+                let frecuenciaPago = $('#frecuenciaPago').val();
+                let nombreBanco = $('#nombreBanco').val();
+                let numeroCuenta = $('#numeroCuenta').val();
+                let nombreTitular = $('#nombreTitular').val();
+                let autorizacionCobro = $('#autorizacionCobro').is(':checked')
+                if(nombreBanco !== '' && frecuenciaPago.length > 4 && numeroCuenta.length > 4 && nombreTitular && autorizacionCobro){
+                    $('#btn-next').attr('disabled', false);
+                }else{
+                    $('#btn-next').attr('disabled', true);
+                }
             }
         }
 
@@ -1483,9 +1501,11 @@ Registro
         let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         {{-- let tiposDocumentos = ["AUTORIZACION_DEBITO"]; --}}
         let tiposDocumentos = [];
+        let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
+        
         $.each(detalleSuscripcion.documentos, function(key, value){
             if(value.nemonico == "AUTORIZACION_DEBITO"){
-                if(finalFile === null){
+                if(_idMethod === "pills-debit-account-tab"){
                     tiposDocumentos.push(value.nemonico)
                 }
             }else{
@@ -1506,7 +1526,8 @@ Registro
         args["bodyType"] = "json";
 
         let datosDocumentoDebito = null
-        if(finalFile === null){
+        
+        if(_idMethod == "pills-debit-account-tab"){
             datosDocumentoDebito = {
                 "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
                 "codigoInstitucion": parseInt(codigoInstitucion),
@@ -1583,7 +1604,9 @@ Registro
         });
         const data = await call(args);
         console.log(data);
-        if(finalFile !== null){
+        let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
+        
+        if(_idMethod === "pills-bank-transfer-tab"){
             await uploadComprobante()
         }
     }
