@@ -1525,7 +1525,10 @@ Registro
         args["token"] = _token;
         args["bodyType"] = "json";
 
-        let datosDocumentoDebito = null
+        let datosDocumentoDebito = {
+            "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
+            "periodo": detalleSuscripcion.detallePlan.tipo
+        }
         
         if(_idMethod == "pills-debit-account-tab"){
             datosDocumentoDebito = {
