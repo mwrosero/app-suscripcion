@@ -1210,10 +1210,21 @@ Registro
             let nombreTitular = $('#nombreTitular').val();
             let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
             args["endpoint"] = api_url + `/empresarial/v1/reportes/autorizacion_debito_cuenta?codigoCliente={{ Session::get('infoCliente')->informacionCliente->codigoCliente }}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
+            args["method"] = "GET";
         }else{
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
+            //args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
+            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=I`;
+            args["method"] = "POST";
+            args["bodyType"] = "json";
+            args["data"] = JSON.stringify({
+                "codigoCliente": parseInt({{ Session::get('infoCliente')->informacionCliente->codigoCliente }}),
+                "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
+                "nombreCliente": `${$('#nombresFactura').val()}`,
+                "email": $('#emailFactura').val()
+            });
+            args["method"] = "POST";
         }
-        args["method"] = "GET";
+        
         args["showLoader"] = true;
         args["token"] = _token;
 
