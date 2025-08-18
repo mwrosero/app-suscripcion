@@ -1586,7 +1586,7 @@ Veris Care - Suscripción
     }
 
     async function validaInfoAfiliado(){
-        let tipoIdentificacion = 2;
+        let tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
         let numeroIdentificacion = $('#numeroIdentificacion').val();
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
@@ -1605,7 +1605,7 @@ Veris Care - Suscripción
     }
 
     async function consultarPaciente(){
-        let tipoIdentificacion = 2;
+        let tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
         let numeroIdentificacion = $('#numeroIdentificacion').val();
 
         let args = [];
