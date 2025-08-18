@@ -1176,10 +1176,10 @@ Registro
 
     async function uploadComprobante(){
         const formData = new FormData();
-        formData.append("file", finalFile);
+        formData.append("archivo", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=COMPROBANTE_PAGO&=secuenciaSuscripcion${detalleSuscripcion.suscripcion.secuenciaSuscripcion}`;
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO&secuenciaSuscripcion=${detalleSuscripcion.suscripcion.secuenciaSuscripcion}`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
