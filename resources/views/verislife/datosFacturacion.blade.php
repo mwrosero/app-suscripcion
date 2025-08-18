@@ -1213,7 +1213,7 @@ Registro
             args["method"] = "GET";
         }else{
             //args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=I`;
+            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=E`;
             args["method"] = "POST";
             args["bodyType"] = "json";
             args["data"] = JSON.stringify({
