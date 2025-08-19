@@ -1754,11 +1754,6 @@ Veris Care - Suscripción
             tiposDocumentos.push(value.nemonico)
         })
 
-        {{-- let codigoInstitucion = $('#nombreBanco option:selected').val();
-        let numeroCuenta = $('#numeroCuenta').val();
-        let nombreTitular = $('#nombreTitular').val();
-        let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE"; --}}
-
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
         args["method"] = "POST";
@@ -1775,7 +1770,7 @@ Veris Care - Suscripción
             "correo": $('#email').val(),
             "telefono": $('#celular').val(), 
             "datosDocumentoDebito" : {
-                "codigoCliente": 24536,
+                "codigoCliente": detalleSuscripcion.empresa.codigoEmpresa,
                 "codigoInstitucion": 5,
                 "tipoCuenta": "AHORROS",
                 "numeroCuenta": "12345678",
