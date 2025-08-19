@@ -1715,7 +1715,20 @@ Veris Care - Suscripción
             $('.nombrePersonaRegistrada').html(nombreRegistrado.toLowerCase());
         }else{
             showMessage('error','Atención',data.message);
+            await deleteAfiliado();
         }
+    }
+
+    async function deleteAfiliado(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/${detalleSuscripcion.carga.secuenciaAfiliado}?codigoEmpresa=1`;
+        args["method"] = "DELETE";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({});
+        const data = await call(args);
+        console.log(data);
     }
 
     async function mostrarComprobante(){
