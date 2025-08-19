@@ -41,7 +41,7 @@ class Ism extends Model
     public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
     public const PASSWORD_VERIS_GENERIC = 'B@Ck3nFID3Liz@C10N!2025$$';
     public const ENVIRONMENT_NUVEI = 'prod';
-    public const BASE_URL_NUVEI = 'https://ccapi-stg.paymentez.com';
+    public const BASE_URL_NUVEI = 'https://ccapi.paymentez.com';
     public const APPLICATION_CODE_NUVEI = 'VERISCARE-PR-EC-CLIENT';
     public const APPLICATION_KEY_NUVEI = 'X2fPO1rMiwabY3Yw6qf68HiLtXXxrc';
     public const SERVER_CODE_NUVEI = 'VERISCARE-PR-EC-SERVER';

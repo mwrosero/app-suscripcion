@@ -1336,6 +1336,7 @@ Veris Care - Suscripción
             await validarCorreoElectronico(email);
         })
 
+        {{-- $('body').on('change', 'input, select', async function(){ --}}
         $('body').on('input change', 'input, select', async function(){
             validateFields();
         })
@@ -1943,7 +1944,20 @@ Veris Care - Suscripción
             $('#wizard-actions').remove()
         }else{
             showMessage('error','Atención',data.message);
+            await deleteAfiliado();
         }
+    }
+
+    async function deleteAfiliado(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/${detalleSuscripcion.afiliado.secuenciaAfiliado}?codigoEmpresa=1`;
+        args["method"] = "DELETE";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({});
+        const data = await call(args);
+        console.log(data);
     }
 
     async function mostrarComprobante(){
@@ -2031,6 +2045,7 @@ Veris Care - Suscripción
         args["bodyType"] = "json";
         args["data"] = JSON.stringify(payload);
         const data = await call(args);
+        detalleSuscripcion.afiliado = data.data
         $('#signedDocumentModal').modal('hide')
         if(data.code == 200){
             $('#verificationCodeModal').modal('hide');
