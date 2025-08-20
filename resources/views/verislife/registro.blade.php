@@ -607,8 +607,8 @@ Registro
             }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
                 await cargaAfiliadosSuscripcion();
                 detalleSuscripcion.pacientes = pacientesAgregados;
-                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-                location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
+                //localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+                //location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
             }
         });
 
