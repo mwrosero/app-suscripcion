@@ -790,7 +790,12 @@ Registro
 
         if (response.code === 200) {
             if(response.data !== null){
-                pacientes = response.data.rows;
+                let filtrados = $.grep(response.data.rows, function(item) {
+                    return item.activo === true;
+                });
+                console.log(filtrados)
+                //pacientes = response.data.rows;
+                pacientes = filtrados;
                 console.log(pacientes)
                 page = 1;
                 const pacientesActivos = pacientes.filter(p => p.activo);
