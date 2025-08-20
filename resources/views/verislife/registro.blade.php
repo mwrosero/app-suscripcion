@@ -606,9 +606,6 @@ Registro
                 location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
             }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
                 await cargaAfiliadosSuscripcion();
-                detalleSuscripcion.pacientes = pacientesAgregados;
-                //localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-                //location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
             }
         });
 
@@ -758,6 +755,13 @@ Registro
         });
         const data = await call(args);
         console.log(data);
+        if(data.code == 200){
+            detalleSuscripcion.pacientes = pacientesAgregados;
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+            location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
+        }else{
+            showMessage('warning','Atención',data.message);
+        }
     }
 
     async function cargarAfiliados() {

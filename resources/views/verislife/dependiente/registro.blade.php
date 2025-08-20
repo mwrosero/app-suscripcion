@@ -95,7 +95,7 @@ Registro
                             <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico"/>
                         </div>
                         <div class="col-12 col-md-10 d-none" id="telefono-col">
-                            <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <label for="telefonoMovil" class="form-label fs-14p fw-medium">Celular <span class="text-danger">*</span></label>
                             <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular"/>
                         </div>
                         
