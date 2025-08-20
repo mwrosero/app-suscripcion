@@ -1396,6 +1396,7 @@ Registro
             if (data.code == 200) {
                 uploadedModal.hide();
                 if(data.data.cargaErronea){
+                    showMessage('error','Atención', 'Descargando archivo con errores para su corrección')
                     const base64 = data.data.binarioCargaErronea;
                     const nombreArchivo = 'errores_carga.xlsx';
                     const byteCharacters = atob(base64);
