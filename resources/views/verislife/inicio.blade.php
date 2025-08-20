@@ -33,9 +33,9 @@ $processId = base64_encode(uniqid());
     <section class="bg-cornflower-blue-400 mb-4 px-3 py-4 section-admin-planes d-none">
         <div class="d-none justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue text-white ps-3 fs-18 mb-0">Planes contratados</h5>
-            <a href="#!" class="fw-medium text-white me-1">Ver todos</a>
+            <a href="#!" class="fw-medium text-white me-1 d-none">Ver todos</a>
         </div>
-        <div class="row g-3">
+        <div class="row g-3 mx-0">
             <div class="slider-planes-contratados position-relative">
                 <div class="swiper my-swiper pt-3 pb-3" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="planesContratadosAdmin">
@@ -86,9 +86,9 @@ $processId = base64_encode(uniqid());
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
-            <a href="#!" class="fw-medium me-1">Ver todos</a>
+            <a href="#!" class="fw-medium me-1 d-none">Ver todos</a>
         </div>
-        <div class="row g-3">
+        <div class="row g-3 mx-0">
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="suscripcionPendientes">
@@ -144,9 +144,9 @@ $processId = base64_encode(uniqid());
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-contratadas">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones contratadas</h5>
-            <a href="#!" class="fw-medium me-1">Ver todos</a>
+            <a href="#!" class="fw-medium me-1 d-none">Ver todos</a>
         </div>
-        <div class="row g-3">
+        <div class="row g-3 mx-0">
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 3 }}'>
                     <div class="swiper-wrapper" id="suscripcionContratadas">
@@ -878,7 +878,7 @@ $processId = base64_encode(uniqid());
     <section class="bg-wild-sand-50 mb-4 px-3 py-4 d-none">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Historial de uso</h5>
-            <a href="#!" class="fw-medium me-1">Ver todos</a>
+            <a href="#!" class="fw-medium me-1 d-none">Ver todos</a>
         </div>
     </section>
 

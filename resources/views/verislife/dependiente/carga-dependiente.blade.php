@@ -13,13 +13,14 @@ $processId = base64_encode(uniqid());
 <div class="flex-grow-1 container-p-y">
     <!-- COLABORADOR 1 B2B-->
     <section class="mb-4 px-lg-5 py-4">
-        <div class="row g-3">
+        <div class="row g-3 mx-0">
 
             <div class="col-sm-12">
                 <div class="card bg-cornflower-blue-400 rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="fw-medium border-start-white text-white ps-3 fs-18 mb-0">Opción contratada</h5>
+                            <img src="" id="logoLineaNegocio" alt="" style="max-width: 100px;">
                         </div>
                         <div class="row g-3 justify-content-center mb-4">
                             <div class="col-12 col-lg-6" id="planContratado">
@@ -36,7 +37,7 @@ $processId = base64_encode(uniqid());
         </div>
     </section>
     <section class="mb-4 px-lg-5 py-4 box-indicadores d-none">
-        <div class="row g-3 d-flex justify-content-center">
+        <div class="row mx-0 g-3 d-flex justify-content-center">
             <div class="col-12 col-md-4">
                 <div class="card h-100">
                     <div class="card-header bg-cerulean-blue-800 py-3">
@@ -122,7 +123,7 @@ $processId = base64_encode(uniqid());
         </div>
     </section>
     <section class="mb-4 px-lg-5 py-4 d-none">
-        <div class="row g-3">
+        <div class="row mx-0 g-3">
             <div class="col-sm-12">
                 <div class="card bg-white rounded-4">
                     <div class="card-body">
@@ -234,6 +235,11 @@ $processId = base64_encode(uniqid());
             $('.sin-dependientes').removeClass('d-none')
         }
         $('.box-indicadores').removeClass('d-none')
+        let logoNombre = 'logo-veris-bn.svg';
+        if (plan.lineaNegocio === 'PMF') logoNombre = 'parami-bn.png';
+        const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
+        $('#logoLineaNegocio').attr('src', logoSrc);
+        console.log(logoSrc)
     }
     
 </script>

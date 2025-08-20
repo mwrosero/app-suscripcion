@@ -91,7 +91,7 @@ Registro
                             <input type="text" class="form-control form-control-lg fs-14p" id="numeroContratoAfiliado" name="numeroContratoAfiliado" placeholder="Número de contrato">
                         </div> -->
                         <div class="col-12 col-md-10 d-none" id="email-col">
-                            <label for="email" class="form-label fs-14p fw-medium d-flex justify-content-between">Correo <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <label for="email" class="form-label fs-14p fw-medium">Correo <span class="text-danger">*</span></label>
                             <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico"/>
                         </div>
                         <div class="col-12 col-md-10 d-none" id="telefono-col">
@@ -439,7 +439,7 @@ Registro
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table text-nowrap">
+                        <table class="table text-nowrap" id="registros">
                             <thead>
                                 <tr>
                                     <th class="align-middle text-center item-action" style="width: 50px;"></th>
@@ -530,6 +530,14 @@ Registro
             pacientes = detalleSuscripcion.pacientes;
             fillRegistros();
         }
+
+        $("#valorFiltro").on("input", function() {
+            var valor = $(this).val().toLowerCase().trim();
+            
+            $("#registros tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1 || valor === "");
+            });
+        });
 
         $('body').on('click', '.btn-pagination-page', function (e) {
             e.preventDefault();
