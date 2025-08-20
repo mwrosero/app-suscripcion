@@ -1539,6 +1539,8 @@ Registro
 
                         // successModal.show();
                         $('#successfullyUploadMasivedModal').modal('show');
+                    }else{
+                        showMessage('error','Atención', 'Descargando archivo con errores para su corrección')
                     }
                 }
                 return data;

@@ -493,7 +493,7 @@ Registro
 
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
-                    <a href="/portal-fidelizacion/verificacion-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
+                    <a href="javascript:history.back()" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
                     <button type="button" class="btn btn-cerulean-blue-800" disabled id="btn-continuar">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></button>
                 </div>
             </div>
