@@ -621,6 +621,8 @@ Registro
             if (!validado) {
                 const fueValidado = await validarIdentidad();
                 if (!fueValidado) return;
+                const fueAsignado = await validaInfoAfiliado();
+                if (!fueAsignado) return;
                 mostrarCamposAdicionales();
                 $('#btn-add').text('Agregar').attr('disabled', true);
             } else {
@@ -1291,6 +1293,25 @@ Registro
         $('#addBeneficiaryModal').modal('hide');
         successModal.show();
         
+    }
+
+    async function validaInfoAfiliado(){
+        let tipoIdentificacion = 2;
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoTipoIdentificacionPcte": tipoIdentificacion,
+            "numeroIdentificacionPcte": numeroIdentificacion,
+            "titularDependiente": "T"
+        });
+        const data = await call(args);
+        const mensajeBuscado = "El afiliado {0} ya tiene un contrato de fidelización activo.";
+        return data.data.includes(mensajeBuscado);
     }
 
     async function cargarEstadoCivil() {
