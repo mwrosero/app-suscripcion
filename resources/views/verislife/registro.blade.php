@@ -1237,7 +1237,7 @@ Registro
         let segundoApellido = $('#segundoApellido').val().toUpperCase();
         let genero = $('#genero option:selected').val();
         let fechaNacimiento = $('#fechaNacimiento').val();
-        let telefonoMovil = $('#telefonoMovil').val();
+        let telefonoMovil = parseInt($('#telefonoMovil').val());
         let email = $('#email').val();
 
         let dateObj = new Date(fechaNacimiento);
