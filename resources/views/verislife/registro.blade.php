@@ -1153,6 +1153,7 @@ Registro
 
             if (response.data?.esIdentificacionValida === true) {
                 validado = true;
+                pacienteExistente = false;
 
                 const paciente = await consultarPaciente();
                 const fueAsignado = await validaInfoAfiliado();
@@ -1162,7 +1163,6 @@ Registro
                     showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
                     return;
                 }
-                pacienteExistente = false;
                 mostrarCamposAdicionales();
                 if (paciente) {
                     llenarCamposPaciente(paciente);
