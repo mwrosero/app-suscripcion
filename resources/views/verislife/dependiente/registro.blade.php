@@ -739,9 +739,9 @@ Registro
         let parentesco = $('#parentesco option:selected').val();
         let fechaNacimiento = $('#fechaNacimiento').val();
         let email = $('#email').val();
-        // let telefonoMovil = $('#telefonoMovil').val();
+        let telefonoMovil = $('#telefonoMovil').val();
 
-        if(primerNombre.length == 0 || primerApellido.length == 0 || genero.length == 0 || parentesco.length == 0 || fechaNacimiento.length == 0 || email.length == 0 ){
+        if(primerNombre.length == 0 || primerApellido.length == 0 || genero.length == 0 || parentesco.length == 0 || fechaNacimiento.length == 0 || email.length == 0 || telefonoMovil.length == 0){
             showMessage('warning','Atención','Debe llenar campos requeridos en el formulario');
             return false;
         }else{
