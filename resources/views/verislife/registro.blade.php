@@ -516,6 +516,7 @@ Registro
     let page = 1;
     let perPage = 7;
     let trDelete = null;
+    let pacienteExistente = false
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -621,11 +622,12 @@ Registro
             if (!validado) {
                 const fueValidado = await validarIdentidad();
                 if (!fueValidado) return;
-                const fueAsignado = await validaInfoAfiliado();
-                if (!fueAsignado) return;
                 mostrarCamposAdicionales();
                 $('#btn-add').text('Agregar').attr('disabled', true);
             } else {
+                if(pacienteExistente){
+                    return;
+                }
                 let idPersonaRegistro = $('#idPersonaRegistro').val();
                 let secuenciaAfiliado = $('#secuenciaAfiliado').val();
                 console.log(idPersonaRegistro);
@@ -1139,6 +1141,7 @@ Registro
                 codigoTipoIdentificacion: tipo,
                 codigoEmpresa: '1',
                 numeroIdentificacion: numero,
+                idPacienteTitular: numero
             });
 
             const response = await call({
@@ -1152,6 +1155,14 @@ Registro
                 validado = true;
 
                 const paciente = await consultarPaciente();
+                const fueAsignado = await validaInfoAfiliado();
+                if(fueAsignado){
+                    validado = false;
+                    pacienteExistente = true;
+                    showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
+                    return;
+                }
+                pacienteExistente = false;
                 mostrarCamposAdicionales();
                 if (paciente) {
                     llenarCamposPaciente(paciente);
@@ -1164,7 +1175,7 @@ Registro
             }
         } catch (error) {
             console.error('Error al validar', error);
-            showMessage('warning','Atención','Error al validar identificación');
+            //showMessage('warning','Atención','Error al validar identificación');
             return false;
         }
     }
