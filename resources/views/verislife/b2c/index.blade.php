@@ -220,7 +220,7 @@
             </div>
         </div>
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
-            <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+            <div class="col-12 d-flex align-items-center justify-content-center mb-3">
                 <h5 class="fw-medium ps-3 fs-18 mb-0 me-3 text-white">Descuentos en</h5>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-parami-bn.svg" class="me-4" alt="parami">
             </div>

@@ -24,7 +24,7 @@
 </header>
 <section class="hero d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
-        <img src="{{ asset('assets/img/veris/titular-parami.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4" style="opacity: 0.7" />
+        <img src="{{ asset('assets/img/veris/titular-parami.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4 img-label" style="opacity: 0.7" />
         <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
     </div>
 </section>
@@ -331,7 +331,7 @@
             </div>
         </div>
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
-            <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+            <div class="col-12 d-flex align-items-center justify-content-center mb-3">
                 <h5 class="fw-medium ps-3 fs-18 mb-0 me-3 text-white">Descuentos en</h5>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-parami-bn.svg" class="me-4" alt="parami">
             </div>
@@ -721,6 +721,29 @@
     }
     .nav-pills li.nav-item .nav-link.active {
         background: #25CAD2 !important;
+    }
+    @media only screen and (max-width: 600px) {
+        .hero{
+            position: relative;
+            background: linear-gradient(
+                    0deg,
+                    rgba(251, 251, 251, 0.90) 0%,
+                    rgba(248, 251, 255, 1) 0%,
+                    rgba(255, 255, 255, 0) 90%
+                ),
+                url("/assets/img/veris/fondo-parami-b2c.jpg") no-repeat top right;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top left;
+            min-height: 100vh;
+            padding-top: 6rem; /* margen para que no tape el navbar */
+            z-index: 1;
+            overflow: hidden;
+            background-position-x: 50%;
+        }
+        .img-label{
+            margin-top: 180px;
+        }
     }
 </style>
 @endsection
