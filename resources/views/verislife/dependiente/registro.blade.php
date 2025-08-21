@@ -725,6 +725,7 @@ Registro
         });
 
         await cargarTiposIdentificacion();
+        $('#tipoIdentificacion option[value="1"]').remove();
         await cargarEstadoCivil();
         await cargarTiposParentesco();
         await cargarSectores();
