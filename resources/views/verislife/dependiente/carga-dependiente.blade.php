@@ -72,7 +72,7 @@ $processId = base64_encode(uniqid());
                     <div class="card-body">
                         <div class="row g-0 justify-content-center align-items-center my-4">
                             <div class="col-3">
-                                <div class="progress-circle my-auto ms-auto" data-percentage="10">
+                                <div class="progress-circle my-auto ms-auto" id="consultas-realizadas" data-percentage="10">
                                     <span class="progress-left">
                                         <span class="progress-bar"></span>
                                     </span>
@@ -82,7 +82,7 @@ $processId = base64_encode(uniqid());
                                     <div class="progress-value">
                                         <div>
                                             <span><i class="bi bi-check2 fw-medium text-success"></i></span>
-                                            <p class="text-success fw-medium fs-12p mb-0">0/4</p>
+                                            <p class="text-success fw-medium fs-12p mb-0" id="consultas-realizadas-label">0/4</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +168,27 @@ $processId = base64_encode(uniqid());
             location.href = '/portal-fidelizacion/registrar-dependientes';
         });
 
+        await cargarIndicadores();
     });
+
+    async function cargarIndicadores(){
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/dash_beneficios?secuenciaAfiliado=${codigoCliente}`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        let citasGratuitas = data.data.citasGratuitas
+        console.log(citasGratuitas);
+        if(data.code == 200){
+            let meta = parseInt(citasGratuitas.cantidadTotal-citasGratuitas.cantidadDisponible);
+            let valor = citasGratuitas.cantidadTotal;
+            let porcentaje = (valor / meta) * 100;
+            let porcentajeFinal = Math.round(porcentaje / 10) * 10;
+            $('#consultas-realizadas-label').html(`${(citasGratuitas.cantidadTotal-citasGratuitas.cantidadDisponible)}/${citasGratuitas.cantidadTotal}`)
+            $('#consultas-realizadas').attr("data-percentage", porcentajeFinal);
+        }
+    }
 
     async function obtenerPlanesSuscripcionDetalleEmpresa() {
         if (!api_url || !_application || !_idOrganizacion || !_token) {
@@ -236,7 +256,7 @@ $processId = base64_encode(uniqid());
         }
         $('.box-indicadores').removeClass('d-none')
         let logoNombre = 'logo-veris-bn.svg';
-        if (plan.lineaNegocio === 'PMF') logoNombre = 'parami-bn.png';
+        if (plan.lineaNegocio === 'PMF') logoNombre = 'logo-parami-bn.svg';
         const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
         $('#logoLineaNegocio').attr('src', logoSrc);
         console.log(logoSrc)

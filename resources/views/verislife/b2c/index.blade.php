@@ -24,7 +24,7 @@
 </header>
 <section class="hero-b2c d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
-        <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid mb-4" />
+        <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid img-label mb-4" />
         <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
     </div>
 </section>
@@ -220,7 +220,7 @@
             </div>
         </div>
         <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
-            <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+            <div class="col-12 d-flex align-items-center justify-content-center mb-3">
                 <h5 class="fw-medium ps-3 fs-18 mb-0 me-3 text-white">Descuentos en</h5>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-parami-bn.svg" class="me-4" alt="parami">
             </div>
@@ -589,5 +589,30 @@
     detalleSuscripcionTmp.lineaNegocio = lineaNegocioPage;
     localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcionTmp));
 </script>
+<style>
+    @media only screen and (max-width: 600px) {
+        .hero-b2c{
+            position: relative;
+                background: linear-gradient(
+                0deg,
+                rgba(251, 251, 251, 0.90) 0%,
+                rgba(248, 251, 255, 1) 0%,
+                rgba(255, 255, 255, 0) 90%
+            ),
+            url("/assets/img/veris/fondo-veris-care.png") no-repeat top center,
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top left;
+            min-height: 100vh;
+            padding-top: 6rem; /* margen para que no tape el navbar */
+            z-index: 1;
+            overflow: hidden;
+            background-position-x: 90%;
+        }
+        .img-label{
+            margin-top: 180px;
+        }
+    }
+</style>
 @include("verislife.b2c.funcionalidadB2C")
 @endsection

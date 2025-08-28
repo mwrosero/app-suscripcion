@@ -95,7 +95,7 @@ Registro
                             <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico"/>
                         </div>
                         <div class="col-12 col-md-10 d-none" id="telefono-col">
-                            <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <label for="telefonoMovil" class="form-label fs-14p fw-medium">Celular <span class="text-danger">*</span></label>
                             <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular"/>
                         </div>
                         
@@ -725,6 +725,7 @@ Registro
         });
 
         await cargarTiposIdentificacion();
+        $('#tipoIdentificacion option[value="1"]').remove();
         await cargarEstadoCivil();
         await cargarTiposParentesco();
         await cargarSectores();
@@ -738,9 +739,9 @@ Registro
         let parentesco = $('#parentesco option:selected').val();
         let fechaNacimiento = $('#fechaNacimiento').val();
         let email = $('#email').val();
-        // let telefonoMovil = $('#telefonoMovil').val();
+        let telefonoMovil = $('#telefonoMovil').val();
 
-        if(primerNombre.length == 0 || primerApellido.length == 0 || genero.length == 0 || parentesco.length == 0 || fechaNacimiento.length == 0 || email.length == 0 ){
+        if(primerNombre.length == 0 || primerApellido.length == 0 || genero.length == 0 || parentesco.length == 0 || fechaNacimiento.length == 0 || email.length == 0 || telefonoMovil.length == 0){
             showMessage('warning','Atención','Debe llenar campos requeridos en el formulario');
             return false;
         }else{

@@ -95,7 +95,7 @@ Registro
                             <input type="email" class="form-control form-control-lg fs-14p" id="email" name="email" placeholder="Ingresa el correo electrónico"/>
                         </div>
                         <div class="col-12 col-md-10 d-none" id="telefono-col">
-                            <label for="telefonoMovil" class="form-label fs-14p fw-medium d-flex justify-content-between">Celular <small class="text-muted fs-12p">(Opcional)</small></label>
+                            <label for="telefonoMovil" class="form-label fs-14p fw-medium">Celular <span class="text-danger">*</span></label>
                             <input type="tel" class="form-control form-control-lg fs-14p" id="telefonoMovil" name="telefonoMovil" placeholder="Ingresa el número celular"/>
                         </div>
                         
@@ -493,7 +493,7 @@ Registro
 
                 </div>
                 <div class="d-flex gap-3 justify-content-center">
-                    <a href="/portal-fidelizacion/verificacion-plan/{{ $params }}" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
+                    <a href="javascript:history.back()" class="btn btn-outline-cerulean-blue-800"><i class="fa-solid fa-chevron-left me-2"></i> Regresar</a>
                     <button type="button" class="btn btn-cerulean-blue-800" disabled id="btn-continuar">Continuar <i class="fa-solid fa-chevron-right ms-2"></i></button>
                 </div>
             </div>
@@ -516,6 +516,7 @@ Registro
     let page = 1;
     let perPage = 7;
     let trDelete = null;
+    let pacienteExistente = false
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -606,9 +607,6 @@ Registro
                 location.href = `/portal-fidelizacion/facturacion/{{ $params }}`;
             }else if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
                 await cargaAfiliadosSuscripcion();
-                detalleSuscripcion.pacientes = pacientesAgregados;
-                localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
-                location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
             }
         });
 
@@ -627,6 +625,9 @@ Registro
                 mostrarCamposAdicionales();
                 $('#btn-add').text('Agregar').attr('disabled', true);
             } else {
+                if(pacienteExistente){
+                    return;
+                }
                 let idPersonaRegistro = $('#idPersonaRegistro').val();
                 let secuenciaAfiliado = $('#secuenciaAfiliado').val();
                 console.log(idPersonaRegistro);
@@ -739,6 +740,7 @@ Registro
         });
 
         await cargarTiposIdentificacion();
+        $('#tipoIdentificacion option[value="1"]').remove();
         await cargarEstadoCivil();
         await cargarTiposParentesco();
         await cargarSectores();
@@ -758,6 +760,13 @@ Registro
         });
         const data = await call(args);
         console.log(data);
+        if(data.code == 200){
+            detalleSuscripcion.pacientes = pacientesAgregados;
+            localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
+            location.href = `/portal-fidelizacion/confirmacion/{{ $params }}`;
+        }else{
+            showMessage('warning','Atención',data.message);
+        }
     }
 
     async function cargarAfiliados() {
@@ -790,7 +799,12 @@ Registro
 
         if (response.code === 200) {
             if(response.data !== null){
-                pacientes = response.data.rows;
+                let filtrados = $.grep(response.data.rows, function(item) {
+                    return item.activo === true;
+                });
+                console.log(filtrados)
+                //pacientes = response.data.rows;
+                pacientes = filtrados;
                 console.log(pacientes)
                 page = 1;
                 const pacientesActivos = pacientes.filter(p => p.activo);
@@ -1127,6 +1141,7 @@ Registro
                 codigoTipoIdentificacion: tipo,
                 codigoEmpresa: '1',
                 numeroIdentificacion: numero,
+                idPacienteTitular: numero
             });
 
             const response = await call({
@@ -1138,8 +1153,16 @@ Registro
 
             if (response.data?.esIdentificacionValida === true) {
                 validado = true;
+                pacienteExistente = false;
 
                 const paciente = await consultarPaciente();
+                const fueAsignado = await validaInfoAfiliado();
+                if(fueAsignado){
+                    validado = false;
+                    pacienteExistente = true;
+                    showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
+                    return;
+                }
                 mostrarCamposAdicionales();
                 if (paciente) {
                     llenarCamposPaciente(paciente);
@@ -1152,7 +1175,7 @@ Registro
             }
         } catch (error) {
             console.error('Error al validar', error);
-            showMessage('warning','Atención','Error al validar identificación');
+            //showMessage('warning','Atención','Error al validar identificación');
             return false;
         }
     }
@@ -1258,7 +1281,7 @@ Registro
             "genero": genero,
             "fechaNacimiento": fechaFormateada,
             "mail": email,
-            "telefonoMovil": telefonoMovil.replace(/\D/g, ''),
+            "telefonoMovil": parseInt(telefonoMovil.replace(/\D/g, '')),
             "codigoRegion": 1,
             "codigoCiudad": 1,
             "codigoPais": 1,
@@ -1281,6 +1304,25 @@ Registro
         $('#addBeneficiaryModal').modal('hide');
         successModal.show();
         
+    }
+
+    async function validaInfoAfiliado(){
+        let tipoIdentificacion = $('#tipoIdentificacion').val();
+        let numeroIdentificacion = $('#numeroIdentificacion').val();
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "codigoTipoIdentificacionPcte": tipoIdentificacion,
+            "numeroIdentificacionPcte": numeroIdentificacion,
+            "titularDependiente": "T"
+        });
+        const data = await call(args);
+        const mensajeBuscado = "El afiliado {0} ya tiene un contrato de fidelización activo.";
+        return data.data.includes(mensajeBuscado);
     }
 
     async function cargarEstadoCivil() {
@@ -1396,6 +1438,7 @@ Registro
             if (data.code == 200) {
                 uploadedModal.hide();
                 if(data.data.cargaErronea){
+                    showMessage('error','Atención', 'Descargando archivo con errores para su corrección')
                     const base64 = data.data.binarioCargaErronea;
                     const nombreArchivo = 'errores_carga.xlsx';
                     const byteCharacters = atob(base64);

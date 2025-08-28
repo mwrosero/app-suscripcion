@@ -14,7 +14,7 @@
 
     <div class="row g-3 g-xl-5 gap-4 flex-column justify-content-start">
         <div class="col-12">
-            <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid" />
+            <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid img-label" />
         </div>
         <div class="col-12">
             <div class="row g-3 justify-content-start align-items-end">
@@ -114,4 +114,19 @@
         return data.data.includes(mensajeBuscado);
     }
 </script>
+<style>
+    @media only screen and (max-width: 600px) {
+        body.login-page {
+            background: linear-gradient(45deg, rgba(251, 251, 251, 0.99) 0%, rgba(248, 251, 255, 0.35) 45.5%, rgba(255, 255, 255, 0) 100%), url(/assets/img/veris/fondo-veris-care.png) no-repeat center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh;
+            background-position-x: 90%;
+        }
+        .img-label{
+            margin-top: 180px;
+        }
+    }
+</style>
 @endpush
