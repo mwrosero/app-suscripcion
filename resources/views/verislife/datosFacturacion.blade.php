@@ -1039,6 +1039,10 @@ Registro
             await validarIdentificacionFactura();
         })
 
+        $('body').on('input', '#telefonoFactura, #emailFactura, #direccionFactura', function(){
+            validateFields();
+        })
+
         $('body').on('change', '#emailFactura', async function(){
             let email = $(this).val();
             await validarCorreoElectronico(email);
@@ -1143,6 +1147,7 @@ Registro
         $('#numeroIdentificacionFactura').val(data.data.datosCliente.numeroIdentificacion)
         $('#nombresFactura').val(data.data.datosCliente.razonSocial)
         if(data.data.datosRepresentanteLegal.correoElectronico !== null){
+            emailFacturaValido = true;
             $('#emailFactura').val(data.data.datosRepresentanteLegal.correoElectronico)
         }
         if(data.data.datosRepresentanteLegal.telefonoCelular !== null){
@@ -1267,11 +1272,12 @@ Registro
     function validateFields(){
         let step = $('#btn-next').attr('step-rel');
         if(step == 1){
-            let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-            let nombresFactura = $('#nombresFactura').val();
+            // let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
+            // let nombresFactura = $('#nombresFactura').val();
             let telefonoFactura = $('#telefonoFactura').val();
             let direccionFactura = $('#direccionFactura').val();
-            if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 5 && numeroIdentificacionFacturaValido && emailFacturaValido){
+            //if(tipoIdentificacionFactura !== '' && nombresFactura.length > 4 && telefonoFactura.length > 6 && direccionFactura.length > 5 && numeroIdentificacionFacturaValido && emailFacturaValido){
+            if(telefonoFactura.length > 6 && direccionFactura.length > 5 && emailFacturaValido){
                 $('#btn-next').attr('disabled', false);
             }else{
                 $('#btn-next').attr('disabled', true);
