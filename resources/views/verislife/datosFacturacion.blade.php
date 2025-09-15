@@ -347,7 +347,7 @@ Registro
                                             <div class="row g-3 justify-content-center">
                                                 <div class="col-md-12 col-xl-8">
                                                     <label for="tipoIdentificacionFactura" class="form-label fs-14p fw-medium">Elige tu documento <span class="text-danger">*</span></label>
-                                                    <select class="form-select form-select-lg fs-14p" id="tipoIdentificacionFactura" name="tipoIdentificacionFactura" required>
+                                                    <select class="form-select form-select-lg fs-14p" id="tipoIdentificacionFactura" name="tipoIdentificacionFactura" required readonly style="pointer-events: none;">
                                                     </select>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
@@ -358,7 +358,7 @@ Registro
                                                         id="numeroIdentificacionFactura"
                                                         name="numeroIdentificacionFactura"
                                                         placeholder="9999999999999"
-                                                        required>
+                                                        required readonly>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
                                                     <label for="nombresFactura" class="form-label fs-14p fw-medium">Nombres y Apellidos <span class="text-danger">*</span></label>
@@ -368,7 +368,8 @@ Registro
                                                         id="nombresFactura"
                                                         name="nombresFactura"
                                                         placeholder="Empresa 1"
-                                                        required>
+                                                        required 
+                                                        readonly>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
                                                     <label for="telefonoFactura" class="form-label fs-14p fw-medium">Teléfono <span class="text-danger">*</span></label>
@@ -1019,6 +1020,7 @@ Registro
         nombreBancoSelect.innerHTML = '<option value="" selected>Seleccionar Banco</option>';
         const institucionesBancarias = await obtenerInstitucionesBancarias();
 
+
         institucionesBancarias.forEach(item => {
             const option = document.createElement('option');
             option.value = item.codigoInstitucion;
@@ -1124,9 +1126,32 @@ Registro
             localStorage.setItem(`suscripcion-{{ $params }}`, JSON.stringify(detalleSuscripcion));
         }) --}}
 
+        await cargarInfoEmpresa();
         await cargarMediosPago();
         await cargarTiposCuenta();
     });
+
+    async function cargarInfoEmpresa(){
+        let args = [];
+        args["endpoint"] = `${api_url}/comercial/v1/clientes/{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}?infoEmpresarial=true`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data)
+        $('#tipoIdentificacionFactura').val(data.data.datosCliente.codigoTipoIdentificacion)
+        $('#numeroIdentificacionFactura').val(data.data.datosCliente.numeroIdentificacion)
+        $('#nombresFactura').val(data.data.datosCliente.razonSocial)
+        if(data.data.datosRepresentanteLegal.correoElectronico !== null){
+            $('#emailFactura').val(data.data.datosRepresentanteLegal.correoElectronico)
+        }
+        if(data.data.datosRepresentanteLegal.telefonoCelular !== null){
+            $('#telefonoFactura').val(data.data.datosRepresentanteLegal.telefonoCelular)
+        }
+        if(data.data.datosResidencia.direccion !== null){
+            $('#direccionFactura').val(data.data.datosResidencia.direccion)
+        }
+    }
 
     async function obtenerListadoDocumentosFirma(){
         let args = [];
