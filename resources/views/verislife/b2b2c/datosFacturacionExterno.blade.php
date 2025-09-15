@@ -1133,6 +1133,7 @@ Veris Care - Suscripción
             if(detalleSuscripcion.persona.telefonoCelular !== null){
                 $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
             }
+            $('#nombres, #primerApellido, #segundoApellido, #fechaNacimiento, #genero').attr('readonly', true);
         }
 
         $('body').on('change', '#terms, #privacy', function(){

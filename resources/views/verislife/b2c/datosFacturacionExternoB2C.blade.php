@@ -1630,6 +1630,7 @@ Veris Care - Suscripción
                         let paciente = await consultarPaciente();
                         let persona = {};
                         if(paciente.data.totalRows > 0){
+                            $('#nombres, #primerApellido, #segundoApellido, #fechaNacimiento, #genero').attr('readonly', true)
                             persona = paciente.data.rows[0]
                             detalleSuscripcion.persona = persona;
                             $('#nombres').val(detalleSuscripcion.persona.primerNombre);
@@ -1645,6 +1646,9 @@ Veris Care - Suscripción
                             if(detalleSuscripcion.persona.telefonoCelular !== null){
                                 $('#celular').val(detalleSuscripcion.persona.telefonoCelular.replace('+593', '0'));
                             }
+                        }else{
+                            $('#nombres, #primerApellido, #segundoApellido, #fechaNacimiento, #genero').attr('readonly', false).val('');
+                            $('#email, #celular').val('')
                         }
                         $('#btn-next').attr('disabled', false);
                     }else{

@@ -227,7 +227,7 @@ Registro
             <div class="col-md-6">
                 <h6 class="bg-zumthor-50 text-blue-zodiac-950 fw-semibold text-start px-3 py-2 rounded w-auto">${plan.nombre}</h6>
                 <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
-                <h2 class="fw-semibold text-blue-zodiac-950 mb-0">$${plan.valorFinal} <small class="fs-6">/anual</small></h2>
+                <h2 class="fw-semibold text-blue-zodiac-950 mb-0">$${plan.valorFinal} <small class="fs-6 text-capitalize">/${plan.tipo.toLowerCase()}</small></h2>
                 <p class="text-fiord-700 text-decoration-line-through small mb-0">PVP $${plan.precio}</p>
             </div>
             <div class="col-md-6 border-start">
