@@ -30,7 +30,7 @@ class Ism extends Model
     // public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
     // public const APPLICATION_KEY_NUVEI = 'jQeELdG4N5NXi6ULTv3kcm9quk9hXx';
     // public const SERVER_CODE_NUVEI = 'VERISSTG-EC-SERVER';
-    // public const SERVER_KEY_NUVEI = 'hNGoiXp3iFM2YWZH9HAo2SVM6iQqJN';
+    // public const SERVER_KEY_NUVEI = 'hNGoiXp3iFM2YWZH9HAo2SVM6iQqJN'; 
 
     // PROD
     public const BASE_URL = 'https://api.phantomx.com.ec';  
