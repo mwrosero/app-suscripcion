@@ -1287,10 +1287,14 @@ Registro
         if(step == 2){
             let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
             if(_idMethod == "pills-bank-transfer-tab"){
-                if(finalFile !== null){
+                if(aplicaCredito){
                     $('#btn-next').attr('disabled', false);
                 }else{
-                    $('#btn-next').attr('disabled', true);
+                    if(finalFile !== null){
+                        $('#btn-next').attr('disabled', false);
+                    }else{
+                        $('#btn-next').attr('disabled', true);
+                    }
                 }
             }else{
                 let frecuenciaPago = $('#frecuenciaPago').val();
@@ -1651,7 +1655,7 @@ Registro
         console.log(data);
         let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
         
-        if(_idMethod === "pills-bank-transfer-tab"){
+        if(_idMethod === "pills-bank-transfer-tab" && finalFile !== null){
             await uploadComprobante()
         }
     }
