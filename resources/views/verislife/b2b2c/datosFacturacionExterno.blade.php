@@ -218,6 +218,36 @@ Veris Care - Suscripción
         </div>
     </div>
 </div>
+
+<!-- Modal de Código de Verificación -->
+<div class="modal fade" id="modalNuveiOtp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNuveiOtpLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-body text-center p-4">
+
+                <h3 class="modal-title fw-semibold text-primary-veris mb-3">Código de verificación</h3>
+
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/enter-otp.svg" alt="Código de verificación" class="img-fluid mb-4" style="max-height: 256px;">
+
+                <p class="mb-2 fw-semibold fs-6">Para autenticar tu tarjeta</b> ingresa el <b>código de seguridad</b> enviado a tu teléfono y/o correo electrónico.</p>
+
+                <div class="d-flex justify-content-center gap-2 mb-3 verification-inputs">
+                    <input type="text" id="input1_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 1">
+                    <input type="text" id="input2_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 2">
+                    <input type="text" id="input3_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 3">
+                    <input type="text" id="input4_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
+                    <input type="text" id="input5_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
+                    <input type="text" id="input6_nuvei" maxlength="1" class="form-control text-center text-primary-veris fw-bold fs-4 p-2 rounded input-digit" placeholder="-" aria-label="Dígito 4">
+                </div>
+
+                <button type="button" class="btn btn-cerulean-blue-800 w-100 mb-2 btn-verificar-otp-nuvei" disabled>Verificar código</button>
+                <button type="button" class="btn btn-outline-cerulean-blue-800 w-100" data-bs-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Firmado documento -->
 <div class="modal fade" id="signedDocumentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signedDocumentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -1249,6 +1279,19 @@ Veris Care - Suscripción
             await confirmarOtp();
         })
 
+        $('body').on('input', '#input1_nuvei, #input2_nuvei, #input3_nuvei, #input4_nuvei, #input5_nuvei, #input6_nuvei', async function(){
+            if( $('#input1_nuvei').val() != "" && $('#input2_nuvei').val() != "" && $('#input3_nuvei').val() != "" && $('#input4_nuvei').val() != "" && $('#input5_nuvei').val() != "" && $('#input6_nuvei').val() != ""){
+                $('.btn-verificar-otp-nuvei').attr('disabled',false)
+            }else{
+                $('.btn-verificar-otp-nuvei').attr('disabled',true)
+                // showMessage('warning','Atención','Debe ingresar el código OTP recibido mediante SMS');
+            }
+        })
+
+        $('body').on('click', '.btn-verificar-otp-nuvei', async function(){
+            await autenticarTokenNuvei();
+        })
+
         const inputs = document.querySelectorAll(".input-digit");
 
         inputs.forEach((input, index) => {
@@ -1337,6 +1380,7 @@ Veris Care - Suscripción
             //await registrarTarjeta();
         }else if(cardResponse.card.status === 'review' || cardResponse.card.status === 'pending') {
             detalleSuscripcion.tarjeta = cardResponse.card;
+            popupOtpNuvei();
             console.log("Abrir OTP");
             {{-- let ruta = `/citas-autenticacion-registro-tarjeta/{{ $params }}`; --}}
             {{-- guardarData();
@@ -1368,6 +1412,17 @@ Veris Care - Suscripción
         submitButton.removeAttr("disabled");
         submitButton.text(submitInitialText);
     };
+
+    function popupOtpNuvei(){
+        hideLoader();
+        $('#input1_nuvei').val("");
+        $('#input2_nuvei').val("");
+        $('#input3_nuvei').val("");
+        $('#input4_nuvei').val("");
+        $('#input5_nuvei').val("");
+        $('#input6_nuvei').val("");
+        $('#modalNuveiOtp').modal('show');
+    }
     
     async function obtenerListadoDocumentosFirma(){
         let args = [];
@@ -1889,6 +1944,45 @@ Veris Care - Suscripción
         const data = await call(args);
         console.log(data);
         delete detalleSuscripcion.tarjeta
+    }
+
+    async function autenticarTokenNuvei(){
+        let codigoOtp = `${$('#input1_nuvei').val()}${$('#input2_nuvei').val()}${$('#input3_nuvei').val()}${$('#input4_nuvei').val()}${$('#input5_nuvei').val()}${$('#input6_nuvei').val()}`;
+        let uid = `${$('#numeroIdentificacion').val()}`;
+        let args = [];
+        args["endpoint"] = `${api_url_nuvei}/v2/transaction/verify/`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["tokenNuvei"] = await getTokenNuvei();
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "user": {
+                "id": `${uid}`
+            },
+            "transaction": {
+                id: detalleSuscripcion.tarjeta.transaction_reference,
+            },
+            "type": "BY_OTP",
+            "value": `${codigoOtp}`,
+            "more_info":true,
+        });
+        const data = await call(args);
+        console.log(data);
+        detalleSuscripcion.autenticacionOtp = data
+        if(data.card.status.toUpperCase() == "VALID"){
+            $('#modalNuveiOtp').modal('hide');
+            $('.box-tarjeta').addClass('d-none');
+            $('.box-firma').removeClass('d-none');
+            esTarjetaBox = false;
+            await obtenerListadoDocumentosFirma()
+            $('#btn-next').attr('disabled', true);
+            validateFields();
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
+        }else if(data.card.status.toUpperCase() == "PENDING"){
+            showMessage('warning','Código inválido','Código erróneo, inténtalo nuevamente');
+        }else{
+            showMessage('warning','No se permiten más intentos','Haz alcanzado el número máximo de intentos con este código');
+        }
     }
 
     async function getTokenNuvei(){
