@@ -1751,7 +1751,8 @@ Veris Care - Suscripción
                 let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
                 let nombresFactura = $('#nombresFactura').val();
 
-                if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && segundoApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
+                {{-- if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && segundoApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){ --}}
+                if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
                     if(!$('#mismosDatos').is(':checked')){
                         if(nombresFactura.length > 0 && tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido){
                             $('#btn-next').attr('disabled', false);
@@ -2237,7 +2238,7 @@ Veris Care - Suscripción
         const data = await call(args);
         console.log(data);
         detalleSuscripcion.autenticacionOtp = data
-        if(data.card.status.toUpperCase() == "VALID"){
+        if(data.transaction.status === "success" && data.transaction.status_detail === 32){
             $('#modalNuveiOtp').modal('hide');
             $('.box-tarjeta').addClass('d-none');
             $('.box-firma').removeClass('d-none');
@@ -2246,7 +2247,7 @@ Veris Care - Suscripción
             $('#btn-next').attr('disabled', true);
             validateFields();
             $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
-        }else if(data.card.status.toUpperCase() == "PENDING"){
+        }else if(data.transaction.status === "pending"){
             showMessage('warning','Código inválido','Código erróneo, inténtalo nuevamente');
         }else{
             showMessage('warning','No se permiten más intentos','Haz alcanzado el número máximo de intentos con este código');
