@@ -470,8 +470,8 @@ Veris Care - Suscripción
                                                 <div class="col-md-12 col-xl-8">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="privacy" name="privacy">
-                                                        <label class="form-check-label fs-10p" for="privacy">
-                                                            He leído y comprendo la autorización para el <a href="https://www.veris.com.ec/politicas/" class="text-mariner-600 text-decoration-underline" nemonico-rel="TRATAMIENTO_DATOS">Tratamiento de mis datos personales</a> <span class="text-danger">*</span>
+                                                        <label class="form-check-label fs-10p">
+                                                            He leído y comprendo la autorización para el <a href="https://www.veris.com.ec/politicas/" target="_blank" class="text-mariner-600 text-decoration-underline" nemonico-rel="TRATAMIENTO_DATOS">Tratamiento de mis datos personales</a> <span class="text-danger">*</span>
                                                         </label>
                                                     </div>
                                                 </div>
