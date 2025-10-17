@@ -152,7 +152,7 @@ Registro
                                 <div class="form-check d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" id="acceptDataPolicy" name="acceptDataPolicy">
                                     <label class="form-check-label fs-10p ms-2" for="acceptDataPolicy">
-                                        He leído y comprendo la autorización para el <a href="#" target="_blank">Tratamiento de mis datos personales</a>
+                                        He leído y comprendo la autorización para el <a href="https://www.veris.com.ec/politicas/" target="_blank">Tratamiento de mis datos personales</a>
                                     </label>
                                 </div>
                             </div>
