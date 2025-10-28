@@ -747,6 +747,7 @@ Registro
     });
 
     async function cargaAfiliadosSuscripcion(){
+        {{-- let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}"; --}}
         let args = [];
         args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
@@ -756,6 +757,7 @@ Registro
         args["data"] = JSON.stringify({
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaSuscripcion": detalleSuscripcion.detallePlan.secuenciaSuscripcion,
+            //"tipoFlujo": tipoFlujo,
             "afiliados": pacientesAgregados
         });
         const data = await call(args);

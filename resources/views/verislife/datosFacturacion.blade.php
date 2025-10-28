@@ -372,6 +372,16 @@ Registro
                                                         readonly>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
+                                                    <label for="codigoAsesor" class="form-label fs-14p fw-medium text-raven-700">Código de asesor Veris <span class="text-raven-700">(Opcional)</span></label>
+                                                    <input
+                                                        type="text"
+                                                        class="form-control form-control-lg fs-14p"
+                                                        id="codigoAsesor"
+                                                        name="codigoAsesor"
+                                                        placeholder="Ingrese el código del asesor">
+                                                    <span class="d-block mt-2 fs-12p fw-medium nombreAsesor text-capitalize d-none"></span>
+                                                </div>
+                                                <div class="col-md-12 col-xl-8">
                                                     <label for="telefonoFactura" class="form-label fs-14p fw-medium">Teléfono <span class="text-danger">*</span></label>
                                                     <input
                                                         type="tel"
@@ -1031,6 +1041,12 @@ Registro
         nombreBancoSelect.disabled = false;
         $('#nombreBanco').select2()
 
+        $('body').on('change', '#codigoAsesor', async function(){
+            if($(this).val() !== ""){
+                await buscarAsesor();
+            }
+        });
+
         $('body').on('click', '.link-comprobante-pago', async function(){
             await mostrarComprobante();
         })
@@ -1466,7 +1482,7 @@ Registro
         args["showLoader"] = true;
         args["token"] = _token;
         args["bodyType"] = "json";
-        args["data"] = JSON.stringify({
+        let payload = {
             "codigoCliente": {{ Session::get('infoCliente')->informacionCliente->codigoCliente }},
             "secuenciaAfiliado": "",//"{{ Session::get('userData')->secuenciaUsuario }}",
             "codigoSolicitudFirma": codigoSolicitudFirma,
@@ -1514,7 +1530,11 @@ Registro
                 "aceptaTratamientoDatos": true,
                 "aceptaConsentimientoDependiente": true
             }
-        });
+        }
+        if(codigoAsesor !== ""){
+            payload.codigoAsesor = parseInt(codigoAsesor);
+        }
+        args["data"] = JSON.stringify(payload);
         const data = await call(args);
         console.log(data);
         detalleSuscripcion.suscripcion = data.data;
@@ -1653,10 +1673,35 @@ Registro
         });
         const data = await call(args);
         console.log(data);
+
+        if (data.code !== 200) {
+            showMessage('error','Atención', data.message)
+        }
         let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
         
         if(_idMethod === "pills-bank-transfer-tab" && finalFile !== null){
             await uploadComprobante()
+        }
+    }
+
+    let codigoAsesor = '';
+    async function buscarAsesor(){
+        let args = [];
+        args["endpoint"] = api_url + `/generaltest/v1/personal_empresa?codigoEmpresa=1&tipoFiltro=CODIGO_PERSONAL&valorFiltro=${ $('#codigoAsesor').val() }&page=1&perPage=1&estado=ACTIVO`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data);
+        if(data.code == 200){
+            if(data.data.totalRows > 0){
+                codigoAsesor = $('#codigoAsesor').val();
+                $('.nombreAsesor').html(`Asesor: ${data.data.rows[0].nombreCompleto.toLowerCase()}`).removeClass('d-none');
+            }else{
+                codigoAsesor = '';
+                showMessage('warning','No existe asesor asociado al código ingresado');
+                $('.nombreAsesor').html(``).addClass('d-none');
+            }
         }
     }
 </script>
