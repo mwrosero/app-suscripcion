@@ -280,3 +280,58 @@ async function cargarTiposIdentificacion() {
     });
     $('#tipoIdentificacion').html(elem);
 }
+
+async function esValidaCedula(cedula) {
+    var cad = cedula.trim();
+    var total = 0;
+    var longitud = cad.length;
+    var longcheck = longitud - 1;
+
+    if (cad !== "" && longitud === 10){
+        for(i = 0; i < longcheck; i++){
+            if (i%2 === 0) {
+                var aux = cad.charAt(i) * 2;
+                if (aux > 9) aux -= 9;
+                total += aux;
+            } else {
+                total += parseInt(cad.charAt(i)); // parseInt o concatenarÃƒÂ¡ en lugar de sumar
+            }
+        }
+
+        total = total % 10 ? 10 - total % 10 : 0;
+
+        if (cad.charAt(longitud-1) == total) {
+            //document.getElementById("salida").innerHTML = ("Cedula VÃƒÂ¡lida");
+            return true;
+        }else{
+            //document.getElementById("salida").innerHTML = ("Cedula InvÃƒÂ¡lida");
+            return false;
+        }
+    }
+
+    return false;
+}
+
+let codigoAsesor = '';
+async function buscarAsesor(str){
+    let esCedula = await esValidaCedula(str);
+    let filtro = 'CODIGO_PERSONAL';
+    if(esCedula){
+        filtro = 'NUMERO_IDENTIFICACION';
+    }
+    let args = [];
+    args["endpoint"] = api_url + `/generaltest/v1/personal_empresa?codigoEmpresa=1&tipoFiltro=${filtro}&valorFiltro=${ str }&page=1&perPage=10&estado=ACTIVO`;
+    args["method"] = "GET";
+    args["showLoader"] = false;
+    args["token"] = _token;
+    const data = await call(args);
+    console.log(data);
+    return data;
+}
+
+async function setSearch(asesor) {
+    console.log(asesor)
+    document.getElementById('codigoAsesor').value = asesor.nombreCompleto.toLowerCase();
+    codigoAsesor = asesor.codigoPersonal;
+    document.getElementById("result").innerHTML = "";
+}

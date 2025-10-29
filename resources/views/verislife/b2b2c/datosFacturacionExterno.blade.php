@@ -460,14 +460,18 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
-                                                    <label for="codigoAsesor" class="form-label fs-14p fw-medium text-raven-700">Código de asesor Veris <span class="text-raven-700">(Opcional)</span></label>
+                                                    <label for="codigoAsesor" class="form-label fs-14p fw-medium text-raven-700 d-flex">Código o Cédula de asesor Veris <span class="fs-12p fw-normal ms-auto">(Opcional)</span></label>
                                                     <input
-                                                        type="text"
-                                                        class="form-control form-control-lg fs-14p"
+                                                        type="search"
+                                                        class="form-control form-control-lg fs-14p text-capitalize"
                                                         id="codigoAsesor"
                                                         name="codigoAsesor"
                                                         placeholder="Ingrese el código del asesor">
-                                                    <span class="d-block mt-2 fs-12p fw-medium nombreAsesor text-capitalize d-none"></span>
+                                                    <div id="result" class="list-group"></div>
+                                                    <span class="d-block mt-2 fs-12p fw-light errorAsesor d-none">
+                                                        <i class="fa-solid fa-triangle-exclamation text-grenadier-600 me-1"></i>
+                                                        Ingresar un código o cédula de asesor válida.
+                                                    </span>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
                                                     <div class="form-check">
@@ -1159,10 +1163,56 @@ Veris Care - Suscripción
             }
         });
 
-        $('body').on('change', '#codigoAsesor', async function(){
-            if($(this).val() !== ""){
-                await buscarAsesor();
+        var typingTimer; // Timer identifier
+        var doneTypingInterval = 500; // Tiempo de pausa en milisegundos (0.5 segundos)
+
+        $('#codigoAsesor').on('keyup', async function() {
+            clearTimeout(typingTimer); // Limpiar el temporizador cada vez que se escribe
+
+            var searchText = $(this).val();
+            if (searchText.length >= 2) { // Solo realizar la búsqueda si hay al menos 3 caracteres
+                typingTimer = setTimeout(async function() {
+                    var autoCompleteResult = await buscarAsesor(searchText);
+                    console.log(autoCompleteResult)
+                    document.getElementById("result").innerHTML = "";
+                    if(autoCompleteResult.code == 200){
+                        if(autoCompleteResult.data.totalRows > 0){
+                            $('.errorAsesor').addClass('d-none');
+                            $.each(autoCompleteResult.data.rows, function(key, value){
+                                console.log(value);
+                                document.getElementById("result").innerHTML += `<div style="cursor: pointer;s" class="list-group-item list-group-item-action lista-asesor text-capitalize" data-rel='${JSON.stringify(value)}'>${value.nombreCompleto.toLowerCase()}</div>`;
+                            })
+                            {{-- for (var i = 0, limit = 10, len = autoCompleteResult.length; i < len  && i < limit; i++) {
+                                document.getElementById("result").innerHTML += "<a class='list-group-item list-group-item-action' href='#' onclick='setSearch(\"" + autoCompleteResult[i] + "\")'>" + autoCompleteResult[i] + "</a>";
+                            } --}}
+                        }else{
+                            $('.errorAsesor').removeClass('d-none');
+                        }
+                    }else{
+                        showMessage('warning','Atención', autoCompleteResult.message);
+                        $('.errorAsesor').addClass('d-none');
+                    }
+                }, doneTypingInterval);
+            }else if(searchText.length == 0){
+                console.log("borrar")
+                codigoAsesor = '';
+                document.getElementById("result").innerHTML = "";
+                $('.errorAsesor').addClass('d-none');
             }
+        });
+        
+        $('body').on('change', '#codigoAsesor', async function(){
+            if($(this).val() == ""){
+                codigoAsesor = '';
+                document.getElementById("result").innerHTML = "";
+                $('.errorAsesor').addClass('d-none');
+            }
+        })
+
+        $('body').on('click', '.lista-asesor', async function(){
+            let asesor = JSON.parse($(this).attr('data-rel'));
+            console.log(asesor);
+            await setSearch(asesor);
         });
 
         $('#numeroIdentificacion').val(detalleSuscripcion.numeroIdentificacion)
@@ -2003,27 +2053,6 @@ Veris Care - Suscripción
             showMessage('warning','Código inválido','Código erróneo, inténtalo nuevamente');
         }else{
             showMessage('warning','No se permiten más intentos','Haz alcanzado el número máximo de intentos con este código');
-        }
-    }
-
-    let codigoAsesor = '';
-    async function buscarAsesor(){
-        let args = [];
-        args["endpoint"] = api_url + `/generaltest/v1/personal_empresa?codigoEmpresa=1&tipoFiltro=CODIGO_PERSONAL&valorFiltro=${ $('#codigoAsesor').val() }&page=1&perPage=1&estado=ACTIVO`;
-        args["method"] = "GET";
-        args["showLoader"] = true;
-        args["token"] = _token;
-        const data = await call(args);
-        console.log(data);
-        if(data.code == 200){
-            if(data.data.totalRows > 0){
-                codigoAsesor = $('#codigoAsesor').val();
-                $('.nombreAsesor').html(`Asesor: ${data.data.rows[0].nombreCompleto.toLowerCase()}`).removeClass('d-none');
-            }else{
-                codigoAsesor = '';
-                showMessage('warning','No existe asesor asociado al código ingresado');
-                $('.nombreAsesor').html(``).addClass('d-none');
-            }
         }
     }
 
