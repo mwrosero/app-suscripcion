@@ -22,6 +22,7 @@ class Ism extends Model
     // public const IDORGANIZACION = 'adf4e264-cd20-4653-9a44-025b13050992';
     // public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     // public const WAR_SEGURIDAD = 'seguridadtest';
+    // public const WAR_GENERAL = 'generaltest';
     // public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     // public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
     // public const PASSWORD_VERIS_GENERIC = 'Cl@ve1234';
@@ -37,6 +38,7 @@ class Ism extends Model
     public const IDORGANIZACION = '365509c8-9596-4506-a5b3-487782d5876e';
     public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     public const WAR_SEGURIDAD = 'seguridad';
+    public const WAR_GENERAL = 'general';
     public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
     public const PASSWORD_VERIS_GENERIC = 'B@Ck3nFID3Liz@C10N!2025$$';

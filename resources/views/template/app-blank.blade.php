@@ -76,6 +76,8 @@
         const _idOrganizacion = "{{ \App\Models\Ism::IDORGANIZACION }}";
         const api_url = "{{ \App\Models\Ism::BASE_URL }}";
         const api_url_nuvei = "{{ \App\Models\Ism::BASE_URL_NUVEI }}";
+
+        const war_general = "{{ \App\Models\Ism::WAR_GENERAL }}";
         
         const url_site = "{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}";
     </script>
@@ -121,7 +123,7 @@
     <!-- Page JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/js/scripts/utils.js"></script>
-    <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/js/ism-helper.js?v=1.0.3"></script>
+    <script src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/js/ism-helper.js?v=1.0.4"></script>
     @stack('scripts')
 </body>
 
