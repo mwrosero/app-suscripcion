@@ -320,7 +320,7 @@ async function buscarAsesor(str){
         filtro = 'NUMERO_IDENTIFICACION';
     }
     let args = [];
-    args["endpoint"] = api_url + `/general/v1/personal_empresa?codigoEmpresa=1&tipoFiltro=${filtro}&valorFiltro=${ str }&page=1&perPage=10&estado=ACTIVO`;
+    args["endpoint"] = api_url + `/${war_general}/v1/personal_empresa?codigoEmpresa=1&tipoFiltro=${filtro}&valorFiltro=${ str }&page=1&perPage=10&estado=ACTIVO`;
     args["method"] = "GET";
     args["showLoader"] = false;
     args["token"] = _token;
