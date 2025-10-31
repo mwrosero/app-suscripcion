@@ -1653,6 +1653,10 @@ Registro
         });
         const data = await call(args);
         console.log(data);
+
+        if (data.code !== 200) {
+            showMessage('error','Atención', data.message)
+        }
         let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
         
         if(_idMethod === "pills-bank-transfer-tab" && finalFile !== null){

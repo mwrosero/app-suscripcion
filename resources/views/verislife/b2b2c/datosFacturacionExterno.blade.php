@@ -460,6 +460,20 @@ Veris Care - Suscripción
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8">
+                                                    <label for="codigoAsesor" class="form-label fs-14p fw-medium text-raven-700 d-flex">Código o Cédula de asesor Veris <span class="fs-12p fw-normal ms-auto">(Opcional)</span></label>
+                                                    <input
+                                                        type="search"
+                                                        class="form-control form-control-lg fs-14p text-capitalize"
+                                                        id="codigoAsesor"
+                                                        name="codigoAsesor"
+                                                        placeholder="Ingrese el código del asesor">
+                                                    <div id="result" class="list-group"></div>
+                                                    <span class="d-block mt-2 fs-12p fw-light errorAsesor d-none">
+                                                        <i class="fa-solid fa-triangle-exclamation text-grenadier-600 me-1"></i>
+                                                        Ingresar un código o cédula de asesor válida.
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-12 col-xl-8">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                                         <label class="form-check-label fs-10p" for="terms">
@@ -1149,6 +1163,58 @@ Veris Care - Suscripción
             }
         });
 
+        var typingTimer; // Timer identifier
+        var doneTypingInterval = 500; // Tiempo de pausa en milisegundos (0.5 segundos)
+
+        $('#codigoAsesor').on('keyup', async function() {
+            clearTimeout(typingTimer); // Limpiar el temporizador cada vez que se escribe
+
+            var searchText = $(this).val();
+            if (searchText.length >= 2) { // Solo realizar la búsqueda si hay al menos 3 caracteres
+                typingTimer = setTimeout(async function() {
+                    var autoCompleteResult = await buscarAsesor(searchText);
+                    console.log(autoCompleteResult)
+                    document.getElementById("result").innerHTML = "";
+                    if(autoCompleteResult.code == 200){
+                        if(autoCompleteResult.data.totalRows > 0){
+                            $('.errorAsesor').addClass('d-none');
+                            $.each(autoCompleteResult.data.rows, function(key, value){
+                                console.log(value);
+                                document.getElementById("result").innerHTML += `<div style="cursor: pointer;s" class="list-group-item list-group-item-action lista-asesor text-capitalize" data-rel='${JSON.stringify(value)}'>${value.nombreCompleto.toLowerCase()}</div>`;
+                            })
+                            {{-- for (var i = 0, limit = 10, len = autoCompleteResult.length; i < len  && i < limit; i++) {
+                                document.getElementById("result").innerHTML += "<a class='list-group-item list-group-item-action' href='#' onclick='setSearch(\"" + autoCompleteResult[i] + "\")'>" + autoCompleteResult[i] + "</a>";
+                            } --}}
+                        }else{
+                            $('.errorAsesor').removeClass('d-none');
+                        }
+                    }else{
+                        showMessage('warning','Atención', autoCompleteResult.message);
+                        $('.errorAsesor').addClass('d-none');
+                    }
+                }, doneTypingInterval);
+            }else if(searchText.length == 0){
+                console.log("borrar")
+                codigoAsesor = '';
+                document.getElementById("result").innerHTML = "";
+                $('.errorAsesor').addClass('d-none');
+            }
+        });
+        
+        $('body').on('change', '#codigoAsesor', async function(){
+            if($(this).val() == ""){
+                codigoAsesor = '';
+                document.getElementById("result").innerHTML = "";
+                $('.errorAsesor').addClass('d-none');
+            }
+        })
+
+        $('body').on('click', '.lista-asesor', async function(){
+            let asesor = JSON.parse($(this).attr('data-rel'));
+            console.log(asesor);
+            await setSearch(asesor);
+        });
+
         $('#numeroIdentificacion').val(detalleSuscripcion.numeroIdentificacion)
 
         if(Object.keys(detalleSuscripcion.persona).length > 0){
@@ -1717,7 +1783,7 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         args["token"] = _token;
         args["bodyType"] = "json";
-        args["data"] = JSON.stringify({
+        let payload = {
             "codigoCliente": parseInt(detalleSuscripcion.empresa.codigoEmpresa),
             "secuenciaAfiliado": detalleSuscripcion.carga.secuenciaAfiliado,
             "codigoSolicitudFirma": codigoSolicitudFirma,
@@ -1760,7 +1826,11 @@ Veris Care - Suscripción
                 "aceptaTratamientoDatos": true,
                 "aceptaConsentimientoDependiente": true
             }
-        });
+        }
+        if(codigoAsesor !== ""){
+            payload.codigoAsesor = parseInt(codigoAsesor);
+        }
+        args["data"] = JSON.stringify(payload);
         const data = await call(args);
         console.log(data);
         detalleSuscripcion.suscripcion = data.data;
