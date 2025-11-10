@@ -1943,7 +1943,7 @@ Veris Care - Suscripción
         if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
             // Desct Rol
             payload.pago.detalle.secuenciaAprobacionDsctoRol = detalleDescuentoRol.data.secuenciaAprobacion;
-            payload.pago.detalle.numero_cuotas = parseInt($('#cuotasDescuento option:selected').val());
+            payload.pago.detalle.numeroCuotas = parseInt($('#cuotasDescuento option:selected').val());
         }else{
             // Pago con TC/TD
             payload.pago.detalle.metadata = JSON.stringify(detalleSuscripcion.tarjeta);
