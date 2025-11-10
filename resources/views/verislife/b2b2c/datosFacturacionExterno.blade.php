@@ -579,6 +579,9 @@ Veris Care - Suscripción
                                                     <li class="nav-item nav-metodo-pago d-none debito_cuenta" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-debit-account-tab" data-bs-toggle="pill" data-bs-target="#pills-debit-account" type="button" role="tab" aria-controls="pills-debit-account" aria-selected="false">Débito a mi cuenta</button>
                                                     </li>
+                                                    <li class="nav-item nav-metodo-pago d-none descuento_rol" role="presentation">
+                                                        <button class="nav-link px-lg-4 fs-14p" id="pills-rol-discount-tab" data-bs-toggle="pill" data-bs-target="#pills-rol-discount" type="button" role="tab" aria-controls="pills-rol-discount" aria-selected="false">Descuento al rol</button>
+                                                    </li>
                                                     <li class="nav-item nav-metodo-pago d-none transferencia" role="presentation">
                                                         <button class="nav-link px-lg-4 fs-14p" id="pills-bank-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-bank-transfer" type="button" role="tab" aria-controls="pills-bank-transfer" aria-selected="false">Transferencia bancaria</button>
                                                     </li>
@@ -712,6 +715,49 @@ Veris Care - Suscripción
                                                                 <div class="text-center">
                                                                     <h6 class="fs-14p mb-1">Comprobante de pago</h6>
                                                                     <button type="button" class="btn btn-cerulean-blue-800 fs-14p">Cargar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane tab-descuento_rol d-none fade" id="pills-rol-discount" role="tabpanel" aria-labelledby="pills-rol-discount-tab" tabindex="0">
+                                                        <div class="row g-3 flex-column justify-content-center align-items-center">
+                                                            <div class="col-12">
+                                                                <hr>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <div class="card bg-zumthor-50">
+                                                                    <div class="card-body">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <i class="fa-solid fa-circle-info text-havelock-blue-500 fs-1 me-3"></i>
+                                                                            <div>
+                                                                                <p class="fw-normal mb-0 infoDescuentoRol"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8">
+                                                                <label for="cuotasDescuento" class="form-label fs-14p fw-medium">Nombre del colaborador</label>
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-lg fs-14p"
+                                                                    id="nombreColaboradorDescuento"
+                                                                    name="nombreColaboradorDescuento"
+                                                                    required
+                                                                    readonly>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8 mt-3">
+                                                                <label for="cuotasDescuento" class="form-label fs-14p fw-medium">Cantidad de cuotas</label>
+                                                                <select class="form-select form-select-lg bg-gray border-0 mb-3" id="cuotasDescuento" name="cuotasDescuento">
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 col-lg-8 mt-3">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="aceptaDescuentoRol" name="aceptaDescuentoRol" required>
+                                                                    <label class="form-check-label fs-10p" for="aceptaDescuentoRol">
+                                                                        Autorizo que los valores sean descontados de mi rol de pago.
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1028,8 +1074,8 @@ Veris Care - Suscripción
               `;
         } else if (idx === total - 1) {
             actions.innerHTML = `
-                <a href="/veris-care" class="btn btn-cerulean-blue-800">
-                  <span class="d-none d-sm-inline">Volver al inicio</span>
+                <a href="https://app.veris.com.ec/external/agendamiento" class="btn btn-cerulean-blue-800 link-agendamiento">
+                  <span class="d-none d-sm-inline">Agendar cita médica</span>
                 </a>
               `;
         } else if(idx === 1) {
@@ -1091,7 +1137,11 @@ Veris Care - Suscripción
             }
 
             if(step == 2){
-                await suscribirTarjeta();
+                if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
+                    stepper.next();
+                }else{
+                    await suscribirTarjeta();
+                }
                 return;
             }
 
@@ -1146,9 +1196,20 @@ Veris Care - Suscripción
         const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
         if(detalleSuscripcion.lineaNegocio === 'PMF'){
             $('body').addClass('bg-onahau-gradient-100')
+            $('.link-agendamiento').attr('href', 'https://app.parami.com.ec/external/agendamiento');
         }else{
             $('body').addClass('bg-pattens-blue-100-gradient')
         }
+
+        $('body').on('click', '.nav-metodo-pago button.active', function(){
+            if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
+                validateFields();
+            }
+        })
+
+        $('body').on('change', '#cuotasDescuento', function(){
+            validateFields();
+        })
 
         $('body').on('click', '.link-documento', async function(){
             let nemonico = $(this).attr('nemonico-rel');
@@ -1232,7 +1293,7 @@ Veris Care - Suscripción
             $('#nombres, #primerApellido, #segundoApellido, #fechaNacimiento, #genero').attr('readonly', true);
         }
 
-        $('body').on('change', '#terms, #privacy', function(){
+        $('body').on('change', '#terms, #privacy, #aceptaDescuentoRol', function(){
             validateFields()
             {{-- if($('#terms').is(':checked') && $('#privacy').is(':checked')) {
                 console.log(1)
@@ -1592,6 +1653,14 @@ Veris Care - Suscripción
         }
 
         if(step == 2){
+            console.log("Validate payment method");
+            if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
+                if($('#aceptaDescuentoRol').is(':checked') && getInput('cuotasDescuento') !== ""){
+                    $('#btn-next').attr('disabled', false);
+                }else{
+                    $('#btn-next').attr('disabled', true);
+                }
+            }
             /*let frecuenciaPago = $('#frecuenciaPago').val();
             let nombreBanco = $('#nombreBanco').val();
             let numeroCuenta = $('#numeroCuenta').val();
@@ -1637,9 +1706,10 @@ Veris Care - Suscripción
         }
     }
 
+    let detalleDescuentoRol;
     async function cargarMediosPago(){
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=COLABORADOR`;
+        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=COLABORADOR&codigoCliente=${detalleSuscripcion.empresa.codigoEmpresa}`
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1647,7 +1717,7 @@ Veris Care - Suscripción
         console.log(data);
         let isSettedActive = false;
         
-        $.each(data.data, function(key, value){
+        $.each(data.data, async function(key, value){
             let classTab = ``
             let classTabContent = ``
             if(value.activo == true){
@@ -1662,9 +1732,51 @@ Veris Care - Suscripción
                 $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
                 console.log(`.${value.nemonico.toLowerCase()} button`);
                 $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
+                if(value.nemonico == "DESCUENTO_ROL"){
+                    detalleDescuentoRol = await detallesAprobacionDescuentoRol();
+                }
             }
 
         })
+    }
+
+    async function detallesAprobacionDescuentoRol(){
+        let persona = await buscarAsesor(detalleSuscripcion.persona.numeroIdentificacion)
+        let codigoPersonal;
+        if(persona.code == 200){
+            if(persona.data.totalRows > 0){
+                codigoPersonal = persona.data.rows[0].codigoPersonal; 
+                $('#nombreColaboradorDescuento').val(persona.data.rows[0].nombreCompleto);
+            }
+        }
+        let args = [];
+        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/${codigoPersonal}/aprobacion_descuento_rol?codigoEmpresa=1&secuenciaFrecuencia=${detalleSuscripcion.detallePlan.secuenciaFrecuencia}`
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        if(data.code == 200){
+            let montoAutorizado = data.data.montoAutorizado;
+            let numeroMaxCuotas = data.data.numeroMaxCuotas;
+
+            if(montoAutorizado >= detalleSuscripcion.detallePlan.valorFinal){
+                $('.infoDescuentoRol').html(`El monto autorizado para la compra del programa de fidelización es $${montoAutorizado.toFixed(2)}.`);
+                let elemOpt = `<option hidden selected value="">Selecciona</option>`;
+                for(let i = 1; i <= numeroMaxCuotas; i++){
+                    elemOpt += `<option value="${i}">${i} Cuota${ (i>1) ? `s` : `` }</option>`;
+                }
+                $('#cuotasDescuento').html(elemOpt);
+            }else{
+                $('.infoDescuentoRol').html(`Tu monto autorizado es $${montoAutorizado.toFixed(2)}. El valor aprobado es menor al costo del programa seleccionado.`);
+                $('#cuotasDescuento').attr('disabled', true);
+                $('#aceptaDescuentoRol').attr('disabled', true);
+            }
+        }else{
+            $('.infoDescuentoRol').html(`Por favor, ingresa en el <b>BUK</b> y realiza tu solicitud de información financiera para determinar tu monto aprobado.`);
+            $('#cuotasDescuento').attr('disabled', true);
+            $('#aceptaDescuentoRol').attr('disabled', true);
+        }
+        return data;
     }
 
     async function validarIdentificacionFactura(){
@@ -1795,8 +1907,8 @@ Veris Care - Suscripción
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
                 "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * 1).toFixed(2)),
                 "detalle": {
-                    "metadata": JSON.stringify(detalleSuscripcion.tarjeta),
-                    "cardToken": detalleSuscripcion.tarjeta.token,
+                    "metadata": '',
+                    "cardToken": '',
                     "numeroTarjeta": "4000996174334475",
                     "mesExpiracion": 10,
                     "anioExpiracion": 2028,
@@ -1827,6 +1939,17 @@ Veris Care - Suscripción
                 "aceptaConsentimientoDependiente": true
             }
         }
+
+        if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
+            // Desct Rol
+            payload.pago.detalle.secuenciaAprobacionDsctoRol = detalleDescuentoRol.data.secuenciaAprobacion;
+            payload.pago.detalle.numero_cuotas = parseInt($('#cuotasDescuento option:selected').val());
+        }else{
+            // Pago con TC/TD
+            payload.pago.detalle.metadata = JSON.stringify(detalleSuscripcion.tarjeta);
+            payload.pago.detalle.cardToken = detalleSuscripcion.tarjeta.token;
+        }
+
         if(codigoAsesor !== ""){
             payload.codigoAsesor = parseInt(codigoAsesor);
         }

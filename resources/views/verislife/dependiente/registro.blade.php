@@ -211,12 +211,12 @@ Registro
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
             <div class="modal-body text-center p-4">
-                <h5 class="text-blue-zodiac-950 text-center fw-bold">¿Estás seguro de que deseas borrar este colaborador?</h5>
+                <h5 class="text-blue-zodiac-950 text-center fw-bold">¿Estás seguro de que deseas borrar este dependiente?</h5>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/man-thinking.svg" />
-                <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Cúal es el motivo principal para eliminar a este colaborador?</h6>
+                <h6 class="text-blue-zodiac-950 text-center fw-bold">¿Cúal es el motivo principal para eliminar a este dependiente?</h6>
                 <div class="text-start d-flex flex-column gap-2 mb-4" id="contentMotivosInactivacion"></div>
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" id="btnDeleteCollaborador">Borrar colaborador</button>
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p col" id="btnDeleteCollaborador">Borrar dependiente</button>
                     <button type="button" class="btn btn-outline-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -228,7 +228,7 @@ Registro
     <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
         <div class="modal-content">
             <div class="modal-body text-center px-5 py-4">
-                <h6 class="text-blue-zodiac-950 text-center fw-bold">El colaborador ha sido borrado con éxito</h6>
+                <h6 class="text-blue-zodiac-950 text-center fw-bold">El dependiente ha sido borrado con éxito</h6>
                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/advantages.svg" class="mb-3"/>
                 <div class="text-center">
                     <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
@@ -675,7 +675,7 @@ Registro
             const secuenciaAfiliado = deleteCollaboratorModal.getAttribute('data-secuencia-afiliado');
             const selectedRadio = document.querySelector('input[name="motivo"]:checked');
             if (!selectedRadio) {
-                showMessage('warning','Atención','Debes seleccionar un motivo para eliminar al colaborador.');
+                showMessage('warning','Atención','Debes seleccionar un motivo para eliminar al dependiente.');
                 return;
             }
 
