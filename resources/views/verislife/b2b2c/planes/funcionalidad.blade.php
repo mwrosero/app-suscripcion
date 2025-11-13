@@ -10,6 +10,12 @@
     	await cargarPlanes();
 
     	$(document).on('click', '.nav-link', async function(){
+            console.log($(this).attr('id'))
+            if(parseInt(detalleSuscripcion.empresa.codigoEmpresa) == 68 && detalleSuscripcion.lineaNegocio === 'CMV'){
+                if($(this).attr('id') == "pills-mensual-veris-tab"){
+                    $('#avisoFrecuenciaLabelencia').modal('show');
+                }
+            }
     		await cargarPlanes();
     	})
 
@@ -25,6 +31,7 @@
                 location.href = '/facturacion-externa-b2c';
             }
         });
+
     })
 
     async function cargarPlanes(){

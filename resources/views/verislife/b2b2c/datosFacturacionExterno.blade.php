@@ -1074,6 +1074,9 @@ Veris Care - Suscripción
               `;
         } else if (idx === total - 1) {
             actions.innerHTML = `
+                <a href="/veris-care" class="btn btn-outline-cerulean-blue-800">
+                  <span class="d-none d-sm-inline">Ir al inicio</span>
+                </a>
                 <a href="https://app.veris.com.ec/external/agendamiento" class="btn btn-cerulean-blue-800 link-agendamiento">
                   <span class="d-none d-sm-inline">Agendar cita médica</span>
                 </a>
@@ -1206,6 +1209,14 @@ Veris Care - Suscripción
                 validateFields();
             }
         })
+
+        $('body').on('click', '.nav-metodo-pago', function () {
+            console.log(55)
+            if ($(this).find('.nav-link').attr('id') === 'pills-credit-card-tab') {
+                console.log(77)
+                $('#btn-next').attr('disabled', false);
+            }
+        });
 
         $('body').on('change', '#cuotasDescuento', function(){
             validateFields();
@@ -1726,12 +1737,21 @@ Veris Care - Suscripción
                     classTab = `active`;
                     classTabContent = `show active`;
                 }
-                console.log(value.nemonico)
-                console.log(classTab,classTabContent)
-                $(`.${value.nemonico.toLowerCase()}`).removeClass('d-none');
-                $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
-                console.log(`.${value.nemonico.toLowerCase()} button`);
-                $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
+                
+                if(value.nemonico == "DESCUENTO_ROL"){
+                    console.log(1)
+                    if(detalleSuscripcion.detallePlan.tipo == "ANUAL"){
+                        console.log(2)
+                        $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
+                        $(`.${value.nemonico.toLowerCase()}`).removeClass('d-none');
+                        $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
+                    }
+                }else{
+                    $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
+                    $(`.${value.nemonico.toLowerCase()}`).removeClass('d-none');
+                    $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
+                }
+
                 if(value.nemonico == "DESCUENTO_ROL"){
                     detalleDescuentoRol = await detallesAprobacionDescuentoRol();
                 }
