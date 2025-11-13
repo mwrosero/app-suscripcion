@@ -1073,11 +1073,15 @@ Veris Care - Suscripción
                 </button>
               `;
         } else if (idx === total - 1) {
+            let urlAgendar = `https://app.veris.com.ec/external/agendamiento`;
+            if(detalleSuscripcion.lineaNegocio === 'PMF'){
+                urlAgendar = `https://app.parami.com.ec/external/agendamiento`;
+            }
             actions.innerHTML = `
                 <a href="/veris-care" class="btn btn-outline-cerulean-blue-800">
                   <span class="d-none d-sm-inline">Ir al inicio</span>
                 </a>
-                <a href="https://app.veris.com.ec/external/agendamiento" class="btn btn-cerulean-blue-800 link-agendamiento">
+                <a href="${urlAgendar}" class="btn btn-cerulean-blue-800 link-agendamiento">
                   <span class="d-none d-sm-inline">Agendar cita médica</span>
                 </a>
               `;
