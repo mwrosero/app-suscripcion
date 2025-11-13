@@ -11,8 +11,8 @@
 
     	$(document).on('click', '.nav-link', async function(){
             console.log($(this).attr('id'))
-            if(parseInt(detalleSuscripcion.empresa.codigoEmpresa) == 68 && detalleSuscripcion.lineaNegocio === 'CMV'){
-                if($(this).attr('id') == "pills-mensual-veris-tab"){
+            if(parseInt(detalleSuscripcion.empresa.codigoEmpresa) == 68){//&& detalleSuscripcion.lineaNegocio === 'CMV'
+                if($(this).attr('id') == "pills-mensual-veris-tab" || $(this).attr('id') == "pills-mensual-parami-tab"){
                     $('#avisoFrecuenciaLabelencia').modal('show');
                 }
             }
