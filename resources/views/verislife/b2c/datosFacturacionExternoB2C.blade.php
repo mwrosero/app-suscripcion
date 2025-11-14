@@ -535,33 +535,8 @@ Veris Care - Suscripción
                                             <div class="row justify-content-center my-4">
                                                 <div class="col-md-12 col-xl-8" id="detalleSuscripcion">
                                                 </div>
-                                                <div class="col-md-12 col-xl-8 mt-3">
-                                                    <h6 class="fw-semibold">Descuentos en Veris</h6>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
-                                                        <span class="fs-14p line-height-20">Consultas adicionales.</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-15%</span>  
-                                                        <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
-                                                        <span class="fs-14p line-height-20">Farmacia.</span>
-                                                    </div>
-                                                    <h6 class="fw-semibold">Descuentos en Para Mí</h6>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
-                                                        <span class="fs-14p line-height-20">Consultas adicionales.</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
-                                                        <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
-                                                        <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
-                                                        <span class="fs-14p line-height-20">Farmacia.</span>
-                                                    </div>
+                                                <div class="col-md-12 col-xl-8 mt-3" id="info-descuentos">
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -1271,6 +1246,8 @@ Veris Care - Suscripción
             $('#btnEnd').attr('href','/b2c');
         }
 
+        fillInfoDescuentos();
+
         $('body').on('click', '.btn-suscribir-tarjeta', async function(){
             await suscribirTarjeta();
         })
@@ -1664,6 +1641,70 @@ Veris Care - Suscripción
         $('#input5_nuvei').val("");
         $('#input6_nuvei').val("");
         $('#modalNuveiOtp').modal('show');
+    }
+
+    function fillInfoDescuentos(){
+        let elem = ``;
+        if(detalleSuscripcion.lineaNegocio === 'PMF'){
+            elem += `
+                <h6 class="fw-semibold">Descuentos en Veris</h6>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-15%</span>  
+                    <span class="fs-14p line-height-20">Consultas adicionales.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-10%</span>  
+                    <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
+                    <span class="fs-14p line-height-20">Farmacia.</span>
+                </div>
+                <h6 class="fw-semibold">Descuentos en Para Mí</h6>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
+                    <span class="fs-14p line-height-20">Consultas adicionales.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
+                    <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
+                    <span class="fs-14p line-height-20">Farmacia.</span>
+                </div>
+            `;
+        }else{
+            elem += `
+                <h6 class="fw-semibold">Descuentos en Veris</h6>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
+                    <span class="fs-14p line-height-20">Consultas adicionales.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-15%</span>  
+                    <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
+                    <span class="fs-14p line-height-20">Farmacia.</span>
+                </div>
+                <h6 class="fw-semibold">Descuentos en Para Mí</h6>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
+                    <span class="fs-14p line-height-20">Consultas adicionales.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-20%</span>  
+                    <span class="fs-14p line-height-20">Laboratorio clínico, Imágenes, Terapias y procedimientos.</span>
+                </div>
+                <div class="d-flex gap-2 justify-content-start align-items-start mb-3">
+                    <span style="min-width: 60px;" class="badge text-center bg-blue-ribbon-600 rounded-4 px-2 py-1 fw-light">-5%</span>  
+                    <span class="fs-14p line-height-20">Farmacia.</span>
+                </div>
+            `;
+        }
+        $('#info-descuentos').html(elem);
     }
 
     async function obtenerListadoDocumentosFirma(){

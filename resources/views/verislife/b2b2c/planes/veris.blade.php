@@ -6,6 +6,20 @@ Veris Care - Elegir plan médico
 @section('body-class', 'bg-sail-gradient')
 
 @section('content')
+<div class="modal fade" id="avisoFrecuenciaLabelencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="avisoFrecuenciaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h5 class="text-primary-veris text-center fw-bold">Método de pago</h5>
+                <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/success-ok.svg" class="mb-3"/>
+                <h5 class="text-blue-zodiac-950 fw-bold">El método de pago “Descuento a rol” solo está disponible en los programas anuales</h5>
+                <div class="d-block">
+                    <div type="button" class="btn bg-blue-ribbon-600 text-white w-100 my-2 text-nowrap fs-14p py-2 col" data-bs-dismiss="modal">Cerrar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="container-fluid bg-sail-gradient px-3 py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Elije la opción <b class="text-primary-veris">Veris</b> de tu preferencia</h5>
