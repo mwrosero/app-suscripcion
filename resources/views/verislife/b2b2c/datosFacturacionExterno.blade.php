@@ -737,7 +737,7 @@ Veris Care - Suscripción
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-lg-8">
-                                                                <label for="cuotasDescuento" class="form-label fs-14p fw-medium">Nombre del colaborador</label>
+                                                                <label for="nombreColaboradorDescuento" class="form-label fs-14p fw-medium">Nombre del colaborador</label>
                                                                 <input
                                                                     type="text"
                                                                     class="form-control form-control-lg fs-14p"
@@ -748,9 +748,17 @@ Veris Care - Suscripción
                                                             </div>
                                                             <div class="col-12 col-lg-8 mt-3">
                                                                 <label for="cuotasDescuento" class="form-label fs-14p fw-medium">Cantidad de cuotas</label>
-                                                                <select class="form-select form-select-lg bg-gray border-0 mb-3" id="cuotasDescuento" name="cuotasDescuento">
+                                                                {{-- <select class="form-select form-select-lg bg-gray border-0 mb-3" id="cuotasDescuento" name="cuotasDescuento">
                                                                     
-                                                                </select>
+                                                                </select> --}}
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control form-control-lg fs-14p"
+                                                                    id="cuotasDescuento"
+                                                                    name="cuotasDescuento"
+                                                                    required
+                                                                    value="0"
+                                                                    readonly>
                                                             </div>
                                                             <div class="col-12 col-lg-8 mt-3">
                                                                 <div class="form-check">
@@ -1670,7 +1678,8 @@ Veris Care - Suscripción
         if(step == 2){
             console.log("Validate payment method");
             if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
-                if($('#aceptaDescuentoRol').is(':checked') && getInput('cuotasDescuento') !== ""){
+                {{-- if($('#aceptaDescuentoRol').is(':checked') && getInput('cuotasDescuento') !== ""){ --}}
+                if($('#aceptaDescuentoRol').is(':checked')){
                     $('#btn-next').attr('disabled', false);
                 }else{
                     $('#btn-next').attr('disabled', true);
@@ -1785,11 +1794,13 @@ Veris Care - Suscripción
 
             if(montoAutorizado >= detalleSuscripcion.detallePlan.valorFinal){
                 $('.infoDescuentoRol').html(`El monto autorizado para la compra del programa de fidelización es $${montoAutorizado.toFixed(2)}.`);
-                let elemOpt = `<option hidden selected value="">Selecciona</option>`;
+                {{-- let elemOpt = `<option hidden selected value="">Selecciona</option>`;
                 for(let i = 1; i <= numeroMaxCuotas; i++){
                     elemOpt += `<option value="${i}">${i} Cuota${ (i>1) ? `s` : `` }</option>`;
                 }
-                $('#cuotasDescuento').html(elemOpt);
+                $('#cuotasDescuento').html(elemOpt); --}}
+                $('#cuotasDescuento').val(numeroMaxCuotas);
+                $('#cuotasDescuento').attr('disabled', true);
             }else{
                 $('.infoDescuentoRol').html(`Tu monto autorizado es $${montoAutorizado.toFixed(2)}. El valor aprobado es menor al costo del programa seleccionado.`);
                 $('#cuotasDescuento').attr('disabled', true);
@@ -1967,7 +1978,8 @@ Veris Care - Suscripción
         if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
             // Desct Rol
             payload.pago.detalle.secuenciaAprobacionDsctoRol = detalleDescuentoRol.data.secuenciaAprobacion;
-            payload.pago.detalle.numeroCuotas = parseInt($('#cuotasDescuento option:selected').val());
+            {{-- payload.pago.detalle.numeroCuotas = parseInt($('#cuotasDescuento option:selected').val()); --}}
+            payload.pago.detalle.numeroCuotas = parseInt($('#cuotasDescuento').val());
         }else{
             // Pago con TC/TD
             payload.pago.detalle.metadata = JSON.stringify(detalleSuscripcion.tarjeta);
