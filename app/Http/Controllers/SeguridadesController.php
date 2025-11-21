@@ -202,7 +202,7 @@ class SeguridadesController extends Controller
 
         if($response->code != 200){
             session()->flash('mensaje', $response->message);
-            return Redirect::route('actualizar_clave.form', ['usuario' => base64_encode($data['usuario'])]);
+            return Redirect::route('actualizar_clave.form', ['usuario' => $data['usuario']]);
         }
 
         session()->flash('mensaje', "Contraseña actualizada exitosamente.");
