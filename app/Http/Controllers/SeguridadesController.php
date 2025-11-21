@@ -184,10 +184,9 @@ class SeguridadesController extends Controller
         return view('login.reestablecer_clave');
     }
 
-    public function formularioActualizarClave($codigo, $usuario){
+    public function formularioActualizarClave($usuario){
         return view('login.actualizar_clave')
-            ->with('codigo',$codigo)
-            ->with('usuario',$usuario);
+            ->with('usuario',base64_decode($usuario));
     }
 
     public function actualizarClave(Request $request){
@@ -202,7 +201,7 @@ class SeguridadesController extends Controller
 
         if($response->code != 200){
             session()->flash('mensaje', $response->message);
-            return Redirect::route('actualizar_clave.form', ['codigo' => $data['codigo'], 'usuario' => $data['usuario']]);
+            return Redirect::route('actualizar_clave.form', ['usuario' => base64_encode($data['usuario'])]);
         }
 
         session()->flash('mensaje', "Contraseña actualizada exitosamente.");

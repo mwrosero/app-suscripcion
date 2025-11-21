@@ -22,7 +22,8 @@
                     <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Recuperando Contraseña</p>
                     <p class="fs-10 mb-3 text-center bg-colortext">Para actualizar la contraseña debes ingresar el código de validación enviado a tu correo electrónico registrado</p>
 
-                    <form id="formAuthentication" class="mb-3" method="post" action="/actualizar-clave" onsubmit="return validarClave()">
+                     {{-- onsubmit="return validarClave()" --}}
+                    <form id="formAuthentication" class="mb-3" method="post" action="/actualizar-clave">
                         @csrf
                         <input type="hidden" name="usuario" value="{{ $usuario }}">
                         @if (session()->has('mensaje'))
@@ -38,7 +39,8 @@
                                 name="codigo"
                                 autofocus
                                 required 
-                                value="{{ $codigo }}" />
+                                autocomplete="off"
+                                value="" />
                         </div>
                         <div class="mb-2">
                             <label for="nuevaClave" class="form-label fw-medium">Nueva contraseña</label>
@@ -75,31 +77,58 @@
 </div>
 <!-- /Content Actualizar Clave -->
 <script>
-    function validarClave() {
-        var nuevaClave = document.getElementById("nuevaClave").value;
-        var confirmarClave = document.getElementById("confirmarClave").value;
-        
-        // Validar longitud mínima de 8 caracteres
-        if (nuevaClave.length < 8) {
-            showMessage('warning','Atención',"La nueva contraseña debe tener al menos 8 caracteres.");
-            return false;
-        }
-        
-        // Validar que las contraseñas coincidan
-        if (nuevaClave !== confirmarClave) {
-            showMessage('warning','Atención',"Las contraseñas no coinciden.");
-            return false;
-        }
-        
-        // Validar requisitos de complejidad
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
-        if (!re.test(nuevaClave)) {
-            showMessage('warning','Atención',"La contraseña debe incluir al menos: <ul><li>Incluir Números</li><li>Incluir Mayúsculas</li><li>Incluir Minúsculas</li><li>Tamaño mínimo 8</li><li>Caracteres especiales</li></ul>");
-            return false;
-        }
-        
-        return true;
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('formAuthentication');
+
+        form.addEventListener('submit', function(event) {
+            // 1. Obtenemos los valores
+            var nuevaClave = document.getElementById("nuevaClave").value;
+            var confirmarClave = document.getElementById("confirmarClave").value;
+            
+            // Variable para controlar si hay error
+            let hayError = false;
+            let mensajeError = "";
+
+            // 2. Validar longitud
+            if (nuevaClave.length < 8) {
+                hayError = true;
+                mensajeError = "La nueva contraseña debe tener al menos 8 caracteres.";
+            } 
+            // 3. Validar coincidencia
+            else if (nuevaClave !== confirmarClave) {
+                hayError = true;
+                mensajeError = "Las contraseñas no coinciden.";
+            } 
+            // 4. Validar complejidad (Regex mejorado)
+            else {
+                // Este regex verifica: 1 dígito, 1 minuscula, 1 mayuscula, 1 caracter especial, min 8 chars
+                // Nota: He eliminado la restricción de caracteres finales para evitar fallos si usan un "." o "-"
+                var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+                
+                if (!re.test(nuevaClave)) {
+                    hayError = true;
+                    mensajeError = "La contraseña debe incluir: Mayúscula, Minúscula, Número y Carácter especial.";
+                }
+            }
+
+            // 5. Si hay error, DETENEMOS el envío
+            if (hayError) {
+                event.preventDefault(); // ESTO es lo que evita que se envíe el form
+                
+                // Verificamos si showMessage existe para evitar crash
+                if (typeof showMessage === "function") {
+                    showMessage('warning', 'Atención', mensajeError);
+                } else {
+                    // Fallback por si la librería visual falla
+                    alert(mensajeError);
+                }
+                
+                return false;
+            }
+
+            // Si llega aquí, el formulario se envía normalmente
+        });
+    });
 
     const passwordInput = document.getElementById('nuevaClave');
     const passwordInput2 = document.getElementById('confirmarClave');
