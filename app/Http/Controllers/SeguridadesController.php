@@ -186,7 +186,8 @@ class SeguridadesController extends Controller
 
     public function formularioActualizarClave($usuario){
         return view('login.actualizar_clave')
-            ->with('usuario',base64_decode($usuario));
+            ->with('usuario', $usuario);
+            // ->with('usuario',base64_decode($usuario));
     }
 
     public function actualizarClave(Request $request){
