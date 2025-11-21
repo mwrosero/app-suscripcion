@@ -976,7 +976,8 @@ $processId = base64_encode(uniqid());
             estado: 'ACTIVO',
             frecuencia: 'TODOS',
             //lineaNegocio: 'CMV',
-            codigoCliente: codigoCliente
+            codigoCliente: codigoCliente,
+            codigoTipoContrato: 39
         });
 
         const response = await call({

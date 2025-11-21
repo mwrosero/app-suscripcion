@@ -36,7 +36,8 @@
             frecuencia: tipo,
             contratado: false,
             lineaNegocio: detalleSuscripcion.lineaNegocio,
-            codigoCliente: codigoCliente
+            codigoCliente: codigoCliente,
+            codigoTipoContrato: 34
         });
 
         const response = await call({

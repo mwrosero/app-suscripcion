@@ -1528,7 +1528,8 @@ Registro
             estado: 'ACTIVO',
             frecuencia: 'TODOS',
             lineaNegocio: planActual.lineaNegocio,
-            codigoCliente: planActual.codigoCliente
+            codigoCliente: planActual.codigoCliente,
+            codigoTipoContrato: 39
         });
 
         const response = await call({
