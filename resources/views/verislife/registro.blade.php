@@ -1234,7 +1234,7 @@ Registro
         $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
-        $('#email').val(paciente.correoElectronico || '').attr('disabled', false)
+        $('#email').val(paciente.correoElectronico || '').attr('disabled', false);
         $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '').attr('disabled', false);
     }
 
