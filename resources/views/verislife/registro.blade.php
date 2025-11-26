@@ -585,6 +585,7 @@ Registro
 
         $('body').on('click', '.btn-editar-paciente', async function(){
             let paciente = JSON.parse($(this).attr('data-rel'));
+            console.log(paciente)
             validado = true;
             mostrarCamposAdicionales();
             await fillPaciente(paciente);
@@ -818,7 +819,9 @@ Registro
     }
 
     function fillPaciente(paciente){
-        $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
+        let tipoIdentificacionP = (paciente.hasOwnProperty('codigoTipoIdentificacionPcte')) ? paciente.codigoTipoIdentificacionPcte : paciente.codigoTipoIdentificacion;
+        console.log(tipoIdentificacion)
+        $('#tipoIdentificacion').val(parseInt(tipoIdentificacionP))
         $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
         $('#primerNombre').val(paciente.primerNombre)
         $('#segundoNombre').val(paciente.segundoNombre)
@@ -840,8 +843,11 @@ Registro
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
         $('#telefonoFijo').val(paciente.telefonoFijo)
-        $('#telefonoMovil').val(paciente.telefonoMovil)
-        $('#email').val(paciente.mail)
+        $('#telefonoMovil').val(paciente.telefonoMovil).attr('disabled', true)
+        let correo_electronico = (paciente.hasOwnProperty('mail')) ? paciente.mail : paciente.correo;
+        $('#email').val(correo_electronico).attr('disabled', true)
+        $('#terms').prop('checked', true); 
+        $('#privacy').prop('checked', true); 
     }
 
     function fillRegistros() {
@@ -954,6 +960,8 @@ Registro
         let segundoNombre = $('#segundoNombre').val()?.toUpperCase() || '';
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val()?.toUpperCase() || '';
+        let email = $('#email').val()?.toUpperCase() || '';
+        let telefonoMovil = $('#telefonoMovil').val()?.toUpperCase() || '';
         let codigoEstadoCivil = $('#codigoEstadoCivil').val();
         let estadoCivil	 = $('#estadoCivil').val();
 
@@ -964,6 +972,8 @@ Registro
             segundoApellido: segundoApellido,
             primerNombre: primerNombre,
             segundoNombre: segundoNombre,
+            mail: email,
+            telefonoMovil: telefonoMovil,
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
         }];
@@ -1224,8 +1234,8 @@ Registro
         $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
-        $('#email').val(paciente.correoElectronico || '');
-        $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');
+        $('#email').val(paciente.correoElectronico || '').attr('disabled', false)
+        $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '').attr('disabled', false);
     }
 
     function formatearFechaInput(fecha) {
