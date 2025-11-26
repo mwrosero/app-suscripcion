@@ -19,7 +19,11 @@
                 <!-- /Logo -->
                 <div class="row justify-content-center pb-5">
                     <!-- Content Actualizar Clave -->
-                    <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Recuperando Contraseña</p>
+                    @if (session()->has('mensaje') && session('mensaje') == "Usuario debe cambiar su clave porque ha pasado 'x' tiempo desde el último cambio")
+                        <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Actualizar Contraseña</p>
+                    @else
+                        <p class="fs-4 mb-1 pt-2 text-center bg-colortext fw-bold">Recuperando Contraseña</p>
+                    @endif
                     <p class="fs-10 mb-3 text-center bg-colortext">Para actualizar la contraseña debes ingresar el código de validación enviado a tu correo electrónico registrado</p>
 
                      {{-- onsubmit="return validarClave()" --}}
