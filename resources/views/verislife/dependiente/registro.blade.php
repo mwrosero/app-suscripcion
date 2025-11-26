@@ -566,6 +566,7 @@ Registro
 
         $('body').on('click', '.btn-editar-paciente', async function(){
             let paciente = JSON.parse($(this).attr('data-rel'));
+            console.log(paciente)
             validado = true;
             mostrarCamposAdicionales();
             await fillPaciente(paciente);
@@ -898,11 +899,12 @@ Registro
         $('#sector').val(paciente.codigoSector)
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
-        $('#telefonoFijo').val(paciente.telefonoFijo).attr('disabled', true)
-        $('#telefonoMovil').val(paciente.telefonoMovil)
-        $('#email').val(paciente.mail).attr('disabled', true)
+        $('#telefonoFijo').val(paciente.telefonoFijo)
+        $('#telefonoMovil').val(paciente.telefonoMovil).attr('disabled', true)
+        let correo_electronico = (paciente.hasOwnProperty('mail')) ? paciente.mail : paciente.correo;
+        $('#email').val(correo_electronico).attr('disabled', true)
         $('#terms').prop('checked', true); 
-        $('#privacy').prop('checked', true); 
+        $('#privacy').prop('checked', true);  
     }
 
     function fillRegistros() {
