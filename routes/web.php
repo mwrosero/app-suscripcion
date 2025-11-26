@@ -40,6 +40,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/actualizar-clave-temporal', [SeguridadesController::class, 'actualizarClaveTemporalAction'])->name('actualizarClaveTemporalAction')->withoutMiddleware(['loggedUser']);
 
     Route::get('/actualizar-clave/{usuario}', [SeguridadesController::class, 'formularioActualizarClave'])->name('actualizar_clave.form')->withoutMiddleware(['loggedUser']);
+    Route::get('/login/{usuario}', [SeguridadesController::class, 'formularioActualizarClave'])->name('actualizar_clave.form')->withoutMiddleware(['loggedUser']);
 
     // Route::get('/cotizacion', function () {
     //     return view('cotizador.cotizacion');
