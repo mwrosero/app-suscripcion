@@ -115,6 +115,17 @@ class SeguridadesController extends Controller
                     break;
                     case 'CHANGE_PASSWORD':
                         $message = "Usuario debe cambiar su clave porque ha pasado 'x' tiempo desde el último cambio";
+                        $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/solicitud_recuperacion_clave';
+
+                        $response = Ism::call([
+                            'endpoint' => Ism::BASE_URL.$method,
+                            //'token'    => Ism::getToken(),
+                            'data'     => ['usuario' => strtoupper($user)],
+                            'method'   => 'POST'
+                        ]);
+
+                        session()->flash('mensaje', $message);
+                        return redirect('/actualizar-clave/'.base64_encode(strtoupper($user)));
                     break;
                     case 'RESET_REQUIRED':
                         $message = "Usuario importado debe seguir el flujo de recuperar contraseña";
