@@ -898,9 +898,11 @@ Registro
         $('#sector').val(paciente.codigoSector)
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
-        $('#telefonoFijo').val(paciente.telefonoFijo)
+        $('#telefonoFijo').val(paciente.telefonoFijo).attr('disabled', true)
         $('#telefonoMovil').val(paciente.telefonoMovil)
-        $('#email').val(paciente.mail)
+        $('#email').val(paciente.mail).attr('disabled', true)
+        $('#terms').prop('checked', true); 
+        $('#privacy').prop('checked', true); 
     }
 
     function fillRegistros() {
@@ -1014,6 +1016,8 @@ Registro
         let segundoNombre = $('#segundoNombre').val()?.toUpperCase() || '';
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val()?.toUpperCase() || '';
+        let email = $('#email').val()?.toUpperCase() || '';
+        let telefonoMovil = $('#telefonoMovil').val()?.toUpperCase() || '';
         let codigoEstadoCivil = $('#codigoEstadoCivil').val();
         let estadoCivil  = $('#estadoCivil').val();
 
@@ -1024,6 +1028,8 @@ Registro
             segundoApellido: segundoApellido,
             primerNombre: primerNombre,
             segundoNombre: segundoNombre,
+            mail: email,
+            telefonoMovil: telefonoMovil,
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
         }];
@@ -1294,9 +1300,9 @@ Registro
         $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
-        $('#email').val(paciente.correoElectronico || '');
+        $('#email').val(paciente.correoElectronico || '').attr('disabled', false);
         if(paciente.telefonoCelular !== null){
-            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');
+            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '').attr('disabled', false);
         }
     }
 
