@@ -35,7 +35,7 @@ Registro
                         </div>
                         <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
+                            <input type="text" class="form-control form-control-lg fs-14p text-uppercase" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                         </div>
                         <div class="col-12 col-md-10 d-none" id="nombre-col">
                             <label for="primerNombre" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>

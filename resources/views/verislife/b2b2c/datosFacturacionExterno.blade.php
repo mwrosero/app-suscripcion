@@ -384,7 +384,7 @@ Veris Care - Suscripción
                                                     <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
                                                     <input
                                                         type="text"
-                                                        class="form-control form-control-lg fs-14p"
+                                                        class="form-control form-control-lg fs-14p text-uppercase"
                                                         id="numeroIdentificacion"
                                                         name="numeroIdentificacion"
                                                         placeholder="9999999999999"
@@ -464,6 +464,7 @@ Veris Care - Suscripción
                                                     <input
                                                         type="search"
                                                         class="form-control form-control-lg fs-14p text-capitalize"
+                                                        maxlength="10"
                                                         id="codigoAsesor"
                                                         name="codigoAsesor"
                                                         placeholder="Ingrese el código del asesor">
@@ -1001,7 +1002,11 @@ Veris Care - Suscripción
         </div>
     </section>
 </div>
-
+<style>
+    #numeroIdentificacion::placeholder {
+        text-transform: capitalize ;
+    }
+</style>
 @endsection
 @push('scripts')
 <link href="https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.css" rel="stylesheet" type="text/css" />
@@ -1250,6 +1255,15 @@ Veris Care - Suscripción
         var typingTimer; // Timer identifier
         var doneTypingInterval = 500; // Tiempo de pausa en milisegundos (0.5 segundos)
 
+        $('#codigoAsesor').on('input', function(e) {
+            let valor = $(this).val();
+            let valorFiltrado = valor.replace(/[^0-9]/g, '');
+
+            if (valor !== valorFiltrado) {
+                $(this).val(valorFiltrado);
+            }
+        });
+
         $('#codigoAsesor').on('keyup', async function() {
             clearTimeout(typingTimer); // Limpiar el temporizador cada vez que se escribe
 
@@ -1375,6 +1389,8 @@ Veris Care - Suscripción
         });
 
         tipoIdentificacionSelect.disabled = false;
+
+        $('#tipoIdentificacion option[value="1"]').remove();
 
         const nombreBancoSelect = document.getElementById('nombreBanco');
         nombreBancoSelect.innerHTML = '<option value="" selected>Seleccionar Banco</option>';
@@ -2110,11 +2126,15 @@ Veris Care - Suscripción
         var partes = $('#fechaNacimiento').val().split('-');
         var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
 
+        let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
+
         detalleSuscripcion.pacientes = [{
             "activo": true,
             "permiteUpgrade": false,
-            "codigoTipoIdentificacionPcte": 2,
-            "codigoTipoIdentificacion": 2,
+            "codigoTipoIdentificacionPcte": codigoTipoIdentificacion,
+            "codigoTipoIdentificacion": codigoTipoIdentificacion,
+            "tipoIdentificacionPcte": tipoIdentificacionPcte,
             "numeroIdentificacionPcte": detalleSuscripcion.numeroIdentificacion,
             "primerNombre": $('#nombres').val(),
             "primerApellido": $('#primerApellido').val(),
@@ -2133,7 +2153,6 @@ Veris Care - Suscripción
             "yaEsTitularContrato": null,
             "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
             "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
-            "tipoIdentificacionPcte": "CEDULA",
             "observacionesError": null
         }]
         let args = [];

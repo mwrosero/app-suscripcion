@@ -376,7 +376,7 @@ Veris Care - Suscripción
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 box-form-1">
                                                     <label for="numeroIdentificacion" class="form-label fs-14p fw-medium text-raven-700">Número de identificación <span class="text-raven-700">*</span></label>
-                                                    <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
+                                                    <input type="text" class="form-control form-control-lg fs-14p text-uppercase" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
                                                     <label for="nombres" class="form-label fs-14p fw-medium text-raven-700">Nombre <span class="text-raven-700">*</span></label>
@@ -451,6 +451,7 @@ Veris Care - Suscripción
                                                         type="search"
                                                         class="form-control form-control-lg fs-14p text-capitalize"
                                                         id="codigoAsesor"
+                                                        maxlength="10"
                                                         name="codigoAsesor"
                                                         placeholder="Ingrese el código del asesor">
                                                     <div id="result" class="list-group"></div>
@@ -1272,6 +1273,17 @@ Veris Care - Suscripción
         var typingTimer; // Timer identifier
         var doneTypingInterval = 500; // Tiempo de pausa en milisegundos (0.5 segundos)
 
+        $('#codigoAsesor').on('input', function(e) {
+            let valor = $(this).val();
+            let valorFiltrado = valor.replace(/[^0-9]/g, '');
+
+            let valorFinal = valorFiltrado.substring(0, 10);
+
+            if (valor !== valorFiltrado) {
+                $(this).val(valorFiltrado);
+            }
+        });
+
         $('#codigoAsesor').on('keyup', async function() {
             clearTimeout(typingTimer); // Limpiar el temporizador cada vez que se escribe
 
@@ -1405,6 +1417,8 @@ Veris Care - Suscripción
         });
 
         tipoIdentificacionSelect.disabled = false;
+
+        $('#tipoIdentificacion option[value="1"]').remove();
 
         const nombreBancoSelect = document.getElementById('nombreBanco');
         nombreBancoSelect.innerHTML = '<option value="" selected>Seleccionar Banco</option>';
@@ -2259,11 +2273,15 @@ Veris Care - Suscripción
         var partes = $('#fechaNacimiento').val().split('-');
         var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
 
+        let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
+
         detalleSuscripcion.pacientes = [{
             "activo": true,
             "permiteUpgrade": false,
-            "codigoTipoIdentificacionPcte": 2,
-            "codigoTipoIdentificacion": 2,
+            "codigoTipoIdentificacionPcte": codigoTipoIdentificacion,
+            "codigoTipoIdentificacion": codigoTipoIdentificacion,
+            "tipoIdentificacionPcte": tipoIdentificacionPcte,
             "numeroIdentificacionPcte": $('#numeroIdentificacion').val(),
             "primerNombre": $('#nombres').val(),
             "primerApellido": $('#primerApellido').val(),
@@ -2282,7 +2300,6 @@ Veris Care - Suscripción
             "yaEsTitularContrato": null,
             "fechaInicioContrato": "{{ $now->format('d/m/Y') }}",
             "fechaFinContrato": "{{ $nextYear->format('d/m/Y') }}",
-            "tipoIdentificacionPcte": "CEDULA",
             "observacionesError": null
         }]
         let args = [];
@@ -2375,6 +2392,9 @@ Veris Care - Suscripción
     }
 </script>
 <style>
+    #numeroIdentificacion::placeholder {
+        text-transform: capitalize ;
+    }
     .step button.step-trigger .bs-stepper-circle {
         background-color: #EAF0FD !important;
         color: #13243F !important;
