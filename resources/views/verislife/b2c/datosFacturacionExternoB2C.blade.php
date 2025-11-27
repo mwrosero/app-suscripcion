@@ -1971,10 +1971,10 @@ Veris Care - Suscripción
         var numeroIdentificacion;
         if(id == "numeroIdentificacion"){
             tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
-            numeroIdentificacion = $('#numeroIdentificacion').val();
+            numeroIdentificacion = $('#numeroIdentificacion').val().toUpperCase();
         }else{
             tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
-            numeroIdentificacion = $('#numeroIdentificacionFactura').val();
+            numeroIdentificacion = $('#numeroIdentificacionFactura').val().toUpperCase();
         }
         console.log(tipoIdentificacion,numeroIdentificacion)
         let args = [];
@@ -2274,14 +2274,14 @@ Veris Care - Suscripción
         var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
 
         let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
-        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html();
 
         detalleSuscripcion.pacientes = [{
             "activo": true,
             "permiteUpgrade": false,
             "codigoTipoIdentificacionPcte": codigoTipoIdentificacion,
             "codigoTipoIdentificacion": codigoTipoIdentificacion,
-            "tipoIdentificacionPcte": tipoIdentificacionPcte,
+            "tipoIdentificacionPcte": tipoIdentificacionPcte.toUpperCase(),
             "numeroIdentificacionPcte": $('#numeroIdentificacion').val(),
             "primerNombre": $('#nombres').val(),
             "primerApellido": $('#primerApellido').val(),
