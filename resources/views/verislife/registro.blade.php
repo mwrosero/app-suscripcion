@@ -35,7 +35,7 @@ Registro
                         </div>
                         <div class="col-12 col-md-10">
                             <label for="numeroIdentificacion" class="form-label fs-14p fw-medium">Número de identificación <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg fs-14p" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
+                            <input type="text" class="form-control form-control-lg fs-14p text-uppercase" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Número de identificación" autocomplete="off" required />
                         </div>
                         <div class="col-12 col-md-10 d-none" id="nombre-col">
                             <label for="primerNombre" class="form-label fs-14p fw-medium">Nombre <span class="text-danger">*</span></label>
@@ -822,7 +822,7 @@ Registro
         let tipoIdentificacionP = (paciente.hasOwnProperty('codigoTipoIdentificacionPcte')) ? paciente.codigoTipoIdentificacionPcte : paciente.codigoTipoIdentificacion;
         console.log(tipoIdentificacion)
         $('#tipoIdentificacion').val(parseInt(tipoIdentificacionP))
-        $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
+        $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte.toUpperCase())
         $('#primerNombre').val(paciente.primerNombre)
         $('#segundoNombre').val(paciente.segundoNombre)
         $('#primerApellido').val(paciente.primerApellido)
@@ -1126,7 +1126,7 @@ Registro
 
     async function validarIdentidad() {
         const tipo = $('#tipoIdentificacion').val();
-        const numero = $('#numeroIdentificacion').val();
+        const numero = $('#numeroIdentificacion').val().toUpperCase();
 
         if (!tipo || !numero) {
             showMessage('warning','Atención','Debes seleccionar tipo y número de identificación');
@@ -1194,7 +1194,7 @@ Registro
 
     async function consultarPaciente() {
         const tipoIdentificacion = $('#tipoIdentificacion').val();
-        const numeroIdentificacion = $('#numeroIdentificacion').val();
+        const numeroIdentificacion = $('#numeroIdentificacion').val().toUpperCase();
 
         if (!tipoIdentificacion || !numeroIdentificacion) {
             showMessage('warning','Atención','Debes seleccionar tipo identificacion y número de identificación');
@@ -1256,7 +1256,7 @@ Registro
     function agregarPaciente() {
         let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
         let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
-        let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
+        let numeroIdentificacionPcte = $('#numeroIdentificacion').val().toUpperCase();
         let primerNombre = $('#primerNombre').val().toUpperCase();
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val().toUpperCase();
@@ -1273,7 +1273,7 @@ Registro
 
         const pacienteRegistrado = pacientes.some(paciente => 
             paciente.codigoTipoIdentificacionPcte === codigoTipoIdentificacionPcte && 
-            paciente.numeroIdentificacionPcte === numeroIdentificacionPcte
+            paciente.numeroIdentificacionPcte.toUpperCase() === numeroIdentificacionPcte.toUpperCase()
         );
 
         if (pacienteRegistrado) {
