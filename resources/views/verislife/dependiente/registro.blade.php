@@ -754,7 +754,7 @@ Registro
         pacientesAgregados = [];
         let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
         let codigoTipoIdentificacionPcte = $('#tipoIdentificacion option:selected').val();
-        let numeroIdentificacionPcte = $('#numeroIdentificacion').val();
+        let numeroIdentificacionPcte = $('#numeroIdentificacion').val().toUpperCase();
         let primerNombre = $('#primerNombre').val().toUpperCase();
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val().toUpperCase();
@@ -772,7 +772,7 @@ Registro
 
         const pacienteRegistrado = pacientes.some(paciente => 
             paciente.codigoTipoIdentificacionPcte === codigoTipoIdentificacionPcte && 
-            paciente.numeroIdentificacionPcte === numeroIdentificacionPcte
+            paciente.numeroIdentificacionPcte.toUpperCase() === numeroIdentificacionPcte.toUpperCase()
         );
 
         if (pacienteRegistrado) {
@@ -879,7 +879,7 @@ Registro
 
     function fillPaciente(paciente){
         $('#tipoIdentificacion').val(paciente.codigoTipoIdentificacionPcte)
-        $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte)
+        $('#numeroIdentificacion').val(paciente.numeroIdentificacionPcte.toUpperCase())
         $('#primerNombre').val(paciente.primerNombre)
         $('#segundoNombre').val(paciente.segundoNombre)
         $('#primerApellido').val(paciente.primerApellido)
@@ -1205,7 +1205,7 @@ Registro
 
     async function validarIdentidad() {
         const tipo = $('#tipoIdentificacion').val();
-        const numero = $('#numeroIdentificacion').val();
+        const numero = $('#numeroIdentificacion').val().toUpperCase();
 
         if (!tipo || !numero) {
             showMessage('warning','Atención','Debes seleccionar tipo y número de identificación');
