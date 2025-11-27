@@ -2048,7 +2048,9 @@ Veris Care - Suscripción
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
-        // let tipoFlujo = "E";
+
+        let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html();
 
         let direccionFactura = "";
 
@@ -2060,8 +2062,8 @@ Veris Care - Suscripción
             let telefonoFactura = $('#celular').val();
             let emailFactura = $('#email').val();
             datosFacturacion = {
-                "codigoTipoIdentificacion": tipoIdentificacionFactura,
-                "numeroIdentificacion": numeroIdentificacionFactura,
+                "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
+                "numeroIdentificacion": numeroIdentificacionFactura.toUpperCase(),
                 "nombres": nombresFactura,
                 "telefono": telefonoFactura,
                 "email": emailFactura,
@@ -2075,7 +2077,7 @@ Veris Care - Suscripción
             let emailFactura = $('#emailFactura').val();
             datosFacturacion = {
                 "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
-                "numeroIdentificacion": numeroIdentificacionFactura,
+                "numeroIdentificacion": numeroIdentificacionFactura.toUpperCase(),
                 "nombres": nombresFactura,
                 "telefono": telefonoFactura,
                 "email": emailFactura,
@@ -2119,8 +2121,8 @@ Veris Care - Suscripción
             },
             "datosFirmaDocumentos": {
                 "nombreEmpresa": detalleSuscripcion.empresa.nombreEmpresa,
-                "codigoTipoIdentificacion": 2,//cambiar
-                "numeroIdentificacion": $('#numeroIdentificacion').val(),//$('#ruc').val(),
+                "codigoTipoIdentificacion": parseInt(codigoTipoIdentificacion),//cambiar
+                "numeroIdentificacion": $('#numeroIdentificacion').val().toUpperCase(),//$('#ruc').val(),
                 "representanteLegal": $('#nombres').val() + " " + $('#primerApellido').val(),//$('#titular').val(),
                 "telefono": $('#celular').val(),//$('#telefono').val(),
                 "email": $('#email').val(),//$('#emailContacto').val(),
@@ -2209,12 +2211,15 @@ Veris Care - Suscripción
         args["token"] = _token;
         args["bodyType"] = "json";
 
+        let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
+        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html();
+
         args["data"] = JSON.stringify({
             "tipoFlujo": tipoFlujo,
             "nombres": $('#nombres').val(),
             "apellidos": `${ $('#primerApellido').val() } ${ $('#segundoApellido').val() }`,
-            "codigoTipoIdentificacion": 2,
-            "numeroIdentificacion": $('#numeroIdentificacion').val(),
+            "codigoTipoIdentificacion": parseInt(codigoTipoIdentificacion),
+            "numeroIdentificacion": $('#numeroIdentificacion').val().toUpperCase(),
             "correo": $('#email').val(),
             "telefono": $('#celular').val(), 
             "datosDocumentoDebito" : {
