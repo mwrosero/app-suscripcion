@@ -831,6 +831,7 @@ Registro
             successModal.show();
             await cargarAfiliados();
         }else{
+            pacientes.pop();
             showMessage('error','Atención', data.message)
         }
     }
