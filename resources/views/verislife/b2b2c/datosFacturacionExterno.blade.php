@@ -2126,15 +2126,12 @@ Veris Care - Suscripción
         var partes = $('#fechaNacimiento').val().split('-');
         var fechaNacimiento = partes[2] + '/' + partes[1] + '/' + partes[0];
 
-        let codigoTipoIdentificacion = parseInt($('#tipoIdentificacion option:selected').val());
-        let tipoIdentificacionPcte = $('#tipoIdentificacion option:selected').html().toUpperCase();
-
         detalleSuscripcion.pacientes = [{
             "activo": true,
             "permiteUpgrade": false,
-            "codigoTipoIdentificacionPcte": codigoTipoIdentificacion,
-            "codigoTipoIdentificacion": codigoTipoIdentificacion,
-            "tipoIdentificacionPcte": tipoIdentificacionPcte,
+            "codigoTipoIdentificacionPcte": 2,
+            "codigoTipoIdentificacion": 2,
+            "tipoIdentificacionPcte": "CEDULA",
             "numeroIdentificacionPcte": detalleSuscripcion.numeroIdentificacion,
             "primerNombre": $('#nombres').val(),
             "primerApellido": $('#primerApellido').val(),
