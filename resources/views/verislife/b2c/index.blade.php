@@ -399,7 +399,7 @@
                                 <ul>
                                     <li>No aplica carencias ni exclusión por preexistencias.</li>
                                     <li>Acceso voluntario, sin trámites engorrosos ni deducibles.</li>
-                                    <li>No es un seguro ni un plan de medicina prepagada.</li>
+                                    <li>No es un seguro ni medicina prepagada.</li>
                                 </ul>
                                 4. Red médica nacional
                                 <ul>
@@ -439,7 +439,7 @@
                         <div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body fw-medium">
                                 <ul>
-                                    <li>El colaborador de la empresa o persona individual que accede al plan.</li>
+                                    <li>El colaborador de la empresa o persona individual que accede al programa.</li>
                                     <li>Familiares hasta 3er grado de consanguinidad, como por ejemplo: Padres, Hijos, Hermanos, Abuelos, Nietos, Tíos, Sobrinos</li>
                                     <li>Familiares hasta 1er grado de afinidad, como: Cónyuge o pareja, Suegros, Yerno o nuera.</li>
                                 </ul>
