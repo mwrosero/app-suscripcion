@@ -843,7 +843,7 @@ Registro
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
         $('#telefonoFijo').val(paciente.telefonoFijo)
-        $('#telefonoMovil').val(paciente.telefonoMovil);//.attr('disabled', true)
+        $('#telefonoMovil').val(replaceCountryCode(paciente.telefonoMovil));//.attr('disabled', true)
         let correo_electronico = (paciente.hasOwnProperty('mail')) ? paciente.mail : paciente.correo;
         $('#email').val(correo_electronico);//.attr('disabled', true)
         $('#terms').prop('checked', true); 
@@ -1116,7 +1116,7 @@ Registro
     async function existeIdentificacion(codigo, numero) {
         console.log(codigo, numero)
         return pacientes.some(item => 
-            parseInt(item.codigoTipoIdentificacionPcte) === parseInt(codigo) &&
+            parseInt(item.codigoTipoIdentificacion) === parseInt(codigo) &&
             item.numeroIdentificacionPcte === numero
         );
     }
