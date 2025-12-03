@@ -1064,7 +1064,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             // submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
+            let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -1532,7 +1532,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
+            let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -2187,7 +2187,7 @@ Veris Care - Suscripción
     }
 
     async function deleteTokenNuvei(){
-        let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
+        let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
         let args = [];
         args["endpoint"] = `${api_url_nuvei}/v2/card/delete/`;
         args["method"] = "POST";
