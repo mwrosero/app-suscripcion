@@ -339,11 +339,7 @@ async function setSearch(asesor) {
 
 function replaceCountryCode(phoneNumberString) {
     // Definimos el código de país que queremos reemplazar
-    const countryCode = "+593";
-    
-    // El carácter "^" asegura que el reemplazo solo ocurra si "+593"
-    // se encuentra al inicio del string.
-    const newPhoneNumber = phoneNumberString.replace(new RegExp(`^${countryCode}`), '0');
+    const newPhoneNumber = phoneNumberString.replace(/^\+593/, '0');
     
     return newPhoneNumber;
 }
