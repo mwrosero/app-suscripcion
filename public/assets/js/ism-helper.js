@@ -36,10 +36,11 @@ async function updateToken() {
     args["showLoader"] = false;
 
     const data = await call(args);
-    console.log(data);
-    return;
+    // console.log(data);
+    // return;
     if(!data || data.code != 200){
         //showMessage("warning","Atención",data.message);
+        console.log("ERROR")
         logout();
     }else{
         _token = data.idToken;

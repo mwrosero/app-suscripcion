@@ -1064,7 +1064,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             // submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+            let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -1208,6 +1208,7 @@ Veris Care - Suscripción
     {{-- let tokenAuthNuvei = "{{ $auth_token }}"; --}}
 
     let dataCita = {};
+    let randomValueNuvei = "";
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1220,6 +1221,8 @@ Veris Care - Suscripción
         }else{
             $('body').addClass('bg-pattens-blue-100-gradient')
         }
+
+        randomValueNuvei = getRandomValue();
 
         $('body').on('click', '.nav-metodo-pago button.active', function(){
             if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
@@ -1529,7 +1532,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+            let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -1588,6 +1591,17 @@ Veris Care - Suscripción
         $('#input5_nuvei').val("");
         $('#input6_nuvei').val("");
         $('#modalNuveiOtp').modal('show');
+    }
+
+    function getRandomValue(){
+        const now = new Date();
+
+        const minutes = now.getMinutes(); 
+        const seconds = now.getSeconds(); 
+        const milliseconds = Math.floor(now.getMilliseconds() / 10);
+        
+        const timeString = `${minutes}${seconds}${milliseconds}`;
+        return timeString.substring(0, 5);
     }
     
     async function obtenerListadoDocumentosFirma(){
@@ -1958,6 +1972,7 @@ Veris Care - Suscripción
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
                 "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * 1).toFixed(2)),
                 "detalle": {
+                    "keyAdicionalToken": randomValueNuvei,
                     "metadata": '',
                     "cardToken": '',
                     "numeroTarjeta": "4000996174334475",
@@ -2172,7 +2187,7 @@ Veris Care - Suscripción
     }
 
     async function deleteTokenNuvei(){
-        let uid = `${detalleSuscripcion.numeroIdentificacion}`;
+        let uid = `${detalleSuscripcion.numeroIdentificacion}-${randomValueNuvei}`;
         let args = [];
         args["endpoint"] = `${api_url_nuvei}/v2/card/delete/`;
         args["method"] = "POST";
