@@ -901,9 +901,9 @@ Registro
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
         $('#telefonoFijo').val(paciente.telefonoFijo)
-        $('#telefonoMovil').val(paciente.telefonoMovil).attr('disabled', true)
+        $('#telefonoMovil').val(paciente.telefonoMovil);//.attr('disabled', true)
         let correo_electronico = (paciente.hasOwnProperty('mail')) ? paciente.mail : paciente.correo;
-        $('#email').val(correo_electronico).attr('disabled', true)
+        $('#email').val(correo_electronico);//.attr('disabled', true)
         $('#terms').prop('checked', true); 
         $('#privacy').prop('checked', true);  
     }
@@ -1032,6 +1032,7 @@ Registro
             primerNombre: primerNombre,
             segundoNombre: segundoNombre,
             mail: email,
+            codigoPais: 1,
             telefonoMovil: telefonoMovil,
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
@@ -1053,6 +1054,7 @@ Registro
             
             if (response.code === 200) {
                 showMessage('warning','Atención','Actualización de datos con éxito');
+                await cargarAfiliados();
             } else {
                 showMessage('warning','Atención','Error al actualizar en servidor');
             }
@@ -1303,9 +1305,9 @@ Registro
         $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
-        $('#email').val(paciente.correoElectronico || '').attr('disabled', false);
+        $('#email').val(paciente.correoElectronico || '');//.attr('disabled', false);
         if(paciente.telefonoCelular !== null){
-            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '').attr('disabled', false);
+            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');//.attr('disabled', false);
         }
     }
 
