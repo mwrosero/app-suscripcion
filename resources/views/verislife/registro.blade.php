@@ -974,7 +974,7 @@ Registro
             segundoNombre: segundoNombre,
             mail: email,
             codigoPais: 1,
-            telefonoMovil: telefonoMovil,
+            telefonoMovil: replaceCountryCode(telefonoMovil),
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
         }];

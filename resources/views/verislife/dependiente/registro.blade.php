@@ -1019,7 +1019,7 @@ Registro
         let segundoNombre = $('#segundoNombre').val()?.toUpperCase() || '';
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val()?.toUpperCase() || '';
-        let email = $('#email').val()?.toUpperCase() || '';
+        let email = $('#email').val() || '';
         let telefonoMovil = $('#telefonoMovil').val()?.toUpperCase() || '';
         let codigoEstadoCivil = $('#codigoEstadoCivil').val();
         let estadoCivil  = $('#estadoCivil').val();
@@ -1033,7 +1033,7 @@ Registro
             segundoNombre: segundoNombre,
             mail: email,
             codigoPais: 1,
-            telefonoMovil: telefonoMovil,
+            telefonoMovil: replaceCountryCode(telefonoMovil),
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
         }];
