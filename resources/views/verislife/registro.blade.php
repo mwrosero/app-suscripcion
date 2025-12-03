@@ -1161,11 +1161,11 @@ Registro
         }
 
         if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "edicion"){
-            let existeWS = await existeIdentificionSuscrita(numero);
+            {{-- let existeWS = await existeIdentificionSuscrita(numero);
             if(existeWS){
                 showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
                 return false;
-            }
+            } --}}
         }
 
         try {
