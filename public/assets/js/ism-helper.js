@@ -36,10 +36,11 @@ async function updateToken() {
     args["showLoader"] = false;
 
     const data = await call(args);
-    console.log(data);
-    return;
+    // console.log(data);
+    // return;
     if(!data || data.code != 200){
         //showMessage("warning","Atención",data.message);
+        console.log("ERROR")
         logout();
     }else{
         _token = data.idToken;
@@ -334,4 +335,22 @@ async function setSearch(asesor) {
     document.getElementById('codigoAsesor').value = asesor.nombreCompleto.toLowerCase();
     codigoAsesor = asesor.codigoPersonal;
     document.getElementById("result").innerHTML = "";
+}
+
+function replaceCountryCode(phoneNumberString) {
+    // Definimos el código de país que queremos reemplazar
+    const newPhoneNumber = phoneNumberString.replace(/^\+593/, '0');
+    
+    return newPhoneNumber;
+}
+
+function getRandomValue(){
+    const now = new Date();
+
+    const minutes = now.getMinutes(); 
+    const seconds = now.getSeconds(); 
+    const milliseconds = Math.floor(now.getMilliseconds() / 10);
+    
+    const timeString = `${minutes}${seconds}${milliseconds}`;
+    return timeString.substring(0, 5);
 }

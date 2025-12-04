@@ -901,9 +901,9 @@ Registro
         $('#numeroContratoAfiliado').val(paciente.numeroContrato)
         $('#parentesco').val(paciente.codigoTipoParentesco)
         $('#telefonoFijo').val(paciente.telefonoFijo)
-        $('#telefonoMovil').val(paciente.telefonoMovil).attr('disabled', true)
+        $('#telefonoMovil').val(replaceCountryCode(paciente.telefonoMovil));//.attr('disabled', true)
         let correo_electronico = (paciente.hasOwnProperty('mail')) ? paciente.mail : paciente.correo;
-        $('#email').val(correo_electronico).attr('disabled', true)
+        $('#email').val(correo_electronico);//.attr('disabled', true)
         $('#terms').prop('checked', true); 
         $('#privacy').prop('checked', true);  
     }
@@ -1019,7 +1019,7 @@ Registro
         let segundoNombre = $('#segundoNombre').val()?.toUpperCase() || '';
         let primerApellido = $('#primerApellido').val().toUpperCase();
         let segundoApellido = $('#segundoApellido').val()?.toUpperCase() || '';
-        let email = $('#email').val()?.toUpperCase() || '';
+        let email = $('#email').val() || '';
         let telefonoMovil = $('#telefonoMovil').val()?.toUpperCase() || '';
         let codigoEstadoCivil = $('#codigoEstadoCivil').val();
         let estadoCivil  = $('#estadoCivil').val();
@@ -1032,7 +1032,8 @@ Registro
             primerNombre: primerNombre,
             segundoNombre: segundoNombre,
             mail: email,
-            telefonoMovil: telefonoMovil,
+            codigoPais: 1,
+            telefonoMovil: replaceCountryCode(telefonoMovil),
             codigoEstadoCivil: parseInt(codigoEstadoCivil),
             estadoCivil: estadoCivil
         }];
@@ -1053,6 +1054,7 @@ Registro
             
             if (response.code === 200) {
                 showMessage('warning','Atención','Actualización de datos con éxito');
+                await cargarAfiliados();
             } else {
                 showMessage('warning','Atención','Error al actualizar en servidor');
             }
@@ -1173,7 +1175,7 @@ Registro
     async function existeIdentificacion(codigo, numero) {
         console.log(codigo, numero)
         return pacientes.some(item => 
-            parseInt(item.codigoTipoIdentificacionPcte) === parseInt(codigo) &&
+            parseInt(item.codigoTipoIdentificacion) === parseInt(codigo) &&
             item.numeroIdentificacionPcte === numero
         );
     }
@@ -1219,11 +1221,11 @@ Registro
             return false;
         }
 
-        let existeWS = await existeIdentificionSuscrita(numero);
+        {{-- let existeWS = await existeIdentificionSuscrita(numero);
         if(existeWS){
             showMessage('warning','Atención','Paciente con esa identificación ya se encuentra suscrito');
             return false;
-        }
+        } --}}
         
         try {
             const baseUrl = `${api_url}/general/v1/util/validar_identificacion`;
@@ -1303,9 +1305,9 @@ Registro
         $('#segundoApellido').val(paciente.segundoApellido || '');
         $('#fechaNacimiento').val(formatearFechaInput(paciente.fechaNacimiento));
         $('#genero').val(paciente.genero || '');
-        $('#email').val(paciente.correoElectronico || '').attr('disabled', false);
+        $('#email').val(paciente.correoElectronico || '');//.attr('disabled', false);
         if(paciente.telefonoCelular !== null){
-            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '').attr('disabled', false);
+            $('#telefonoMovil').val(paciente.telefonoCelular.replace(/^\+593/, '').replace(/\D/g, '') || '');//.attr('disabled', false);
         }
     }
 
