@@ -343,3 +343,14 @@ function replaceCountryCode(phoneNumberString) {
     
     return newPhoneNumber;
 }
+
+function getRandomValue(){
+    const now = new Date();
+
+    const minutes = now.getMinutes(); 
+    const seconds = now.getSeconds(); 
+    const milliseconds = Math.floor(now.getMilliseconds() / 10);
+    
+    const timeString = `${minutes}${seconds}${milliseconds}`;
+    return timeString.substring(0, 5);
+}
