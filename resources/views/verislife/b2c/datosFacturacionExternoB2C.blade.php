@@ -2211,7 +2211,6 @@ Veris Care - Suscripción
                     "autorizaDebitoCargado": true,
                     "autorizaAcuerdoCargado": true,
                     "comprobantePagoCargado": true,
-                    "tipoCobro": tipoCobro,
                     "numeroCuotas": numeroCuotas 
                 }
             },
