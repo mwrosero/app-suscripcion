@@ -729,6 +729,47 @@ Veris Care - Suscripción
                                     </div>
                                 </div>
                             </div>
+                            <div class="row justify-content-center box-diferidos d-none">
+                                <div class="col-12 col-lg-6 col-md-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body px-lg-5">
+                                            <div class="mb-4">
+                                                <h5 class="fw-semibold subtitle-card text-white"><span class="nombreCliente text-capitalize"></span>, ingresa los datos para el pago</h5>
+                                                <hr>
+                                                <div class="row justify-content-center mt-4">
+                                                    <div class="col-md-12 col-md-10 col-lg-8 col-xl-8">
+                                                        <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-8">
+                                                                        <h3 class="mb-2">Total a pagar</h3>
+                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
+                                                                        <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar d-none"></p>
+                                                                        <p class="fw-normal mb-0 fs-12p label-nombre-plan"></p>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-4">
+                                                                        <div class="text-start text-md-end">
+                                                                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5 class="mb-3">Elige tu forma de pago</h5>
+                                            <hr>
+                                            <div class="list-group custom-radio-list" id="lista-diferidos">
+                                                {{-- <label class="list-group-item mb-3 d-flex align-items-center justify-content-between">
+                                                    <span class="fw-medium">Corriente</span>
+                                                    <input class="form-check-input ms-3" type="radio" name="flexRadioDefault" id="radioCorriente" checked>
+                                                </label> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                              <div class="row justify-content-center box-firma d-none">
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
@@ -1177,7 +1218,7 @@ Veris Care - Suscripción
             }
 
             if(step == 3){
-                console.error('suscribirTarjeta()')
+                console.error('suscribirTarjeta() desde render')
                 await suscribirTarjeta();
                 return;
             }
@@ -1253,7 +1294,18 @@ Veris Care - Suscripción
         fillInfoDescuentos();
 
         $('body').on('click', '.btn-suscribir-tarjeta', async function(){
+            console.log("SUSCRIBIR TARJETA DESDE CLICK .btn-suscribir-tarjeta");
             await suscribirTarjeta();
+        })
+
+        $('body').on('click', '.btn-continuar-tipo-diferido', async function(){
+            $('.box-diferidos').addClass('d-none');
+            $('.box-firma').removeClass('d-none');
+            esTarjetaBox = false;
+            await obtenerListadoDocumentosFirma()
+            $('#btn-next').attr('disabled', true);
+            validateFields();
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
         })
 
         $('body').on('click', '.btn-firmar-documentos', async function(){
@@ -1454,6 +1506,10 @@ Veris Care - Suscripción
             await validarCorreoElectronico(email);
         })
 
+        $('body').on('change', 'input[name="flexTipoDiferido"]', async function(){
+            $('#btn-next').attr('disabled', false);
+        });
+
         {{-- $('body').on('change', 'input, select', async function(){ --}}
         $('body').on('input change', 'input, select', async function(){
             validateFields();
@@ -1591,7 +1647,7 @@ Veris Care - Suscripción
             $('#messages').text("Invalid Card Data");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
-            let uid = `${$('#numeroIdentificacion').val()}${randomValueNuvei}`;
+            let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -1605,15 +1661,16 @@ Veris Care - Suscripción
         if (cardResponse.card.status === 'valid') {
             detalleSuscripcion.tarjeta = cardResponse.card;
             $('.box-tarjeta').addClass('d-none');
-            $('.box-firma').removeClass('d-none');
+            // $('.box-firma').removeClass('d-none');
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-continuar-tipo-diferido');
+            await obtenerTiposDiferido();
 
-            esTarjetaBox = false;
-            await obtenerListadoDocumentosFirma()
-            $('#btn-next').attr('disabled', true);
-            validateFields();
-            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
-            //stepper.next();
-            //await registrarTarjeta();
+            // esTarjetaBox = false;
+            // await obtenerListadoDocumentosFirma()
+            // $('#btn-next').attr('disabled', true);
+            // validateFields();
+            // $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
+
         }else if(cardResponse.card.status === 'review' || cardResponse.card.status === 'pending') {
             detalleSuscripcion.tarjeta = cardResponse.card;
             console.log("Abrir OTP");
@@ -2048,6 +2105,30 @@ Veris Care - Suscripción
         return response?.data || [];
     }
 
+    async function obtenerTiposDiferido(){
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/bines_tarjetas?idBin=${detalleSuscripcion.tarjeta.bin}`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data);
+        $('.box-diferidos').removeClass('d-none');
+        if(data.code == 200){
+            let elem = ``;
+            $.each(data.data, function(key, value){
+                elem += `<label class="list-group-item mb-3 d-flex align-items-center justify-content-between">
+                    <span class="fw-medium text-capitalize">${value.mensajeMetodoPago.toLowerCase()}</span>
+                    <input class="form-check-input ms-3" type="radio" name="flexTipoDiferido" id="radio-${value.idBin}" data-rel='${JSON.stringify(value)}'>
+                </label>`;
+            })
+            $('#lista-diferidos').html(elem);
+            $('#btn-next').attr('disabled', true);
+        }else{
+            showMessage('error','Atención',data.message);
+        }
+    }
+
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
         let tipoFlujo = detalleSuscripcion.tipoFlujo;
@@ -2088,6 +2169,13 @@ Veris Care - Suscripción
             }
         }
 
+        let tipoDiferido = null;
+        let plazoDiferido = null;
+
+        //if($('.nav-metodo-pago button.active').attr('idMedioPago-rel'))
+        
+        let diferido = JSON.parse($('input[name="flexTipoDiferido"]:checked').attr('data-rel'));
+
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
         args["method"] = "POST";
@@ -2101,6 +2189,8 @@ Veris Care - Suscripción
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
+            "tipoDiferido": diferido.aplicaInteres,
+            "plazoDiferido": diferido.numeroCuotas,
             "pago": {
                 "cantidad": 1,
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
@@ -2120,7 +2210,9 @@ Veris Care - Suscripción
                     "codigoInstitucion": 5,
                     "autorizaDebitoCargado": true,
                     "autorizaAcuerdoCargado": true,
-                    "comprobantePagoCargado": true
+                    "comprobantePagoCargado": true,
+                    "tipoCobro": tipoCobro,
+                    "numeroCuotas": numeroCuotas 
                 }
             },
             "datosFirmaDocumentos": {
@@ -2378,12 +2470,16 @@ Veris Care - Suscripción
         if(data.transaction.status === "success" && data.transaction.status_detail === 32){
             $('#modalNuveiOtp').modal('hide');
             $('.box-tarjeta').addClass('d-none');
-            $('.box-firma').removeClass('d-none');
-            esTarjetaBox = false;
-            await obtenerListadoDocumentosFirma()
-            $('#btn-next').attr('disabled', true);
-            validateFields();
-            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
+            // $('.box-firma').removeClass('d-none');
+
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-continuar-tipo-diferido');
+            await obtenerTiposDiferido();
+
+            // esTarjetaBox = false;
+            // await obtenerListadoDocumentosFirma()
+            // $('#btn-next').attr('disabled', true);
+            // validateFields();
+            // $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
         }else if(data.transaction.status === "pending"){
             showMessage('warning','Código inválido','Código erróneo, inténtalo nuevamente');
         }else{
@@ -2404,6 +2500,44 @@ Veris Care - Suscripción
     #numeroIdentificacion::placeholder {
         text-transform: capitalize ;
     }
+    .list-group-item{
+        border-radius: 12px !important;
+    }
+    /* Agregamos una clase contenedora para facilitar la aplicación de estilos personalizados */
+    .custom-radio-list .list-group-item {
+        border: 1px solid #dee2e6; /* Borde estándar de Bootstrap */
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    /* 🎯 Regla clave: Aplica el borde azul cuando el input dentro del label está seleccionado */
+    .custom-radio-list input[type="radio"]:checked + .form-check-label,
+    .custom-radio-list input[type="radio"]:checked:focus ~ .list-group-item,
+    .custom-radio-list input[type="radio"]:checked:not(:focus) + .list-group-item,
+    .custom-radio-list .list-group-item:has(input[type="radio"]:checked) {
+        /* El selector :has() es el más limpio si el navegador lo soporta */
+        border-color: #296BEF; /* El color azul principal de Bootstrap (primary) */
+        {{-- box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Opcional: Para el efecto de "glow" de enfoque */ --}}
+        z-index: 2; /* Para asegurar que el borde no se oculte con otros elementos adyacentes */
+    }
+
+    /* Opcional: Estilo al pasar el ratón (hover) */
+    .custom-radio-list .list-group-item:hover {
+        border-color: #a0c9f1; /* Un azul más claro al pasar el ratón */
+        z-index: 1;
+    }
+
+    /* Esto es para que el label (list-group-item) cambie cuando su input interno está seleccionado */
+    .custom-radio-list .list-group-item:has(input:checked) {
+        border-color: #296BEF;
+        {{-- box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); --}}
+        z-index: 2;
+    }
+
+    /* Esto es para asegurar que el input en sí no tenga el focus ring por defecto de Bootstrap, ya que lo estamos poniendo en el list-group-item */
+    .custom-radio-list .form-check-input:focus {
+        box-shadow: none;
+    }
+
     .step button.step-trigger .bs-stepper-circle {
         background-color: #EAF0FD !important;
         color: #13243F !important;
