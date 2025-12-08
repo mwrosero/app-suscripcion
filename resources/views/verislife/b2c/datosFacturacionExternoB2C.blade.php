@@ -2172,9 +2172,14 @@ Veris Care - Suscripción
         let tipoDiferido = null;
         let plazoDiferido = null;
 
+
         //if($('.nav-metodo-pago button.active').attr('idMedioPago-rel'))
         
         let diferido = JSON.parse($('input[name="flexTipoDiferido"]:checked').attr('data-rel'));
+        if(diferido.mensajeMetodoPago !== "CORRIENTE"){
+            tipoDiferido = (diferido.aplicaInteres) ? 'DIFERIDO_INTERES' : 'DIFERIDO_SIN_INTERES';
+            plazoDiferido = diferido.numeroCuotas;
+        }
 
         let args = [];
         args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
@@ -2189,8 +2194,8 @@ Veris Care - Suscripción
             "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
             "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
             "tipoFlujo": tipoFlujo,
-            "tipoDiferido": diferido.aplicaInteres,
-            "plazoDiferido": diferido.numeroCuotas,
+            "tipoDiferido": tipoDiferido,
+            "plazoDiferido": plazoDiferido,
             "pago": {
                 "cantidad": 1,
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
@@ -2211,7 +2216,6 @@ Veris Care - Suscripción
                     "autorizaDebitoCargado": true,
                     "autorizaAcuerdoCargado": true,
                     "comprobantePagoCargado": true,
-                    "numeroCuotas": numeroCuotas 
                 }
             },
             "datosFirmaDocumentos": {
