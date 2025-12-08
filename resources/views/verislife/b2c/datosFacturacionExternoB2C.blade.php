@@ -954,9 +954,17 @@ Veris Care - Suscripción
                                                 </li>
                                             </ul>
                                             <hr>
-                                            <a href="/" class="btn btn-cerulean-blue-800" id="btnEnd">
+                                            <div class="box-buttons w-100 mt-2 d-flex justify-content-center align-items-center gap-3">
+                                                <a href="#" class="btn link-inicio btn-outline-cerulean-blue-800">
+                                                    <span class="d-none d-sm-inline">Ir al inicio</span>
+                                                </a>
+                                                <a href="#" class="btn btn-cerulean-blue-800 link-agendamiento">
+                                                  <span class="d-none d-sm-inline">Agendar cita médica</span>
+                                                </a>
+                                            </div>
+                                            {{-- <a href="/" class="btn btn-cerulean-blue-800" id="btnEnd">
                                                 <span class="d-none d-sm-inline">Cerrar</span>
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -1284,11 +1292,13 @@ Veris Care - Suscripción
         if(detalleSuscripcion.lineaNegocio === 'PMF'){
             $('body').addClass('bg-onahau-gradient-100')
             $('.subtitle-card').addClass('subtitle-parami');
-            $('#btnEnd').attr('href','/b2c-parami');
+            $('.link-inicio').attr('href','/b2c-parami');
+            $('.link-agendamiento').attr('href', 'https://app.parami.com.ec/external/agendamiento');
         }else{
             $('.subtitle-card').addClass('subtitle-veris');
             $('body').addClass('bg-pattens-blue-100-gradient')
-            $('#btnEnd').attr('href','/b2c');
+            $('.link-inicio').attr('href','/b2c');
+            $('.link-agendamiento').attr('href', 'https://app.veris.com.ec/external/agendamiento');
         }
 
         randomValueNuvei = getRandomValue();
