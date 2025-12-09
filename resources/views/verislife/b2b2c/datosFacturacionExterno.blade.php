@@ -778,6 +778,47 @@ Veris Care - Suscripción
                                     </div>
                                 </div>
                             </div>
+                            <div class="row justify-content-center box-diferidos d-none">
+                                <div class="col-12 col-lg-6 col-md-8">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body px-lg-5">
+                                            <div class="mb-4">
+                                                <h5 class="fw-semibold subtitle-card text-white"><span class="nombreCliente text-capitalize"></span>, ingresa los datos para el pago</h5>
+                                                <hr>
+                                                <div class="row justify-content-center mt-4">
+                                                    <div class="col-md-12 col-md-10 col-lg-8 col-xl-8">
+                                                        <div class="card border-perano-300 bg-wild-sand-50 rounded-4">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-8">
+                                                                        <h3 class="mb-2">Total a pagar</h3>
+                                                                        <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
+                                                                        <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar d-none"></p>
+                                                                        <p class="fw-normal mb-0 fs-12p label-nombre-plan"></p>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-4">
+                                                                        <div class="text-start text-md-end">
+                                                                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/device-inject.svg" alt="pay" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5 class="mb-3">Elige tu forma de pago</h5>
+                                            <hr>
+                                            <div class="list-group custom-radio-list" id="lista-diferidos">
+                                                {{-- <label class="list-group-item mb-3 d-flex align-items-center justify-content-between">
+                                                    <span class="fw-medium">Corriente</span>
+                                                    <input class="form-check-input ms-3" type="radio" name="flexRadioDefault" id="radioCorriente" checked>
+                                                </label> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div id="firma-docuemtos-validation" class="content d-none">
                             <div class="row justify-content-center">

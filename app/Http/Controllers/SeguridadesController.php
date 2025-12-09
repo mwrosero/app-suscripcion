@@ -185,8 +185,8 @@ class SeguridadesController extends Controller
             'data'     => ['usuario' => strtoupper(urlencode($user))],
             'method'   => 'POST'
         ]);
-        dump(Ism::BASE_URL.$method);
-        dd(strtoupper(urlencode($user)));
+        // dump(Ism::BASE_URL.$method);
+        // dd(strtoupper(urlencode($user)));
         session()->flash('mensaje', $response->message . ' user: '.$user);
         return view('login.olvide_clave');
     }
