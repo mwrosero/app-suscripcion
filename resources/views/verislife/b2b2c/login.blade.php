@@ -46,7 +46,7 @@
         let tipoIdentificacion = 2;
         let numeroIdentificacion = $('#numeroIdentificacion').val();
         let args = [];
-        args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
+        args["endpoint"] = `${api_url}/${war_general}/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -85,7 +85,7 @@
         let numeroIdentificacion = $('#numeroIdentificacion').val();
 
         let args = [];
-        args["endpoint"] = `${api_url}/general/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&valorFiltro=${numeroIdentificacion}&page=1&perPage=1`;
+        args["endpoint"] = `${api_url}/${war_general}/v1/pacientes/consulta_basica?codigoTipoIdentificacion=${tipoIdentificacion}&tipoFiltro=numeroIdentificacion&valorFiltro=${numeroIdentificacion}&page=1&perPage=1`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;

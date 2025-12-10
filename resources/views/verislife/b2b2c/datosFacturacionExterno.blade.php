@@ -1878,7 +1878,7 @@ Veris Care - Suscripción
         let tipoIdentificacion = $('#tipoIdentificacionFactura option:selected').val();
         let numeroIdentificacion = $('#numeroIdentificacionFactura').val();
         let args = [];
-        args["endpoint"] = `${api_url}/general/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
+        args["endpoint"] = `${api_url}/${war_general}/v1/util/validar_identificacion?codigoTipoIdentificacion=${tipoIdentificacion}&codigoEmpresa=1&numeroIdentificacion=${numeroIdentificacion}`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1891,7 +1891,7 @@ Veris Care - Suscripción
 
     async function validarCorreoElectronico(email){
         let args = [];
-        args["endpoint"] = `${api_url}/general/v1/util/validacion_correo_electronico?canalOrigenInvocaion=COMERCIAL`;
+        args["endpoint"] = `${api_url}/${war_general}/v1/util/validacion_correo_electronico?canalOrigenInvocaion=COMERCIAL`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1909,7 +1909,7 @@ Veris Care - Suscripción
     }
 
     async function obtenerTiposIdentificacion() {
-        const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
+        const baseUrl = `${api_url}/${war_general}/v1/tipos_identificacion`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: '1',
             usoTipoIdentificacion: 'GESTION_FACTURACION'
@@ -1926,7 +1926,7 @@ Veris Care - Suscripción
     }
 
     async function obtenerInstitucionesBancarias() {
-        const baseUrl = `${api_url}/general/v1/instituciones/bancarias`;
+        const baseUrl = `${api_url}/${war_general}/v1/instituciones/bancarias`;
         const queryParams = new URLSearchParams({
             tipoProposito: '',
         });
