@@ -1,5 +1,4 @@
-{{-- @extends('template.app-template') --}}
-@extends('template.app-blank')
+@extends('template.app-template')
 @section('title')
 Veris
 @endsection
@@ -30,42 +29,42 @@ Registro
         </div>
         <div class="row justify-content-center">
             <div class="col-12">
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs radio-navs border-bottom-0" role="tablist">
                     <li class="nav-item">
-                        <a href="#comprobantes" role="tab" data-bs-toggle="tab" class="nav-link active"><i class="fa-solid fa-file-pdf me-2"></i> Comprobantes de pago</a>
+                        <a href="#comprobantes" role="tab" data-bs-toggle="tab" class="nav-link fs-14p text-blue-zodiac-950 active"><i class="fa-solid fa-file-pdf me-2"></i> Comprobantes de pago</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#facturas" role="tab" data-bs-toggle="tab" class="nav-link"><i class="fa-solid fa-file-invoice me-2"></i> Facturas</a>
+                        <a href="#facturas" role="tab" data-bs-toggle="tab" class="nav-link fs-14p text-blue-zodiac-950"><i class="fa-solid fa-file-invoice me-2"></i> Facturas</a>
                     </li>
                 </ul>
                 
-                <div class="tab-content">
+                <div class="tab-content radio-folder">
                     <div class="tab-pane active" role="tabpanel" id="comprobantes">
-                        <h3>Comprobantes de transferencia</h3>
+                        <h3 class="fs-20p">Comprobantes de transferencia</h3>
                         <div class="row">
                             <div class="col-3">
-                                <div class="card shadow-sm rounded-3">
+                                <div class="card rounded-3" style="box-shadow: 0px 0px 8px 0px #0000001A;">
                                     <div class="card-header text-center">
                                         <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-veris.svg" width="100" alt="veris">
                                     </div>
                                     <div class="card-body">
-                                        <h4 class="fw-bold text-primary-veris mb-1">Esencial</h4>
-                                        <h5 class="fw-medium text-blue-zodiac-950 mb-1">100 opciones</h5>
-                                        <h6 class="fw-normal mb-1">Mes: Octubre</h6>
+                                        <h4 class="fw-bold text-primary-veris mb-1 fs-20p">Esencial</h4>
+                                        <h5 class="fw-medium text-blue-zodiac-950 mb-1 fs-14p">100 opciones</h5>
+                                        <h6 class="fw-normal mb-1 fs-12p">Mes: Octubre</h6>
                                     </div>
                                     <div class="card-footer">
                                         <label for="archivo_oculto" class="btn btn-blue-veris fs-14p w-100 mb-2">
                                             Cargar
                                         </label>
                                         <input type="file" class="form-control fileComprobante d-none" id="archivo_oculto">
-                                        <small><span class="fw-light">Formatos: PDF,PNG,JPEG</span></small>
+                                        <span class="fw-light fs-10p">Formatos: PDF,PNG,JPEG</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="facturas">
-                        <h3>Facturas</h3>
+                        <h3 class="fs-20p">Facturas</h3>
                     </div>
                 </div>
             </div>
@@ -86,11 +85,12 @@ Registro
     })
     
     async function uploadComprobante(){
+        let secuenciaSuscripcion = 605;
         const formData = new FormData();
         formData.append("archivo", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_TRANSFERENCIA&secuenciaSuscripcion=123`;
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_TRANSFERENCIA&secuenciaSuscripcion=${secuenciaSuscripcion}`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -100,7 +100,7 @@ Registro
             const data = await call(args);
             console.log(data);
             if (data.code == 200) {
-                detalleSuscripcion.comprobante = data.data;
+                //detalleSuscripcion.comprobante = data.data;
                 $('#successComprobanteUpload').modal('show');
             } else {
                 showMessage('error','Atención', data.message)
