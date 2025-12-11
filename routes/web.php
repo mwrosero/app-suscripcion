@@ -48,6 +48,10 @@ Route::middleware('guest')->group(function () {
 
     /*Visualizar Prestaciones*/
     Route::get('/cliente/cotizacion/{idCotizacion}/aprobar', [CotizadorController::class, 'visualizarCotizacion'])->name('visualizar_cotizacion')->withoutMiddleware(['loggedUser']);
+
+    Route::get('/documentacion', function () {
+        return view('verislife.documentacion');
+    })->withoutMiddleware(['guest']);
 });
 
 //Route::middleware('auth')->group(function () {
