@@ -1147,7 +1147,7 @@ Veris Care - Suscripción
             let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
-            hideLoader();
+            // hideLoader();
         }
     }
 
@@ -1829,6 +1829,7 @@ Veris Care - Suscripción
                 }else{
                     // console.log(5)
                     $('#btn-next').attr('disabled', false);
+                    $('.box-diferidos').addClass('d-none');
                 }
             }else{
                 // console.log(6)
@@ -2395,13 +2396,21 @@ Veris Care - Suscripción
         detalleSuscripcion.autenticacionOtp = data
         if(data.transaction.status === "success" && data.transaction.status_detail === 32){
             $('#modalNuveiOtp').modal('hide');
+
+            //detalleSuscripcion.tarjeta = cardResponse.card;
             $('.box-tarjeta').addClass('d-none');
+            $('.box-diferidos').removeClass('d-none');
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-continuar-tipo-diferido');
+
+            await obtenerTiposDiferido();
+
+            {{-- $('.box-tarjeta').addClass('d-none');
             $('.box-firma').removeClass('d-none');
             esTarjetaBox = false;
             await obtenerListadoDocumentosFirma()
             $('#btn-next').attr('disabled', true);
             validateFields();
-            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos');
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-firmar-documentos'); --}}
         }else if(data.transaction.status === "pending"){
             showMessage('warning','Código inválido','Código erróneo, inténtalo nuevamente');
         }else{
