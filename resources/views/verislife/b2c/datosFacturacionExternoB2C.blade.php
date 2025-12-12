@@ -2194,9 +2194,6 @@ Veris Care - Suscripción
 
         let tipoDiferido = null;
         let plazoDiferido = null;
-
-
-        //if($('.nav-metodo-pago button.active').attr('idMedioPago-rel'))
         
         let diferido = JSON.parse($('input[name="flexTipoDiferido"]:checked').attr('data-rel'));
         if(diferido.mensajeMetodoPago !== "CORRIENTE"){
