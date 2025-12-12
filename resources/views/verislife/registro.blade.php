@@ -1093,7 +1093,7 @@ Registro
     }
 
     async function cargarTiposIdentificacion() {
-        const baseUrl = `${api_url}/general/v1/tipos_identificacion`;
+        const baseUrl = `${api_url}/${war_general}/v1/tipos_identificacion`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: '1',
             usoTipoIdentificacion: 'GESTION_FACTURACION'
@@ -1171,7 +1171,7 @@ Registro
         }
 
         try {
-            const baseUrl = `${api_url}/general/v1/util/validar_identificacion`;
+            const baseUrl = `${api_url}/${war_general}/v1/util/validar_identificacion`;
             const queryParams = new URLSearchParams({
                 codigoTipoIdentificacion: tipo,
                 codigoEmpresa: '1',
@@ -1225,7 +1225,7 @@ Registro
         }
 
         try {
-            const baseUrl = `${api_url}/general/v1/pacientes/consulta_basica`;
+            const baseUrl = `${api_url}/${war_general}/v1/pacientes/consulta_basica`;
             const queryParams = new URLSearchParams({
                 tipoFiltro: 'numeroIdentificacion',
                 codigoTipoIdentificacion: tipoIdentificacion,
@@ -1361,7 +1361,7 @@ Registro
     }
 
     async function cargarEstadoCivil() {
-        const baseUrl = `${api_url}/general/v1/estado_civil`;
+        const baseUrl = `${api_url}/${war_general}/v1/estado_civil`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: '1'
         });
@@ -1381,7 +1381,7 @@ Registro
     }
 
     async function cargarTiposParentesco() {
-        const baseUrl = `${api_url}/general/v1/tipos_parentesco`;
+        const baseUrl = `${api_url}/${war_general}/v1/tipos_parentesco`;
         const queryParams = new URLSearchParams({
             usoTipoParentesco: 'TODOS'
         });
@@ -1401,7 +1401,7 @@ Registro
     }
 
     async function cargarSectores() {
-        const baseUrl = `${api_url}/general/v1/sectores_cardinales`;
+        const baseUrl = `${api_url}/${war_general}/v1/sectores_cardinales`;
         const queryParams = new URLSearchParams({
             usoTipoParentesco: 'TODOS'
         });

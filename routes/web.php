@@ -156,6 +156,10 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.carga-dependiente.registro');
     })->withoutMiddleware(['guest']);
 
+    Route::get('/portal-fidelizacion/documentacion', function () {
+        return view('verislife.documentacion');
+    })->withoutMiddleware(['guest']);
+
 });
 
 # B2B2C

@@ -621,6 +621,21 @@ h1,
 .fs-14p {
     font-size: 14px !important;
 }
+.fs-16p {
+    font-size: 16px !important;
+}
+.fs-18p {
+    font-size: 18px !important;
+}
+.fs-20p {
+    font-size: 20px !important;
+}
+.fs-22p {
+    font-size: 22px !important;
+}
+.fs-24p {
+    font-size: 24px !important;
+}
 .fw-medium {
     font-weight: 500 !important;
 }
@@ -1190,6 +1205,32 @@ fieldset:disabled .btn.btn-eliminar-paciente {
     content: "\f077"; /* fa-chevron-up */
     margin-left: auto;
     transition: transform 0.3s ease;
+}
+
+.radio-navs .nav-item{
+    border: 1px solid #A9C4F9 !important;
+}
+
+.radio-navs .nav-item:first-child{
+    border-top-left-radius: 16px !important;
+}
+
+.radio-navs .nav-item:last-child{
+    border-top-right-radius: 16px !important;
+}
+
+.radio-navs .nav-link.active{
+    background-color: transparent !important;
+}
+
+.radio-folder{
+    border-width: 1px;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 16px !important;
+    border-bottom-right-radius: 16px !important;
+    border-bottom-left-radius: 16px !important;
+    border: 1px solid #A9C4F9;
+    box-shadow: 0px 0px 4px 0px #0000000D;
 }
 
 @media (max-width: 576px) {
