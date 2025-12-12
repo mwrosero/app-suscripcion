@@ -2175,8 +2175,12 @@ Veris Care - Suscripción
             payload.pago.detalle.metadata = JSON.stringify(detalleSuscripcion.tarjeta);
             payload.pago.detalle.cardToken = detalleSuscripcion.tarjeta.token;
             let diferido = JSON.parse($('input[name="flexTipoDiferido"]:checked').attr('data-rel'));
-            tipoDiferido = (diferido.aplicaInteres) ? 'DIFERIDO_INTERES' : 'DIFERIDO_SIN_INTERES';
-            plazoDiferido = diferido.numeroCuotas;
+            let tipoDiferido = null;
+            let plazoDiferido = null;
+            if(diferido.mensajeMetodoPago !== "CORRIENTE"){
+                tipoDiferido = (diferido.aplicaInteres) ? 'DIFERIDO_INTERES' : 'DIFERIDO_SIN_INTERES';
+                plazoDiferido = diferido.numeroCuotas;
+            }
             payload.tipoDiferido = tipoDiferido;
             payload.plazoDiferido = plazoDiferido;
         }
