@@ -541,7 +541,7 @@ Veris Care - Suscripción
                             </div>
                         </div>
                         <div id="forma-pago-validation" class="content d-none">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center box-tarjeta">
                                 <div class="col-12 col-lg-6 col-md-8">
                                     <div class="card shadow-sm">
                                         <div class="card-body">
@@ -793,7 +793,7 @@ Veris Care - Suscripción
                                                                     <div class="col-12 col-md-8">
                                                                         <h3 class="mb-2">Total a pagar</h3>
                                                                         <h2 class="fw-semibold text-cerulean-blue-800 mb-0 valor-pagar"></h2>
-                                                                        <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar d-none"></p>
+                                                                        <p class="fw-normal text-cerulean-blue-800 mb-0 fs-12p qty-valor-pagar"></p>
                                                                         <p class="fw-normal mb-0 fs-12p label-nombre-plan"></p>
                                                                     </div>
                                                                     <div class="col-12 col-md-4">
@@ -1047,6 +1047,44 @@ Veris Care - Suscripción
     #numeroIdentificacion::placeholder {
         text-transform: capitalize ;
     }
+
+    .list-group-item{
+        border-radius: 12px !important;
+    }
+    /* Agregamos una clase contenedora para facilitar la aplicación de estilos personalizados */
+    .custom-radio-list .list-group-item {
+        border: 1px solid #dee2e6; /* Borde estándar de Bootstrap */
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    /* 🎯 Regla clave: Aplica el borde azul cuando el input dentro del label está seleccionado */
+    .custom-radio-list input[type="radio"]:checked + .form-check-label,
+    .custom-radio-list input[type="radio"]:checked:focus ~ .list-group-item,
+    .custom-radio-list input[type="radio"]:checked:not(:focus) + .list-group-item,
+    .custom-radio-list .list-group-item:has(input[type="radio"]:checked) {
+        /* El selector :has() es el más limpio si el navegador lo soporta */
+        border-color: #296BEF; /* El color azul principal de Bootstrap (primary) */
+        {{-- box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Opcional: Para el efecto de "glow" de enfoque */ --}}
+        z-index: 2; /* Para asegurar que el borde no se oculte con otros elementos adyacentes */
+    }
+
+    /* Opcional: Estilo al pasar el ratón (hover) */
+    .custom-radio-list .list-group-item:hover {
+        border-color: #a0c9f1; /* Un azul más claro al pasar el ratón */
+        z-index: 1;
+    }
+
+    /* Esto es para que el label (list-group-item) cambie cuando su input interno está seleccionado */
+    .custom-radio-list .list-group-item:has(input:checked) {
+        border-color: #296BEF;
+        {{-- box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); --}}
+        z-index: 2;
+    }
+
+    /* Esto es para asegurar que el input en sí no tenga el focus ring por defecto de Bootstrap, ya que lo estamos poniendo en el list-group-item */
+    .custom-radio-list .form-check-input:focus {
+        box-shadow: none;
+    }
 </style>
 @endsection
 @push('scripts')
@@ -1102,14 +1140,15 @@ Veris Care - Suscripción
         let cardToSave = myCard.PaymentForm('card');
         console.log(cardToSave);
         if (cardToSave == null) {
-            $('#messages').text("Invalid Card Data");
+            hideLoader();
+            $('#messages').text("Datos inválidos de tarjeta, verifique la información ingresada.");
         }else{
             // submitButton.attr("disabled", "disabled").text("Procesando pago...");
             let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
             let email = $('#email').val();
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
+            hideLoader();
         }
-        hideLoader();
     }
 
     async function renderButtons(idx) {
@@ -1140,8 +1179,16 @@ Veris Care - Suscripción
                 </a>
               `;
         } else if(idx === 1) {
+            console.log({idx});
             if(detalleSuscripcion.hasOwnProperty('tarjeta')){
+                console.log("ELIMINAR TOKEN");
                 await deleteTokenNuvei();
+                esTarjetaBox = true;
+                $('.box-diferidos').addClass('d-none');
+                $('.box-tarjeta').removeClass('d-none');
+                $('#btn-next').removeClass('btn-firmar-documentos').removeClass('btn-generar-solicitud').removeClass('btn-continuar-tipo-diferido').addClass('btn-suscribir-tarjeta');
+                $('#btn-next').html('Continuar');
+                {{-- return; --}}
             }
             actions.innerHTML = `
                 <button id="btn-prev" class="btn btn-outline-cerulean-blue-800">
@@ -1201,7 +1248,11 @@ Veris Care - Suscripción
                 if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
                     stepper.next();
                 }else{
-                    await suscribirTarjeta();
+                    console.log('susc tarj 1243')
+                    showLoader();
+                    if(esTarjetaBox){
+                        await suscribirTarjeta();
+                    }
                 }
                 return;
             }
@@ -1250,6 +1301,9 @@ Veris Care - Suscripción
 
     let dataCita = {};
     let randomValueNuvei = "";
+
+    var esTarjetaBox = true;
+    var esDiferidoBox = false;
  
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion'));
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1267,20 +1321,39 @@ Veris Care - Suscripción
 
         $('body').on('click', '.nav-metodo-pago button.active', function(){
             if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
+                esTarjetaBox = false;
                 validateFields();
+            }else{
+                $('#btn-next').attr('disabled', false);
+                esTarjetaBox = true;
             }
         })
 
         $('body').on('click', '.nav-metodo-pago', function () {
-            console.log(55)
+            // console.log(55)
             if ($(this).find('.nav-link').attr('id') === 'pills-credit-card-tab') {
-                console.log(77)
+                console.log("Bloquear botón continuar");
                 $('#btn-next').attr('disabled', false);
+                esTarjetaBox = true;
+            }else{
+                $('#btn-next').attr('disabled', true);
+                esTarjetaBox = false;
             }
         });
 
         $('body').on('change', '#cuotasDescuento', function(){
             validateFields();
+        })
+
+        $('body').on('click', '.btn-continuar-tipo-diferido', async function(){
+            $('.box-diferidos').addClass('d-none');
+            esTarjetaBox = false;
+            esDiferidoBox = false;
+            await obtenerListadoDocumentosFirma()
+            $('.box-tarjeta').removeClass('d-none');
+            $('#btn-next').attr('disabled', true);
+            stepper.next();
+            $('#btn-next').removeClass('btn-continuar-tipo-diferido').addClass('btn-firmar-documentos');
         })
 
         $('body').on('click', '.link-documento', async function(){
@@ -1315,13 +1388,13 @@ Veris Care - Suscripción
             if (searchText.length >= 2) { // Solo realizar la búsqueda si hay al menos 3 caracteres
                 typingTimer = setTimeout(async function() {
                     var autoCompleteResult = await buscarAsesor(searchText);
-                    console.log(autoCompleteResult)
+                    // console.log(autoCompleteResult)
                     document.getElementById("result").innerHTML = "";
                     if(autoCompleteResult.code == 200){
                         if(autoCompleteResult.data.totalRows > 0){
                             $('.errorAsesor').addClass('d-none');
                             $.each(autoCompleteResult.data.rows, function(key, value){
-                                console.log(value);
+                                // console.log(value);
                                 document.getElementById("result").innerHTML += `<div style="cursor: pointer;s" class="list-group-item list-group-item-action lista-asesor text-capitalize" data-rel='${JSON.stringify(value)}'>${value.nombreCompleto.toLowerCase()}</div>`;
                             })
                             {{-- for (var i = 0, limit = 10, len = autoCompleteResult.length; i < len  && i < limit; i++) {
@@ -1463,6 +1536,12 @@ Veris Care - Suscripción
             await validarCorreoElectronico(email);
         })
 
+        $('body').on('change', 'input[name="flexTipoDiferido"]', function(){
+            console.log('change input[name="flexTipoDiferido"]');
+            $('#btn-next').attr('disabled', false);
+            $('.btn-continuar-tipo-diferido').attr('disabled', false);
+        });
+
         $('body').on('input change', 'input, select', async function(){
             validateFields();
         })
@@ -1474,6 +1553,21 @@ Veris Care - Suscripción
         $('body').on('click', '.btn-previsualizar', async function(){
             let datos = JSON.parse($(this).attr('data-rel'));
             await obtenerDocumentoContrato(datos);
+        })
+
+        $('body').on('click', '#btn-prev', async function(){
+            let step = $('#btn-next').attr('step-rel');
+            if(step == 2){
+                if(!esTarjetaBox){
+                    await deleteTokenNuvei();
+                    esTarjetaBox = true;
+                    $('.box-diferidos').addClass('d-none');
+                    $('.box-tarjeta').removeClass('d-none');
+                    $('#btn-next').removeClass('btn-firmar-documentos').removeClass('btn-generar-solicitud').removeClass('btn-continuar-tipo-diferido').addClass('btn-suscribir-tarjeta');
+                }else{
+                    stepper.previous()
+                }
+            }
         })
 
         $('body').on('input', '#input1, #input2, #input3, #input4, #input5, #input6', async function(){
@@ -1565,12 +1659,14 @@ Veris Care - Suscripción
     let submitInitialText = submitButton.text();
 
     $("#add-card-form").submit(function (e) {
+        showLoader();
         let myCard = $('#my-card');
         $('#messages').text("");
         let cardToSave = myCard.PaymentForm('card');
-        //console.log(cardToSave);
+        console.log('cardToSave #add-card-form');
         if (cardToSave == null) {
-            $('#messages').text("Invalid Card Data");
+            hideLoader();
+            $('#messages').text("Datos inválidos de tarjeta, verifique la información ingresada.");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
             let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
@@ -1585,9 +1681,14 @@ Veris Care - Suscripción
         hideLoader();
         console.log(cardResponse.card);
         if (cardResponse.card.status === 'valid') {
+            console.log("-----SUSCRITO, LLAMAR DIFERIDOS-----")
             detalleSuscripcion.tarjeta = cardResponse.card;
-            stepper.next();
-            //await registrarTarjeta();
+            $('.box-tarjeta').addClass('d-none');
+            $('.box-diferidos').removeClass('d-none');
+            $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-continuar-tipo-diferido');
+
+            await obtenerTiposDiferido();
+            // stepper.next();
         }else if(cardResponse.card.status === 'review' || cardResponse.card.status === 'pending') {
             detalleSuscripcion.tarjeta = cardResponse.card;
             popupOtpNuvei();
@@ -1712,31 +1813,34 @@ Veris Care - Suscripción
             let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
             let nombresFactura = $('#nombresFactura').val();
 
-            console.log(0)
+            // console.log(0)
             {{-- if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && segundoApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){ --}}
             if(nombres.length > 2 && celular.length > 6 && primerApellido.length > 2 && $('#terms').is(':checked') && $('#privacy').is(':checked')){
-                console.log(1)
+                // console.log(1)
                 if(!$('#mismosDatos').is(':checked')){
-                    console.log(2)
+                    // console.log(2)
                     if(nombresFactura.length > 0 && tipoIdentificacionFactura !== '' && numeroIdentificacionFacturaValido && emailFacturaValido){
-                        console.log(3)
+                        // console.log(3)
                         $('#btn-next').attr('disabled', false);
                     }else{
-                        console.log(4)
+                        // console.log(4)
                         $('#btn-next').attr('disabled', true);
                     }
                 }else{
-                    console.log(5)
+                    // console.log(5)
                     $('#btn-next').attr('disabled', false);
                 }
             }else{
-                console.log(6)
+                // console.log(6)
                 $('#btn-next').attr('disabled', true);
             }
         }
 
         if(step == 2){
-            console.log("Validate payment method");
+            //console.log("Validate payment method");
+            if(esTarjetaBox){
+                return;
+            }
             if($('.nav-metodo-pago button.active').attr('idMedioPago-rel') == 4){
                 {{-- if($('#aceptaDescuentoRol').is(':checked') && getInput('cuotasDescuento') !== ""){ --}}
                 if($('#aceptaDescuentoRol').is(':checked')){
@@ -1798,7 +1902,6 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         args["token"] = _token;
         const data = await call(args);
-        console.log(data);
         let isSettedActive = false;
         
         $.each(data.data, async function(key, value){
@@ -1812,9 +1915,7 @@ Veris Care - Suscripción
                 }
                 
                 if(value.nemonico == "DESCUENTO_ROL"){
-                    console.log(1)
                     if(detalleSuscripcion.detallePlan.tipo == "ANUAL"){
-                        console.log(2)
                         $(`.tab-${value.nemonico.toLowerCase()}`).removeClass('d-none').addClass(`${classTabContent}`);
                         $(`.${value.nemonico.toLowerCase()}`).removeClass('d-none');
                         $(`.${value.nemonico.toLowerCase()} button`).addClass(`${classTab}`).attr('idMedioPago-rel',value.idMedioPago).attr('descripcion-rel',value.descripcion);
@@ -1941,6 +2042,33 @@ Veris Care - Suscripción
         return response?.data || [];
     }
 
+    async function obtenerTiposDiferido(){
+        $('.box-firma').addClass('d-none');
+        esTarjetaBox = false;
+        esDiferidoBox = true;
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/bines_tarjetas?idBin=${detalleSuscripcion.tarjeta.bin}`;
+        args["method"] = "GET";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        const data = await call(args);
+        console.log(data);
+        $('.box-diferidos').removeClass('d-none');
+        if(data.code == 200){
+            let elem = ``;
+            $.each(data.data, function(key, value){
+                elem += `<label class="list-group-item mb-3 d-flex align-items-center justify-content-between">
+                    <span class="fw-medium text-capitalize">${value.mensajeMetodoPago.toLowerCase()}</span>
+                    <input class="form-check-input ms-3" type="radio" name="flexTipoDiferido" id="radio-${value.idBin}" data-rel='${JSON.stringify(value)}'>
+                </label>`;
+            })
+            $('#lista-diferidos').html(elem);
+            $('#btn-next').attr('disabled', true);
+        }else{
+            showMessage('error','Atención',data.message);
+        }
+    }
+
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
 
@@ -2045,6 +2173,11 @@ Veris Care - Suscripción
             // Pago con TC/TD
             payload.pago.detalle.metadata = JSON.stringify(detalleSuscripcion.tarjeta);
             payload.pago.detalle.cardToken = detalleSuscripcion.tarjeta.token;
+            let diferido = JSON.parse($('input[name="flexTipoDiferido"]:checked').attr('data-rel'));
+            tipoDiferido = (diferido.aplicaInteres) ? 'DIFERIDO_INTERES' : 'DIFERIDO_SIN_INTERES';
+            plazoDiferido = diferido.numeroCuotas;
+            payload.tipoDiferido = tipoDiferido;
+            payload.plazoDiferido = plazoDiferido;
         }
 
         if(codigoAsesor !== ""){

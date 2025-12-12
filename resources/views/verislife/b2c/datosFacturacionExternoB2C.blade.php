@@ -1656,12 +1656,14 @@ Veris Care - Suscripción
     let submitInitialText = submitButton.text();
 
     $("#add-card-form").submit(function (e) {
+        showLoader()
         let myCard = $('#my-card');
         $('#messages').text("");
         let cardToSave = myCard.PaymentForm('card');
         //console.log(cardToSave);
         if (cardToSave == null) {
-            $('#messages').text("Invalid Card Data");
+            hideLoader();
+            $('#messages').text("Datos inválidos de tarjeta, verifique la información ingresada.");
         }else{
             submitButton.attr("disabled", "disabled").text("Procesando pago...");
             let uid = `${detalleSuscripcion.numeroIdentificacion}${randomValueNuvei}`;
