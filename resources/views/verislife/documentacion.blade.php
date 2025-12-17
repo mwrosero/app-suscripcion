@@ -33,16 +33,53 @@ Registro
                     <li class="nav-item">
                         <a href="#comprobantes" role="tab" data-bs-toggle="tab" class="nav-link fs-14p text-blue-zodiac-950 active"><i class="fa-solid fa-file-pdf me-2"></i> Comprobantes de pago</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#facturas" role="tab" data-bs-toggle="tab" class="nav-link fs-14p text-blue-zodiac-950"><i class="fa-solid fa-file-invoice me-2"></i> Facturas</a>
+                    <li class="nav-item d-none">
+                        <a href="#facturas" role="tab" data-bs-toggle="tab" class="nav-link fs-14p text-blue-zodiac-950 disabled"><i class="fa-solid fa-file-invoice me-2"></i> Facturas</a>
                     </li>
                 </ul>
                 
                 <div class="tab-content radio-folder">
                     <div class="tab-pane active" role="tabpanel" id="comprobantes">
-                        <h3 class="fs-20p">Comprobantes de transferencia</h3>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-12 col-md-6">
+                                <h3 class="fs-20p fw-medium">Comprobantes de transferencia</h3>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <select class="form-control form-select" name="year" id="year">
+                                    @php
+                                        $months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+                                        $initYear = 2025;
+                                        $currentYear = (int) date('Y');
+                                        $currentMonthNumber = (int) date('n');
+                                        $endYear = $currentYear + 5;
+                                        $maxYearToShow = $currentYear;
+                                    @endphp
+
+                                    @for ($year = $initYear; $year <= $maxYearToShow; $year++)
+                                        @php
+                                        $selected = ($year === $currentYear) ? 'selected' : '';
+                                        @endphp
+                                        <option value="{{ $year }}" {{ $selected }}>
+                                            {{ $year }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <select class="form-control form-select" name="month" id="month">
+                                    @for ($month = 1; $month <= 12; $month++)
+                                        @php
+                                        $selected = ($month === $currentMonthNumber) ? 'selected' : '';
+                                        @endphp
+                                        <option value="{{ $month }}" {{ $selected }}>
+                                            {{ $months[ $month-1 ] }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" id="listado-comprobantes">
+                            {{-- <div class="col-3 mb-3">
                                 <div class="card rounded-3" style="box-shadow: 0px 0px 8px 0px #0000001A;">
                                     <div class="card-header text-center">
                                         <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-veris.svg" width="100" alt="veris">
@@ -60,7 +97,7 @@ Registro
                                         <span class="fw-light fs-10p">Formatos: PDF,PNG,JPEG</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="facturas">
@@ -72,25 +109,121 @@ Registro
     </section>
 </div>
 <script>
+    let codigoCliente = {{ Session::get('infoCliente')->informacionCliente->codigoCliente }};
     let finalFile = null;
+    let months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
     document.addEventListener('DOMContentLoaded', async () => {
-        $('.fileComprobante').on('change', async function (e) {
+        await listadoComprobantes();
+
+        $('body').on('change', '.fileComprobante', async function (e) {
             console.log(0)
             $('#btn-next').attr('disabled', true);
             finalFile = e.target.files[0];
             if (!finalFile) return;
             console.log("Eligió")
-            await uploadComprobante();
+            let value = JSON.parse($(this).attr('data-rel'));
+            let eliminarPreviamente = $(this).attr('eliminar-rel')
+            await uploadComprobante(value, eliminarPreviamente);
         });
+
+        $('body').on('change', '#year, #month', async function () {
+            await listadoComprobantes();
+        })
     })
-    
-    async function uploadComprobante(){
-        let secuenciaSuscripcion = 605;
+
+    async function listadoComprobantes(mostrarLoader = true){
+        let year = parseInt(getInput('year'));
+        let month = parseInt(getInput('month'));
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${codigoCliente}/documentos_comprobantes?codigoEmpresa=1&tipoDocumento=COBROS&anio=${year}&mes=${month}`;
+        args["method"] = "GET";
+        args["showLoader"] = mostrarLoader;
+        args["token"] = _token;
+
+        const data = await call(args);
+        console.log(data)
+
+        if(data.code == 200){
+            if(data.data.comprobantesPago.length > 0){
+                let elem = ``;
+                $.each(data.data.comprobantesPago, function(key, value){
+                    elem += drawCard(value);
+                })
+                $('#listado-comprobantes').html(elem);
+            }else{
+                let elem = `<div class="col-12 mb-3 text-center">No tienes comprobantes en la fecha seleccionada.</div>`;
+                $('#listado-comprobantes').html(elem);
+            }
+        }
+    }
+
+    function drawCard(value){
+        let logoNombre = 'logo-veris.svg';
+        if (value.lineaNegocio === 'PMF') logoNombre = 'parami.png';
+        const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
+
+        let cardFooter = ``;
+        if(value.estadoComprobante !== "ING"){
+            cardFooter += `<a href="${value.urlSoporte}" target="_blank" class="btn btn-blue-veris fs-14p w-100 mb-2 text-decoration-none">
+                    Visualizar
+                </a>`;
+        }else if(value.estadoComprobante === "ING" && value.urlSoporte !== null){
+            cardFooter += `<a href="${value.urlSoporte}" target="_blank" class="btn btn-blue-veris fs-14p w-100 mb-2 text-decoration-none">
+                    Visualizar
+                </a>
+                <label for="archivo_oculto_${value.secuenciaPago}" class="text-primary-veris text-decoration-underline text-center fs-14p w-100 mb-2">
+                    Reenviar Comprobante
+                </label>
+                <input eliminar-rel='S' data-rel='${JSON.stringify(value)}' type="file" class="form-control fileComprobante d-none" id="archivo_oculto_${value.secuenciaPago}">`;
+        }else{
+            cardFooter += `<label for="archivo_oculto_${value.secuenciaPago}" class="btn btn-blue-veris fs-14p w-100 mb-2">
+                Cargar
+            </label>
+            <input eliminar-rel='N' data-rel='${JSON.stringify(value)}' type="file" class="form-control fileComprobante d-none" id="archivo_oculto_${value.secuenciaPago}">
+            <span class="fw-light fs-10p">Formatos: PDF,PNG,JPEG</span>`;
+        }
+
+        let elem = `<div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
+            <div class="card rounded-3" style="box-shadow: 0px 0px 8px 0px #0000001A;">
+                <div class="card-header text-center">
+                    <img src="${logoSrc}" width="100" alt="veris">
+                </div>
+                <div class="card-body">
+                    <h4 class="fw-bold text-primary-veris mb-1 fs-20p text-capitalize">${value.nombrePlan.toLowerCase()}</h4>
+                    <h5 class="d-none fw-medium text-blue-zodiac-950 mb-1 fs-14p">100 opciones</h5>
+                    <h6 class="fw-normal mb-1 fs-12p">Mes: ${months[value.mes - 1]}</h6>
+                </div>
+                <div class="card-footer">
+                    ${cardFooter}
+                </div>
+            </div>
+        </div>`;
+        return elem;
+    }
+
+    async function eliminarComprobante(value){
+        let args = [];
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
+        args["method"] = "DELETE";
+        args["token"] = _token;
+        args["showLoader"] = true;
+        args["bodyType"] = "json";
+        const data = await call(args);
+            console.log(data);
+    }
+
+    async function uploadComprobante(value, eliminarPreviamente){
+        //console.log(value, eliminarPreviamente);
+        if(eliminarPreviamente === "S"){
+            await eliminarComprobante(value);
+        }
+
+        let secuenciaSuscripcion = value.secuenciaSuscripcion;
         const formData = new FormData();
         formData.append("archivo", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_TRANSFERENCIA&secuenciaSuscripcion=${secuenciaSuscripcion}`;
+        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -99,9 +232,11 @@ Registro
         try {
             const data = await call(args);
             console.log(data);
+            finalFile = undefined;
             if (data.code == 200) {
                 //detalleSuscripcion.comprobante = data.data;
                 $('#successComprobanteUpload').modal('show');
+                await listadoComprobantes(false);
             } else {
                 showMessage('error','Atención', data.message)
                 console.log("Error en respuesta:", data);
