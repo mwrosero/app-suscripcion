@@ -171,7 +171,7 @@ Registro
             cardFooter += `<a href="${value.urlSoporte}" target="_blank" class="btn btn-blue-veris fs-14p w-100 mb-2 text-decoration-none">
                     Visualizar
                 </a>
-                <label for="archivo_oculto_${value.secuenciaPago}" class="text-primary-veris text-decoration-underline text-center fs-14p w-100 mb-2">
+                <label style="cursor: pointer;" for="archivo_oculto_${value.secuenciaPago}" class="text-primary-veris text-decoration-underline text-center fs-14p w-100 mb-2">
                     Reenviar Comprobante
                 </label>
                 <input eliminar-rel='S' data-rel='${JSON.stringify(value)}' type="file" class="form-control fileComprobante d-none" id="archivo_oculto_${value.secuenciaPago}">`;
