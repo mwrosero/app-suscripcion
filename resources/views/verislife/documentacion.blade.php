@@ -220,7 +220,7 @@ Registro
 
         let secuenciaSuscripcion = value.secuenciaSuscripcion;
         const formData = new FormData();
-        formData.append("archivo", finalFile);
+        formData.append("file", finalFile);
 
         let args = [];
         args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
