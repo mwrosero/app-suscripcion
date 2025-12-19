@@ -283,7 +283,7 @@
             <div class="col-12 col-md-5">
                 <div class="card rounded-4 shadow-sm text-center h-100" style="background: #25B0F3">
                     <div class="badge bg-white text-congress-blue-900 fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
-                        Hasta 20% en:
+                        Hasta 10% en:
                     </div>
                     <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                         <div class="col-6 col-xl-3 text-center">
