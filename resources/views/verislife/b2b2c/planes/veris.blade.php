@@ -141,6 +141,12 @@ Veris Care - Elegir plan médico
                 </div>
             </div>
             <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+                <div class="col-12 d-flex align-items-end justify-content-center mb-3">
+                    <h5 class="fw-medium ps-3 fs-18 mb-0 me-3">Descuentos en</h5>
+                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/logo-veris.svg" class="me-4" alt="veris">
+                </div>
+            </div>
+            <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
                 <div class="col-12 col-md-3">
                     <div class="card border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                         <div class="badge bg-blue-ribbon-600 text-white fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
@@ -157,6 +163,63 @@ Veris Care - Elegir plan médico
                     <div class="card border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
                         <div class="badge bg-blue-ribbon-600 text-white fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
                             -15% en:
+                        </div>
+                        <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
+                            <div class="col-6 col-xl-3 text-center">
+                                <i class="fa-solid fa-flask fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                                <p class="fs-12p text-blue-zodiac-950 mb-0 lh-1">Laboratorio clínico</p>
+                            </div>
+                            <div class="col-6 col-xl-3 text-center">
+                                <i class="fa-solid fa-x-ray fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                                <p class="fs-12p text-blue-zodiac-950 mb-0 lh-1">Imágenes</p>
+                            </div>
+                            <div class="col-6 col-xl-3 text-center">
+                                <i class="fa-solid fa-crutch fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                                <p class="fs-12p text-blue-zodiac-950 mb-0 lh-1">Terapias</p>
+                            </div>
+                            <div class="col-6 col-xl-3 text-center">
+                                <i class="fa-solid fa-file-prescription fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                                <p class="fs-12p text-blue-zodiac-950 mb-0 lh-1">Procedimientos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-3">
+                    <div class="card border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                        <div class="badge bg-blue-ribbon-600 text-white fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                            -5% en:
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
+                            <i class="fa-solid fa-pills fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                            <p class="fs-12p fw-normal text-blue-zodiac-950 mb-0 lh-1">Farmacia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+                <div class="col-12 d-flex align-items-center justify-content-center mb-3">
+                    <h5 class="fw-medium ps-3 fs-18 mb-0 me-3">Descuentos en</h5>
+                    <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-sm.png" class="me-4" alt="parami">
+                </div>
+            </div>
+            <div class="row g-3 gap-4 gap-xl-0 mt-4 justify-content-between">
+                <div class="col-12 col-md-3">
+                    <div class="card border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                        <div class="badge bg-blue-ribbon-600 text-white fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                            -20% en:
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center pt-4">
+                            <i class="fa-solid fa-stethoscope fs-2 text-blue-zodiac-950 mt-3 mb-2"></i>
+                            <p class="fs-12p fw-normal text-blue-zodiac-950 mb-0 lh-1">Consultas adicionales</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-5">
+                    <div class="card border-blue-ribbon-600 rounded-4 shadow-sm text-center h-100">
+                        <div class="badge bg-blue-ribbon-600 text-white fs-12p position-absolute top-0 start-50 translate-middle rounded-pill px-4 py-3 small fw-medium">
+                            -20% en:
                         </div>
                         <div class="card-body row justify-content-around align-items-center flex-wrap g-0 pt-4">
                             <div class="col-6 col-xl-3 text-center">
