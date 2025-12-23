@@ -64,7 +64,8 @@ async function call(args){
         // Solo agregas Content-Type si NO es FormData
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     }else if(args.bodyType === "formdata"){
-        myHeaders.append("Content-Type", "multipart/form-data");
+        console.log("formdata");
+        //myHeaders.append("Content-Type", "multipart/form-data");
     }
 
     if(args.tokenNuvei){
