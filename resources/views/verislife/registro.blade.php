@@ -15,6 +15,19 @@ Registro
     $nextYear = $now->copy()->addYear();
 @endphp
 
+<div class="modal fade" id="planEnMora" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="planEnMoraLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered mx-auto">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h5 class="text-blue-zodiac-950 text-center fw-bold">Suscripción impaga.</h5>
+                <div class="text-center">
+                    <button type="button" class="btn btn-cerulean-blue-800 text-nowrap fs-14p" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="addBeneficiaryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeneficiaryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-simple modal-dialog-centered">
         <div class="modal-content p-3 py-md-4 px-md-4">
@@ -399,10 +412,10 @@ Registro
     <section class="mb-4 p-3">
         <div class="row g-3 justify-content-center">
             <div class="col-12 mb-4 text-end">
-                <button type="button" class="btn btn-blue-veris fw-medium fs-14p shadow-none mb-3" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
+                <button type="button" class="btn btn-action-mora btn-blue-veris fw-medium fs-14p shadow-none mb-3" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                     <i class="fa-solid fa-plus me-2"></i> Añadir usuario
                 </button>
-                <label for="excelFile" class="btn btn-outline-blue-veris fw-medium fs-14p shadow-none mb-3" style="cursor: pointer;">
+                <label for="excelFile" class="btn btn-action-mora btn-outline-blue-veris fw-medium fs-14p shadow-none mb-3" style="cursor: pointer;">
                     <i class="fa-solid fa-users me-2"></i> 
                     <small>Carga masiva de usuarios</small>
                     <input type="file" id="excelFile" name="excelFile" accept=".xls, .xlsx" hidden />
@@ -517,8 +530,17 @@ Registro
     let perPage = 7;
     let trDelete = null;
     let pacienteExistente = false
+    let statusMora;
 
     document.addEventListener('DOMContentLoaded', async () => {
+
+        statusMora = (detalleSuscripcion.detallePlan.mora) ? `disabled` : ``;
+
+        if(detalleSuscripcion.detallePlan.mora){
+            $('.btn-action-mora').attr('disabled', true);
+            $('.btn-action-mora').addClass('disabled');
+            $('#planEnMora').modal('show');
+        }
 
         if(detalleSuscripcion.hasOwnProperty('origen') && detalleSuscripcion.origen == "suscripcion"){
             $('.item-action').addClass('d-none')
@@ -810,7 +832,8 @@ Registro
                 pacientes = filtrados;
                 console.log(pacientes)
                 page = 1;
-                const pacientesActivos = pacientes.filter(p => p.activo);
+                {{-- const pacientesActivos = pacientes.filter(p => p.activo); --}}
+                const pacientesActivos = pacientes;
 
                 fillRegistros();
                 drawPaginationAfiliados({ totalRows: pacientesActivos.length }, page);
@@ -878,7 +901,7 @@ Registro
             }
             let actionTd = `<td class="text-nowrap align-middle text-center">
                 <div class="form-check d-flex justify-content-center align-items-center me-1">
-                    <input ${disabled} class="form-check-input mx-auto item-beneficiario" type="checkbox" data-rel='${JSON.stringify(value)}'/>
+                    <input ${statusMora} ${disabled} class="form-check-input mx-auto item-beneficiario" type="checkbox" data-rel='${JSON.stringify(value)}'/>
                 </div>
             </td>`;
             if (detalleSuscripcion.origen === "suscripcion") {
@@ -894,10 +917,10 @@ Registro
                 <td class="text-center">${value.fechaNacimiento}</td>
                 <td class="text-center">${detalleSuscripcion.detallePlan.nombre}</td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
+                    <button ${statusMora} type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
+                    <button ${statusMora} type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
