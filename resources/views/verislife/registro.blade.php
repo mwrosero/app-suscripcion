@@ -619,7 +619,7 @@ Registro
             trDelete = keyAEliminar;
             console.log(keyAEliminar);
             // delete pacientes[keyAEliminar];
-            // pacientes.splice(keyAEliminar, 1);
+            pacientes.splice(keyAEliminar, 1);
             fillRegistros();
         });
 
@@ -878,6 +878,14 @@ Registro
         const pacientesActivos = pacientes.filter(p => p.activo);
         if (pacientesActivos.length === 0) {
             $('.box-pagination').addClass('d-none');
+            $('#contenido-pacientes').empty().html(`<tr id="empty-space">
+                                    <td colspan="8">
+                                        <div class="text-center">
+                                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/images/illustration/veris/connecting-teams-amico.svg" alt="sin registro">
+                                        </div>
+                                    </td>
+                                </tr>`);
+            $('#btn-continuar').attr('disabled', true);
             return;
         }
 
@@ -908,6 +916,11 @@ Registro
                 actionTd = ``;
             }
 
+            let modalMotivosAttr = ``;
+            if(detalleSuscripcion.origen !== 'suscripcion'){
+                modalMotivosAttr += `data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal"`
+            }
+
             elem += `<tr id="paciente-${key}">
                 ${actionTd}
                 <td class="text-center">${value.numeroIdentificacionPcte}</td>
@@ -920,7 +933,7 @@ Registro
                     <button ${statusMora} type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button ${statusMora} type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal">
+                    <button ${statusMora} type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" ${modalMotivosAttr}>
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
