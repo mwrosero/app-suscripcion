@@ -808,7 +808,7 @@ Registro
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
-            tipoCredito: 'CREDITO_FIDELIZACION',
+            nemonicoTipoCredito: 'CREDITO_FIDELIZACION',
             tipoFiltro: $('#tipoFiltro option:selected').val(),
             valorFiltro: $('#valorFiltro').val(),
             page: 1,
@@ -1162,7 +1162,7 @@ Registro
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
-            tipoCredito: 'CREDITO_FIDELIZACION',
+            nemonicoTipoCredito: 'CREDITO_FIDELIZACION',
             tipoFiltro: 'identificacion',
             valorFiltro: numero,
             page: 1,
