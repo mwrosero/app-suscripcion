@@ -5,4 +5,5 @@ return [
     'dashboard'             => 'home',
     'registro-plan'         => 'registrar',
     'editar-colaboradores'  => 'editar',
+    'documentacion'         => 'documentacion',
 ];

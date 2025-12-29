@@ -891,6 +891,7 @@ $processId = base64_encode(uniqid());
     {{-- let codigoCliente = 13315; --}}
     document.addEventListener('DOMContentLoaded', async () => {
         const planes = await obtenerPlanesSuscripcionDetalleEmpresa();
+        console.log(planes);
         const planesContratados = planes.filter(plan => plan.contratado);
         const planesPendientes = planes.filter(plan => !plan.contratado);
 
