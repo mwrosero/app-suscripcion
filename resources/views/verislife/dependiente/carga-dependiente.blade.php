@@ -213,6 +213,12 @@ $processId = base64_encode(uniqid());
 
     function renderizarPlanes(planesContratados) {
         if(planesContratados === null || planesContratados.length == 0){
+            $('.registrar-dependientes, .editar-dependientes')
+            .css({
+                'pointer-events': 'none',
+                'opacity': '0.5',
+                'cursor': 'not-allowed'
+            });
             $('#empty-space-planes-contratados').removeClass('d-none')
             return;
         }
