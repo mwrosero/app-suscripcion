@@ -31,7 +31,7 @@
                     $iconPath = $iconBase ? "/assets/svg/icons/menu/{$iconBase}_{$style}_icon.svg" : null;
                 @endphp
 
-                <li class="menu-item @if($isActive) active @endif">
+                <li class="menu-item @if($isActive) active @endif {{ Str::slug($v->descripcionOpcion) }}">
                     <a href="/{{ $expectedRoute }}" class="menu-link text-white">
                         @if ($iconPath)
                             <div class="svg-container me-3">

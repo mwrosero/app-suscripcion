@@ -688,6 +688,7 @@
         </div>
     </div>
 </section>
+@include('verislife.widget-whatsapp')
 <script>
     let detalleSuscripcionTmp = {
         "empresa": {
