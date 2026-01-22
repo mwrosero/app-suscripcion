@@ -1205,8 +1205,10 @@ Veris Care - Suscripción
             let direccionFactura = $('#direccionFactura').val();
 
             console.table(step)
+            console.table('/////////////')
             if(step == 1){
                 if(busqueda){
+                    console.log(999)
                     couldNext = false;
                     busqueda = false;
                     $('.box-form-2').removeClass('d-none');
@@ -1214,7 +1216,12 @@ Veris Care - Suscripción
                     $('#btn-next').attr('disabled', true);
                     validateFields()
                 }else{
-                    $('.nombreCliente').html($('#nombres').val().toLowerCase())
+                    if($('#email').val() !== "" && $('#celular').val() !== ""){
+                        $('.nombreCliente').html($('#nombres').val().toLowerCase())
+                    }else{
+                        showMessage('warning','Atención','Debe llenar los campos obligatorios');
+                        couldNext = false;
+                    }
                 }
                 detalleSuscripcion.datosFactura = {
                     "tipoIdentificacion": tipoIdentificacionFactura,
@@ -1514,9 +1521,14 @@ Veris Care - Suscripción
             await validarIdentificacionFactura('numeroIdentificacion');
         })
 
-        $('body').on('change', '#email, #emailFactura', async function(){
+        $('body').on('change', '#email', async function(){
             let email = $(this).val();
-            await validarCorreoElectronico(email);
+            await validarCorreoElectronico(email, false, true);
+        })
+
+        $('body').on('change', '#emailFactura', async function(){
+            let email = $(this).val();
+            await validarCorreoElectronico(email, false, false);
         })
 
         $('body').on('change', 'input[name="flexTipoDiferido"]', function(){
@@ -1914,7 +1926,15 @@ Veris Care - Suscripción
                         let persona = {};
                         if(paciente.data.totalRows > 0){
                             $('#nombres, #primerApellido, #segundoApellido, #fechaNacimiento, #genero').attr('readonly', true)
-                            persona = paciente.data.rows[0]
+                            persona = paciente.data.rows[0];
+                            if(persona.hasOwnProperty('correoElectronico') && persona.correoElectronico !== null && paciente.correoElectronico !== ""){
+                                let validarEmail = await validarCorreoElectronico(persona.correoElectronico, true, false);
+                                console.log(validarEmail)
+                                if(validarEmail.existeVerisCare){
+                                    persona.correoElectronico = "";
+                                    console.log(persona)
+                                }
+                            }
                             detalleSuscripcion.persona = persona;
                             $('#nombres').val(detalleSuscripcion.persona.primerNombre);
                             $('#primerApellido').val(detalleSuscripcion.persona.primerApellido);
@@ -2073,9 +2093,13 @@ Veris Care - Suscripción
         }
     }
 
-    async function validarCorreoElectronico(email){
+    async function validarCorreoElectronico(email, incognito = false, validarExistencia = false){
         let args = [];
-        args["endpoint"] = `${api_url}/${war_general}/v1/util/validacion_correo_electronico?canalOrigenInvocaion=COMERCIAL`;
+        let paramsAdd = ``;
+        if(incognito || validarExistencia){
+            paramsAdd += `&validacionVerisCare=true`;
+        }
+        args["endpoint"] = `${api_url}/${war_general}/v1/util/validacion_correo_electronico?canalOrigenInvocaion=COMERCIAL${paramsAdd}`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2087,8 +2111,22 @@ Veris Care - Suscripción
         const data = await call(args);
         console.log(data);
         if(data.code == 200){
-            emailFacturaValido = data.data.correoValido
-            validateFields();
+            if(incognito){
+                return data.data;
+            }else{
+                if(validarExistencia){
+                    if(data.data.existeVerisCare){
+                        $('#email').val("");
+                        showMessage('error','Atención','El correo electrónico ingresado: <b>'+email+'</b> ya está vinculado a una suscripción activa.');
+                    }else{
+                        emailFacturaValido = data.data.correoValido
+                        validateFields();
+                    }
+                }else{
+                    emailFacturaValido = data.data.correoValido
+                    validateFields();
+                }
+            }
         }
     }
 
