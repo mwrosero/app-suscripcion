@@ -381,3 +381,31 @@ function esMayorDeEdad(fechaNacimiento) {
 
     return edad >= 18;
 }
+
+function esMayorDeEdadDDMMYYYY(fechaString) {
+    const hoy = new Date();
+    
+    // Separamos por la barra inclinada "/"
+    const partes = fechaString.split('/');
+    
+    // Verificamos que tengamos las 3 partes necesarias
+    if (partes.length !== 3) return false;
+
+    const diaNac = parseInt(partes[0], 10);
+    const mesNac = parseInt(partes[1], 10) - 1; // Restamos 1 porque Enero es 0
+    const anioNac = parseInt(partes[2], 10);
+
+    const nacimiento = new Date(anioNac, mesNac, diaNac);
+
+    // Cálculo de la edad
+    let edad = hoy.getFullYear() - anioNac;
+    const mesDiferencia = hoy.getMonth() - mesNac;
+    const diaDiferencia = hoy.getDate() - diaNac;
+
+    // Ajuste si no ha llegado su cumpleaños este año
+    if (mesDiferencia < 0 || (mesDiferencia === 0 && diaDiferencia < 0)) {
+        edad--;
+    }
+
+    return edad >= 18;
+}
