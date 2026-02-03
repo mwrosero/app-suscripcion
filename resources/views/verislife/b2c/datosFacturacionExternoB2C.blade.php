@@ -1216,6 +1216,10 @@ Veris Care - Suscripción
                     $('#btn-next').attr('disabled', true);
                     validateFields()
                 }else{
+                    if(!esMayorDeEdad(getInput('fechaNacimiento'))){
+                        showMessage('warning','Atención','Para continuar con el registro el titular debe ser mayor de edad.');
+                        couldNext = false;
+                    }
                     if($('#email').val() !== "" && $('#celular').val() !== ""){
                         if(validarEmailRegex($('#email').val())){
                             $('.nombreCliente').html($('#nombres').val().toLowerCase())
