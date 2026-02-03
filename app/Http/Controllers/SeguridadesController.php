@@ -198,7 +198,11 @@ class SeguridadesController extends Controller
         return view('login.reestablecer_clave');
     }
 
-    public function formularioActualizarClave($usuario){
+    public function formularioActualizarClave($usuario = null){
+        if (!$usuario) {
+            return redirect()->route('login');
+        }
+        
         return view('login.actualizar_clave')
             ->with('usuario', $usuario);
             // ->with('usuario',base64_decode($usuario));
