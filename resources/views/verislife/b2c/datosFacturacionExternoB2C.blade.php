@@ -1217,7 +1217,12 @@ Veris Care - Suscripción
                     validateFields()
                 }else{
                     if($('#email').val() !== "" && $('#celular').val() !== ""){
-                        $('.nombreCliente').html($('#nombres').val().toLowerCase())
+                        if(validarEmailRegex($('#email').val())){
+                            $('.nombreCliente').html($('#nombres').val().toLowerCase())
+                        }else{
+                            showMessage('warning','Atención','Revise el formato del correo electrónico.');
+                            couldNext = false;    
+                        }
                     }else{
                         showMessage('warning','Atención','Debe llenar los campos obligatorios');
                         couldNext = false;
@@ -1913,6 +1918,11 @@ Veris Care - Suscripción
         const data = await call(args);
         console.log(data)
         return data;
+    }
+
+    function validarEmailRegex(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     }
 
     async function validateFields(){
