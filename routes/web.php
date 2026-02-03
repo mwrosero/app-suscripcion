@@ -35,9 +35,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/reestablecer-clave', [SeguridadesController::class, 'reestablecerClave'])->name('reestablecer_clave')->withoutMiddleware(['loggedUser']);
     
+    Route::get('/actualizar-clave/{usuario?}', [SeguridadesController::class, 'formularioActualizarClave'])->name('actualizar_clave.form')->withoutMiddleware(['loggedUser']);
+    
     Route::post('/actualizar-clave', [SeguridadesController::class, 'actualizarClave'])->name('actualizar_clave.update')->withoutMiddleware(['loggedUser']);
-
-    Route::get('/actualizar-clave/{usuario}', [SeguridadesController::class, 'formularioActualizarClave'])->name('actualizar_clave.form')->withoutMiddleware(['loggedUser']);
     
     Route::post('/actualizar-clave-temporal', [SeguridadesController::class, 'actualizarClaveTemporalAction'])->name('actualizarClaveTemporalAction')->withoutMiddleware(['loggedUser']);
     
