@@ -615,12 +615,21 @@ Registro
         });
 
         $('body').on('click', '.btn-eliminar-paciente', async function(){
-            let keyAEliminar = parseInt($(this).attr('paciente-rel'));
+            console.log(2)
+            let secuenciaAfiliado = $(this).attr('data-secuencia-afiliado');
+            let numeroDocumentoSeleccionado = $(this).attr('numeroDocumento-rel');
+            if (secuenciaAfiliado === 'undefined') {
+                console.log(numeroDocumentoSeleccionado)
+                //$(`.tr-documento-${numeroDocumentoSeleccionado}`).remove();
+                pacientes = pacientes.filter(item => item.numeroIdentificacionPcte !== numeroDocumentoSeleccionado);
+                fillRegistros();
+            }
+            
+            {{-- let keyAEliminar = parseInt($(this).attr('paciente-rel'));
             trDelete = keyAEliminar;
             console.log(keyAEliminar);
-            // delete pacientes[keyAEliminar];
             pacientes.splice(keyAEliminar, 1);
-            fillRegistros();
+            fillRegistros(); --}}
         });
 
         $('body').on('click', '#btn-continuar', async function(){
@@ -710,6 +719,8 @@ Registro
         })
 
         btnDeleteCollaborador.addEventListener('click', async () => {
+
+            console.log(1)
             const secuenciaAfiliado = deleteCollaboratorModal.getAttribute('data-secuencia-afiliado');
             const selectedRadio = document.querySelector('input[name="motivo"]:checked');
             if (!selectedRadio) {
@@ -917,11 +928,11 @@ Registro
             }
 
             let modalMotivosAttr = ``;
-            if(detalleSuscripcion.origen !== 'suscripcion'){
+            if(detalleSuscripcion.origen !== 'suscripcion' && value.hasOwnProperty('secuenciaAfiliado')){
                 modalMotivosAttr += `data-bs-toggle="modal" data-bs-target="#deleteCollaboratorModal"`
             }
 
-            elem += `<tr id="paciente-${key}">
+            elem += `<tr id="paciente-${key}" class="tr-documento-${value.numeroIdentificacionPcte}">
                 ${actionTd}
                 <td class="text-center">${value.numeroIdentificacionPcte}</td>
                 <td class="text-center">${value.primerApellido ?? ''} ${value.segundoApellido ?? ''} ${value.primerNombre ?? ''} ${value.segundoNombre ?? ''}</td>
@@ -933,7 +944,7 @@ Registro
                     <button ${statusMora} type="button" class="btn btn-sm text-malachite-600 shadow-none btn-editar-paciente px-2" data-rel='${JSON.stringify(value)}' paciente-rel="${key}" data-bs-toggle="modal" data-bs-target="#addBeneficiaryModal">
                         <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button ${statusMora} type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" paciente-rel="${key}" ${modalMotivosAttr}>
+                    <button ${statusMora} type="button" class="btn btn-sm text-grenadier-600 shadow-none btn-eliminar-paciente px-2" data-rel='${JSON.stringify(value)}' data-secuencia-afiliado="${value.secuenciaAfiliado}" numeroDocumento-rel='${value.numeroIdentificacionPcte}' paciente-rel="${key}" ${modalMotivosAttr}>
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
