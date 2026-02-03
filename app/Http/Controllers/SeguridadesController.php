@@ -182,13 +182,15 @@ class SeguridadesController extends Controller
         $response = Ism::call([
             'endpoint' => Ism::BASE_URL.$method,
             //'token'    => Ism::getToken(),
-            'data'     => ['usuario' => strtoupper(urlencode($user))],
+            'data'     => ['usuario' => $user],
             'method'   => 'POST'
         ]);
+        
         // dump(Ism::BASE_URL.$method);
         // dump($response);
         // echo $response->message;
-        // dd(strtoupper(urlencode($user)));
+        // dd($user);
+
         session()->flash('mensaje', $response->message . ' user: '.$user);
         return view('login.olvide_clave');
     }
