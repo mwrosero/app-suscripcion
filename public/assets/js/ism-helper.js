@@ -357,3 +357,55 @@ function getRandomValue(){
     const timeString = `${minutes}${seconds}${milliseconds}`;
     return timeString.substring(0, 5);
 }
+
+function esMayorDeEdad(fechaNacimiento) {
+    const hoy = new Date();
+    
+    // Separamos el string "YYYY-MM-DD" manualmente
+    const partes = fechaNacimiento.split('-');
+    const anioNac = parseInt(partes[0], 10);
+    const mesNac = parseInt(partes[1], 10) - 1; // Enero es 0 en JS
+    const diaNac = parseInt(partes[2], 10);
+
+    const nacimiento = new Date(anioNac, mesNac, diaNac);
+
+    let edad = hoy.getFullYear() - anioNac;
+    const mesDiferencia = hoy.getMonth() - mesNac;
+    const diaDiferencia = hoy.getDate() - diaNac;
+
+    // Si el mes actual es menor al de nacimiento, o es el mismo mes pero 
+    // el día actual es menor al de nacimiento, aún no cumple años.
+    if (mesDiferencia < 0 || (mesDiferencia === 0 && diaDiferencia < 0)) {
+        edad--;
+    }
+
+    return edad >= 18;
+}
+
+function esMayorDeEdadDDMMYYYY(fechaString) {
+    const hoy = new Date();
+    
+    // Separamos por la barra inclinada "/"
+    const partes = fechaString.split('/');
+    
+    // Verificamos que tengamos las 3 partes necesarias
+    if (partes.length !== 3) return false;
+
+    const diaNac = parseInt(partes[0], 10);
+    const mesNac = parseInt(partes[1], 10) - 1; // Restamos 1 porque Enero es 0
+    const anioNac = parseInt(partes[2], 10);
+
+    const nacimiento = new Date(anioNac, mesNac, diaNac);
+
+    // Cálculo de la edad
+    let edad = hoy.getFullYear() - anioNac;
+    const mesDiferencia = hoy.getMonth() - mesNac;
+    const diaDiferencia = hoy.getDate() - diaNac;
+
+    // Ajuste si no ha llegado su cumpleaños este año
+    if (mesDiferencia < 0 || (mesDiferencia === 0 && diaDiferencia < 0)) {
+        edad--;
+    }
+
+    return edad >= 18;
+}

@@ -59,6 +59,10 @@
                     let persona = {};
                     if(paciente.data.totalRows > 0){
                         persona = paciente.data.rows[0]
+                        if(!esMayorDeEdadDDMMYYYY(persona.fechaNacimiento)){
+                            showMessage('warning','Atención','Para continuar con el registro el titular debe ser mayor de edad.');
+                            return;
+                        }
                     }
                     
                     let suscripcion = {
