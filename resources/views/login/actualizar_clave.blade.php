@@ -57,6 +57,16 @@
                                     required />
                                 <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
+                            <div class="checklist-box p-2 my-2 rounded">
+                                <p class="fw-medium mb-2 bg-colortext">Su password debe contener al menos:</p>
+                                <ul class="checklist px-2">
+                                    <li id="numbers">Incluir Números</li>
+                                    <li id="uppercase">Incluir Mayúsculas</li>
+                                    <li id="lowercase">Incluir Minúsculas</li>
+                                    <li id="length">Tamaño mínimo 8</li>
+                                    <li id="special">Caracteres Especiales</li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="confirmarClave" class="form-label fw-medium">Confirmar nueva contraseña</label>
@@ -82,6 +92,33 @@
 <!-- /Content Actualizar Clave -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('nuevaClave');
+
+        // Mapeo de requisitos y sus expresiones regulares
+        const requirements = {
+            numbers: /[0-9]/,
+            uppercase: /[A-Z]/,
+            lowercase: /[a-z]/,
+            special: /[!@#$%^&*(),.?":{}|<>]/,
+            length: /^.{8,}$/
+        };
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+
+            // Iterar sobre cada regla y validar
+            for (const key in requirements) {
+                const element = document.getElementById(key);
+                const isValid = requirements[key].test(value);
+
+                if (isValid) {
+                    element.classList.add('valid');
+                } else {
+                    element.classList.remove('valid');
+                }
+            }
+        });
+
         const form = document.getElementById('formAuthentication');
 
         form.addEventListener('submit', function(event) {
@@ -159,4 +196,47 @@
         }
     });
 </script>
+<style>
+    .checklist-box{
+        font-size: 0.85rem;
+        color: #6e6b7b;
+        font-size: 12px;
+        line-height: 12px;
+        background: #296bef17;
+    }
+    /* Estilos base */
+    .checklist {
+        list-style: none;
+    }
+
+    .checklist li {
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        margin-bottom: 4px;
+    }
+
+    /* Estado por defecto: El BULLET */
+    .checklist li::before {
+        content: "\2022"; /* Código Unicode de un punto (bullet) */
+        color: #b9b9c3;   /* Color gris claro para el punto */
+        font-weight: bold;
+        display: inline-block; 
+        width: 20px;      /* Espacio fijo para que el texto no se mueva */
+        font-size: 1.2rem;
+    }
+
+    /* Estado cuando se cumple la validación */
+    .checklist li.valid {
+        color: #28c76f !important; /* Verde Bootstrap/Tabler */
+    }
+
+    /* Insertar el icono de flechita dinámicamente */
+    .checklist li.valid::before {
+        content: "\2713"; /* Código Unicode del check (visto) */
+        font-weight: bold;
+        margin-right: 8px;
+        color: #28c76f !important;
+    }
+</style>
 @endsection
