@@ -99,7 +99,7 @@
                             <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 4 },"1280": { "slidesPerView": 4 }}'>
                                 <div class="swiper-wrapper" id="planesMENSUAL">
 
-                                    <div class="swiper-slide">
+                                    {{-- <div class="swiper-slide">
                                         <div class="card card-transition border-perano-300 rounded-3 shadow-sm p-3 h-100">
                                             <h5 class="bg-zumthor-50 text-blue-zodiac-950 fw-medium text-start px-3 py-2 rounded">
                                                 Opción 1
@@ -246,7 +246,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
@@ -260,6 +260,7 @@
                 <div class="mt-5">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h6 class="text-fiord-700 fw-normal text-center">*Los beneficios  del programa se extiende a familiares de hasta tercer grado de consanguinidad y primer grado de afinidad.</h6>
+                        <h6 class="text-fiord-700 fw-normal text-center">*No aplican devoluciones</h6>                        
                         <p class="fw-medium mt-3 mb-2">¿Tienes dudas?</p>
                         <a href="#dudas" class="btn btn-outline-blue-veris">Clic aquí</a>
                     </div>
