@@ -149,6 +149,7 @@
                 <div class="mt-5">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h6 class="text-fiord-700 fw-normal text-center">*Los beneficios  del programa se extiende a familiares de hasta tercer grado de consanguinidad y primer grado de afinidad.</h6>
+                        <h6 class="text-fiord-700 fw-normal text-center">*No aplican devoluciones</h6>                        
                         <p class="fw-medium mt-3 mb-2">¿Tienes dudas?</p>
                         <a href="#dudas" class="btn btn-outline-blue-veris">Clic aquí</a>
                     </div>

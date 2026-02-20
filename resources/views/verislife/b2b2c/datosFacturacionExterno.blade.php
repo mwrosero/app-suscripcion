@@ -2430,6 +2430,8 @@ Veris Care - Suscripción
         if(data.code == 200){
             detalleSuscripcion.carga = data.data
             await crearSuscripcion();
+        }else{
+            showMessage('error','Atención',data.message);
         }
     }
 

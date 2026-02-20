@@ -382,7 +382,7 @@ Veris Care - Suscripción
                                                     <label for="nombres" class="form-label fs-14p fw-medium text-raven-700">Nombre <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
-                                                        class="form-control form-control-lg fs-14p"
+                                                        class="form-control form-control-lg fs-14p solo-letras"
                                                         id="nombres"
                                                         name="nombres"
                                                         placeholder="Ingresa tu nombre"
@@ -392,7 +392,7 @@ Veris Care - Suscripción
                                                     <label for="primerApellido" class="form-label fs-14p fw-medium text-raven-700">Primer Apellido <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
-                                                        class="form-control form-control-lg fs-14p"
+                                                        class="form-control form-control-lg fs-14p solo-letras"
                                                         id="primerApellido"
                                                         name="primerApellido"
                                                         placeholder="Ingresa tu primer apellido"
@@ -402,7 +402,7 @@ Veris Care - Suscripción
                                                     <label for="segundoApellido" class="form-label fs-14p fw-medium text-raven-700">Segundo Apellido <span class="text-raven-700">*</span></label>
                                                     <input
                                                         type="text"
-                                                        class="form-control form-control-lg fs-14p"
+                                                        class="form-control form-control-lg fs-14p solo-letras"
                                                         id="segundoApellido"
                                                         name="segundoApellido"
                                                         placeholder="Ingresa tu segundo apellido"
@@ -1316,6 +1316,16 @@ Veris Care - Suscripción
             $('.link-inicio').attr('href','/b2c');
             $('.link-agendamiento').attr('href', 'https://app.veris.com.ec/external/agendamiento');
         }
+
+        // Seleccionamos todos los inputs con la clase específica
+        const inputsLetras = document.querySelectorAll('.solo-letras');
+
+        inputsLetras.forEach(input => {
+            input.addEventListener('input', (e) => {
+                // Reemplaza cualquier carácter que NO sea letra, tilde, eñe o espacio
+                e.target.value = e.target.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');
+            });
+        });
 
         randomValueNuvei = getRandomValue();
 
@@ -2494,6 +2504,8 @@ Veris Care - Suscripción
         if(data.code == 200){
             detalleSuscripcion.carga = data.data
             await crearSuscripcion();
+        }else{
+            showMessage('error','Atención',data.message);
         }
     }
 
