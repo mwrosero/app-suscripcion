@@ -25,7 +25,20 @@
 <section class="hero d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
         <img src="{{ asset('assets/img/veris/titular-parami.svg') }}" alt="Sé parte de Para Mí Cuidado Familiar" class="img-fluid mb-4 img-label" style="opacity: 0.7" />
-        <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
+        {{-- <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4> --}}
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 text-fiord-700 fw-semibold text-start fs-20p mb-3">
+                <p class="mb-2">Programa diseñado para el cuidado de la salud de tu familia en nuestros Centros Médicos Convenientes ParaMí.</p>
+                <p>Acceso fácil,  cercanos a tu hogar y servicios de calidad con el respaldo de Grupo Veris.</p>
+            </div>
+            <div class="col-12 col-md-6 text-start">
+                <p class="fw-semibold text-primary-veris mb-2 fs-16p">¿A quién puedo incluir?</p>
+                <ul class="text-fiord-700 fw-semibold fs-16p">
+                    <li>Familiares hasta tercer grado de consanguinidad como: padres, hijos, hermanos, abuelos, nietos, tíos, sobrinos.</li>
+                    <li>Familiares hasta primer grado de afinidad como: cónyuge o pareja, suegros, yerno o nuera.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 
