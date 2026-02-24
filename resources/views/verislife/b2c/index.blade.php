@@ -25,7 +25,17 @@
 <section class="hero-b2c d-flex flex-column justify-content-center align-items-center text-white text-start">
     <div class="container">
         <img src="{{ asset('assets/img/veris/titular.svg') }}" alt="Sé parte de Veris Care" class="img-fluid img-label mb-4" />
-        <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4>
+        {{-- <h4 class="text-fiord-700 fw-semibold">Programa de cuidado completo y fácil de contratar</h4> --}}
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 text-fiord-700 fw-semibold text-start fs-20p mb-3">Programa de fidelización diseñado para personas que buscan acceso ágil y preferente a servicios médicos de calidad, con beneficios que se activan desde el primer día para su bienestar familiar.</div>
+            <div class="col-12 col-md-6 text-start">
+                <p class="fw-semibold text-primary-veris mb-2 fs-16p">¿A quién puedo incluir?</p>
+                <ul class="text-fiord-700 fw-semibold fs-16p">
+                    <li>Familiares hasta tercer grado de consanguinidad como: padres, hijos, hermanos, abuelos, nietos, tíos, sobrinos.</li>
+                    <li>Familiares hasta primer grado de afinidad como: cónyuge o pareja, suegros, yerno o nuera.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 
