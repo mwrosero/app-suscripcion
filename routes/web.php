@@ -161,6 +161,11 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.documentacion');
     })->withoutMiddleware(['guest']);
 
+    Route::get('/portal-fidelizacion/cambiar-clave', function () {
+        // dd(Session::get('userData')->secuenciaUsuario);
+        return view('verislife.cambiar_clave_logueado');
+    })->withoutMiddleware(['guest']);
+
 });
 
 # B2B2C
