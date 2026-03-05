@@ -442,6 +442,10 @@
                         <div class="dropdown-divider"></div>
                     </li> -->
                     <li>
+                        <a class="dropdown-item" href="/portal-fidelizacion/cambiar-clave">
+                            <i class="fa-solid fa-redo me-2 fa-sm"></i>
+                            <span class="align-middle">Cambiar clave</span>
+                        </a>
                         <a class="dropdown-item" href="/logout">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Cerrar sesión</span>
