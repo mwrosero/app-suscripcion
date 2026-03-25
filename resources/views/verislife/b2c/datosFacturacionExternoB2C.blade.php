@@ -1979,6 +1979,7 @@ Veris Care - Suscripción
                         }
                         $('#btn-next').attr('disabled', false);
                     }else{
+                        numeroIdentificacionValido = false;
                         showMessage('warning','Atención','Ya dispones de un contrato de fidelización activo.')
                         $('#btn-next').attr('disabled', true);
                     }
