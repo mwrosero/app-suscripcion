@@ -55,6 +55,7 @@ class SeguridadesController extends Controller
                     ])->post(Ism::BASE_URL.$method);
             $response = json_decode($res->body());
 
+            // echo Ism::BASE_URL.$method;
             // dd($response);
             /*$method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/'.$response->data->secuenciaUsuario;
             $response = Ism::call([

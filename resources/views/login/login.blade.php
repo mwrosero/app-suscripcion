@@ -53,7 +53,7 @@ VerisLife - Login
                                     name="password"
                                     placeholder="Ingresa tu contraseña"
                                     aria-describedby="password" required/>
-                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                                <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
                         </div>
                         <div class="mb-5">
