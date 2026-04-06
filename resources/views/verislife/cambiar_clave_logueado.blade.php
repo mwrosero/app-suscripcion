@@ -70,20 +70,20 @@ Registro
 </div>
 <script>
 
-    const passwordInput = document.getElementById('claveActual');
+    const passwordInput1 = document.getElementById('claveActual');
     const passwordInput2 = document.getElementById('claveNueva');
     const passwordInput3 = document.getElementById('claveNueva2');
-    const togglePassword = document.getElementById('togglePassword');
+    const togglePassword1 = document.getElementById('togglePassword');
     const togglePassword2 = document.getElementById('togglePassword2');
     const togglePassword3 = document.getElementById('togglePassword3');
 
-    togglePassword.addEventListener('click', function() {
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            togglePassword.innerHTML = '<i class="ti ti-eye"></i>';
+    togglePassword1.addEventListener('click', function() {
+        if (passwordInput1.type === 'password') {
+            passwordInput1.type = 'text';
+            togglePassword1.innerHTML = '<i class="ti ti-eye"></i>';
         } else {
-            passwordInput.type = 'password';
-            togglePassword.innerHTML = '<i class="ti ti-eye-off"></i>';
+            passwordInput1.type = 'password';
+            togglePassword1.innerHTML = '<i class="ti ti-eye-off"></i>';
         }
     });
 
@@ -108,6 +108,12 @@ Registro
     });
 
     document.addEventListener('DOMContentLoaded', async () => {
+        $('#claveActual, #claveNueva, #claveNueva2').on('keydown', function(e) {
+            if (e.which === 32) {
+                return false; // Bloquea la acción por defecto
+            }
+        });
+
         const passwordInput = document.getElementById('claveNueva');
         const requirements = {
             numbers: /[0-9]/,
@@ -200,7 +206,8 @@ Registro
         }
         
         // Validar requisitos de complejidad
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
+        //var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
+        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\^$*.\[\]{}()?\-!@#%&/,><':;|_~+=¡¿]).{8,}$/;
         if (!re.test(nuevaClave)) {
             showMessage('warning','Atención',"La contraseña debe incluir al menos: <ul><li>Incluir Números</li><li>Incluir Mayúsculas</li><li>Incluir Minúsculas</li><li>Tamaño mínimo 8</li><li>Caracteres especiales</li></ul>");
             return false;
