@@ -83,76 +83,12 @@ $processId = base64_encode(uniqid());
 
         </div>
     </section>
-
     <section class="bg-pattens-blue-100 mb-4 px-3 py-4" id="section-pendientes-registro">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-medium border-start-blue ps-3 fs-18 mb-0">Opciones pendientes de registro</h5>
             <a href="#!" class="fw-medium me-1 d-none">Ver todos</a>
         </div>
-        <div class="row gap-4 justify-content-center">
-            <div class="col-12 col-md-4">
-                <a href="#!" class="text-decoration-none">
-                    <div class="card card-medical-center-brand shadow-1 rounded-4 card-hover text-center">
-                        <div class="card-body position-relative linea-item" lineaNegocio-rel='CMV'>
-                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/icono-veris-vertical-lg.svg" class="my-auto" alt="Veris"/>
-                            <div class="card-info pt-5 p-4">
-                                <div class="badge-descuento">-15% en:</div>
-                                <div class="row g-0 justify-content-center">
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <a href="#" class="text-decoration-none">
-                    <div class="card card-medical-center-brand shadow-1 rounded-4 card-hover text-center">
-                        <div class="card-body position-relative linea-item" lineaNegocio-rel='PMF'>
-                            <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/img/veris/parami-vertical.png" class="my-auto" alt="ParaMí" />
-                            <div class="card-info pt-5 p-4">
-                                <div class="badge-descuento">-20% en:</div>
-                                <div class="row g-0 justify-content-center">
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-flask"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Laboratorio<br>clínico</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-x-ray"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Imágenes</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-crutch"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Terapias</p>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <div class="info-icon"><i class="fa-solid fa-file-prescription"></i></div>
-                                        <p class="fw-normal text-white fs-14p lh-1">Procedimientos</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row g-3 mx-0 d-none">
+        <div class="row g-3 mx-0">
             <div class="slider-promotions position-relative">
                 <div class="swiper my-swiper pt-3 pb-5" data-slides-per-view="1" data-autoplay='{"delay": 2500,"disableOnInteraction": false}' data-has-navigation="true" data-breakpoints='{"360": { "slidesPerView": 1.2 },"640": { "slidesPerView": 2 },"1024": { "slidesPerView": 3 },"1280": { "slidesPerView": 4 }}'>
                     <div class="swiper-wrapper" id="suscripcionPendientes">
@@ -956,17 +892,11 @@ $processId = base64_encode(uniqid());
     document.addEventListener('DOMContentLoaded', async () => {
         const planes = await obtenerPlanesSuscripcionDetalleEmpresa();
         const planesContratados = planes.filter(plan => plan.contratado);
-        //const planesPendientes = planes.filter(plan => !plan.contratado);
+        const planesPendientes = planes.filter(plan => !plan.contratado);
 
         renderizarPlanes(planesContratados, 'suscripcionContratadas', 'empty-space-no-contratado', true);
-        //renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
+        renderizarPlanes(planesPendientes, 'suscripcionPendientes', 'empty-space-pendientes-registro', false);
         drawAdminPlanes(planesContratados);
-
-        $('body').on('click', '.linea-item', async function() {
-            let lineaNegocio = $(this).attr('lineaNegocio-rel');
-            let url = `/portal-fidelizacion/planes/${lineaNegocio}`;
-            location.href = url;
-        })
 
         $('body').on('click', '.btn-continuar-registro', function() {
             let data = JSON.parse($(this).attr('data-rel'));

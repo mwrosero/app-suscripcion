@@ -29,6 +29,9 @@ $processId = base64_encode(uniqid());
                             <div class="content-message text-center d-none" id="empty-space-planes-contratados">
                                 <img src="{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}/assets/svg/login-amico1.svg" />
                                 <h4 class="text-white">Pronto podrás visualizar tu información aquí</h4>
+                                @if(Session::get('infoCliente')->secuenciaAfiliado == null)
+                                <h5 class="text-white">Tu suscripción está en pausa, contacta a tu ejecutiva de ventas.</h4>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -146,7 +149,7 @@ $processId = base64_encode(uniqid());
 @endsection
 @push('scripts')
 <script>
-    let codigoCliente = {{ Session::get('infoCliente')->secuenciaAfiliado  }};
+    let codigoCliente = {{ (Session::get('infoCliente')->secuenciaAfiliado == null) ? 0 : Session::get('infoCliente')->secuenciaAfiliado }};
     let suscripcion = {};
     {{-- let codigoCliente = 13315; --}}
     document.addEventListener('DOMContentLoaded', async () => {

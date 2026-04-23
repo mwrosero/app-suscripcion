@@ -200,6 +200,9 @@ Registro
 @push('scripts')
 <script>
     const detalleSuscripcion = JSON.parse(localStorage.getItem('suscripcion-{{ $params }}'));
+    let logoNombre = 'logo-veris.svg';
+    if (detalleSuscripcion.detallePlan.lineaNegocio === 'PMF') logoNombre = 'parami.png';
+    const logoSrc = `${url_site}/assets/img/veris/${logoNombre}`;
     document.addEventListener('DOMContentLoaded', async () => {
         const contenedor = document.getElementById('detalleSuscripcion');
         contenedor.innerHTML = '';
@@ -225,6 +228,7 @@ Registro
         const html = `
         <div class="row border-perano-300 rounded p-3">
             <div class="col-md-6">
+                <img src='${logoSrc}' class="w-50 mb-3" />
                 <h6 class="bg-zumthor-50 text-blue-zodiac-950 fw-semibold text-start px-3 py-2 rounded w-auto">${plan.nombre}</h6>
                 <span class="badge bg-blue-ribbon-600 fw-normal rounded-4 fs-10p mb-2">AHORRA ${plan.porcentajeDescuento}%</span>
                 <h2 class="fw-semibold text-blue-zodiac-950 mb-0">$${plan.valorFinal} <small class="fs-6 text-capitalize">/${plan.tipo.toLowerCase()}</small></h2>

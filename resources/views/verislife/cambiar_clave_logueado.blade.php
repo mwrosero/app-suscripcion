@@ -31,11 +31,17 @@ Registro
             <div class="col-12 col-md-5 col-lg-4 rounded-3 shadow p-3">
                 <div class="w-100 mb-3">
                     <label for="claveActual" class="form-label fs-14p fw-medium">Clave actual <span class="text-danger">*</span></label>
-                    <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveActual" name="claveActual" required>
+                    <div class="input-group input-group-merge">
+                        <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveActual" name="claveActual" required>
+                        <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
                 </div>
                 <div class="w-100 mb-3">
                     <label for="claveNueva" class="form-label fs-14p fw-medium">Clave nueva <span class="text-danger">*</span></label>
-                    <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva" name="claveNueva" required>
+                    <div class="input-group input-group-merge">
+                        <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva" name="claveNueva" required>
+                        <span id="togglePassword2" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
                 </div>
                 <div class="w-100 checklist-box p-2 mb-3 rounded">
                     <p class="fw-medium mb-2 bg-colortext">Su password debe contener al menos:</p>
@@ -49,7 +55,10 @@ Registro
                 </div>
                 <div class="w-100 mb-3">
                     <label for="claveNueva2" class="form-label fs-14p fw-medium">Confirmar clave nueva <span class="text-danger">*</span></label>
-                    <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva2" name="claveNueva2" required>
+                    <div class="input-group input-group-merge">
+                        <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva2" name="claveNueva2" required>
+                        <span id="togglePassword3" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
                 </div>
                 <hr>
                 <div class="w-100">
@@ -60,7 +69,51 @@ Registro
     </section>
 </div>
 <script>
+
+    const passwordInput1 = document.getElementById('claveActual');
+    const passwordInput2 = document.getElementById('claveNueva');
+    const passwordInput3 = document.getElementById('claveNueva2');
+    const togglePassword1 = document.getElementById('togglePassword');
+    const togglePassword2 = document.getElementById('togglePassword2');
+    const togglePassword3 = document.getElementById('togglePassword3');
+
+    togglePassword1.addEventListener('click', function() {
+        if (passwordInput1.type === 'password') {
+            passwordInput1.type = 'text';
+            togglePassword1.innerHTML = '<i class="ti ti-eye"></i>';
+        } else {
+            passwordInput1.type = 'password';
+            togglePassword1.innerHTML = '<i class="ti ti-eye-off"></i>';
+        }
+    });
+
+    togglePassword2.addEventListener('click', function() {
+        if (passwordInput2.type === 'password') {
+            passwordInput2.type = 'text';
+            togglePassword2.innerHTML = '<i class="ti ti-eye"></i>';
+        } else {
+            passwordInput2.type = 'password';
+            togglePassword2.innerHTML = '<i class="ti ti-eye-off"></i>';
+        }
+    });
+
+    togglePassword3.addEventListener('click', function() {
+        if (passwordInput3.type === 'password') {
+            passwordInput3.type = 'text';
+            togglePassword3.innerHTML = '<i class="ti ti-eye"></i>';
+        } else {
+            passwordInput3.type = 'password';
+            togglePassword3.innerHTML = '<i class="ti ti-eye-off"></i>';
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', async () => {
+        $('#claveActual, #claveNueva, #claveNueva2').on('keydown', function(e) {
+            if (e.which === 32) {
+                return false; // Bloquea la acción por defecto
+            }
+        });
+
         const passwordInput = document.getElementById('claveNueva');
         const requirements = {
             numbers: /[0-9]/,
@@ -153,7 +206,8 @@ Registro
         }
         
         // Validar requisitos de complejidad
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
+        //var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
+        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\^$*.\[\]{}()?\-!@#%&/,><':;|_~+=¡¿]).{8,}$/;
         if (!re.test(nuevaClave)) {
             showMessage('warning','Atención',"La contraseña debe incluir al menos: <ul><li>Incluir Números</li><li>Incluir Mayúsculas</li><li>Incluir Minúsculas</li><li>Tamaño mínimo 8</li><li>Caracteres especiales</li></ul>");
             return false;
