@@ -151,7 +151,7 @@ Registro
                 })
                 $('#listado-comprobantes').html(elem);
             }else{
-                let elem = `<div class="col-12 mb-3 text-center">No tienes comprobantes en la fecha seleccionada.</div>`;
+                let elem = `<div class="col-12 my-5 text-center">No tienes comprobantes en la fecha seleccionada.</div>`;
                 $('#listado-comprobantes').html(elem);
             }
         }

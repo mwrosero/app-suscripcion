@@ -108,6 +108,11 @@ Route::group(['middleware' => ['loggedUser']], function () {
             return view('verislife.dependiente.carga-dependiente');
         }
     })->withoutMiddleware(['guest']);
+
+    Route::get('portal-fidelizacion/planes/{lineaNegocio}', function ($lineaNegocio) {
+        // dd(Session::get('userData'));
+        return view('verislife.planesPorContratar')->with('lineaNegocio', $lineaNegocio);
+    })->withoutMiddleware(['guest']);
     
     Route::get('portal-fidelizacion/verificacion-plan/{params}', function ($params) {
         // dd(Session::get('userData'));
