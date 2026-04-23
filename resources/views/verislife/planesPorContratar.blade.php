@@ -146,7 +146,7 @@ $processId = base64_encode(uniqid());
             </div>
             <div class="mt-5">
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h6 class="text-fiord-700 fw-normal">¿Deseas ver las opciones “Para Mí”?</h6>
+                    <h6 class="text-fiord-700 fw-normal labelOpcionLN"></h6>
                     <a href="#" class="text-primary-veris text-decoration-underline text-link-lineaNegocio"></a>
                 </div>
             </div>
@@ -165,9 +165,11 @@ $processId = base64_encode(uniqid());
         if(lineaNegocio === 'PMF'){
             $('.nombreLineaNegocio').html('Para Mí');
             $('.text-link-lineaNegocio').html(`Ver “Veris”`).attr('href','CMV');
+            $('.labelOpcionLN').html(`¿Deseas ver las opciones “Veris”?`);
         }else{
             $('.nombreLineaNegocio').html('Veris');
             $('.text-link-lineaNegocio').html(`Ver “Para Mi”`).attr('href','PMF');
+            $('.labelOpcionLN').html(`¿Deseas ver las opciones “Para Mí”?`)
         }
 
         $(document).on('click', '.nav-link', async function(){
