@@ -699,8 +699,7 @@ Registro
                                             <div class="text-center mb-4">
                                                 <i class="fa-solid fa-circle-check text-primary-veris fs-1"></i>
                                             </div>
-                                            <h4 class="text-primary-veris fw-semibold mb-3">Registro exitoso</h4>
-                                            <h6 class="fw-medium mb-4">Gracias por registrarte. Nuestro sistema está generando tu documentación; recibirás un mensaje en tu bandeja de entrada en breve con toda la información relevante de tu suscripción.</h6>
+                                            <h4 class="text-primary-veris fw-semibold mb-4">Registro exitoso</h4>
                                             <div class="row justify-content-center">
                                                 <div class="col-12 col-lg-10 box-tiene-credito d-none">
                                                     <div class="card bg-zumthor-50">
@@ -768,7 +767,7 @@ Registro
                                                     <div>Monto total:</div>
                                                     <div class="detail-value valor-total"></div>
                                                 </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0 d-none">
+                                                <li class="list-group-item d-flex justify-content-between align-items-start border-0">
                                                     <div>Comprobante de pago:</div>
                                                     <div type="button" class="detail-value text-decoration-underline btn-outline-cerulean-blue-800 link-comprobante-pago border-0">Visualizar</div>
                                                 </li>
@@ -929,8 +928,7 @@ Registro
                 $('.frecuencia-pago').html(detalleSuscripcion.detallePlan.tipo.toLowerCase());
                 $('.valor-total').html(`$${(detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length ).toFixed(2)}`);
                 couldNext = true;//validar
-                //await generarSolicitudFirma();
-                await preRegistrarB2B();
+                await generarSolicitudFirma();
                 return;
             }
 
@@ -1153,16 +1151,11 @@ Registro
             $('#emailFactura').val(data.data.datosRepresentanteLegal.correoElectronico)
         }
         if(data.data.datosRepresentanteLegal.telefonoCelular !== null){
-            let numero = data.data.datosRepresentanteLegal.telefonoCelular;
-            if(data.data.datosRepresentanteLegal.telefonoCelular.length == 9){
-                numero = `0${data.data.datosRepresentanteLegal.telefonoCelular}`; 
-            }
-            $('#telefonoFactura').val(numero)
+            $('#telefonoFactura').val(data.data.datosRepresentanteLegal.telefonoCelular)
         }
         if(data.data.datosResidencia.direccion !== null){
             $('#direccionFactura').val(data.data.datosResidencia.direccion)
         }
-        validateFields();
     }
 
     async function obtenerListadoDocumentosFirma(){
@@ -1448,157 +1441,6 @@ Registro
         return response?.data || [];
     }
 
-    async function preRegistrarB2B(){
-        let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
-
-        let _idMethod = $('.nav-metodo-pago .nav-link.active').attr('id');
-        if(_idMethod === "pills-bank-transfer-tab" && finalFile !== null){
-            const success = await uploadComprobantePreRegistroB2B();
-            if(!success){
-                return;
-            }
-        }
-
-        let tiposDocumentos = [];
-        
-        $.each(detalleSuscripcion.documentos, function(key, value){
-            if(value.nemonico == "AUTORIZACION_DEBITO"){
-                if(_idMethod === "pills-debit-account-tab"){
-                    tiposDocumentos.push(value.nemonico)
-                }
-            }else{
-                tiposDocumentos.push(value.nemonico)
-            }
-        })
-        let codigoInstitucion = $('#nombreBanco option:selected').val();
-        let numeroCuenta = $('#numeroCuenta').val();
-        let nombreTitular = $('#nombreTitular').val();
-        let datosDocumentoDebito = {
-            "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
-            "periodo": detalleSuscripcion.detallePlan.tipo
-        }
-        
-        if(_idMethod == "pills-debit-account-tab"){
-            datosDocumentoDebito = {
-                "codigoCliente": parseInt("{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}"),
-                "codigoInstitucion": parseInt(codigoInstitucion),
-                "tipoCuenta": (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE",
-                "numeroCuenta": numeroCuenta,
-                "periodo": detalleSuscripcion.detallePlan.tipo,
-            }
-        }
-
-        let tipoIdentificacionFactura = $('#tipoIdentificacionFactura option:selected').val();
-        let numeroIdentificacionFactura = $('#numeroIdentificacionFactura').val();
-        let nombresFactura = $('#nombresFactura').val();
-        let telefonoFactura = $('#telefonoFactura').val();
-        let emailFactura = $('#emailFactura').val();
-        let direccionFactura = $('#direccionFactura').val();
-
-        let args = [];
-        let secuenciaPreSuscripcion = (detalleSuscripcion.hasOwnProperty('secuenciaPreSuscripcion')) ? `?secuenciaPreSuscripcion=${detalleSuscripcion.secuenciaPreSuscripcion}` : ``;
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/pre_registro_b2b${secuenciaPreSuscripcion}`;
-        args["method"] = "POST";
-        args["showLoader"] = true;
-        args["token"] = _token;
-        args["bodyType"] = "json";
-        args["data"] = JSON.stringify({
-            "firmaDocumento": {
-                "tipoFlujo": tipoFlujo,
-                "nombres": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
-                "apellidos": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
-                "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
-                "numeroIdentificacion": numeroIdentificacionFactura,
-                "correo": emailFactura,
-                "telefono": telefonoFactura, 
-                "datosDocumentoDebito" : datosDocumentoDebito,
-                "tiposDocumentos": tiposDocumentos
-            },
-            "registroSuscripcion": {
-                "codigoCliente": {{ Session::get('infoCliente')->informacionCliente->codigoCliente }},
-                "secuenciaAfiliado": "",
-                "codigoConvenio": detalleSuscripcion.detallePlan.codigoConvenio,
-                "secuenciaFrecuencia": detalleSuscripcion.detallePlan.secuenciaFrecuencia,
-                "tipoFlujo": tipoFlujo,
-                "pago": {
-                    "cantidad": detalleSuscripcion.pacientes.length,
-                    "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
-                    "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2)),
-                    "detalle": {
-                        "numeroCuenta": numeroCuenta,
-                        "nombreTitular": nombreTitular,
-                        "tipoCuenta": (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AH" : "CC",
-                        "codigoInstitucion": codigoInstitucion,
-                        "autorizaDebitoCargado": true,
-                        "autorizaAcuerdoCargado": true,
-                        "comprobantePagoCargado": true
-                    }
-                },
-                "datosFirmaDocumentos": {
-                    "nombreEmpresa": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
-                    "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
-                    "numeroIdentificacion": numeroIdentificacionFactura,
-                    "representanteLegal": nombresFactura,
-                    "telefono": telefonoFactura,
-                    "email": emailFactura,
-                    "direccion": direccionFactura
-                },
-                "datosFacturacion": {
-                    "codigoTipoIdentificacion": parseInt(tipoIdentificacionFactura),
-                    "numeroIdentificacion": numeroIdentificacionFactura,
-                    "nombres": nombresFactura,
-                    "telefono": telefonoFactura,
-                    "email": emailFactura,
-                    "direccion": direccionFactura
-                },
-                "terminosCondiciones": {
-                    "aceptaPolitica": true,
-                    "aceptaTratamientoDatos": true,
-                    "aceptaConsentimientoDependiente": true
-                }
-            },
-            "afiliados": detalleSuscripcion.pacientes
-        });
-        const data = await call(args);
-        console.log(data);
-        detalleSuscripcion.suscripcion = data.data;
-        if(data.code == 200){
-            stepper.next();
-            showMessage('success','Registro completo');
-        }else{
-            showMessage('error','Atención',data.message);
-        }
-    }
-
-    async function uploadComprobantePreRegistroB2B(){
-        const formData = new FormData();
-        formData.append("archivo", finalFile);
-
-        let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_pre_registro_b2b?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO`;
-        args["method"] = "POST";
-        args["token"] = _token;
-        args["showLoader"] = true;
-        args["data"] = formData;
-        args["bodyType"] = "formdata";
-        try {
-            const data = await call(args);
-            console.log(data);
-            if (data.code == 200) {
-                detalleSuscripcion.secuenciaPreSuscripcion = data.data.secuenciaPreSuscripcion;
-                return true;
-            } else {
-                return false;
-                showMessage('error','Atención', data.message);
-                console.log("Error en respuesta:", data);
-            }
-        } catch (error) {
-            showMessage('error','Atención', error);
-            console.error("Error en uploadFile:", error);
-            return false;
-        }
-    }
-
     async function crearSuscripcion(){
         $('#signedDocumentModal').modal('hide')
         {{-- console.log("crearSuscripcion");
@@ -1636,6 +1478,11 @@ Registro
                 "idMedioPago": parseInt($('.nav-metodo-pago button.active').attr('idMedioPago-rel')),
                 "montoTotal": parseFloat((detalleSuscripcion.detallePlan.valorFinal * detalleSuscripcion.pacientes.length).toFixed(2)),
                 "detalle": {
+                    // "numeroTarjeta": "",
+                    // "mesExpiracion": 0,
+                    // "anioExpiracion": 0,
+                    // "codigoSeguridad": 0,
+                    // "tipoCobro": "CORRIENTE",
                     "numeroCuenta": numeroCuenta,
                     "nombreTitular": nombreTitular,
                     "tipoCuenta": tipoCuenta,
@@ -1647,12 +1494,12 @@ Registro
             },
             "datosFirmaDocumentos": {
                 "nombreEmpresa": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
-                "codigoTipoIdentificacion": 3,
-                "numeroIdentificacion": numeroIdentificacionFactura,
-                "representanteLegal": nombresFactura,
-                "telefono": telefonoFactura,
-                "email": emailFactura,
-                "direccion": direccionFactura
+                "codigoTipoIdentificacion": 3,//cambiar
+                "numeroIdentificacion": "0923796304",//$('#ruc').val(),
+                "representanteLegal": "Michael Rosero",//$('#titular').val(),
+                "telefono": "0988302580",//$('#telefono').val(),
+                "email": "mwrosero@gmail.com",//$('#emailContacto').val(),
+                "direccion": "Mi casa"
             },
             "datosFacturacion": {
                 "codigoTipoIdentificacion": tipoIdentificacionFactura,
@@ -1745,8 +1592,8 @@ Registro
             "apellidos": "{{ Session::get('infoCliente')->informacionCliente->nombreCliente }}",
             "codigoTipoIdentificacion": 3,//"{{ Session::get('infoCliente')->informacionCliente->tipoIdentificacionCliente }}",
             "numeroIdentificacion": "{{ Session::get('infoCliente')->informacionCliente->identificacionCliente }}",
-            "correo": emailFactura,
-            "telefono": telefonoFactura, 
+            "correo": "mwrosero@gmail.com",
+            "telefono": "0988302580", 
             "datosDocumentoDebito" : datosDocumentoDebito,
             "tiposDocumentos": tiposDocumentos
         });
