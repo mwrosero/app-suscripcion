@@ -660,6 +660,18 @@ Registro
                 if(pacienteExistente){
                     return;
                 }
+
+                if($('#fechaNacimiento').val() == ""){
+                    showMessage('warning','Atención','Debes ingresar la fecha de nacimiento del titular.');
+                    return;
+                }
+                let f_n = $('#fechaNacimiento').val().split('-');
+                let fechaNacimientoFormateada = `${f_n[2]}/${f_n[1]}/${f_n[0]}`
+                if(!esMayorDeEdadDDMMYYYY(fechaNacimientoFormateada)){
+                    showMessage('warning','Atención','Para continuar con el registro el titular debe ser mayor de edad.');
+                    return;
+                }
+
                 let idPersonaRegistro = $('#idPersonaRegistro').val();
                 let secuenciaAfiliado = $('#secuenciaAfiliado').val();
                 console.log(idPersonaRegistro);
@@ -1238,6 +1250,11 @@ Registro
                 pacienteExistente = false;
 
                 const paciente = await consultarPaciente();
+                console.log(paciente);
+                if(paciente !== null && !esMayorDeEdadDDMMYYYY(paciente.fechaNacimiento)){
+                    showMessage('warning','Atención','Para continuar con el registro el titular debe ser mayor de edad.');
+                    return;
+                }
                 const fueAsignado = await validaInfoAfiliado();
                 if(fueAsignado){
                     validado = false;
