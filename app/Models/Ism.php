@@ -25,7 +25,7 @@ class Ism extends Model
     public const WAR_GENERAL = 'generaltest';
     public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
-    public const PASSWORD_VERIS_GENERIC = 'Cl@ve1234';
+    public const PASSWORD_VERIS_GENERIC = 'F1d3lT3$t#2025!';
     public const ENVIRONMENT_NUVEI = 'stg';
     public const BASE_URL_NUVEI = 'https://ccapi-stg.paymentez.com';
     public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
