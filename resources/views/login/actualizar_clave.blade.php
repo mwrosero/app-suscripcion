@@ -99,7 +99,7 @@
             numbers: /[0-9]/,
             uppercase: /[A-Z]/,
             lowercase: /[a-z]/,
-            special: /[!@#$%^&*(),.?":{}|<>]/,
+            special: /[#$%*_\-+ =!]/,
             length: /^.{8,}$/
         };
 
@@ -144,7 +144,7 @@
             else {
                 // Este regex verifica: 1 dígito, 1 minuscula, 1 mayuscula, 1 caracter especial, min 8 chars
                 // Nota: He eliminado la restricción de caracteres finales para evitar fallos si usan un "." o "-"
-                var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+                var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%*_\-+ =!])[0-9a-zA-Z#$%*_\-+ =!]{8,}$/;
                 
                 if (!re.test(nuevaClave)) {
                     hayError = true;

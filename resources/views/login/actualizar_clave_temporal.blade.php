@@ -82,7 +82,7 @@
             numbers: /[0-9]/,
             uppercase: /[A-Z]/,
             lowercase: /[a-z]/,
-            special: /[!@#$%^&*(),.?":{}|<>]/,
+            special: /[#$%*_\-+ =!]/,
             length: /^.{8,}$/
         };
 
@@ -129,7 +129,7 @@
         }
         
         // Validar requisitos de complejidad
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!¡¿?])[0-9a-zA-Z@#*$%^&+=!¡¿?]{8,}$/;
+        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%*_\-+ =!])[0-9a-zA-Z#$%*_\-+ =!]{8,}$/;
         if (!re.test(nuevaClave)) {
             showMessage('warning','Atención',"La contraseña debe incluir al menos: <ul><li>Incluir Números</li><li>Incluir Mayúsculas</li><li>Incluir Minúsculas</li><li>Tamaño mínimo 8</li><li>Caracteres especiales</li></ul>");
             return false;
