@@ -43,11 +43,12 @@
                             <div class="checklist-box p-2 my-2 rounded">
                                 <p class="fw-medium mb-2 bg-colortext">Su password debe contener al menos:</p>
                                 <ul class="checklist px-2">
+                                    <li id="firstLetter">Debe iniciar con una letra mayúscula</li>
+                                    {{-- <li id="uppercase">Incluir Mayúscula</li> --}}
+                                    <li id="lowercase">Incluir Minúscula</li>
                                     <li id="numbers">Incluir Números</li>
-                                    <li id="uppercase">Incluir Mayúsculas</li>
-                                    <li id="lowercase">Incluir Minúsculas</li>
                                     <li id="length">Tamaño mínimo 8</li>
-                                    <li id="special">Caracteres Especiales</li>
+                                    <li id="special">Caracteres Especiales <b class="ms-1 text-dark">#$%*_-+=!</b></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,15 +78,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         const passwordInput = document.getElementById('nuevaClave');
 
-        // Mapeo de requisitos y sus expresiones regulares
-        const requirements = {
-            numbers: /[0-9]/,
-            uppercase: /[A-Z]/,
-            lowercase: /[a-z]/,
-            special: /[#$%*_\-+ =!]/,
-            length: /^.{8,}$/
-        };
-
         {{-- passwordInput.addEventListener('focus', () => {
             $('.checklist-box').removeClass('d-none')
         })
@@ -95,18 +87,38 @@
         }) --}}
 
         passwordInput.addEventListener('input', () => {
-            const value = passwordInput.value;
+            let value = passwordInput.value;
+            const allowedCharsStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$%*_-+=!";
 
-            // Iterar sobre cada regla y validar
+            // 1. RESTRICCIÓN: Si hay algo escrito, el primer carácter DEBE ser Mayúscula
+            if (value.length > 0) {
+                const firstChar = value.charAt(0);
+                if (!/[A-Z]/.test(firstChar)) {
+                    // Si el primero no es mayúscula, borramos todo y avisamos
+                    passwordInput.value = "";
+                    showMessage('warning', 'Atención', "La contraseña debe comenzar obligatoriamente con una letra mayúscula.");
+                    
+                    // Limpiamos todos los checks visualmente
+                    for (const key in requirements) {
+                        document.getElementById(key).classList.remove('valid');
+                    }
+                    return;
+                }
+            }
+
+            // 2. FILTRADO de caracteres prohibidos (el resto de la cadena)
+            const lastChar = value.slice(-1);
+            if (value.length > 0 && !allowedCharsStr.includes(lastChar)) {
+                passwordInput.value = value.slice(0, -1);
+                showMessage('warning', 'Atención', `Caracter "${lastChar}" no permitido.`);
+                return; 
+            }
+
+            // 3. Validación visual (se desmarcará al borrar, ya que evaluamos el valor actual)
             for (const key in requirements) {
                 const element = document.getElementById(key);
-                const isValid = requirements[key].test(value);
-
-                if (isValid) {
-                    element.classList.add('valid');
-                } else {
-                    element.classList.remove('valid');
-                }
+                // Si el valor es vacío o no cumple, .toggle(..., false) quitará la clase
+                element.classList.toggle('valid', value.length > 0 && requirements[key].test(value));
             }
         });
 
@@ -128,10 +140,10 @@
             return false;
         }
         
-        // Validar requisitos de complejidad
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%*_\-+ =!])[0-9a-zA-Z#$%*_\-+ =!]{8,}$/;
-        if (!re.test(nuevaClave)) {
-            showMessage('warning','Atención',"La contraseña debe incluir al menos: <ul><li>Incluir Números</li><li>Incluir Mayúsculas</li><li>Incluir Minúsculas</li><li>Tamaño mínimo 8</li><li>Caracteres especiales</li></ul>");
+        const isComplex = Object.values(requirements).every(regex => regex.test(nuevaClave));
+        
+        if (!isComplex) {
+            showMessage('warning', 'Atención', "La contraseña no cumple con todos los requisitos de seguridad.");
             return false;
         }
         

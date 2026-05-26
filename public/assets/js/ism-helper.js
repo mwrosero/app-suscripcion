@@ -1,3 +1,16 @@
+// Configuración centralizada de reglas
+const requirements = {
+    firstLetter: /^[A-Z]/,   // Solo valida que el primer carácter sea A-Z
+    lowercase: /[a-z]/,
+    numbers: /[0-9]/,
+    length: /^.{8,}$/,
+    special: /[#$%*_\-+ =!]/
+};
+
+// Regex de seguridad: asegura que NO haya caracteres fuera de los permitidos
+const allowedChars = /^[0-9a-zA-Z#$%*_\-+ =!]+$/;
+const allowedCharsStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$%*_-+=!";
+
 $(document).ready(function() {
     
     if (localStorage.getItem('sessionTime') === null) {
