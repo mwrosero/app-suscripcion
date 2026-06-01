@@ -39,7 +39,7 @@ Registro
                 <div class="w-100 mb-3">
                     <label for="claveNueva" class="form-label fs-14p fw-medium">Clave nueva <span class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
-                        <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva" name="claveNueva" required>
+                        <input type="password" autocomplete="new-password" class="form-control form-control-lg fs-14p" id="claveNueva" name="claveNueva" required onpaste="return false;" >
                         <span id="togglePassword2" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                     </div>
                 </div>

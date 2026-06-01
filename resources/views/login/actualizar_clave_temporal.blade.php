@@ -36,7 +36,8 @@
                                     class="form-control"
                                     id="nuevaClave"
                                     name="nuevaClave"
-                                    autofocus
+                                    autofocus 
+                                    onpaste="return false;" 
                                     required />
                                 <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>

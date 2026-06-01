@@ -53,7 +53,8 @@
                                     class="form-control"
                                     id="nuevaClave"
                                     name="nuevaClave"
-                                    autofocus
+                                    autofocus 
+                                    onpaste="return false;" 
                                     required />
                                 <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
@@ -134,26 +135,19 @@
         const form = document.getElementById('formAuthentication');
 
         form.addEventListener('submit', function(event) {
-            // 1. Obtenemos los valores
             var nuevaClave = document.getElementById("nuevaClave").value;
             var confirmarClave = document.getElementById("confirmarClave").value;
             
-            // Variable para controlar si hay error
             let hayError = false;
             let mensajeError = "";
 
-            // 2. Validar longitud
             if (nuevaClave.length < 8) {
                 hayError = true;
                 mensajeError = "La nueva contraseña debe tener al menos 8 caracteres.";
-            } 
-            // 3. Validar coincidencia
-            else if (nuevaClave !== confirmarClave) {
+            }else if (nuevaClave !== confirmarClave) {
                 hayError = true;
                 mensajeError = "Las contraseñas no coinciden.";
-            } 
-            // 4. Validar complejidad (Regex mejorado)
-            else {
+            }else {
                 const isComplex = Object.values(requirements).every(regex => regex.test(nuevaClave));
         
                 if (!isComplex) {
