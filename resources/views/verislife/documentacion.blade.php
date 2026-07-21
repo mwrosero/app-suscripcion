@@ -135,7 +135,7 @@ Registro
         let year = parseInt(getInput('year'));
         let month = parseInt(getInput('month'));
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${codigoCliente}/documentos_comprobantes?codigoEmpresa=1&tipoDocumento=COBROS&anio=${year}&mes=${month}`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/${codigoCliente}/documentos_comprobantes?codigoEmpresa=1&tipoDocumento=COBROS&anio=${year}&mes=${month}`;
         args["method"] = "GET";
         args["showLoader"] = mostrarLoader;
         args["token"] = _token;
@@ -203,7 +203,7 @@ Registro
 
     async function eliminarComprobante(value){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
         args["method"] = "DELETE";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -223,7 +223,7 @@ Registro
         formData.append("file", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/${value.secuenciaPago}/documento_pago`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;

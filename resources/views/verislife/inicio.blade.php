@@ -1041,7 +1041,7 @@ $processId = base64_encode(uniqid());
             return null;
         }
 
-        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`; 
+        const baseUrl = `${api_url}/${api_war_empresarial}/v1/suscripcion/planes/detalle_empresa`; 
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             frecuencia: 'TODOS',

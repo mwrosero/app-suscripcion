@@ -85,6 +85,8 @@
         const url_site = "{{ request()->getHost() === '127.0.0.1' ? url('/') : secure_url('/') }}";
         const war_general = "{{ \App\Models\Ism::WAR_GENERAL }}";
         const war_seguridad = "{{ \App\Models\Ism::WAR_SEGURIDAD }}";
+        const api_war_empresarial = "{{ \App\Models\Ism::EMPRESARIAL }}";
+        const api_war_facturacion = "{{ \App\Models\Ism::FACTURACION }}";
     </script>
 </head>
 

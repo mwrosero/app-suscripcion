@@ -268,7 +268,7 @@ Registro
 
     async function infoInicial(){
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/{{ Session::get('userData')->secuenciaUsuario }}/informacion_inicial`
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/{{ Session::get('userData')->secuenciaUsuario }}/informacion_inicial`
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -279,7 +279,7 @@ Registro
 
     // Planes detalle_especifico
     async function obtenerBeneficiosPorFrecuencia(secuenciaFrecuencia) {
-        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_especifico`;
+        const baseUrl = `${api_url}/${api_war_empresarial}/v1/suscripcion/planes/detalle_especifico`;
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             tipoBeneficio: 'G',

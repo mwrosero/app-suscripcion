@@ -17,7 +17,7 @@ class CotizadorController extends Controller
     }
 
     public function obtenerCotizacion($idCotizacion){
-        $method = '/empresarial/v1/cotizacion/'.$idCotizacion;
+        $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/cotizacion/'.$idCotizacion;
         
         $response = Ism::call([
             'endpoint' => Ism::BASE_URL.$method,
@@ -37,7 +37,7 @@ class CotizadorController extends Controller
     }
 
     public function pdfCotizacion($idCotizacion){
-        $method = '/empresarial/v1/cotizacion/'.$idCotizacion;
+        $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/cotizacion/'.$idCotizacion;
         $response = Ism::call([
             'endpoint' => Ism::BASE_URL.$method,
             'token'    => Session::get('accessToken'),
@@ -76,7 +76,7 @@ class CotizadorController extends Controller
             $filtroCodigoUsuario = "";
         }
 
-        $method = '/empresarial/v1/cotizacion';
+        $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/cotizacion';
         $param = '?page='.$request->query('page', '1').'&perPage='.Ism::PERPAGE.'&estado=ACTIVO&estadoCotizacion='.$request->query('estado', 'TODOS').'&codigoTipoContrato='.$request->query('codigoTipoContrato','').$filtroCodigoUsuario;
 
         $response = Ism::call([
@@ -130,7 +130,7 @@ class CotizadorController extends Controller
     }
 
     public function visualizarCotizacion($idCotizacion){
-        $method = '/empresarial/v1/cotizacion/resumen?idCotizacion='.base64_decode($idCotizacion);
+        $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/cotizacion/resumen?idCotizacion='.base64_decode($idCotizacion);
         
         $response = Ism::call([
             'endpoint' => Ism::BASE_URL.$method,

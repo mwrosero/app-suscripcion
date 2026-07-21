@@ -89,7 +89,7 @@ Veris Care - Selecciona la empresa
 
     async function obtenerEmpresas(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/empresas`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/empresas`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;

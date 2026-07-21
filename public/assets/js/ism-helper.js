@@ -260,7 +260,7 @@ function getInput(idElem, type = 'input'){
 
 async function cargarDocumento(nemonico){
     let args = [];
-    args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${nemonico}&codigoEmpresa=1`
+    args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/documentos?nemonicoDocumento=${nemonico}&codigoEmpresa=1`
     args["method"] = "GET";
     args["showLoader"] = true;
     args["token"] = _token;

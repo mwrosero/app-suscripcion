@@ -28,7 +28,7 @@ class B2B2CController extends Controller
         $secuenciaUsuario = $response->data->secuenciaUsuario;
         Session::put('userData', $response->data);
         Session::put('accessToken', $response->data->idToken);
-        // $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
+        // $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
         // $response = Ism::call([
         //     'endpoint' => Ism::BASE_URL.$method,
         //     'token'    => Session::get('accessToken'),

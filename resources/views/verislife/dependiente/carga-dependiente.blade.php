@@ -176,7 +176,7 @@ $processId = base64_encode(uniqid());
 
     async function cargarIndicadores(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/dash_beneficios?secuenciaAfiliado=${codigoCliente}`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/dash_beneficios?secuenciaAfiliado=${codigoCliente}`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -199,7 +199,7 @@ $processId = base64_encode(uniqid());
             return null;
         }
 
-        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_afiliado`; 
+        const baseUrl = `${api_url}/${api_war_empresarial}/v1/suscripcion/planes/detalle_afiliado`; 
         const queryParams = new URLSearchParams({
             secuenciaAfiliado: codigoCliente
         });

@@ -1167,7 +1167,7 @@ Registro
 
     async function obtenerListadoDocumentosFirma(){
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=EMPRESA`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=EMPRESA`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1216,7 +1216,7 @@ Registro
         formData.append("archivo", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO&secuenciaSuscripcion=${detalleSuscripcion.suscripcion.secuenciaSuscripcion}`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/documentos?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO&secuenciaSuscripcion=${detalleSuscripcion.suscripcion.secuenciaSuscripcion}`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -1246,11 +1246,11 @@ Registro
             let numeroCuenta = $('#numeroCuenta').val();
             let nombreTitular = $('#nombreTitular').val();
             let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
-            args["endpoint"] = api_url + `/empresarial/v1/reportes/autorizacion_debito_cuenta?codigoCliente={{ Session::get('infoCliente')->informacionCliente->codigoCliente }}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
+            args["endpoint"] = api_url + `/${api_war_empresarial}/v1/reportes/autorizacion_debito_cuenta?codigoCliente={{ Session::get('infoCliente')->informacionCliente->codigoCliente }}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
             args["method"] = "GET";
         }else{
-            //args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=E`;
+            //args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/documentos?nemonicoDocumento=${datos.nemonico}`;
+            args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=E`;
             args["method"] = "POST";
             args["bodyType"] = "json";
             args["data"] = JSON.stringify({
@@ -1330,7 +1330,7 @@ Registro
 
     async function cargarTiposCuenta(){
         let args = [];
-        args["endpoint"] = api_url + `/facturacion/v1/util/tipos_cuenta_bancaria`;
+        args["endpoint"] = api_url + `/${api_war_facturacion}/v1/util/tipos_cuenta_bancaria`;
         args["method"] = "GET";
         args["showLoader"] = false;
         args["token"] = _token;
@@ -1352,7 +1352,7 @@ Registro
 
     async function cargarMediosPago(){
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=EMPRESA
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=EMPRESA
     `;
         args["method"] = "GET";
         args["showLoader"] = true;
@@ -1497,7 +1497,7 @@ Registro
 
         let args = [];
         let secuenciaPreSuscripcion = (detalleSuscripcion.hasOwnProperty('secuenciaPreSuscripcion')) ? `?secuenciaPreSuscripcion=${detalleSuscripcion.secuenciaPreSuscripcion}` : ``;
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/pre_registro_b2b${secuenciaPreSuscripcion}`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/pre_registro_b2b${secuenciaPreSuscripcion}`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1575,7 +1575,7 @@ Registro
         formData.append("archivo", finalFile);
 
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_pre_registro_b2b?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/documentos_pre_registro_b2b?codigoEmpresa=1&nemonicoDocumento=COMPROBANTE_PAGO`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -1619,7 +1619,7 @@ Registro
         let direccionFactura = $('#direccionFactura').val();
 
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/registro`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1718,7 +1718,7 @@ Registro
         let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
 
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/firma/genera_solicitud`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1774,7 +1774,7 @@ Registro
             payload.codigoOtp = codigoOtp
         }
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;

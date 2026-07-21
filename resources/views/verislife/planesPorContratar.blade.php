@@ -195,7 +195,7 @@ $processId = base64_encode(uniqid());
 
     async function cargarPlanes(){
         let tipo = $('.nav-link.active').attr('tipo-rel');
-        const baseUrl = `${api_url}/empresarial/v1/suscripcion/planes/detalle_empresa`; 
+        const baseUrl = `${api_url}/${api_war_empresarial}/v1/suscripcion/planes/detalle_empresa`; 
         const queryParams = new URLSearchParams({
             estado: 'ACTIVO',
             frecuencia: tipo,
