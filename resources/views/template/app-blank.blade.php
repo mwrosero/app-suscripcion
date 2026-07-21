@@ -76,8 +76,8 @@
         const _idOrganizacion = "{{ \App\Models\Ism::IDORGANIZACION }}";
         const api_url = "{{ \App\Models\Ism::BASE_URL }}";
         const api_url_nuvei = "{{ \App\Models\Ism::BASE_URL_NUVEI }}";
-        const api_war_empresarial = "{{ \App\Models\Ism::EMPRESARIAL }}";
-        const api_war_facturacion = "{{ \App\Models\Ism::FACTURACION }}";
+        const api_war_empresarial = "{{ \App\Models\Ism::WAR_EMPRESARIAL }}";
+        const api_war_facturacion = "{{ \App\Models\Ism::WAR_FACTURACION }}";
 
         const war_general = "{{ \App\Models\Ism::WAR_GENERAL }}";
         
