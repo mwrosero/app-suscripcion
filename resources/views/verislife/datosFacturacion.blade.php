@@ -1139,7 +1139,7 @@ Registro
 
     async function cargarInfoEmpresa(){
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/clientes/{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}?infoEmpresarial=true`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/clientes/{{ Session::get('infoCliente')->informacionCliente->codigoCliente }}?infoEmpresarial=true`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1793,7 +1793,7 @@ Registro
     async function cargaAfiliadosSuscripcion(){
         let tipoFlujo = "{{ Session::get('infoCliente')->tipoFlujo }}";
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;

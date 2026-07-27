@@ -813,7 +813,7 @@ Registro
         pacientesAgregados.push(itemPaciente);
 
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -846,7 +846,7 @@ Registro
  --}}
         origenDatos = 'api';
 
-        const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
+        const baseUrl = `${api_url}/${api_war_comercial}/v1/afiliados/lista_afiliados_cargados`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
@@ -1038,7 +1038,7 @@ Registro
             estadoCivil: estadoCivil
         }];
 
-        const baseUrl = `${api_url}/comercial/v1/afiliados/modificacion_afiliados_cargados`;
+        const baseUrl = `${api_url}/${api_war_comercial}/v1/afiliados/modificacion_afiliados_cargados`;
         try {
             const queryParams = new URLSearchParams({
                 codigoEmpresa: '1',
@@ -1066,7 +1066,7 @@ Registro
     }
 
     async function deleteAfiliado(secuenciaAfiliado, codigoMotivo) {
-        const baseUrl = `${api_url}/comercial/v1/afiliados/${secuenciaAfiliado}`;
+        const baseUrl = `${api_url}/${api_war_comercial}/v1/afiliados/${secuenciaAfiliado}`;
 
         const queryParams = new URLSearchParams({
             codigoMotivoInactivacion: codigoMotivo,
@@ -1181,7 +1181,7 @@ Registro
     }
 
     async function existeIdentificionSuscrita(numero){
-        const baseUrl = `${api_url}/comercial/v1/afiliados/lista_afiliados_cargados`;
+        const baseUrl = `${api_url}/${api_war_comercial}/v1/afiliados/lista_afiliados_cargados`;
         const queryParams = new URLSearchParams({
             codigoEmpresa: 1,
             codigoConvenio: detalleSuscripcion.detallePlan.codigoConvenio,
@@ -1456,7 +1456,7 @@ Registro
     }
 
     async function cargarMotivosInactivacion() {
-        const baseUrl = `${api_url}/comercial/v1/convenios/motivos_inactivacion`;
+        const baseUrl = `${api_url}/${api_war_comercial}/v1/convenios/motivos_inactivacion`;
 
         const response = await call({
             method: 'GET',
@@ -1494,7 +1494,7 @@ Registro
         formData.append("file", finalFile);
 
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_archivo_afiliados?codigoPais=1&codigoProvincia=1&codigoCiudad=1&tipoCredito=CREDITO_FIDELIZACION&codigoConvenio=${detalleSuscripcion.detallePlan.codigoConvenio}`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/carga_archivo_afiliados?codigoPais=1&codigoProvincia=1&codigoCiudad=1&tipoCredito=CREDITO_FIDELIZACION&codigoConvenio=${detalleSuscripcion.detallePlan.codigoConvenio}`;
         args["method"] = "POST";
         args["token"] = _token;
         args["showLoader"] = true;
@@ -1567,7 +1567,7 @@ Registro
 
     async function descargarPlantilla(){
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;

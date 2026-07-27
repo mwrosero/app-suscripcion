@@ -1904,7 +1904,7 @@ Veris Care - Suscripción
         let tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
         let numeroIdentificacion = $('#numeroIdentificacion').val();
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2347,7 +2347,7 @@ Veris Care - Suscripción
 
     async function deleteAfiliado(){
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/${detalleSuscripcion.carga.secuenciaAfiliado}?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/${detalleSuscripcion.carga.secuenciaAfiliado}?codigoEmpresa=1`;
         args["method"] = "DELETE";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2490,7 +2490,7 @@ Veris Care - Suscripción
             "observacionesError": null
         }]
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;

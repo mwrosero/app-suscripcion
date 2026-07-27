@@ -87,6 +87,7 @@
         const war_seguridad = "{{ \App\Models\Ism::WAR_SEGURIDAD }}";
         const api_war_empresarial = "{{ \App\Models\Ism::WAR_EMPRESARIAL }}";
         const api_war_facturacion = "{{ \App\Models\Ism::WAR_FACTURACION }}";
+        const api_war_comercial = "{{ \App\Models\Ism::WAR_COMERCIAL }}";
     </script>
 </head>
 

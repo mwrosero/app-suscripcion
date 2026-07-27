@@ -103,7 +103,7 @@
         let tipoIdentificacion = 2;
         let numeroIdentificacion = $('#numeroIdentificacion').val();
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
