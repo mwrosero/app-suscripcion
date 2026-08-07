@@ -19,7 +19,7 @@ class Ism extends Model
     
     // DESA
     public const BASE_URL = 'https://api-phantomx.veris.com.ec';  
-    public const IDORGANIZACION = 'adf4e264-cd20-4653-9a44-025b13050992';
+    public const IDORGANIZACION = '365509c8-9596-4506-a5b3-487782d5876e';
     public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     public const WAR_SEGURIDAD = 'seguridad';
     public const WAR_GENERAL = 'general';
@@ -28,7 +28,7 @@ class Ism extends Model
     public const WAR_COMERCIAL = 'comercial';
     public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
-    public const PASSWORD_VERIS_GENERIC = 'F1d3lT3$t#2025!';
+    public const PASSWORD_VERIS_GENERIC = 'F1d3lD3v#25!';
     public const ENVIRONMENT_NUVEI = 'stg';
     public const BASE_URL_NUVEI = 'https://ccapi-stg.paymentez.com';
     public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
