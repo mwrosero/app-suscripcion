@@ -443,6 +443,8 @@ Veris Care - Suscripción
                                                         id="celular"
                                                         name="celular"
                                                         placeholder="0999999999"
+                                                        {{-- maxlength="10" 
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" --}}
                                                         required>
                                                 </div>
                                                 <div class="col-md-12 col-xl-8 d-none box-form-2">
@@ -1226,6 +1228,10 @@ Veris Care - Suscripción
                         }else{
                             showMessage('warning','Atención','Revise el formato del correo electrónico.');
                             couldNext = false;    
+                        }
+                        if ($('#celular').val().length > 0 && !esCelularEcuatorianoValido($('#celular').val())) {
+                            showMessage('warning','Atención','Formato incorrecto del celular.');
+                            couldNext = false;
                         }
                     }else{
                         showMessage('warning','Atención','Debe llenar los campos obligatorios');
@@ -2582,6 +2588,48 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         const data = await call(args);
         return data.token;
+    }
+
+    const inputTel = document.getElementById('celular');
+
+    // Limpieza en tiempo real mientras el usuario escribe o pega
+    inputTel.addEventListener('input', (e) => {
+        e.target.value = formatearCelularEcuador(e.target.value);
+
+        // Ocultar mensaje de error mientras escribe
+        console.log('ocultar error')
+    });
+
+    // Validación al perder el foco (blur)
+    inputTel.addEventListener('blur', () => {
+        const valor = inputTel.value;
+
+        if (valor.length > 0 && !esCelularEcuatorianoValido(valor)) {
+          console.log('Atención','Formato incorrecto del celular.');
+        } else {
+          console.log('ocultar error')
+        }
+    });
+
+    // Función para normalizar el formato a 09XXXXXXXX
+    function formatearCelularEcuador(valor) {
+        // 1. Quitar todos los caracteres que no sean dígitos
+        let limpio = valor.replace(/\D/g, '');
+
+        // 2. Si empieza con el código de país '593', reemplazarlo por '0'
+        if (limpio.startsWith('593')) {
+          limpio = '0' + limpio.slice(3);
+        }
+
+        // 3. Limitar a máximo 10 dígitos
+        return limpio.slice(0, 10);
+    }
+
+    // Función para validar si cumple con la regla de celular ecuatoriano
+    function esCelularEcuatorianoValido(numero) {
+        // Expresión regular: debe empezar con 09 y tener exactamente 10 dígitos
+        const regexEcuador = /^09\d{8}$/;
+        return regexEcuador.test(numero);
     }
 </script>
 <style>
