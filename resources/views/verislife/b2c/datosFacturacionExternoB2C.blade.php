@@ -1229,9 +1229,13 @@ Veris Care - Suscripción
                             showMessage('warning','Atención','Revise el formato del correo electrónico.');
                             couldNext = false;    
                         }
-                        if ($('#celular').val().length > 0 && !esCelularEcuatorianoValido($('#celular').val())) {
-                            showMessage('warning','Atención','Formato incorrecto del celular.');
-                            couldNext = false;
+
+                        if( $('#celular').val().length > 0 ) {
+                            let esValidoCelular = await validarCelularApi($('#celular').val());
+                            if(esValidoCelular.code == 400 || esValidoCelular.data.esValido == "N"){
+                                showMessage('warning','Atención','Formato incorrecto del celular.');
+                                couldNext = false;
+                            }
                         }
                     }else{
                         showMessage('warning','Atención','Debe llenar los campos obligatorios');
@@ -2630,6 +2634,24 @@ Veris Care - Suscripción
         // Expresión regular: debe empezar con 09 y tener exactamente 10 dígitos
         const regexEcuador = /^09\d{8}$/;
         return regexEcuador.test(numero);
+    }
+
+    async function validarCelularApi(celular){
+        celular = celular.replace(/^0/, '');
+        let args = [];
+
+        args["endpoint"] = api_url + `/${war_general}/v1/util/validacion_numero_telefonico`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "numeroTelefonico": `+593${celular}`,
+            "paisISO": "EC",
+            "tipo": "MOBILE"
+        });
+        const data = await call(args);
+        return data;
     }
 </script>
 <style>
