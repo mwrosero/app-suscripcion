@@ -1240,14 +1240,23 @@ Veris Care - Suscripción
                     couldNext = false;
                 }
                 if($('#email').val() !== "" && $('#celular').val() !== ""){
+
                     if(validarEmailRegex($('#email').val())){
-                        detalleSuscripcion.datosFactura = {
-                            "tipoIdentificacion": tipoIdentificacionFactura,
-                            "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
-                            "nombres": nombresFactura,
-                            "telefono": telefonoFactura,
-                            "correo": $('#emailFactura').val(),
-                            "direccion": direccionFactura
+                        if( $('#celular').val().length > 0 ) {
+                            let esValidoCelular = await validarCelularApi($('#celular').val());
+                            if(esValidoCelular.code == 400 || esValidoCelular.data.esValido == "N"){
+                                showMessage('warning','Atención','Formato incorrecto del celular.');
+                                couldNext = false;
+                            }else{
+                                detalleSuscripcion.datosFactura = {
+                                    "tipoIdentificacion": tipoIdentificacionFactura,
+                                    "numeroIdentificacion": $('#numeroIdentificacionFactura').val(),
+                                    "nombres": nombresFactura,
+                                    "telefono": telefonoFactura,
+                                    "correo": $('#emailFactura').val(),
+                                    "direccion": direccionFactura
+                                }
+                            }
                         }
                     }else{
                         showMessage('warning','Atención','Revise el formato del correo electrónico.');
@@ -2510,6 +2519,66 @@ Veris Care - Suscripción
         args["showLoader"] = true;
         const data = await call(args);
         return data.token;
+    }
+
+    const inputTel = document.getElementById('celular');
+
+    // Limpieza en tiempo real mientras el usuario escribe o pega
+    inputTel.addEventListener('input', (e) => {
+        e.target.value = formatearCelularEcuador(e.target.value);
+
+        // Ocultar mensaje de error mientras escribe
+        console.log('ocultar error')
+    });
+
+    // Validación al perder el foco (blur)
+    inputTel.addEventListener('blur', () => {
+        const valor = inputTel.value;
+
+        if (valor.length > 0 && !esCelularEcuatorianoValido(valor)) {
+          console.log('Atención','Formato incorrecto del celular.');
+        } else {
+          console.log('ocultar error')
+        }
+    });
+
+    // Función para normalizar el formato a 09XXXXXXXX
+    function formatearCelularEcuador(valor) {
+        // 1. Quitar todos los caracteres que no sean dígitos
+        let limpio = valor.replace(/\D/g, '');
+
+        // 2. Si empieza con el código de país '593', reemplazarlo por '0'
+        if (limpio.startsWith('593')) {
+          limpio = '0' + limpio.slice(3);
+        }
+
+        // 3. Limitar a máximo 10 dígitos
+        return limpio.slice(0, 10);
+    }
+
+    // Función para validar si cumple con la regla de celular ecuatoriano
+    function esCelularEcuatorianoValido(numero) {
+        // Expresión regular: debe empezar con 09 y tener exactamente 10 dígitos
+        const regexEcuador = /^09\d{8}$/;
+        return regexEcuador.test(numero);
+    }
+
+    async function validarCelularApi(celular){
+        celular = celular.replace(/^0/, '');
+        let args = [];
+
+        args["endpoint"] = api_url + `/${war_general}/v1/util/validacion_numero_telefonico`;
+        args["method"] = "POST";
+        args["showLoader"] = true;
+        args["token"] = _token;
+        args["bodyType"] = "json";
+        args["data"] = JSON.stringify({
+            "numeroTelefonico": `+593${celular}`,
+            "paisISO": "EC",
+            "tipo": "MOBILE"
+        });
+        const data = await call(args);
+        return data;
     }
 </script>
 @endpush
