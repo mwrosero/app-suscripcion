@@ -53,18 +53,20 @@
                                     class="form-control"
                                     id="nuevaClave"
                                     name="nuevaClave"
-                                    autofocus
+                                    autofocus 
+                                    onpaste="return false;" 
                                     required />
                                 <span id="togglePassword" class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
                             <div class="checklist-box p-2 my-2 rounded">
                                 <p class="fw-medium mb-2 bg-colortext">Su password debe contener al menos:</p>
                                 <ul class="checklist px-2">
+                                    <li id="firstLetter">Debe iniciar con una letra mayúscula</li>
+                                    {{-- <li id="uppercase">Incluir Mayúscula</li> --}}
+                                    <li id="lowercase">Incluir Minúscula</li>
                                     <li id="numbers">Incluir Números</li>
-                                    <li id="uppercase">Incluir Mayúsculas</li>
-                                    <li id="lowercase">Incluir Minúsculas</li>
                                     <li id="length">Tamaño mínimo 8</li>
-                                    <li id="special">Caracteres Especiales</li>
+                                    <li id="special">Caracteres Especiales <b class="ms-1 text-dark">#$%*_-+=!</b></li>
                                 </ul>
                             </div>
                         </div>
@@ -94,62 +96,69 @@
     document.addEventListener('DOMContentLoaded', function() {
         const passwordInput = document.getElementById('nuevaClave');
 
-        // Mapeo de requisitos y sus expresiones regulares
-        const requirements = {
-            numbers: /[0-9]/,
-            uppercase: /[A-Z]/,
-            lowercase: /[a-z]/,
-            special: /[!@#$%^&*(),.?":{}|<>]/,
-            length: /^.{8,}$/
-        };
-
         passwordInput.addEventListener('input', () => {
-            const value = passwordInput.value;
+            let value = passwordInput.value;
+            const allowedCharsStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$%*_-+=!";
 
-            // Iterar sobre cada regla y validar
+            // 1. RESTRICCIÓN: Si hay algo escrito, el primer carácter DEBE ser Mayúscula
+            if (value.length > 0) {
+                const firstChar = value.charAt(0);
+                if (!/[A-Z]/.test(firstChar)) {
+                    // Si el primero no es mayúscula, borramos todo y avisamos
+                    passwordInput.value = "";
+                    showMessage('warning', 'Atención', "La contraseña debe comenzar obligatoriamente con una letra mayúscula.");
+                    
+                    // Limpiamos todos los checks visualmente
+                    for (const key in requirements) {
+                        document.getElementById(key).classList.remove('valid');
+                    }
+                    return;
+                }
+            }
+
+            // 2. FILTRADO de caracteres prohibidos (el resto de la cadena)
+            const lastChar = value.slice(-1);
+            if (value.length > 0 && !allowedCharsStr.includes(lastChar)) {
+                passwordInput.value = value.slice(0, -1);
+                showMessage('warning', 'Atención', `Caracter "${lastChar}" no permitido.`);
+                return; 
+            }
+
+            // 3. Validación visual (se desmarcará al borrar, ya que evaluamos el valor actual)
             for (const key in requirements) {
                 const element = document.getElementById(key);
-                const isValid = requirements[key].test(value);
-
-                if (isValid) {
-                    element.classList.add('valid');
-                } else {
-                    element.classList.remove('valid');
-                }
+                // Si el valor es vacío o no cumple, .toggle(..., false) quitará la clase
+                element.classList.toggle('valid', value.length > 0 && requirements[key].test(value));
             }
         });
 
         const form = document.getElementById('formAuthentication');
 
         form.addEventListener('submit', function(event) {
-            // 1. Obtenemos los valores
             var nuevaClave = document.getElementById("nuevaClave").value;
             var confirmarClave = document.getElementById("confirmarClave").value;
             
-            // Variable para controlar si hay error
             let hayError = false;
             let mensajeError = "";
 
-            // 2. Validar longitud
             if (nuevaClave.length < 8) {
                 hayError = true;
                 mensajeError = "La nueva contraseña debe tener al menos 8 caracteres.";
-            } 
-            // 3. Validar coincidencia
-            else if (nuevaClave !== confirmarClave) {
+            }else if (nuevaClave !== confirmarClave) {
                 hayError = true;
                 mensajeError = "Las contraseñas no coinciden.";
-            } 
-            // 4. Validar complejidad (Regex mejorado)
-            else {
-                // Este regex verifica: 1 dígito, 1 minuscula, 1 mayuscula, 1 caracter especial, min 8 chars
-                // Nota: He eliminado la restricción de caracteres finales para evitar fallos si usan un "." o "-"
-                var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
-                
-                if (!re.test(nuevaClave)) {
+            }else {
+                const isComplex = Object.values(requirements).every(regex => regex.test(nuevaClave));
+        
+                if (!isComplex) {
                     hayError = true;
                     mensajeError = "La contraseña debe incluir: Mayúscula, Minúscula, Número y Carácter especial.";
                 }
+                {{-- 
+                if (!re.test(nuevaClave)) {
+                    hayError = true;
+                    mensajeError = "La contraseña debe incluir: Mayúscula, Minúscula, Número y Carácter especial.";
+                } --}}
             }
 
             // 5. Si hay error, DETENEMOS el envío

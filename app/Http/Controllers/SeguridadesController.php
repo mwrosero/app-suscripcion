@@ -85,7 +85,7 @@ class SeguridadesController extends Controller
 
                         Session::put('menu', $response->data);
                         // return redirect('/verislife/home');
-                        $method = '/empresarial/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
+                        $method = '/'.Ism::WAR_EMPRESARIAL.'/v1/suscripcion/'.$secuenciaUsuario.'/informacion_inicial';
                         $response = Ism::call([
                             'endpoint' => Ism::BASE_URL.$method,
                             'token'    => Session::get('accessToken'),

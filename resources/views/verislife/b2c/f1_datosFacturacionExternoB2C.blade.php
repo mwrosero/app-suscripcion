@@ -1727,7 +1727,7 @@ Veris Care - Suscripción
     async function obtenerListadoDocumentosFirma(){
         //let nemonicoTipoDocumento = '';
         let args = [];
-        args["endpoint"] = api_url + `/empresarial/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=INDIVIDUAL`;
+        args["endpoint"] = api_url + `/${api_war_empresarial}/v1/util/suscripcion/tipos_documentos?estado=ACTIVO&aplicaFirma=true&flujoSuscripcion=INDIVIDUAL`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1760,10 +1760,10 @@ Veris Care - Suscripción
             let numeroCuenta = $('#numeroCuenta').val();
             let nombreTitular = $('#nombreTitular').val();
             let tipoCuenta = (parseInt($('input[name="tipoCuenta"]:checked').val()) == 1) ? "AHORROS" : "CORRIENTE";
-            args["endpoint"] = api_url + `/empresarial/v1/reportes/autorizacion_debito_cuenta?codigoCliente=${detalleSuscripcion.empresa.nombreEmpresa}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
+            args["endpoint"] = api_url + `/${api_war_empresarial}/v1/reportes/autorizacion_debito_cuenta?codigoCliente=${detalleSuscripcion.empresa.nombreEmpresa}&codigoInstitucion=${codigoInstitucion}&tipoCuenta=${tipoCuenta}&numeroCuenta=${numeroCuenta}&periodo=${detalleSuscripcion.detallePlan.tipo}`;
             args["method"] = "GET";
         }else{
-            args["endpoint"] = api_url + `/empresarial/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=I`;
+            args["endpoint"] = api_url + `/${api_war_empresarial}/v1/suscripcion/documentos_firma?codigoEmpresa=1&nemonicoDocumento=${datos.nemonico}&flujoSuscripcion=I`;
             args["method"] = "POST";
             args["bodyType"] = "json";
             args["data"] = JSON.stringify({
@@ -1797,7 +1797,7 @@ Veris Care - Suscripción
         let tipoIdentificacion = $('#tipoIdentificacion option:selected').val();
         let numeroIdentificacion = $('#numeroIdentificacion').val();
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/valida_informacion_afiliado?codigoEmpresa=1&tipoCredito=CREDITO_FIDELIZACION&validaPlanPaciente=true`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -1918,7 +1918,7 @@ Veris Care - Suscripción
 
     async function cargarTiposCuenta(){
         let args = [];
-        args["endpoint"] = api_url + `/facturacion/v1/util/tipos_cuenta_bancaria`;
+        args["endpoint"] = api_url + `/${api_war_facturacion}/v1/util/tipos_cuenta_bancaria`;
         args["method"] = "GET";
         args["showLoader"] = false;
         args["token"] = _token;
@@ -1940,7 +1940,7 @@ Veris Care - Suscripción
 
     async function cargarMediosPago(){
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=COLABORADOR`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/util/suscripcion/medios_pago?estado=ACTIVO&flujoSuscripcion=COLABORADOR`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2089,7 +2089,7 @@ Veris Care - Suscripción
         }
 
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/registro`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/registro`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2169,7 +2169,7 @@ Veris Care - Suscripción
 
     async function deleteAfiliado(){
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/${detalleSuscripcion.carga.secuenciaAfiliado}?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/${detalleSuscripcion.carga.secuenciaAfiliado}?codigoEmpresa=1`;
         args["method"] = "DELETE";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2209,7 +2209,7 @@ Veris Care - Suscripción
         })
 
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/genera_solicitud`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/firma/genera_solicitud`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2260,7 +2260,7 @@ Veris Care - Suscripción
             payload.codigoOtp = codigoOtp
         }
         let args = [];
-        args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
+        args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/firma/${codigoSolicitudFirma}/confirmacion?tipoFlujo=${tipoFlujo}`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;
@@ -2312,7 +2312,7 @@ Veris Care - Suscripción
             "observacionesError": null
         }]
         let args = [];
-        args["endpoint"] = `${api_url}/comercial/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/carga_afiliados_credito_fidelizacion?codigoEmpresa=1`;
         args["method"] = "POST";
         args["showLoader"] = true;
         args["token"] = _token;

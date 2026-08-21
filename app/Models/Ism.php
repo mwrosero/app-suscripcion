@@ -17,15 +17,37 @@ class Ism extends Model
     // public const IDORGANIZACION = '365509c8-9596-4506-a5b3-487782d5876e';
     // public const WAR_SEGURIDAD = 'seguridad';
     
+    // DESA
+    // public const BASE_URL = 'https://api-phantomx.veris.com.ec';  
+    // public const IDORGANIZACION = '365509c8-9596-4506-a5b3-487782d5876e';
+    // public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
+    // public const WAR_SEGURIDAD = 'seguridad';
+    // public const WAR_GENERAL = 'general';
+    // public const WAR_EMPRESARIAL = 'empresarial';
+    // public const WAR_FACTURACION = 'facturacion';
+    // public const WAR_COMERCIAL = 'comercial';
+    // public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
+    // public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
+    // public const PASSWORD_VERIS_GENERIC = 'F1d3lD3v#25!';
+    // public const ENVIRONMENT_NUVEI = 'stg';
+    // public const BASE_URL_NUVEI = 'https://ccapi-stg.paymentez.com';
+    // public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
+    // public const APPLICATION_KEY_NUVEI = 'jQeELdG4N5NXi6ULTv3kcm9quk9hXx';
+    // public const SERVER_CODE_NUVEI = 'VERISSTG-EC-SERVER';
+    // public const SERVER_KEY_NUVEI = 'hNGoiXp3iFM2YWZH9HAo2SVM6iQqJN'; 
+
     // TEST
     // public const BASE_URL = 'https://api-phantomx.veris.com.ec';  
     // public const IDORGANIZACION = 'adf4e264-cd20-4653-9a44-025b13050992';
     // public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     // public const WAR_SEGURIDAD = 'seguridadtest';
     // public const WAR_GENERAL = 'generaltest';
+    // public const WAR_EMPRESARIAL = 'empresarialtest';
+    // public const WAR_FACTURACION = 'facturaciontest';
+    // public const WAR_COMERCIAL = 'comercialtest';
     // public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     // public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
-    // public const PASSWORD_VERIS_GENERIC = 'Cl@ve1234';
+    // public const PASSWORD_VERIS_GENERIC = 'F1d3lT3$t#2025!';
     // public const ENVIRONMENT_NUVEI = 'stg';
     // public const BASE_URL_NUVEI = 'https://ccapi-stg.paymentez.com';
     // public const APPLICATION_CODE_NUVEI = 'VERISSTG-EC-CLIENT';
@@ -39,6 +61,9 @@ class Ism extends Model
     public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     public const WAR_SEGURIDAD = 'seguridad';
     public const WAR_GENERAL = 'general';
+    public const WAR_EMPRESARIAL = 'empresarial';
+    public const WAR_FACTURACION = 'facturacion';
+    public const WAR_COMERCIAL = 'comercial';
     public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
     public const PASSWORD_VERIS_GENERIC = 'B@Ck3nFID3Liz@C10N!2025$$';

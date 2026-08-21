@@ -1,3 +1,16 @@
+// Configuración centralizada de reglas
+const requirements = {
+    firstLetter: /^[A-Z]/,   // Solo valida que el primer carácter sea A-Z
+    lowercase: /[a-z]/,
+    numbers: /[0-9]/,
+    length: /^.{8,}$/,
+    special: /[#$%*_\-+ =!]/
+};
+
+// Regex de seguridad: asegura que NO haya caracteres fuera de los permitidos
+const allowedChars = /^[0-9a-zA-Z#$%*_\-+ =!]+$/;
+const allowedCharsStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$%*_-+=!";
+
 $(document).ready(function() {
     
     if (localStorage.getItem('sessionTime') === null) {
@@ -247,7 +260,7 @@ function getInput(idElem, type = 'input'){
 
 async function cargarDocumento(nemonico){
     let args = [];
-    args["endpoint"] = `${api_url}/empresarial/v1/suscripcion/documentos?nemonicoDocumento=${nemonico}&codigoEmpresa=1`
+    args["endpoint"] = `${api_url}/${api_war_empresarial}/v1/suscripcion/documentos?nemonicoDocumento=${nemonico}&codigoEmpresa=1`
     args["method"] = "GET";
     args["showLoader"] = true;
     args["token"] = _token;
