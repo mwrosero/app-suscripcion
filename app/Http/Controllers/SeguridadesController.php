@@ -115,18 +115,28 @@ class SeguridadesController extends Controller
                         return redirect('actualizar-clave-inicial');
                     break;
                     case 'CHANGE_PASSWORD':
-                        $message = "Usuario debe cambiar su clave porque ha pasado 'x' tiempo desde el último cambio";
-                        $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/solicitud_recuperacion_clave';
+                        // $message = "Usuario debe cambiar su clave porque ha pasado 'x' tiempo desde el último cambio";
+                        // $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/solicitud_recuperacion_clave';
 
-                        $response = Ism::call([
-                            'endpoint' => Ism::BASE_URL.$method,
-                            //'token'    => Ism::getToken(),
-                            'data'     => ['usuario' => strtoupper($user)],
-                            'method'   => 'POST'
-                        ]);
+                        // $response = Ism::call([
+                        //     'endpoint' => Ism::BASE_URL.$method,
+                        //     //'token'    => Ism::getToken(),
+                        //     'data'     => ['usuario' => strtoupper($user)],
+                        //     'method'   => 'POST'
+                        // ]);
 
-                        session()->flash('mensaje', $message);
-                        return redirect('/actualizar-clave/'.base64_encode(strtoupper($user)));
+                        // return redirect('/actualizar-clave/'.base64_encode(strtoupper($user)));
+
+                        Session::put('userTmp', $user);
+                        Session::put('passwordTmp', $password);
+
+                        Session::put('userDataTmp', $response->data);
+                        Session::put('accessTokenTmp', $response->data->idToken);
+
+                        // $message = "Contraseña caducada, actualízala para ingresar al portal.";
+                        // session()->flash('mensaje', $message);
+
+                        return redirect('/actualizar-clave-caducada/');
                     break;
                     case 'RESET_REQUIRED':
                         $message = "Usuario importado debe seguir el flujo de recuperar contraseña";
@@ -154,6 +164,11 @@ class SeguridadesController extends Controller
         return view('login.actualizar_clave_temporal');
     }
 
+    public function actualizarClaveCaducada(){
+        // dd(Session::get('userDataTmp')->secuenciaUsuario);
+        return view('login.actualizar_clave_caducada');
+    }
+
     public function actualizarClaveTemporalAction(Request $request){
         $data = $request->all();
         $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/activacion_cuenta';
@@ -169,6 +184,32 @@ class SeguridadesController extends Controller
             return Redirect::route('actualizarClaveTemporal');
         }
 
+        session()->flash('mensaje', "Contraseña actualizada exitosamente.");
+        return redirect()->route('login');
+    }
+
+    public function actualizarClaveCaducadaAction(Request $request){
+        // dd(Session::get('userDataTmp'));
+        $data = $request->all();
+        // https://api-phantomx.veris.com.ec/seguridadtest/v1/usuarios/11971/cambio_clave
+        $method = '/'.Ism::WAR_SEGURIDAD.'/v1/usuarios/'.Session::get('userDataTmp')->secuenciaUsuario.'/cambio_clave';
+        $response = Ism::call([
+            'endpoint' => Ism::BASE_URL.$method,
+            'token'    => Session::get('userDataTmp')->idToken,
+            'data'     => ['accessToken' => Session::get('userDataTmp')->accessToken, 'claveAnterior' => $data['claveActual'], 'clavePropuesta' => $data['nuevaClave']],
+            'method'   => 'POST'
+        ]);
+
+        // echo Ism::BASE_URL.$method;
+        // dump(['accessToken' => Session::get('accessToken'), 'claveAnterior' => $data['claveActual'], 'clavePropuesta' => $data['nuevaClave']]);
+        // dd($response);
+
+        if($response->code != 200){
+            session()->flash('mensaje', $response->message);
+            return Redirect::route('actualizarClaveCaducada');
+        }
+
+        Session::flush();
         session()->flash('mensaje', "Contraseña actualizada exitosamente.");
         return redirect()->route('login');
     }
