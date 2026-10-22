@@ -88,6 +88,7 @@
         const api_war_empresarial = "{{ \App\Models\Ism::WAR_EMPRESARIAL }}";
         const api_war_facturacion = "{{ \App\Models\Ism::WAR_FACTURACION }}";
         const api_war_comercial = "{{ \App\Models\Ism::WAR_COMERCIAL }}";
+        const api_url_nuvei = "{{ \App\Models\Ism::BASE_URL_NUVEI }}";
     </script>
 </head>
 
