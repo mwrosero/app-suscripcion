@@ -254,7 +254,7 @@
             "mesExpiracion": parseInt(detalleSuscripcion.tarjetaNueva.expiry_month),
             "anioExpiracion": detalleSuscripcion.tarjetaNueva.expiry_year,
             "tipoCobro": "CORRIENTE",
-            "codigoInstitucion": 12
+            "codigoInstitucion": 5
         });
         const response = await call(args);
         console.log(response);
@@ -270,7 +270,8 @@
             tarjetaActual.style.display = 'block';
             document.getElementById("add-card-form").reset();
         }else{
-            showMessage('error', response.message)
+            showMessage('error', response.message);
+            await deleteTokenNuvei();
         }
     }
 
