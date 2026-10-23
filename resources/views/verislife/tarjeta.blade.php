@@ -186,7 +186,7 @@
         } else {
             submitButton.attr("disabled", "disabled").text("Procesando tarjeta...");
 
-            let uid = `${ {{ Session::get('userData')->secuenciaUsuario }} || 'user'}${randomValueNuvei}`;
+            let uid = `${ detalleSuscripcion.numeroIdentificacionTitular }${randomValueNuvei}`;
             let email = '{{ Session::get('userData')->correoElectronico }}' || '';
             Payment.addCard(uid, email, cardToSave, successHandler, errorHandler);
         }
@@ -343,6 +343,7 @@
                 document.getElementById('seccionFormularioTarjeta').style.display = 'block';
             });
         } else {
+            document.getElementById('brandBank').textContent = `Veris Care`;
             btnContainer.innerHTML = `<p class="text-muted small mb-0"><i class="fa fa-lock me-1"></i> Tarjeta gestionada por convenio corporativo (No editable).</p>`;
         }
 
@@ -359,7 +360,7 @@
                                 <i class="fa fa-exclamation-triangle"></i>
                             </div>
                             <div>
-                                <h5 class="alert-heading fw-bold mb-1">Programa cancelado por falta de pago</h5>
+                                <h5 class="alert-heading fw-bold mb-1">Suscripción cancelada por falta de pago</h5>
                                 <p class="mb-0 small">Tu suscripción se encuentra inactiva porque el último cobro fue rechazado o tu tarjeta expiró. Actualiza tu método de pago para procesar el pendiente y reactivar tus beneficios de inmediato.</p>
                             </div>
                         </div>
@@ -373,7 +374,7 @@
                             </div>
                             <div>
                                 <h5 class="alert-heading fw-bold mb-1">Pago pendiente de cobro</h5>
-                                <p class="mb-0 small">No pudimos procesar el cobro automático de tu programa. Actualiza tu tarjeta para evitar la suspensión del servicio.</p>
+                                <p class="mb-0 small">No pudimos procesar el cobro automático de tu suscripción. Actualiza tu tarjeta para evitar la suspensión del servicio.</p>
                             </div>
                         </div>
                     </div>`;
@@ -382,7 +383,7 @@
     }
 
     async function deleteTokenNuvei(){
-        let uid = `${ {{ Session::get('userData')->secuenciaUsuario }} || 'user'}${randomValueNuvei}`;
+        let uid = `${ detalleSuscripcion.numeroIdentificacionTitular }${randomValueNuvei}`;
         let args = [];
         args["endpoint"] = `${api_url_nuvei}/v2/card/delete/`;
         args["method"] = "POST";
@@ -404,7 +405,7 @@
 
     async function autenticarTokenNuvei(){
         let codigoOtp = `${$('#input1_nuvei').val()}${$('#input2_nuvei').val()}${$('#input3_nuvei').val()}${$('#input4_nuvei').val()}${$('#input5_nuvei').val()}${$('#input6_nuvei').val()}`;
-        let uid = `${ {{ Session::get('userData')->secuenciaUsuario }} || 'user'}${randomValueNuvei}`;
+        let uid = `${ detalleSuscripcion.numeroIdentificacionTitular }${randomValueNuvei}`;
         let args = [];
         args["endpoint"] = `${api_url_nuvei}/v2/transaction/verify/`;
         args["method"] = "POST";
