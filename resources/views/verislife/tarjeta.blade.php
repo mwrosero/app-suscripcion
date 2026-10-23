@@ -35,7 +35,7 @@
                                 <div>
                                     <div class="font-monospace fs-5 mb-2 tracking-widest" id="lblUltimosDigitos">•••• •••• •••• ----</div>
                                     <div class="d-flex justify-content-between align-items-end">
-                                        <div>
+                                        <div class="d-none">
                                             <span style="font-size: 10px;" class="d-block text-uppercase opacity-75">Titular</span>
                                             <span class="small fw-semibold text-truncate d-inline-block" style="max-width: 180px;" id="lblNombreTitular">CARGANDO...</span>
                                         </div>
@@ -249,7 +249,7 @@
             "cardToken": detalleSuscripcion.tarjetaNueva.token,
             "keyAdicionalToken": randomValueNuvei,
             "metadata": JSON.stringify(detalleSuscripcion.tarjetaNueva),
-            "nombreTitular": $("input[name=card-holder]").val(),
+            "nombreTitular": detalleSuscripcion.tarjeta.nombreTitular,//$("input[name=card-holder]").val(),
             "ultimosDigitos": detalleSuscripcion.tarjetaNueva.number,
             "mesExpiracion": parseInt(detalleSuscripcion.tarjetaNueva.expiry_month),
             "anioExpiracion": detalleSuscripcion.tarjetaNueva.expiry_year,
