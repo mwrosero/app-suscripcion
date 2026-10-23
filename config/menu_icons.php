@@ -8,4 +8,5 @@ return [
     'editar-dependientes'      => 'editar',
     'registrar-dependientes'    => 'registrar',
     'documentacion'             => 'documentacion',
+    'gestion-pago'             => 'gestion-pago',
 ];

@@ -42,9 +42,9 @@ class Ism extends Model
     // public const APPLICATION = 'UEhBTlRPTVhfRklERUxJWkFDSU9O';
     // public const WAR_SEGURIDAD = 'seguridadtest';
     // public const WAR_GENERAL = 'generaltest';
-    // public const WAR_EMPRESARIAL = 'empresarialtest';
+    // public const WAR_EMPRESARIAL = 'empresarial';
     // public const WAR_FACTURACION = 'facturaciontest';
-    // public const WAR_COMERCIAL = 'comercialtest';
+    // public const WAR_COMERCIAL = 'comercial';
     // public const APPLICATION_GENERIC = 'UEhBTlRPTVhfQkFDS0VORA==';
     // public const USER_VERIS_GENERIC = 'BACKENDFIDELIZACION';
     // public const PASSWORD_VERIS_GENERIC = 'F1d3lT3$t#2025!';
