@@ -5,8 +5,9 @@ return [
     'dashboard'                 => 'home',
     'registro-plan'             => 'registrar',
     'editar-colaboradores'      => 'editar',
-    'editar-dependientes'      => 'editar',
+    'editar-dependientes'       => 'editar',
     'registrar-dependientes'    => 'registrar',
     'documentacion'             => 'documentacion',
-    'gestion-pago'             => 'gestion-pago',
+    'gestion-pago'              => 'gestion-pago',
+    'gestion-suscripcion'       => 'gestion-suscripcion',
 ];
