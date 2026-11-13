@@ -1678,17 +1678,17 @@ Veris Care - Suscripción
             localStorage.setItem(`suscripcion`, JSON.stringify(detalleSuscripcion));
         }) --}}
 
-        await cargarMediosPago();
-        await cargarTiposCuenta();
-
-
         Payment.init('{{ \App\Models\Ism::ENVIRONMENT_NUVEI }}', '{{ \App\Models\Ism::APPLICATION_CODE_NUVEI }}', '{{ \App\Models\Ism::APPLICATION_KEY_NUVEI }}');
-
+        
         setTimeout(function(){
             $('.expiry').val('');
             $('.cvc').val('');
             $('#add-card-form').removeClass('d-none');
         },1000);
+        
+        await cargarMediosPago();
+        await cargarTiposCuenta();
+
 
     });
 

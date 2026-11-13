@@ -176,6 +176,12 @@ Route::group(['middleware' => ['loggedUser']], function () {
         return view('verislife.tarjeta');
     })->withoutMiddleware(['guest']);
 
+    Route::get('/portal-fidelizacion/gestion-suscripcion', function () {
+        // dump(Session::get('userData'));
+        // dd(Session::get('infoCliente'));
+        return view('verislife.gestion-plan');
+    })->withoutMiddleware(['guest']);
+
     Route::get('/portal-fidelizacion/cambiar-clave', function () {
         // dd(Session::get('userData')->secuenciaUsuario);
         return view('verislife.cambiar_clave_logueado');

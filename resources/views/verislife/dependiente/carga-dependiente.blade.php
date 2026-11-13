@@ -216,7 +216,7 @@ $processId = base64_encode(uniqid());
 
     function renderizarPlanes(planesContratados) {
         if(planesContratados === null || planesContratados.length == 0){
-            $('.registrar-dependientes, .editar-dependientes')
+            $('.registrar-dependientes, .editar-dependientes, .metodo-de-pago')
             .css({
                 'pointer-events': 'none',
                 'opacity': '0.5',
