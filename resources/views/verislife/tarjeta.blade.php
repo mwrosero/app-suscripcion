@@ -161,6 +161,19 @@
             });
         });
 
+        $('body').on('input', '#input1_nuvei, #input2_nuvei, #input3_nuvei, #input4_nuvei, #input5_nuvei, #input6_nuvei', async function(){
+            if( $('#input1_nuvei').val() != "" && $('#input2_nuvei').val() != "" && $('#input3_nuvei').val() != "" && $('#input4_nuvei').val() != "" && $('#input5_nuvei').val() != "" && $('#input6_nuvei').val() != ""){
+                $('.btn-verificar-otp-nuvei').attr('disabled',false)
+            }else{
+                $('.btn-verificar-otp-nuvei').attr('disabled',true)
+                // showMessage('warning','Atención','Debe ingresar el código OTP recibido mediante SMS');
+            }
+        })
+
+        $('body').on('click', '.btn-verificar-otp-nuvei', async function(){
+            await autenticarTokenNuvei();
+        })
+
         Payment.init('{{ \App\Models\Ism::ENVIRONMENT_NUVEI }}', '{{ \App\Models\Ism::APPLICATION_CODE_NUVEI }}', '{{ \App\Models\Ism::APPLICATION_KEY_NUVEI }}');
 
         setTimeout(function(){
@@ -433,8 +446,9 @@
             $('.box-tarjeta').addClass('d-none');
             $('.box-diferidos').removeClass('d-none');
             $('#btn-next').removeClass('btn-suscribir-tarjeta').addClass('btn-continuar-tipo-diferido');
-
-            await obtenerTiposDiferido();
+            detalleSuscripcion.tarjetaNueva = data.card;
+            await actualizarTarjeta();
+            // await obtenerTiposDiferido();
 
             {{-- $('.box-tarjeta').addClass('d-none');
             $('.box-firma').removeClass('d-none');
