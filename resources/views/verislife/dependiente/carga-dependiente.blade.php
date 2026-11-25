@@ -73,7 +73,7 @@ $processId = base64_encode(uniqid());
                         <h6 class="fw-medium border-start-white text-white ps-3 mb-0">Consultas realizadas</h6>
                     </div>
                     <div class="card-body">
-                        <div class="row g-0 justify-content-center align-items-center my-4">
+                        <div class="row g-0 justify-content-center align-items-center my-4 h-100">
                             <div class="col-3">
                                 <div class="progress-circle my-auto ms-auto" id="consultas-realizadas" data-percentage="10">
                                     <span class="progress-left">
@@ -91,7 +91,7 @@ $processId = base64_encode(uniqid());
                                 </div>
                             </div>
                         </div>
-                        <a href="#!" class="btn btn-blue-veris px-0 w-100">Ver consultas realizadas</a>
+                        <a href="#!" class="btn btn-blue-veris px-0 w-100 d-none">Ver consultas realizadas</a>
                     </div>
                 </div>
             </div>
