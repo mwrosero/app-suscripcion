@@ -1597,7 +1597,7 @@ Registro
 
     async function descargarPlantilla(){
         let args = [];
-        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_SERVICIOS`;
+        args["endpoint"] = `${api_url}/${api_war_comercial}/v1/afiliados/plantilla_afiliados?tipoCredito=CREDITO_FIDELIZACION`;
         args["method"] = "GET";
         args["showLoader"] = true;
         args["token"] = _token;
