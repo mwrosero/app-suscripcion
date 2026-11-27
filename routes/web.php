@@ -24,7 +24,11 @@ Route::middleware('guest')->group(function () {
         return view('login.login');
     });
 
-    Route::get('/login', [SeguridadesController::class, 'login'])->name('login')->withoutMiddleware(['loggedUser']);
+    // Route::get('/login', [SeguridadesController::class, 'login'])->name('login')->withoutMiddleware(['loggedUser']);
+    Route::get('/login', function () {
+        return redirect()->away(ISM::URL_EXTERNA_ANGULAR);
+    })->name('login')->withoutMiddleware(['loggedUser']);
+
     Route::post('/autenticar', [SeguridadesController::class, 'autenticar'])->name('autenticar')->withoutMiddleware(['loggedUser']);
     
     Route::get('/olvide-clave', [SeguridadesController::class, 'olvideClave'])->name('olvide_clave')->withoutMiddleware(['loggedUser']);
